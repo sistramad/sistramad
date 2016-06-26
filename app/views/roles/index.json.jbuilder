@@ -1,0 +1,6 @@
+json.roles do
+  json.array!(@roles) do |role|
+    json.extract! role, :id, :name, :resource_id, :resource_type
+    json.url role_url(role, format: :json)
+  end
+end

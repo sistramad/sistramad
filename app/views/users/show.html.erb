@@ -1,0 +1,44 @@
+<!--<p id="notice"><%= notice %></p>-->
+
+<p>
+  <strong>username:</strong>
+  <%= @user.username %>
+</p>
+
+<p>
+  <strong>first_name:</strong>
+  <%= @user.first_name %>
+</p>
+
+<p>
+  <strong>middle_name:</strong>
+  <%= @user.middle_name %>
+</p>
+
+<p>
+  <strong>last_name:</strong>
+  <%= @user.last_name %>
+</p>
+
+<p>
+  <strong>genre:</strong>
+  <%= @user.genre %>
+</p>
+
+<p>
+  <strong>identification_document:</strong>
+  <%= @user.identification_document %>
+</p>
+
+<p>
+  <strong>birthday:</strong>
+  <%= @user.birthday %>
+</p>
+
+<p>
+  <strong>email:</strong>
+  <%= @user.email %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @employee.user %>
+</p>
+
+<p>
+  <strong>Type employee:</strong>
+  <%= @employee.type_employee_id %>
+</p>
+
+<p>
+  <strong>Scale clasification:</strong>
+  <%= @employee.scale_clasification_id %>
+</p>
+
+<p>
+  <strong>Scale category:</strong>
+  <%= @employee.scale_category_id %>
+</p>
+
+<%= link_to 'Edit', edit_employee_path(@employee) %> |
+<%= link_to 'Back', employees_path %>

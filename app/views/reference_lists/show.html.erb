@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @reference_list.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @reference_list.description %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @reference_list.value %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @reference_list.reference %>
+</p>
+
+<%= link_to 'Edit', edit_reference_list_path(@reference_list) %> |
+<%= link_to 'Back', reference_lists_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Reference Lists</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Value</th>
+      <th>Reference</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reference_lists.each do |reference_list| %>
+      <tr>
+        <td><%= reference_list.name %></td>
+        <td><%= reference_list.description %></td>
+        <td><%= reference_list.value %></td>
+        <td><%= reference_list.reference.name %></td>
+        <td><%= link_to 'Show', reference_list %></td>
+        <td><%= link_to 'Edit', edit_reference_list_path(reference_list) %></td>
+        <td><%= link_to 'Destroy', reference_list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reference list', new_reference_list_path %>

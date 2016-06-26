@@ -1,0 +1,13 @@
+<%= simple_form_for(@university_degree) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.association :university %>
+    <%= f.input :academic_degree_id %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

@@ -1,0 +1,12 @@
+class CreateEmployees < ActiveRecord::Migration
+  def change
+    create_table :employees do |t|
+      t.references :user, index: {:unique=>true}, foreign_key: true, null: false
+      t.integer :type_employee_id, null: false
+      t.integer :scale_clasification_id, null: false
+      t.integer :scale_category_id, null: false
+
+      t.timestamps null: false
+    end
+  end
+end
