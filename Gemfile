@@ -46,6 +46,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # gemas agregadas
 
+group :production do
+ gem 'rails_12factor'
+end
+
 # para la autenticación de usuarios
 gem 'devise', '~>4.1.0'
 # para porder mandar invitaciones por correo electronico
