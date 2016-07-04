@@ -69,3 +69,13 @@ gem 'simple_form', '~> 3.2', '>= 3.2.1'
 
 # para la paginacion
 gem 'kaminari', '~> 0.17.0'
+
+# para instalar el compilador css sass
+gem 'sass', '~> 3.4', '>= 3.4.22'
+
+# para integrar bootstrap
+gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
+
+# para cuando se compile se agregan los prefijos automaticamente de acuerdo al proveedor
+gem 'autoprefixer-rails', '~> 6.3', '>= 6.3.7'
+

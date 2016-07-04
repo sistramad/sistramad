@@ -30,9 +30,12 @@ class ReferencesController < ApplicationController
 
     respond_to do |format|
       if @reference.save
-        format.html { redirect_to @reference, notice: 'Reference was successfully created.' }
+        # format.html { redirect_to @reference, notice: 'Reference was successfully created.' }
+        flash[:success] = 'Reference was successfully created.'
+        format.html { redirect_to @reference }
         format.json { render :show, status: :created, location: @reference }
       else
+        flash[:danger] = 'There was a problem creating the Reference.'
         format.html { render :new }
         format.json { render json: @reference.errors, status: :unprocessable_entity }
       end
@@ -58,7 +61,10 @@ class ReferencesController < ApplicationController
   def destroy
     @reference.destroy
     respond_to do |format|
-      format.html { redirect_to references_url, notice: 'Reference was successfully destroyed.' }
+      # format.html { redirect_to references_url, notice: 'Reference was successfully destroyed.' }
+      flash[:success] = 'Reference was successfully destroyed.'
+      format.html { redirect_to references_url }
+
       format.json { head :no_content }
     end
   end

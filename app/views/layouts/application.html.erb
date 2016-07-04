@@ -2,18 +2,38 @@
 <html>
 <head>
   <title>Sistramad</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
 <%= render "partials/navigation" %>
+<div id="main-container" class="container-fluid">
+  <% if controller_name != 'sessions' %>
+      <div class="row">
+        <div class="col-xs-12">
+          <% flash.each do |name, msg| -%>
+              <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+          <% end -%>
+        </div>
+      </div>
+      <div class="row">
+        <div id="sidebar" class="col-xs-3">
+          <!-- sidebar content -->
+          <%#= render "partials/navigation" %>
+        </div>
+        <div id="content" class="col-xs-9">
+          <!--  main content -->
+          <!--<p class="notice"><%= notice %></p>-->
+          <!--<p class="alert"><%= alert %></p>-->
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+          <%= yield %>
+        </div>
+      </div>
 
-<%= yield %>
-
+  <% elsif controller_name == 'sessions' %>
+      <%= yield %>
+  <% end %>
+</div>
 </body>
 </html>

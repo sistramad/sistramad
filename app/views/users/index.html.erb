@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Users</h1>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to 'Listing Users', users_path %></li>
+  <li><%= link_to 'New user', new_user_path %></li>
+</ul>
 
 <table>
   <thead>
@@ -28,9 +29,9 @@
         <td><%= user.identification_document %></td>
         <td><%= user.birthday %></td>
         <td><%= user.email %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', user, class: 'btn btn-success btn-xs' %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-primary btn-xs' %></td>
+        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -38,4 +39,8 @@
 
 <br>
 
-<%= link_to 'New User', new_user_path %>
+<!--<%= link_to 'New User', new_user_path %>-->
+
+<%= link_to new_user_path, class: 'btn btn-success' do %>
+    <i class="glyphicon glyphicon-plus"></i> New User
+<% end %>
