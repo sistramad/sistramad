@@ -1,3 +1,16 @@
+def secure_token
+  token_file = Rails.root.join('.secret')
+  if File.exist?(token_file)
+    # Use the existing token.
+    File.read(token_file).chomp
+  else
+    # Generate a new token and store it in token_file.
+    token = SecureRandom.hex(64)
+    File.write(token_file, token)
+    token
+  end
+end
+
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -7,6 +20,7 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = '9ec789a35feaad4f2c509d2d8815ddf5dc1344d980fa3b6307390e9e35cc4ded336afa503c930b47354a42c8ca7ca8823761e6f64436d87aafc1909862bbf141'
+  config.secret_key = secure_token
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
