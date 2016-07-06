@@ -20,10 +20,18 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  home:      'Sistramad'
+  log_in:     'Log in'
+  hello:
+    short:    'welcome'
+    long:     'Welcome to our website'
+    too_long: 'Hi, welcome to our amazing website :-)'
   views:
     pagination:
       previous: "&lt; Previous"
       next: "Next &gt;"
       truncate: "..."
-
+  routes:
+      users: 'users'
+      references: 'references'
+      reference_lists: 'reference_lists'

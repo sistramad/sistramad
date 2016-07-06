@@ -83,3 +83,8 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 # para cuando se compile se agregan los prefijos automaticamente de acuerdo al proveedor
 gem 'autoprefixer-rails', '~> 6.3', '>= 6.3.7'
 
+# para mostrar las rutas con show-routes y ls modelos con show-models
+gem 'pry-rails', '~> 0.3.4', :group => :development
+
+# para traducir las rutas
+gem 'route_translator', '~> 4.4'

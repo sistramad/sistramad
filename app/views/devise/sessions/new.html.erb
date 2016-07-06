@@ -2,7 +2,7 @@
   <div class="center-login">
   <div class="col-md-2 col-md-offset-5">
     <div class="panel panel-info">
-      <div class="panel-heading center">Log in</div>
+      <div class="panel-heading center"><%= t :log_in %></div>
       <div class="panel-body">
         <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {role: 'form'}) do |f| %>
             <%= f.error_notification %>
@@ -19,7 +19,7 @@
                 <%= f.label :remember_me %></br>
             <% end %>
 
-            <%= f.button :submit, value: 'Log in', class: 'form-control' %>
+            <%= f.button :submit, value: t(:log_in), class: 'form-control' %>
         <% end %>
       </div>
     </div>

@@ -6,7 +6,7 @@ class ReferencesController < ApplicationController
   # GET /references
   # GET /references.json
   def index
-    @references = Reference.all
+    @references = Reference.all.page(params[:page]).per(15)
   end
 
   # GET /references/1

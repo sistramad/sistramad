@@ -1,44 +1,35 @@
-<!--<p id="notice"><%= notice %></p>-->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel-heading center">Reference list</div>
+      <div class="panel-body">
+        <label for="username" class="control-label">username</label>
+        <input type="text" class="form-control" value=<%= @user.username %> disabled= true>
 
-<p>
-  <strong>username:</strong>
-  <%= @user.username %>
-</p>
+        <label for="first_name" class="control-label">first_name</label>
+        <input type="text" class="form-control" value=<%= @user.first_name %> disabled= true>
 
-<p>
-  <strong>first_name:</strong>
-  <%= @user.first_name %>
-</p>
+        <label for="middle_name" class="control-label">middle_name</label>
+        <input type="text" class="form-control" value=<%= @user.middle_name %> disabled= true>
 
-<p>
-  <strong>middle_name:</strong>
-  <%= @user.middle_name %>
-</p>
+        <label for="last_name" class="control-label">last_name</label>
+        <input type="text" class="form-control" value=<%= @user.last_name %> disabled= true>
 
-<p>
-  <strong>last_name:</strong>
-  <%= @user.last_name %>
-</p>
+        <label for="genre" class="control-label">genre</label>
+        <input type="text" class="form-control" value=<%= @user.genre %> disabled= true>
 
-<p>
-  <strong>genre:</strong>
-  <%= @user.genre %>
-</p>
+        <label for="identification_document" class="control-label">identification_document</label>
+        <input type="text" class="form-control" value=<%= @user.identification_document %> disabled= true>
 
-<p>
-  <strong>identification_document:</strong>
-  <%= @user.identification_document %>
-</p>
+        <label for="birthday" class="control-label">birthday</label>
+        <input type="text" class="form-control" value=<%= @user.birthday %> disabled= true>
 
-<p>
-  <strong>birthday:</strong>
-  <%= @user.birthday %>
-</p>
-
-<p>
-  <strong>email:</strong>
-  <%= @user.email %>
-</p>
+        <label for="email" class="control-label">email</label>
+        <input type="text" class="form-control" value=<%= @user.email %> disabled= true>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
