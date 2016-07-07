@@ -1,19 +1,20 @@
-<!--<p id="notice"><%= notice %></p>-->
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel-heading center">Reference list</div>
+      <div class="panel-body">
+        <label for="name" class="control-label">name</label>
+        <input type="text" class="form-control" value="<%= @role.name %>" disabled=true>
 
-<p>
-  <strong>name:</strong>
-  <%= @role.name %>
-</p>
+        <label for="resource_id" class="control-label">resource id</label>
+        <input type="text" class="form-control" value="<%= @role.resource_id %>" disabled=true>
 
-<p>
-  <strong>resource_id:</strong>
-  <%= @role.resource_id %>
-</p>
-
-<p>
-  <strong>resource_type:</strong>
-  <%= @role.resource_type %>
-</p>
+        <label for="resource_type" class="control-label">resource type</label>
+        <input type="text" class="form-control" value="<%= @role.resource_type %>" disabled=true>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_role_path(@role) %> |
 <%= link_to 'Back', roles_path %>

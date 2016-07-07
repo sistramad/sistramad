@@ -1,4 +1,0 @@
-pirate:
-  time:
-    formats:
-      short: "arrrround %H'ish"

@@ -3,25 +3,18 @@
     <div class="panel panel-info">
       <div class="panel-heading center">Reference list</div>
       <div class="panel-body">
-        <p>
-          <strong>Name:</strong>
-          <%= @reference_list.name %>
-        </p>
 
-        <p>
-          <strong>Description:</strong>
-          <%= @reference_list.description %>
-        </p>
+        <label for="name" class="control-label">name</label>
+        <input type="text" class="form-control" value="<%= @reference_list.name %>" disabled= true>
 
-        <p>
-          <strong>Value:</strong>
-          <%= @reference_list.value %>
-        </p>
+        <label for="description" class="control-label">description</label>
+        <input type="text" class="form-control" value="<%= @reference_list.description %>" disabled= true>
 
-        <p>
-          <strong>Reference:</strong>
-          <%= @reference_list.reference.name %>
-        </p>
+        <label for="value" class="control-label">value</label>
+        <input type="text" class="form-control" value="<%= @reference_list.value %>" disabled= true>
+
+        <label for="reference" class="control-label">reference</label>
+        <input type="text" class="form-control" value="<%= @reference_list.reference.name %>" disabled= true>
       </div>
     </div>
   </div>

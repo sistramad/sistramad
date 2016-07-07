@@ -3,15 +3,11 @@
     <div class="panel panel-info">
       <div class="panel-heading center">Reference</div>
       <div class="panel-body">
-        <p>
-          <strong>Name:</strong>
-          <%= @reference.name %>
-        </p>
+        <label for="name" class="control-label">name</label>
+        <input type="text" class="form-control" value="<%= @reference.name %>" disabled= true>
 
-        <p>
-          <strong>Description:</strong>
-          <%= @reference.description %>
-        </p>
+        <label for="description" class="control-label">description</label>
+        <input type="text" class="form-control" value="<%= @reference.description %>" disabled= true>
       </div>
     </div>
   </div>
