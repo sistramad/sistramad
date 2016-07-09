@@ -10,12 +10,12 @@ module ReferenceConstant
   WITHOUT_REGION = 1
   WITHOUT_SUB_REGION = 2
 
-  SCALE_CLASIFICATION = 3
+  SCALE_CLASSIFICATION = 3
   SCALE_CATEGORY = 4
 
   TYPE_EMPLOYEE = 5
 
-  module ScaleClasificationConst
+  module ScaleClassificationConst
     INSTRUCTOR = 30
     ASISTENTE = 31
     AGREGADO = 32

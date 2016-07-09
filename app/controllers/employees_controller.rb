@@ -4,7 +4,7 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    @employees = Employee.all.page(params[:page]).per(15)
   end
 
   # GET /employees/1
@@ -69,6 +69,10 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:user_id, :type_employee_id, :scale_clasification_id, :scale_category_id)
+      params.require(:employee).permit(
+          :user_id,
+          :type_employee_id,
+          :scale_classification_id,
+          :scale_category_id)
     end
 end

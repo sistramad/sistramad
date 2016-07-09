@@ -4,7 +4,7 @@ class FacultiesController < ApplicationController
   # GET /faculties
   # GET /faculties.json
   def index
-    @faculties = Faculty.all
+    @faculties = Faculty.all.page(params[:page]).per(15)
   end
 
   # GET /faculties/1

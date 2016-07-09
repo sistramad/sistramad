@@ -1,14 +1,19 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel-heading center">Reference list</div>
+      <div class="panel-body">
+        <label for="name" class="control-label">name</label>
+        <input type="text" class="form-control" value="<%= @faculty.name %>" disabled= true>
 
-<p>
-  <strong>Name:</strong>
-  <%= @faculty.name %>
-</p>
+        <label for="acronym" class="control-label">acronym</label>
+        <input type="text" class="form-control" value="<%= @faculty.acronym %>" disabled= true>
 
-<p>
-  <strong>Active:</strong>
-  <%= @faculty.active %>
-</p>
-
-<%= link_to 'Edit', edit_faculty_path(@faculty) %> |
-<%= link_to 'Back', faculties_path %>
+        <label for="active" class="control-label">active</label>
+        <input type="text" class="form-control" value="<%= @faculty.active %>" disabled= true>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Edit', edit_faculty_path(@faculty), class: 'btn btn-default' %> |
+<%= link_to 'Back', faculties_path, class: 'btn btn-default' %>

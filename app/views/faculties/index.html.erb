@@ -1,29 +1,37 @@
-<p id="notice"><%= notice %></p>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to 'Listing Faculties', faculties_path %></li>
+  <li><%= link_to 'New faculty', new_faculty_path %></li>
+</ul>
 
-<h1>Listing Faculties</h1>
-
-<table>
-  <thead>
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
     <tr>
       <th>Name</th>
       <th>Active</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
+    <tbody>
     <% @faculties.each do |faculty| %>
-      <tr>
-        <td><%= faculty.name %></td>
-        <td><%= faculty.active %></td>
-        <td><%= link_to 'Show', faculty %></td>
-        <td><%= link_to 'Edit', edit_faculty_path(faculty) %></td>
-        <td><%= link_to 'Destroy', faculty, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <tr>
+          <td><%= faculty.name %></td>
+          <td><%= faculty.active %></td>
+          <td><%= link_to 'Show', faculty %></td>
+          <td><%= link_to 'Edit', edit_faculty_path(faculty) %></td>
+          <td><%= link_to 'Destroy', faculty, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @faculties %></br>
+<%= page_entries_info @faculties %>
 
 <br>
 
-<%= link_to 'New Faculty', new_faculty_path %>
+<%= link_to new_faculty_path, class: 'btn btn-success' do %>
+    <i class="glyphicon glyphicon-plus"></i> New Faculty
+<% end %>

@@ -127,26 +127,26 @@ sub_region.save!
 sub_region = ReferenceList.new(:name => 'central asia', :reference_id => ReferenceConstant::SUB_REGION) #29
 sub_region.save!
 
-reference_clasification = Reference.new(:name => 'clasification') #3
-reference_clasification.save!
+reference_classification = Reference.new(:name => 'classification') #3
+reference_classification.save!
 
 reference_category = Reference.new(:name => 'category') #4
 reference_category.save!
 
-clasification = ReferenceList.new(:name => 'instructor', :value => '1', :reference_id => ReferenceConstant::SCALE_CLASIFICATION) #30
-clasification.save!
+classification = ReferenceList.new(:name => 'instructor', :value => '1', :reference_id => ReferenceConstant::SCALE_CLASSIFICATION) #30
+classification.save!
 
-clasification = ReferenceList.new(:name => 'asistente', :value => '2', :reference_id => ReferenceConstant::SCALE_CLASIFICATION) #31
-clasification.save!
+classification = ReferenceList.new(:name => 'asistente', :value => '2', :reference_id => ReferenceConstant::SCALE_CLASSIFICATION) #31
+classification.save!
 
-clasification = ReferenceList.new(:name => 'agregado', :value => '3', :reference_id => ReferenceConstant::SCALE_CLASIFICATION) #32
-clasification.save!
+classification = ReferenceList.new(:name => 'agregado', :value => '3', :reference_id => ReferenceConstant::SCALE_CLASSIFICATION) #32
+classification.save!
 
-clasification = ReferenceList.new(:name => 'asociado', :value => '4', :reference_id => ReferenceConstant::SCALE_CLASIFICATION) #33
-clasification.save!
+classification = ReferenceList.new(:name => 'asociado', :value => '4', :reference_id => ReferenceConstant::SCALE_CLASSIFICATION) #33
+classification.save!
 
-clasification = ReferenceList.new(:name => 'titular', :value => '5', :reference_id => ReferenceConstant::SCALE_CLASIFICATION) #34
-clasification.save!
+classification = ReferenceList.new(:name => 'titular', :value => '5', :reference_id => ReferenceConstant::SCALE_CLASSIFICATION) #34
+classification.save!
 
 category = ReferenceList.new(:name => 'categoria I', :value => '1', :reference_id => ReferenceConstant::SCALE_CATEGORY) #35
 category.save!

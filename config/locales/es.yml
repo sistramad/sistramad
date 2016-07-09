@@ -226,6 +226,7 @@ es:
   log_in:     'Iniciar sesión'
   reference: 'Referencia'
   reference_lists: 'Lista de referencias'
+  user:  'Usuario'
   users: 'Usuarios'
   roles: 'Roles'
   employees: 'Empleados'

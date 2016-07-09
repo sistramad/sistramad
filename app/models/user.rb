@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
+
+  scope :without_employee, -> { where.not(:id => User.joins(:employee).map(&:id)) }
 end

@@ -34,12 +34,12 @@ ActiveRecord::Schema.define(version: 20160626204734) do
   add_index "countries", ["alpha3code"], name: "index_countries_on_alpha3code", unique: true, using: :btree
 
   create_table "employees", force: :cascade do |t|
-    t.integer  "user_id",                null: false
-    t.integer  "type_employee_id",       null: false
-    t.integer  "scale_clasification_id", null: false
-    t.integer  "scale_category_id",      null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "user_id",                 null: false
+    t.integer  "type_employee_id",        null: false
+    t.integer  "scale_classification_id", null: false
+    t.integer  "scale_category_id",       null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "employees", ["user_id"], name: "index_employees_on_user_id", unique: true, using: :btree

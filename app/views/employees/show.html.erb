@@ -1,24 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel-heading center">Reference list</div>
+      <div class="panel-body">
+        <label for="user" class="control-label">user</label>
+        <input type="text" class="form-control" value="<%= @employee.user.first_name %>" disabled= true>
 
-<p>
-  <strong>User:</strong>
-  <%= @employee.user %>
-</p>
+        <label for="type_employee" class="control-label">type_employee</label>
+        <input type="text" class="form-control" value="<%= @employee.type_employee.name %>" disabled= true>
 
-<p>
-  <strong>Type employee:</strong>
-  <%= @employee.type_employee_id %>
-</p>
+        <label for="scale_classification" class="control-label">scale_classification</label>
+        <input type="text" class="form-control" value="<%= @employee.scale_classification.name %>" disabled= true>
 
-<p>
-  <strong>Scale clasification:</strong>
-  <%= @employee.scale_clasification_id %>
-</p>
-
-<p>
-  <strong>Scale category:</strong>
-  <%= @employee.scale_category_id %>
-</p>
-
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+        <label for="scale_category" class="control-label">scale_category</label>
+        <input type="text" class="form-control" value="<%= @employee.scale_category.name %>" disabled= true>
+      </div>
+    </div>
+  </div>
+</div>
+<%= link_to 'Edit', edit_employee_path(@employee), class: 'btn btn-default' %> |
+<%= link_to 'Back', employees_path, class: 'btn btn-default' %>

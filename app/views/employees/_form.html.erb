@@ -1,33 +1,29 @@
-<%= form_for(@employee) do |f| %>
-  <% if @employee.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t :user %></div>
+      <div class="panel-body">
+        <%= simple_form_for(@employee) do |f| %>
+            <% if @employee.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
-      <ul>
-      <% @employee.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+                  <ul>
+                    <% @employee.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+
+            <%= f.association :user, :include_blank => false, :label_method => lambda { |user| "#{user.username}".capitalize }, collection: User.without_employee %>
+            <%= f.association :type_employee, :include_blank => false, collection: ReferenceList.type_employee %>
+            <%= f.association :scale_classification, :include_blank => false, collection: ReferenceList.scale_classification %>
+            <%= f.association :scale_category, :include_blank => false, collection: ReferenceList.scale_category %>
+
+            <%= f.button :submit, value: 'Send', class: 'form-control' %>
+        <% end %>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
   </div>
-  <div class="field">
-    <%= f.label :type_employee_id %><br>
-    <%= f.number_field :type_employee_id %>
-  </div>
-  <div class="field">
-    <%= f.label :scale_clasification_id %><br>
-    <%= f.number_field :scale_clasification_id %>
-  </div>
-  <div class="field">
-    <%= f.label :scale_category_id %><br>
-    <%= f.number_field :scale_category_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
