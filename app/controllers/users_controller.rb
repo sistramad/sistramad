@@ -81,6 +81,7 @@ class UsersController < ApplicationController
         :last_name,
         :genre,
         :identification_document,
-        :birthday)
+        :birthday,
+        :avatar)
   end
 end

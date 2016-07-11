@@ -3,7 +3,7 @@
     <div class="panel panel-info">
       <div class="panel-heading center"><%= t :user %></div>
       <div class="panel-body">
-        <%= simple_form_for @user do |f| %>
+        <%= simple_form_for @user, :html => {:multipart => true} do |f| %>
             <%= f.error_notification %>
             <% if @user.errors.any? %>
                 <div id="error_explanation">
@@ -18,7 +18,10 @@
             <% end %>
 
             <%= f.file_field :avatar, class: "form-control" %>
-            <%= f.input :username %>
+
+            <label for="username" class="control-label">username</label>
+            <input type="text" class="form-control" value="<%= @user.username %>" disabled= true>
+
             <%= f.input :first_name %>
             <%= f.input :middle_name %>
             <%= f.input :last_name %>

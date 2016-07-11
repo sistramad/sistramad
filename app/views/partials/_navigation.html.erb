@@ -31,8 +31,8 @@
                         <i class="glyphicon glyphicon-log-out"></i> Cerrar sesión
                     <% end %>
                   </li>
-                  <li class="divider"></li>
                   <% if current_user.has_role? :admin %>
+                      <li class="divider"></li>
                       <li>
                         <%= link_to new_user_invitation_path do %>
                             <i class="glyphicon glyphicon-envelope"></i> Invitar

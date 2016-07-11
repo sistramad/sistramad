@@ -88,3 +88,12 @@ gem 'pry-rails', '~> 0.3.4', :group => :development
 
 # para traducir las rutas
 gem 'route_translator', '~> 4.4'
+
+# para abrir correos desde local
+gem "letter_opener", :group => :development
+
+# para el procesamiento de archivos varios
+gem 'carrierwave', '~> 0.11.2'
+
+# para transformar imagenes
+gem 'rmagick', '~> 2.15', '>= 2.15.4'

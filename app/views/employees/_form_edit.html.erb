@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t :user %></div>
+      <div class="panel-body">
+        <%= simple_form_for(@employee) do |f| %>
+            <% if @employee.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+                  <ul>
+                    <% @employee.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+
+            <label for="user" class="control-label">user</label>
+            <input type="text" class="form-control" value="<%= @employee.user.first_name %>" disabled= true>
+
+            <%= f.association :type_employee, :include_blank => false, collection: ReferenceList.type_employee %>
+            <%= f.association :scale_classification, :include_blank => false, collection: ReferenceList.scale_classification %>
+            <%= f.association :scale_category, :include_blank => false, collection: ReferenceList.scale_category %>
+
+            <%= f.button :submit, value: 'Send', class: 'form-control' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
