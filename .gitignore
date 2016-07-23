@@ -29,6 +29,7 @@ doc/
 /config/secrets.yml
 
 # Ignore public
+/public/uploads/
 /public/uploads/*
 
 .secret
