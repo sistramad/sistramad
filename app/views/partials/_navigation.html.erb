@@ -1,6 +1,6 @@
 <header>
   <% if current_user %>
-      <nav class="navbar navbar-inverse">
+      <nav class="navbar navbar-inicio navbar-inverse navbar-static-top">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -48,7 +48,11 @@
                   <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <% I18n.available_locales.each do |locale| %>
-                      <li><%= link_to locale, url_for(locale: locale.to_s, only_path: true) %></li>
+                      <% if I18n.locale == locale %>
+                          <li><%= link_to locale, url_for(locale: locale.to_s, only_path: true), class: "bg-info" %></li>
+                      <% else %>
+                          <li><%= link_to locale, url_for(locale: locale.to_s, only_path: true), html_options = {disabled: true} %></li>
+                      <% end %>
                   <% end %>
                 </ul>
               </li>

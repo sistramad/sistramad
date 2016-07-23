@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
         user_params.permit(:username, :email)
       end
 
-      devise_parameter_sanitizer.for(:accept_invitation).concat [:username]
+      # devise_parameter_sanitizer.for(:accept_invitation).concat [:username]
+      devise_parameter_sanitizer.permit(:accept_invitation) do |user_params|
+        user_params.permit(:username)
+      end
     end
 end

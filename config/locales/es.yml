@@ -223,7 +223,12 @@ es:
       references: 'referencias'
       reference_lists: 'lista_referencias'
   home: 'Sistramad'
-  log_in:     'Iniciar sesión'
+  sign_in:
+    log_in:     'Iniciar sesión'
+    login_input: 'usuario@dominio.com o usuario'
+    password: 'Contraseña'
+    forgot_your_password: '¿Olvidaste tu contraseña?'
+    did_not_receive_unlock_instructions: '¿No recibiste instrucciones de desbloqueo?'
   reference: 'Referencia'
   reference_lists: 'Lista de referencias'
   user:  'Usuario'

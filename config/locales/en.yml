@@ -21,7 +21,12 @@
 
 en:
   home:      'Sistramad'
-  log_in:     'Log in'
+  sign_in:
+    log_in:     'Log in'
+    login_input: 'user@domain.com or username'
+    password: 'Password'
+    forgot_your_password: 'Forgot your password?'
+    did_not_receive_unlock_instructions: "Didn't receive unlock instructions?"
   hello:
     short:    'welcome'
     long:     'Welcome to our website'

@@ -35,5 +35,8 @@ module Sistramad
     # autoload lib path
     config.autoload_paths += %W(#{config.root}/lib)
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
+    #predefinir sass
+    config.sass.preferred_syntax = :sass
   end
 end

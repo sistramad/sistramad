@@ -7,10 +7,6 @@ html {
   overflow-y: scroll;
 }
 
-body {
-  padding-top: 60px;
-}
-
 section {
   overflow: auto;
 }
@@ -37,5 +33,25 @@ textarea {
 }
 
 .center-login {
-  margin: 10% auto;
+  margin: 20% auto;
+}
+
+.alert-notice {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+  margin-bottom: 0;
+}
+.alert-alert {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.navbar.navbar-inicio {
+  margin-bottom: 0;
+}
+
+.container.main-container {
+  margin-top: 20px;
 }

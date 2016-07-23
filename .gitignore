@@ -27,4 +27,8 @@ doc/
 # Ignore application configuration
 /config/application.yml
 /config/secrets.yml
+
+# Ignore public
+/public/uploads/*
+
 .secret

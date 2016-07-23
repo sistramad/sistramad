@@ -92,6 +92,9 @@ gem 'route_translator', '~> 4.4'
 # para abrir correos desde local
 gem "letter_opener", :group => :development
 
+#para que no salgan las peticiones de precompilado assets en la consola
+gem 'quiet_assets', '~> 1.1', :group => :development
+
 # para el procesamiento de archivos varios
 gem 'carrierwave', '~> 0.11.2'
 
