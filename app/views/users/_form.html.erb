@@ -1,9 +1,32 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-12">
     <div class="panel panel-info">
       <div class="panel-heading center"><%= t :user %></div>
       <div class="panel-body">
-        <%= simple_form_for @user do |f| %>
+        <%= simple_form_for @user, :html => {:multipart => true, :class => "form-horizontal"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input_sistramad,
+                                date: :multi_select_sistramad
+                            } do |f| %>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-3">
+                <%= f.file_field :avatar, class: "form-control" %>
+              </div>
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <%= f.input :username, :label => t("username.short"), :placeholder => t("username.long")%>
+                <%= f.input :first_name, :label => t("first_name"), :placeholder => t("first_name")%>
+                <%= f.input :middle_name, :label => t("middle_name"), :placeholder => t("middle_name") %>
+                <%= f.input :last_name, :label => t("last_name"), :placeholder => t("last_name") %>
+                <%= f.input :genre, :label => t("genre"), collection: {'m' => t('genres.male'), 'f' => t('genres.female')}.sort.map {|k, v| [v, k]}, :include_blank => false, :placeholder => t("genre") %>
+                <%= f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document") %>
+                <%= f.input :birthday, :label => t("birthday.short")%>
+              </div>
+              <div class="col-md-12">
+                <%= f.button :submit, value: t('form.send'), class: 'form-control btn btn-info' %>
+              </div>
+            </div>
             <%= f.error_notification %>
             <% if @user.errors.any? %>
                 <div id="error_explanation">
@@ -16,17 +39,6 @@
                   </ul>
                 </div>
             <% end %>
-
-            <%= f.file_field :avatar, class: "form-control" %>
-            <%= f.input :username %>
-            <%= f.input :first_name %>
-            <%= f.input :middle_name %>
-            <%= f.input :last_name %>
-            <%= f.input :genre %>
-            <%= f.input :identification_document %>
-            <%= f.input :birthday %>
-
-            <%= f.button :submit, value: 'Send', class: 'form-control' %>
         <% end %>
       </div>
     </div>

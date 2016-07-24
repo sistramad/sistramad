@@ -12,14 +12,20 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-    def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_in) do |user_params|
-        user_params.permit(:username, :email)
-      end
+  def configure_permitted_parameters
+    # http://www.rubydoc.info/github/plataformatec/devise/Devise/ParameterSanitizer
 
-      # devise_parameter_sanitizer.for(:accept_invitation).concat [:username]
-      devise_parameter_sanitizer.permit(:accept_invitation) do |user_params|
-        user_params.permit(:username)
-      end
+    # Using the block form to completely override how we permit the
+    # parameters for the `sign_in` action.
+    devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+      user_params.permit(:username, :email)
     end
+
+    # Adding new parameters to be permitted in the `accept_invitation` action.
+    # devise_parameter_sanitizer.for(:accept_invitation).concat [:username]
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:username])
+
+    # Removing the `password` parameter from the `account_update` action.
+    # devise_parameter_sanitizer.permit(:account_update, except: [:password])
+  end
 end
