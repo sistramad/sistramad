@@ -21,6 +21,23 @@
 
 en:
   home:      'Sistramad'
+  password: 'Password'
+  name: 'Name'
+  description: 'Description'
+  edit: 'Edit'
+  back: 'Back'
+  password_confirmation:
+    short: 'Confirmation'
+    long: 'Password confirmation'
+  index:
+    show: 'Show'
+    edit: 'Edit'
+    destroy: 'Destroy'
+    listing_users: 'Listing users'
+    listing_references: 'Listing references'
+    new_user: 'New user'
+    new_reference: 'new reference'
+    references_list: 'References list'
   sign_in:
     log_in:     'Log in'
     login_input: 'user@domain.com or username'

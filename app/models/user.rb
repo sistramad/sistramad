@@ -14,7 +14,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  validates :username, :presence => true, :uniqueness => { :case_sensitive => false, :message => "jjj" }
+  validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
+  validates :identification_document, :numericality => true
   # Only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 

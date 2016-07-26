@@ -10,8 +10,22 @@
                             } do |f| %>
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-3">
-                <%= image_tag @user.avatar_url(:thumb).to_s, class: "center-block img-responsive img-thumbnail" %></br>
-                <%= f.file_field :avatar, class: "form-control" %>
+                <div class="img-avatar-circle center-block">
+                  <%= image_tag @user.avatar_url(:thumb).to_s if @user.avatar? %>
+                  <% unless @user.avatar? %>
+                      <%= image_tag "user_default_male.png" if @user.genre == 'm' %>
+                      <%= image_tag "user_default_female.png" if @user.genre == 'f' %>
+                  <% end %>
+                </div>
+                <div class="input-group input-group-sm">
+                  <div class="input-group-btn">
+                    <label class="btn btn-info">
+                      Buscar
+                      <%= f.file_field :avatar, class: "input-hiden" %>
+                    </label>
+                  </div>
+                  <input id="upload-file-info" class="form-control" type="text" readonly>
+                </div>
               </div>
               <div class="col-xs-12 col-sm-12 col-md-9">
                 <div class="form-group">
@@ -20,12 +34,14 @@
                     <p class="form-control-static"><%= @user.username %></p>
                   </div>
                 </div>
-                  <%= f.input :first_name, :label => t("first_name"), :placeholder => t("first_name")%>
-                  <%= f.input :middle_name, :label => t("middle_name"), :placeholder => t("middle_name") %>
-                  <%= f.input :last_name, :label => t("last_name"), :placeholder => t("last_name") %>
-                  <%= f.input :genre, :label => t("genre"), collection: {'m' => t('genres.male'), 'f' => t('genres.female')}.sort.map {|k, v| [v, k]}, :include_blank => false, :placeholder => t("genre") %>
-                  <%= f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document") %>
-                  <%= f.input :birthday, :label => t("birthday.short"), :wrapper => :multi_select_sistramad%>
+                <%= f.input :first_name, :label => t("first_name"), :placeholder => t("first_name") %>
+                <%= f.input :middle_name, :label => t("middle_name"), :placeholder => t("middle_name") %>
+                <%= f.input :last_name, :label => t("last_name"), :placeholder => t("last_name") %>
+                <%= f.input :genre, :label => t("genre"), collection: {'m' => t('genres.male'), 'f' => t('genres.female')}.sort.map { |k, v| [v, k] },
+                            :include_blank => false, :placeholder => t("genre") %>
+                <%= f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document") %>
+                <%= f.input :birthday, start_year: Date.today.year - 90, end_year: Date.today.year - 12,
+                            :label => t("birthday.short"), :wrapper => :multi_select_sistramad %>
               </div>
               <div class="col-md-12">
                 <%= f.button :submit, value: t('form.send'), class: 'form-control btn btn-info' %>
