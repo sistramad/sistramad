@@ -23,20 +23,47 @@ en:
   home:      'Sistramad'
   password: 'Password'
   name: 'Name'
+  reference_list: 'Reference list'
   description: 'Description'
+  value: 'Value'
+  roles: 'Roles'
+  role: 'Rol'
+  employees: 'Empleados'
+  employee: 'Empleado'
   edit: 'Edit'
   back: 'Back'
+  first_name: 'First name'
+  type_employee:
+    short: 'Type'
+    long: 'Type employee'
+  scale_classification:
+    short: 'Classification'
+    long: 'Scale classification'
+  scale_category:
+    short: 'Category'
+    long: 'Scale category'
+  form_reference_list:
+    hint_name: 'Type the name of the reference list.'
   password_confirmation:
     short: 'Confirmation'
     long: 'Password confirmation'
+  show:
+    new_user: 'New user'
+    listing_users: 'Listing users'
   index:
     show: 'Show'
     edit: 'Edit'
     destroy: 'Destroy'
     listing_users: 'Listing users'
     listing_references: 'Listing references'
+    listing_reference_lists: 'Listing reference lists'
+    listing_roles: 'Listing roles'
+    listing_employees: 'Listing employees'
     new_user: 'New user'
     new_reference: 'new reference'
+    new_reference_list: 'New reference list'
+    new_role: 'New rol'
+    new_employee: 'New employee'
     references_list: 'References list'
   sign_in:
     log_in:     'Log in'

@@ -1,24 +1,42 @@
 <div class="row">
-  <div class="col-md-6 col-md-offset-3">
+  <div class="col-md-10 col-md-offset-1">
     <div class="panel panel-info">
-      <div class="panel-heading center">Reference list</div>
+      <div class="panel-heading center"><%= t('reference_list') %></div>
       <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9">
+              <div class="form-group">
+                <label for="name" class="control-label col-sm-5 col-md-4"><%= t("name") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @reference_list.name %></p>
+                </div>
 
-        <label for="name" class="control-label">name</label>
-        <input type="text" class="form-control" value="<%= @reference_list.name %>" disabled= true>
+                <label for="description" class="control-label col-sm-5 col-md-4"><%= t("description") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @reference_list.description %></p>
+                </div>
 
-        <label for="description" class="control-label">description</label>
-        <input type="text" class="form-control" value="<%= @reference_list.description %>" disabled= true>
+                <label for="value" class="control-label col-sm-5 col-md-4"><%= t("value") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @reference_list.value %></p>
+                </div>
 
-        <label for="value" class="control-label">value</label>
-        <input type="text" class="form-control" value="<%= @reference_list.value %>" disabled= true>
-
-        <label for="reference" class="control-label">reference</label>
-        <input type="text" class="form-control" value="<%= @reference_list.reference.name %>" disabled= true>
+                <label for="reference" class="control-label col-sm-5 col-md-4"><%= t("reference") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= link_to @reference_list.reference.name, @reference_list.reference %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
-<%= link_to 'Edit', edit_reference_list_path(@reference_list), class: 'btn btn-default' %> |
-<%= link_to 'Back', reference_lists_path, class: 'btn btn-default' %>
+<div class="btn-toolbar">
+  <div class="btn-group btn-group-justified">
+    <%= link_to t('edit'), edit_reference_list_path(@reference_list), class: 'btn btn-info' %>
+    <%= link_to t('back'), reference_lists_path, class: 'btn btn-info' %>
+  </div>
+</div>
