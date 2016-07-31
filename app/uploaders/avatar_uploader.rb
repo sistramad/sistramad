@@ -4,6 +4,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
+  include CarrierWave::MimeTypes
   # include CarrierWave::MiniMagick
 
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
@@ -27,10 +28,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  process :scale => [600, 600]
-  #
+  process :scale => [400, 400]
+  process convert: 'png'
+
   def scale(width, height)
-    # do something
+    resize_to_limit(width, height)
   end
 
   # Create different versions of your uploaded files:
@@ -38,7 +40,8 @@ class AvatarUploader < CarrierWave::Uploader::Base
   #   process :resize_to_fit => [50, 50]
   # end
   version :thumb do
-    process :resize_to_fit => [600, 600]
+    process crop: :avatar
+    resize_to_fill(200,200)
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -55,5 +58,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+
+  def filename
+    super.chomp(File.extname(super)) + '.png' if original_filename.present?
+  end
 
 end

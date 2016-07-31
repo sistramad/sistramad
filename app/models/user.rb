@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
-  attr_accessor :login, :avatar
+  attr_accessor :login, :avatar, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h
 
   rolify #se pueden agregar opciones a la gema
 
@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   has_one :employee, inverse_of: :user
 
   mount_uploader :avatar, AvatarUploader
+  crop_uploaded :avatar
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :identification_document, :numericality => true

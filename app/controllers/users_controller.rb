@@ -33,7 +33,13 @@ class UsersController < ApplicationController
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
 
         flash[:success] = 'User was successfully created.'
-        format.html { redirect_to @user }
+        format.html {
+          if user_params[:avatar].present?
+            render :crop  ## Render the view for cropping
+          else
+            redirect_to @user
+          end
+        }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -47,7 +53,13 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html {
+          if user_params[:avatar].present?
+            render :crop  ## Render the view for cropping
+          else
+            redirect_to @user, notice: 'User was successfully updated.'
+          end
+        }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
@@ -85,6 +97,10 @@ class UsersController < ApplicationController
         :genre,
         :identification_document,
         :birthday,
-        :avatar)
+        :avatar,
+        :avatar_crop_x,
+        :avatar_crop_y,
+        :avatar_crop_w,
+        :avatar_crop_h)
   end
 end

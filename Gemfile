@@ -97,7 +97,10 @@ gem "letter_opener", :group => :development
 gem 'quiet_assets', '~> 1.1', :group => :development
 
 # para el procesamiento de archivos varios
-gem 'carrierwave', '~> 0.11.2'
+gem 'carrierwave', '~> 0.10.0'
+
+# para agregar la funcionalidad de recorte de imagenes
+gem 'carrierwave-crop', '~> 0.1.2'
 
 # para transformar imagenes
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
