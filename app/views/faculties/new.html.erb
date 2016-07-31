@@ -1,8 +1,8 @@
 <ul class="nav nav-tabs" role="tablist">
-  <li><%= link_to 'Listing Faculties', faculties_path %></li>
-  <li class="active"><%= link_to 'New faculty', new_faculty_path %></li>
+  <li><%= link_to t('index.listing_faculties'), faculties_path %></li>
+  <li class="active"><%= link_to t('index.new_faculty'), new_faculty_path %></li>
 </ul>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', faculties_path, class: 'btn btn-default' %>
+<%= link_to t('back'), faculties_path, class: 'btn btn-info' %>

@@ -245,11 +245,13 @@ es:
       listing_reference_lists: 'Listado de Listas referencias'
       listing_roles: 'Listado de roles'
       listing_employees: 'Listado de empleados'
+      listing_faculties: 'Listado de facultades'
       new_user: 'Nuevo usuario'
       new_reference: 'Nueva referencia'
       new_reference_list: 'Nueva lista de referencia'
       new_role: 'Nuevo rol'
       new_employee: 'Nuevo empleado'
+      new_faculty: 'Nueva facultad'
       references_list: 'Lista de referencias'
   show:
     new_user: 'Nuevo usuario'
@@ -301,6 +303,9 @@ es:
   employees: 'Empleados'
   employee: 'Empleado'
   faculties: 'Facultades'
+  faculty: 'Facultad'
+  acronym: 'acronimo'
+  active: 'Activo'
   form:
     send: 'Enviar'
   form_reference_list:
