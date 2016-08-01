@@ -3,7 +3,7 @@
 <head>
   <title>Sistramad</title>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -27,10 +27,21 @@
           <%#= render "partials/navigation" %>
 
           <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">Menu 1</a></li>
-            <li><a href="#">Menu 2</a></li>
-            <li><a href="#">Menu 3</a></li>
+            <li class="active"><a href="#">Plan Septenal</a></li>
+            <li><a href="#">Ascenso</a></li>
+            <li><a href="#">Formación Especial</a></li>
+            <li><a href="#">Licencias</a></li>
+            <li><a href="#">Plan de Rotación</a></li>
+            <li><a href="#">Régimen de Año Sabático</a></li>
+            <li><a href="#">Traslado</a></li>
+            <li><a href="#">Cambio de Dedicación Permanente</a></li>
+            <li><a href="#">Cambio de Dedicación Temporal</a></li>
+            <li><a href="#">Permanencia en la Dedicación</a></li>
+            <li><a href="#">Regimen de Beca</a></li>
+            <li><a href="#">Regimen de Plan Conjunto</a></li>
+            <li><a href="#">Ascenso</a></li>
+            <li><a href="#">Ascenso</a></li>
+            <li><a href="#">...</a></li>
           </ul>
 
         </div>
@@ -47,6 +58,6 @@
       <%= yield %>
   <% end %>
 </div>
-<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

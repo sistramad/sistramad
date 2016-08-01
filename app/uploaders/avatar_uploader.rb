@@ -41,7 +41,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   # end
   version :thumb do
     process crop: :avatar
-    resize_to_fill(200,200)
+    resize_to_fill(200, 200)
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
