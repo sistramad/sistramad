@@ -20,7 +20,7 @@ user = User.new(:username => 'test',
                 :password_confirmation => '123456')
 user.save!(:validate => false)
 
-user.add_role(:admin)
+user.add_role(:test)
 
 user = User.new(:username => 'joalbert',
                 :email => 'joalbertgonzalez@gmail.com',
