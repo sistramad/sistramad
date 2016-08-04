@@ -7,7 +7,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="body-font">
-<div id="background"></div>
+
 <%= render "partials/navigation" %>
 
 <% flash.each do |name, msg| -%>
@@ -19,8 +19,15 @@
     </div>
 <% end -%>
 
+<% if ['sessions', 'passwords', 'unlocks'].include?(controller_name) %>
+    <div id="background"></div>
+<% end %>
+
 <div id="main-container" class="container main-container">
-  <% if controller_name != 'sessions' %>
+
+  <% if ['sessions', 'passwords', 'unlocks', 'invitations'].include?(controller_name) %>
+      <%= yield %>
+  <% else %>
       <div class="row">
         <div id="sidebar" class="col-xs-3">
           <!-- sidebar content -->
@@ -53,9 +60,6 @@
           <%= yield %>
         </div>
       </div>
-
-  <% elsif controller_name == 'sessions' %>
-      <%= yield %>
   <% end %>
 </div>
 <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
