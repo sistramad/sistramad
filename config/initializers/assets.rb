@@ -14,6 +14,6 @@ Rails.application.config.assets.precompile += %w( users/avatar_carrier_wave_crop
 
 #para agregar las fuentes a la ruta
 Rails.application.config.assets.enabled = true
-Rails.application.config.assets.paths << "#{Rails.root}/app/assets/fonts"
+# Rails.application.config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 # Precompile additional assets
 Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf )
