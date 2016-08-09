@@ -257,7 +257,8 @@ es:
     new_user: 'Nuevo usuario'
     listing_users: 'Listado de usuarios'
   sign_in:
-    log_in:     'Iniciar sesión'
+    log_in:     'Ingresar'
+    sign_in:    'Iniciar sesión'
     login_input: 'usuario@dominio.com o usuario'
     password: 'Contraseña'
     forgot_your_password: '¿Olvidaste tu contraseña?'
