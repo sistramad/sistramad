@@ -13,8 +13,10 @@
 //= require jquery
 //= require jquery.jcrop
 //= require jquery_ujs
-//= require turbolinks
+//= require app
 //= require bootstrap-sprockets
+
+
 
 $(document).ready(function() {
     $('.has-tooltip').tooltip();
