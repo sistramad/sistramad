@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
@@ -82,7 +82,7 @@ gem 'sass', '~> 3.4', '>= 3.4.22'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
 # para cuando se compile se agregan los prefijos automaticamente de acuerdo al proveedor
-gem 'autoprefixer-rails', '~> 6.3', '>= 6.3.7'
+gem 'autoprefixer-rails', '~> 6.4', '>= 6.4.0'
 
 # para mostrar las rutas con show-routes y ls modelos con show-models
 gem 'pry-rails', '~> 0.3.4', :group => :development
@@ -104,3 +104,6 @@ gem 'carrierwave-crop', '~> 0.1.2'
 
 # para transformar imagenes
 gem 'rmagick', '~> 2.15', '>= 2.15.4'
+
+# para que puedan coexistir jquery y turbolinks sin problemas
+gem 'jquery-turbolinks'

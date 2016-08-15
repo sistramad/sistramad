@@ -2,40 +2,133 @@
 <html>
 <head>
   <title>Sistramad</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
   <%= csrf_meta_tags %>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 </head>
-<body class="body-font">
-
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
 <%= render "partials/navigation" %>
-
-<% flash.each do |name, msg| -%>
-    <div class="alert alert-<%= name %>">
-      <div class="container-fluid">
-        <button class="close" data-dismiss="alert"><span>&times;</span></button>
-        <%= content_tag :div, msg %>
-      </div>
-    </div>
-<% end -%>
 
 <% if ['sessions', 'passwords', 'unlocks'].include?(controller_name) %>
     <div id="background"></div>
 <% end %>
 
-<div id="main-container" class="container main-container">
-
   <% if ['sessions', 'passwords', 'unlocks', 'invitations'].include?(controller_name) %>
       <%= yield %>
   <% else %>
-      <div class="row">
+
+      <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+          <!-- Sidebar user panel (optional) -->
+          <div class="user-panel">
+            <div class="pull-left image">
+              <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
+            </div>
+            <div class="pull-left info">
+              <p>Alexander Pierce</p>
+              <!-- Status -->
+              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+          </div>
+
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
+
+          <!-- Sidebar Menu -->
+          <ul class="sidebar-menu">
+            <li class="header">TR&Aacute;MITES</li>
+            <!-- Optionally, you can add icons to the links -->
+            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Formación Especial</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
+
+
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle"></i>Nuevo Plan Conjunto</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
+              </ul>
+            </li>
+          </ul>
+          <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+      </aside>
+
+
+      <div class="content-wrapper">
+        <% flash.each do |name, msg| -%>
+            <div class="alert alert-<%= name %>">
+              <div class="container-fluid">
+                <button class="close" data-dismiss="alert"><span>&times;</span></button>
+                <%= content_tag :div, msg %>
+              </div>
+            </div>
+        <% end -%>
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <h1>
+            Page Header
+            <small>Optional description</small>
+          </h1>
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+          </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+          <!-- Your Page Content Here -->
+          <%= yield %>
+
+        </section>
+      </div>
+
+      <footer class="main-footer">
+        <!-- To the right -->
+        <div class="pull-right hidden-xs">
+          Anything you want
+        </div>
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+      </footer>
+        <!-- /.content -->
+      <!--<div class="row">
         <div id="sidebar" class="col-xs-3">
-          <!-- sidebar content -->
+          &lt;!&ndash; sidebar content &ndash;&gt;
           <%#= render "partials/navigation" %>
 
           <ul class="nav nav-pills nav-stacked">
             <li class="active"><a href="#">Plan Septenal</a></li>
-            <li><a href="#">Ascenso</a></li>
+            <li><a href="#">Ascensooooo</a></li>
             <li><a href="#">Formación Especial</a></li>
             <li><a href="#">Licencias</a></li>
             <li><a href="#">Plan de Rotación</a></li>
@@ -53,13 +146,13 @@
 
         </div>
         <div id="content" class="col-xs-9">
-          <!--  main content -->
-          <!--<p class="notice"><%= notice %></p>-->
-          <!--<p class="alert"><%= alert %></p>-->
+          &lt;!&ndash;  main content &ndash;&gt;
+          &lt;!&ndash;<p class="notice"><%= notice %></p>&ndash;&gt;
+          &lt;!&ndash;<p class="alert"><%= alert %></p>&ndash;&gt;
 
-          <%= yield %>
+
         </div>
-      </div>
+      </div>-->
   <% end %>
 </div>
 <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
