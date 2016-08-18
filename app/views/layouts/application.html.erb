@@ -23,6 +23,10 @@
     <div id="background"></div>
 <% end %>
 
+<ol class="breadcrumb">
+  <%= render_breadcrumbs :tag => :li, :separator => "" %>
+</ol>
+
 <div id="main-container" class="container main-container">
 
   <% if ['sessions', 'passwords', 'unlocks', 'invitations'].include?(controller_name) %>

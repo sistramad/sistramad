@@ -3,9 +3,13 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :only => [:new, :edit, :destroy]
 
+  add_breadcrumb "home", :authenticated_root_path, :title => "Back to the home"
+
   # GET /users
   # GET /users.json
   def index
+    add_breadcrumb "users", users_path
+
     @users = User.all.page(params[:page]).per(15)
   end
 
