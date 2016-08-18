@@ -82,7 +82,7 @@ gem 'sass', '~> 3.4', '>= 3.4.22'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 
 # para cuando se compile se agregan los prefijos automaticamente de acuerdo al proveedor
-gem 'autoprefixer-rails', '~> 6.3', '>= 6.3.7'
+gem 'autoprefixer-rails', '~> 6.4', '>= 6.4.0'
 
 # para mostrar las rutas con show-routes y ls modelos con show-models
 gem 'pry-rails', '~> 0.3.4', :group => :development
@@ -103,4 +103,8 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-crop', '~> 0.1.2'
 
 # para transformar imagenes
-gem 'rmagick', '~> 2.15', '>= 2.15.4'
+# gem 'rmagick', '~> 2.15', '>= 2.15.4'
+gem 'mini_magick', '~> 4.5', '>= 4.5.1'
+
+# para que puedan coexistir jquery y turbolinks sin problemas
+gem 'jquery-turbolinks'
