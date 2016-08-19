@@ -1,0 +1,32 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.active= link_to t('index.listing_users'), users_path
+  %li= link_to t('index.new_user'), new_user_path
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= t('first_name')
+        %th= t('last_name')
+        %th= t('genre')
+        %th= t('identification_document')
+        %th{:colspan => "3"}
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td= user.first_name
+          %td= user.last_name
+          %td= user.genre == 'm' ?  t('genres.male') : t('genres.female')
+          %td= user.identification_document
+          %td
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                = link_to t('index.show'), user, class: 'btn btn-info list'
+                = link_to t('index.edit'), edit_user_path(user), class: 'btn btn-primary list'
+                = link_to t('index.destroy'), user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list'
+= paginate @users
+= page_entries_info @users
+%br/
+%br/
+= link_to new_user_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.new_user')

@@ -1,0 +1,5 @@
+= form_for @user, :html => {:multipart => true} do |f|
+  = f.cropbox :avatar
+  = f.previewbox :avatar
+  = f.submit 'Crop'
+= javascript_include_tag "users/avatar_carrier_wave_crop", 'data-turbolinks-track' => true

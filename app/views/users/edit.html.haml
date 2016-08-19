@@ -1,0 +1,6 @@
+= render 'form_edit.erb'
+.col-md-3.pull-left
+  .btn-toolbar
+    .btn-group
+      = link_to t('edit'), @user, class: 'btn btn-info'
+      = link_to t('back'), users_path, class: 'btn btn-info'

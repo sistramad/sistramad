@@ -109,4 +109,9 @@ gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 # para que puedan coexistir jquery y turbolinks sin problemas
 gem 'jquery-turbolinks'
 
+# servidor
 gem "puma"
+
+gem 'haml', '~> 4.0', '>= 4.0.7'
+
+gem 'html2haml', '~> 2.0'

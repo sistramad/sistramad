@@ -1,0 +1,50 @@
+.row
+  .col-md-12
+    .panel.panel-info
+      .panel-heading.center= t :user
+      .panel-body
+        = simple_form_for @user, :html => {:multipart => true, :class => "form-horizontal"}, |
+          wrapper: :horizontal_file_input_sistramad,                                         |
+          wrapper_mappings: {                                                                |
+              file: :horizontal_file_input_sistramad                                         |
+          } do |f|                                                                           |
+          .row
+            .col-xs-12.col-sm-12.col-md-3
+              .img-avatar-circle.center-block
+                = image_tag @user.avatar_url(:thumb).to_s if @user.avatar?
+                - unless @user.avatar?
+                  = image_tag "user_default_male.png" if @user.genre == 'm'
+                  = image_tag "user_default_female.png" if @user.genre == 'f'
+              .input-group.input-group-sm
+                .input-group-btn
+                  %label.btn.btn-info
+                    Buscar
+                    \#{f.file_field :avatar, class: "input-hiden"}
+                %input#upload-file-info.form-control{:readonly => "readonly", :type => "text"}/
+            .col-xs-12.col-sm-12.col-md-9
+              .form-group
+                %label.control-label.col-sm-5.col-md-3{:for => "username"}
+                  = t("user")
+                  \:
+                .col-sm-7.col-md-9
+                  %p.form-control-static= @user.username
+              = f.input :first_name, :label => t("first_name"), :placeholder => t("first_name")
+              = f.input :middle_name, :label => t("middle_name"), :placeholder => t("middle_name")
+              = f.input :last_name, :label => t("last_name"), :placeholder => t("last_name")
+              = f.input :genre, :label => t("genre"), collection: {'m' => t('genres.male'), 'f' => t('genres.female')}.sort.map { |k, v| [v, k] }, |
+                :include_blank => false, :placeholder => t("genre")                                                                                |
+              = f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document")
+              = f.input :birthday, start_year: Date.today.year - 90, end_year: Date.today.year - 12, |
+                :label => t("birthday.short"), :wrapper => :multi_select_sistramad                   |
+            .col-md-12
+              = f.button :submit, value: t('form.send'), class: 'form-control btn btn-info'
+          = f.error_notification
+          - if @user.errors.any?
+            #error_explanation
+              %h2
+                = pluralize(@user.errors.count, "error")
+                prohibited this user from being saved:
+              %ul
+                - @user.errors.full_messages.each do |message|
+                  %li= message
+= javascript_include_tag "users/avatar_preview_text_input", 'data-turbolinks-track' => true

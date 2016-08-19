@@ -1,0 +1,59 @@
+.row
+  .col-md-12
+    .panel.panel-user.panel-info
+      .panel-heading.center= t("user")
+      .panel-body
+        .form-horizontal
+          .row
+            .col-xs-12.col-sm-12.col-md-3
+              .img-avatar-circle.center-block
+                = image_tag @user.avatar_url(:thumb).to_s if @user.avatar?
+                - unless @user.avatar?
+                  = image_tag "user_default_male.png" if @user.genre == 'm'
+                  = image_tag "user_default_female.png" if @user.genre == 'f'
+            .col-xs-12.col-sm-12.col-md-9
+              .form-group
+                %label.control-label.col-sm-5.col-md-4{:for => "username"}
+                  = t("user")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.username
+                %label.control-label.col-sm-5.col-md-4{:for => "first_name"}
+                  = t("first_name")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.first_name
+                %label.control-label.col-sm-5.col-md-4{:for => "middle_name"}
+                  = t("middle_name")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.middle_name
+                %label.control-label.col-sm-5.col-md-4{:for => "last_name"}
+                  = t("last_name")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.last_name
+                %label.control-label.col-sm-5.col-md-4{:for => "genre"}
+                  = t("genre")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.genre == 'm' ? t("genres.male") : t("genres.female")
+                %label.control-label.col-sm-5.col-md-4{:for => "identification_document"}
+                  = t("identification_document")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.identification_document
+                %label.control-label.col-sm-5.col-md-4{:for => "birthday"}
+                  = t("birthday.short")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.birthday
+                %label.control-label.col-sm-5.col-md-4{:for => "email"}
+                  = t("email.short")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @user.email
+    .btn-toolbar
+      .btn-group.btn-group-justified
+        = link_to t('edit'), edit_user_path(@user), class: 'btn btn-info'
+        = link_to t('back'), users_path, class: 'btn btn-info'

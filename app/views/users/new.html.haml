@@ -1,0 +1,5 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li= link_to t('show.listing_users'), users_path
+  %li.active= link_to t('show.new_user'), new_user_path
+= render 'form.erb'
+= link_to t('back'), users_path, class: 'btn btn-info'
