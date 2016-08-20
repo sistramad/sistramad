@@ -1,0 +1,31 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @country.name
+%p
+  %strong Capital:
+  = @country.capital
+%p
+  %strong Region:
+  = @country.region_id
+%p
+  %strong Sub region:
+  = @country.sub_region_id
+%p
+  %strong Latitude:
+  = @country.latitude
+%p
+  %strong Longitude:
+  = @country.longitude
+%p
+  %strong Nativename:
+  = @country.nativeName
+%p
+  %strong Alpha2code:
+  = @country.alpha2Code
+%p
+  %strong Alpha3code:
+  = @country.alpha3Code
+= link_to 'Edit', edit_country_path(@country)
+|
+= link_to 'Back', countries_path

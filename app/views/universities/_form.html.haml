@@ -1,0 +1,8 @@
+= simple_form_for(@university) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+    = f.input :acronym
+    = f.association :country
+  .form-actions
+    = f.button :submit

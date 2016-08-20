@@ -1,0 +1,5 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li= link_to t('index.listing_reference_lists'), reference_lists_path
+  %li.active= link_to t('index.new_reference_list'), new_reference_list_path
+= render 'form'
+= link_to t('back'), reference_lists_path, class: 'btn btn-info'

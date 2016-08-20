@@ -1,0 +1,49 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.active= link_to t('index.listing_references'), references_path
+  %li= link_to t('index.new_reference'), new_reference_path
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= t('name')
+        %th= t('description')
+        %th{:colspan => "3"}
+    %tbody
+      - @references.each do |reference|
+        %tr
+          %td
+            %span.has-tooltip{"data-placement" => "left", "data-toggle" => "tooltip", :title => "Created on #{reference.created_at.strftime("%m/%e/%Y at %w:%M %p")}, Last modified on #{reference.updated_at.strftime("%m/%e/%Y at %w:%M %p")}"}
+              = reference.name
+          %td= reference.description
+          %td
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                = link_to t('index.show'), reference, class: 'btn btn-info list'
+                - if !reference.reference_lists.empty?
+                  / Button trigger modal
+                  %button.btn.btn-success.list{"data-target" => "#reference-#{reference.id}-reference_lists", "data-toggle" => "modal"}
+                    = t('index.references_list')
+                  / Modal
+                  .modal.fade{"aria-hidden" => "true", "aria-labelledby" => "reference-#{reference.id}-name", :id => "reference-#{reference.id}-reference_lists", :role => "dialog", :tabindex => "-1"}
+                    .modal-dialog
+                      .modal-content
+                        .modal-header
+                          %h4.modal-title{:id => "todo-#{reference.id}-name"}= reference.name
+                        .modal-body
+                          .table-responsive
+                            %table.table.table-striped.table-hover
+                              %tbody
+                                - reference.reference_lists.each do |reference_list|
+                                  %tr
+                                    %td= reference_list.name
+                        .modal-footer
+                          %button.btn.btn-primary{"data-dismiss" => "modal", :type => "button"} Close
+                = link_to t('index.edit'), edit_reference_path(reference), class: 'btn btn-primary list'
+                = link_to t('index.destroy'), reference, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list'
+= paginate @references
+= page_entries_info @references
+%br/
+%br/
+= link_to new_reference_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.new_reference')

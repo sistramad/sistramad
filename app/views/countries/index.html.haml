@@ -1,0 +1,32 @@
+%p#notice= notice
+%h1 Listing Countries
+%table
+  %thead
+    %tr
+      %th Name
+      %th Capital
+      %th Region
+      %th Sub region
+      %th Latitude
+      %th Longitude
+      %th Nativename
+      %th Alpha2code
+      %th Alpha3code
+      %th{:colspan => "3"}
+  %tbody
+    - @countries.each do |country|
+      %tr
+        %td= country.name
+        %td= country.capital
+        %td= country.region_id
+        %td= country.sub_region_id
+        %td= country.latitude
+        %td= country.longitude
+        %td= country.nativeName
+        %td= country.alpha2Code
+        %td= country.alpha3Code
+        %td= link_to 'Show', country
+        %td= link_to 'Edit', edit_country_path(country)
+        %td= link_to 'Destroy', country, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Country', new_country_path

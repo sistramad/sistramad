@@ -1,0 +1,121 @@
+﻿%html
+  %head
+    %meta{:content => "text/html; charset=CP850", "http-equiv" => "Content-Type"}/
+    %title Sistramad
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false
+    = javascript_include_tag 'application', 'data-turbolinks-track' => false
+    = csrf_meta_tags
+    / Font Awesome
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    / Ionicons
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css", :rel => "stylesheet"}/
+  %body.hold-transition.skin-blue.sidebar-mini
+    .wrapper
+      = render "partials/navigation"
+      - if ['sessions', 'passwords', 'unlocks'].include?(controller_name)
+        #background
+      - if ['sessions', 'passwords', 'unlocks', 'invitations'].include?(controller_name)
+        = yield
+      - else
+        %aside.main-sidebar
+          / sidebar: style can be found in sidebar.less
+          %section.sidebar
+            / Sidebar user panel (optional)
+            .user-panel
+              .pull-left.image
+                = image_tag "user2-160x160.jpg", :class => "img-circle", :alt => "User Image"
+              .pull-left.info
+                %p Alexander Pierce
+                / Status
+                %a{:href => "#"}
+                  %i.fa.fa-circle.text-success
+                  Online
+            / search form (Optional)
+            %form.sidebar-form{:action => "#", :method => "get"}
+              .input-group
+                %input.form-control{:name => "q", :placeholder => "Search...", :type => "text"}/
+                %span.input-group-btn
+                  %button#search-btn.btn.btn-flat{:name => "search", :type => "submit"}
+                    %i.fa.fa-search
+            / /.search form
+            / Sidebar Menu
+            %ul.sidebar-menu
+              %li.header TR&Aacute;MITES
+              / Optionally, you can add icons to the links
+              %li.active
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Plan Septenal
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Ascenso
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Formación Especial
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Licencias
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Plan de Rotación
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Traslado
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Regimen de Beca
+              %li.treeview
+                %a{:href => "#"}
+                  %i.fa.fa-circle-o
+                  %span Plan Conjunto
+                  %span.pull-right-container
+                    %i.fa.fa-angle-left.pull-right
+                %ul.treeview-menu
+                  %li
+                    %a{:href => "#"}
+                      %i.fa.fa-circle>
+                      Nuevo Plan Conjunto
+                  %li
+                    %a{:href => "#"}
+                      %i.fa.fa-circle>
+                      Eliminar Plan Conjunto
+            / /.sidebar-menu
+          / /.sidebar
+        .content-wrapper
+          - flash.each do |name, msg|
+            %div{:class => "alert alert-#{name}"}
+              .container-fluid
+                %button.close{"data-dismiss" => "alert"}
+                  %span &times;
+                = content_tag :div, msg
+          / Content Header (Page header)
+          %section.content-header
+            %h1
+              Page Header
+              %small Optional description
+            %ol.breadcrumb
+              %li
+                %a{:href => "#"}
+                  %i.fa.fa-dashboard
+                  Level
+              %li.active Here
+          / Main content
+          %section.content
+            / Your Page Content Here
+            = yield
+        %footer.main-footer
+          / To the right
+          .pull-right.hidden-xs
+            Anything you want
+          / Default to the left
+          %strong
+            Copyright &copy; 2016
+            = succeed "." do
+              %a{:href => "#"} Company
+          All rights reserved.

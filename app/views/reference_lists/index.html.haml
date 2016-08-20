@@ -1,0 +1,32 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.active= link_to t('index.listing_reference_lists'), reference_lists_path
+  %li= link_to t('index.new_reference_list'), new_reference_list_path
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= t('name')
+        %th= t('description')
+        %th= t('value')
+        %th= t('reference')
+        %th{:colspan => "3"}
+    %tbody
+      - @reference_lists.each do |reference_list|
+        %tr
+          %td= reference_list.name
+          %td= reference_list.description
+          %td= reference_list.value
+          %td= reference_list.reference.name
+          %td
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                = link_to t('index.show'), reference_list, class: 'btn btn-info list'
+                = link_to t('index.edit'), edit_reference_list_path(reference_list), class: 'btn btn-primary list'
+                = link_to t('index.destroy'), reference_list, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list'
+= paginate @reference_lists
+= page_entries_info @reference_lists
+%br/
+%br/
+= link_to new_reference_list_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.new_reference_list')

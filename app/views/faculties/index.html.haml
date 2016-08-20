@@ -1,0 +1,28 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.active= link_to t('index.listing_faculties'), faculties_path
+  %li= link_to t('index.new_faculty'), new_faculty_path
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th= t('name')
+        %th= t('active')
+        %th{:colspan => "3"}
+    %tbody
+      - @faculties.each do |faculty|
+        %tr
+          %td= faculty.name
+          %td= faculty.active
+          %td
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                = link_to t('index.show'), faculty, class: 'btn btn-info list'
+                = link_to t('index.edit'), edit_faculty_path(faculty), class: 'btn btn-primary list'
+                = link_to t('index.destroy'), faculty, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list'
+= paginate @faculties
+= page_entries_info @faculties
+%br/
+%br/
+= link_to new_faculty_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.new_faculty')

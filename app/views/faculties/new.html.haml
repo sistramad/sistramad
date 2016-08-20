@@ -1,0 +1,5 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li= link_to t('index.listing_faculties'), faculties_path
+  %li.active= link_to t('index.new_faculty'), new_faculty_path
+= render 'form'
+= link_to t('back'), faculties_path, class: 'btn btn-info'

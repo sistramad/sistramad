@@ -48,7 +48,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # gemas agregadas
 
 group :production do
- gem 'rails_12factor'
+  gem 'rails_12factor'
 end
 
 # para la autenticación de usuarios
@@ -103,7 +103,6 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-crop', '~> 0.1.2'
 
 # para transformar imagenes
-# gem 'rmagick', '~> 2.15', '>= 2.15.4'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 
 # para que puedan coexistir jquery y turbolinks sin problemas
@@ -114,4 +113,8 @@ gem "puma"
 
 gem 'haml', '~> 4.0', '>= 4.0.7'
 
-gem 'html2haml', '~> 2.0'
+group :development do
+  gem 'html2haml', '~> 2.0'
+  gem 'erb2haml', '~> 0.1.5'
+  gem 'haml-rails', '~> 0.9.0'
+end

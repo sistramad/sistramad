@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Listing University Degrees
+%table
+  %thead
+    %tr
+      %th Name
+      %th University
+      %th Academic degree
+      %th{:colspan => "3"}
+  %tbody
+    - @university_degrees.each do |university_degree|
+      %tr
+        %td= university_degree.name
+        %td= university_degree.university
+        %td= university_degree.academic_degree_id
+        %td= link_to 'Show', university_degree
+        %td= link_to 'Edit', edit_university_degree_path(university_degree)
+        %td= link_to 'Destroy', university_degree, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New University degree', new_university_degree_path

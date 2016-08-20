@@ -1,0 +1,129 @@
+%body
+  %header.main-header
+    - if current_user
+      / Logo
+      %a.logo{:href => "#"}
+        / mini logo for sidebar mini 50x50 pixels
+        %span.logo-mini
+          %b> S
+          MD
+        / logo for regular state and mobile devices
+        %span.logo-lg
+          %b Sistramad
+      / Header Navbar
+      %nav.navbar.navbar-static-top{:role => "navigation"}
+        / Sidebar toggle button
+        %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
+          %span.sr-only Toggle navigation
+        / Navbar Right Menu
+        #menu.navbar-custom-menu
+          %ul.nav.navbar-nav
+            - if current_user.has_role? :admin
+              %li= link_to t(:reference), references_path
+              %li= link_to t(:reference_lists), reference_lists_path
+              %li= link_to t(:users), users_path
+              %li= link_to t(:roles), roles_path
+              %li= link_to t(:employees), employees_path
+              %li= link_to t(:faculties), faculties_path
+            / Messages: style can be found in dropdown.less
+            %li.dropdown.messages-menu
+              / Menu toggle button
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %i.fa.fa-envelope-o
+                %span.label.label-success 4
+              %ul.dropdown-menu
+                %li.header You have 4 messages
+                %li
+                  / inner menu: contains the messages
+                  %ul.menu
+                    %li
+                      / start message
+                      %a{:href => "#"}
+                        .pull-left
+                          / User Image
+                          = image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"
+                        / Message title and timestamp
+                        %h4
+                          Support Team
+                          %small
+                            %i.fa.fa-clock-o
+                            5 mins
+                        / The message
+                        %p Why not buy a new awesome theme?
+                    / end message
+                  / /.menu
+                %li.footer
+                  %a{:href => "#"} See All Messages
+            / /.messages-menu
+            / Notifications Menu
+            %li.dropdown.notifications-menu
+              / Menu toggle button
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %i.fa.fa-bell-o
+                %span.label.label-warning 10
+              %ul.dropdown-menu
+                %li.header You have 10 notifications
+                %li
+                  / Inner Menu: contains the notifications
+                  %ul.menu
+                    %li
+                      / start notification
+                      %a{:href => "#"}
+                        %i.fa.fa-users.text-aqua
+                        5 new members joined today
+                    / end notification
+                %li.footer
+                  %a{:href => "#"} View all
+            / User Account Menu
+            %li.dropdown.user.user-menu
+              / Menu Toggle Button
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                / The user image in the navbar
+                = image_tag "user2-160x160.jpg" , :class=>"user-image", :alt=>"User Image"
+                / hidden-xs hides the username on small devices so only the image appears.
+                %span.hidden-xs Alexander Pierce
+              %ul.dropdown-menu
+                / The user image in the menu
+                %li.user-header
+                  = image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"
+                  %p
+                    Alexander Pierce - Web Developer
+                    %small Member since Nov. 2012
+                / Menu Body
+                /
+                  <li class="user-body">
+                  <div class="row">
+                  <div class="col-xs-4 text-center">
+                  <a href="#">Followers</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                  <a href="#">Sales</a>
+                  </div>
+                  <div class="col-xs-4 text-center">
+                  <a href="#">Friends</a>
+                  </div>
+                  </div>
+                  \&lt;!&ndash; /.row &ndash;&gt;
+                  </li>
+                / Menu Footer
+                %li.user-footer
+                  .pull-left
+                    %a.btn.btn-default.btn-flat{:href => "#"} Profile
+                  .pull-right
+                    %a.btn.btn-default.btn-flat{:href => "#"} Sign out
+            / Control Sidebar Toggle Button
+            %li
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %i.fa.fa-gears
+              %ul.dropdown-menu
+                %li
+                  = link_to destroy_user_session_path, method: :delete do
+                    %i.glyphicon.glyphicon-log-out
+                    Cerrar sesión
+                - if current_user.has_role? :admin
+                  %li.divider
+                  %li
+                    = link_to new_user_invitation_path do
+                      %i.glyphicon.glyphicon-envelope
+                      Invitar

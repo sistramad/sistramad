@@ -1,0 +1,32 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.active= link_to t('index.listing_employees'), employees_path
+  %li= link_to t('index.new_employee'), new_employee_path
+.table-responsive
+  %table.table.table-striped.table-hover
+    %thead
+      %tr
+        %th User
+        %th= t('type_employee.long')
+        %th= t('scale_classification.short')
+        %th= t('scale_category.short')
+        %th{:colspan => "3"}
+    %tbody
+      - @employees.each do |employee|
+        %tr
+          %td= employee.user.username
+          %td= employee.type_employee.name
+          %td= employee.scale_classification.name
+          %td= employee.scale_category.name
+          %td
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                = link_to 'Show', employee, class: 'btn btn-info list'
+                = link_to 'Edit', edit_employee_path(employee), class: 'btn btn-primary list'
+                = link_to 'Destroy', employee, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list'
+= paginate @employees
+= page_entries_info @employees
+%br/
+%br/
+= link_to new_employee_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.new_employee')

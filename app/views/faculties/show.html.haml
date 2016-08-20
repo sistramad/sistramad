@@ -1,0 +1,28 @@
+.row
+  .col-md-8.col-md-offset-2
+    .panel.panel-info
+      .panel-heading.center= t("faculty")
+      .panel-body
+        .form-horizontal
+          .row
+            .col-xs-12.col-sm-12.col-md-9
+              .form-group
+                %label.control-label.col-sm-5.col-md-4{:for => "name"}
+                  = t("name")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @faculty.name
+                %label.control-label.col-sm-5.col-md-4{:for => "acronym"}
+                  = t("acronym")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @faculty.acronym
+                %label.control-label.col-sm-5.col-md-4{:for => "active"}
+                  = t("active")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @faculty.active
+    .btn-toolbar
+      .btn-group.btn-group-justified
+        = link_to t('edit'), edit_faculty_path(@faculty), class: 'btn btn-info'
+        = link_to t('back'), faculties_path, class: 'btn btn-info'

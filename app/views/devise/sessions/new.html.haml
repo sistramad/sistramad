@@ -1,0 +1,51 @@
+.row
+  .col-md-12
+    %h2.center-title-login
+      %span.label
+        Sistema de trámites administrativos docente
+.row
+  .center-login
+    .col-xs-4.col-sm-4.col-md-4.col-lg-4
+      .panel.panel-info
+        .panel-heading.center= t("users")
+        .panel-body
+          .form-horizontal
+            .row
+              .col-xs-12.col-sm-12.col-md-12
+                .form-group
+                  %label.control-label.col-sm-5.col-md-4{:for => "username"}
+                    = t("user")
+                    \:
+                  .col-sm-7.col-md-8
+                    %p.form-control-static admin
+                  %label.control-label.col-sm-5.col-md-4{:for => "Password"}
+                    = t("password")
+                    \:
+                  .col-sm-7.col-md-8
+                    %p.form-control-static 123456
+                .form-group
+                  %label.control-label.col-sm-5.col-md-4{:for => "username"}
+                    = t("user")
+                    \:
+                  .col-sm-7.col-md-8
+                    %p.form-control-static test
+                  %label.control-label.col-sm-5.col-md-4{:for => "Password"}
+                    = t("password")
+                    \:
+                  .col-sm-7.col-md-8
+                    %p.form-control-static 123456
+    .col-xs-6.col-sm-4.col-md-4.col-lg-4
+      .panel.panel-primary
+        .panel-heading.text-center= t('sign_in.log_in')
+        .panel-body
+          = simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {role: 'form'}) do |f|
+            = f.error_notification
+            - if alert
+              %p= alert
+            = f.input :login, :label_html => {:class => "sr-only"}, autofocus: true, placeholder: t('sign_in.login_input')
+            = f.input :password, :label_html => {:class => "sr-only"}, autocomplete: "off", placeholder: t('sign_in.password')
+            - if devise_mapping.rememberable?
+              = f.check_box :remember_me
+              = f.label :remember_me, t("devise.sessions.remember_me")
+            = f.button :submit, value: t('sign_in.sign_in'), class: 'form-control btn btn-primary'
+      = render "devise/shared/links"

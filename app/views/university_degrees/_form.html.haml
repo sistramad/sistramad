@@ -1,0 +1,8 @@
+= simple_form_for(@university_degree) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.input :name
+    = f.association :university
+    = f.input :academic_degree_id
+  .form-actions
+    = f.button :submit

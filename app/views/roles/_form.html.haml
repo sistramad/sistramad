@@ -1,0 +1,26 @@
+.row
+  .col-md-10.col-md-offset-1
+    .panel.panel-info
+      .panel-heading.center= t('roles')
+      .panel-body
+        = simple_form_for @role, :html => {:class => "form-horizontal"}, |
+          wrapper: :horizontal_file_input_sistramad,                     |
+          wrapper_mappings: {                                            |
+              file: :horizontal_file_input_sistramad                     |
+          } do |f|                                                       |
+          = f.error_notification
+          - if @role.errors.any?
+            #error_explanation
+              %h2
+                = pluralize(@role.errors.count, "error")
+                prohibited this role from being saved:
+              %ul
+                - @role.errors.full_messages.each do |message|
+                  %li= message
+          .row
+            .col-xs-12.col-sm-12.col-md-9.col-md-offset-1
+              = f.input :name, :label => t("name"), :placeholder => t("name")
+              = f.input :resource_id
+              = f.input :resource_type
+          .col-md-12
+            = f.button :submit, value: t('form.send'), class: 'form-control btn btn-info'

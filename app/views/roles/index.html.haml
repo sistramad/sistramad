@@ -1,0 +1,29 @@
+%ul.nav.nav-tabs{:role => "tablist"}
+  %li.active= link_to t('index.listing_roles'), roles_path
+  %li= link_to t('index.new_role'), new_role_path
+.table-responsive
+  %table.table.table-striped.table-hover
+    %tr
+      %th= t('name')
+      %th resource_id
+      %th resource_type
+      %th{:colspan => "3"}
+    %tbody
+      - @roles.each do |role|
+        %tr
+          %td= role.name
+          %td= role.resource_id
+          %td= role.resource_type
+          %td
+            .btn-toolbar
+              .btn-group.btn-group-xs
+                = link_to t('index.show'), role, class: 'btn btn-info list'
+                = link_to t('index.edit'), edit_role_path(role), class: 'btn btn-primary list'
+                = link_to t('index.destroy'), role, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list'
+= paginate @roles
+= page_entries_info @roles
+%br/
+%br/
+= link_to new_role_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.new_role')

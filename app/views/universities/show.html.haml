@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @university.name
+%p
+  %strong Acronym:
+  = @university.acronym
+%p
+  %strong Country:
+  = @university.country
+= link_to 'Edit', edit_university_path(@university)
+|
+= link_to 'Back', universities_path

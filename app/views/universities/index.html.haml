@@ -1,0 +1,20 @@
+%p#notice= notice
+%h1 Listing Universities
+%table
+  %thead
+    %tr
+      %th Name
+      %th Acronym
+      %th Country
+      %th{:colspan => "3"}
+  %tbody
+    - @universities.each do |university|
+      %tr
+        %td= university.name
+        %td= university.acronym
+        %td= university.country
+        %td= link_to 'Show', university
+        %td= link_to 'Edit', edit_university_path(university)
+        %td= link_to 'Destroy', university, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New University', new_university_path

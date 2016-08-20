@@ -1,0 +1,12 @@
+.row
+  .center-login
+    .col-xs-12.col-sm-6.col-sm-offset-3.col-md-4.col-md-offset-4.col-lg-4.col-lg-offset-4
+      .panel.panel-info
+        .panel-heading.text-center= t('sign_in.forgot_your_password')
+        .panel-body
+          = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: {method: :post}) do |f|
+            = devise_error_messages!
+            = f.input :email, :label => t('email.short'), :label_html => {:class => "sr-only"}, autofocus: true, |
+              placeholder: t('email.long')                                                                       |
+            = f.button :submit, value: t('form.send'), class: 'form-control btn btn-info'
+      = render "devise/shared/links"

@@ -1,0 +1,19 @@
+.row
+  .col-md-12
+    .panel.panel-info
+      .panel-heading.center= t('reference_list')
+      .panel-body
+        = simple_form_for @reference_list, :html => {:class => "form-horizontal"}, |
+          wrapper: :horizontal_file_input_sistramad,                               |
+          wrapper_mappings: {                                                      |
+              file: :horizontal_file_input_sistramad                               |
+          } do |f|                                                                 |
+          = f.error_notification
+          .row
+            .col-xs-12.col-sm-12.col-md-11
+              = f.input :name, :label => t("name"), :hint => t('form_reference_list.hint_name'), :placeholder => t("name")
+              = f.input :description, :label => t("description"), :placeholder => t("description")
+              = f.input :value, :label => t("value"), :placeholder => t("value")
+              = f.association :reference, :label => t("reference"), :include_blank => false
+          .col-md-12
+            = f.button :submit, value: t('form.send'), class: 'form-control btn btn-info'

@@ -1,0 +1,33 @@
+.row
+  .col-md-12
+    .panel.panel-info
+      .panel-heading.center= t('employee')
+      .panel-body
+        .form-horizontal
+          .row
+            .col-xs-12.col-sm-12.col-md-9
+              .form-group
+                %label.control-label.col-sm-5.col-md-4{:for => "first_name"}
+                  = t("first_name")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @employee.user.first_name
+                %label.control-label.col-sm-5.col-md-4{:for => "type_employee"}
+                  = t("type_employee")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @employee.type_employee.name
+                %label.control-label.col-sm-5.col-md-4{:for => "scale_classification"}
+                  = t("scale_classification.short")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @employee.scale_classification.name
+                %label.control-label.col-sm-5.col-md-4{:for => "scale_category"}
+                  = t("scale_category.short")
+                  \:
+                .col-sm-7.col-md-8
+                  %p.form-control-static= @employee.scale_category.name
+  .btn-toolbar
+    .btn-group.btn-group-justified
+      = link_to t('edit'), edit_employee_path(@employee), class: 'btn btn-info'
+      = link_to t('back'), employees_path, class: 'btn btn-info'

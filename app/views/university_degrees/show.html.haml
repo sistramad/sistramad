@@ -1,0 +1,13 @@
+%p#notice= notice
+%p
+  %strong Name:
+  = @university_degree.name
+%p
+  %strong University:
+  = @university_degree.university
+%p
+  %strong Academic degree:
+  = @university_degree.academic_degree_id
+= link_to 'Edit', edit_university_degree_path(@university_degree)
+|
+= link_to 'Back', university_degrees_path
