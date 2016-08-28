@@ -30,3 +30,10 @@
 = link_to new_user_path, class: 'btn btn-info btn-sm list' do
   %i.glyphicon.glyphicon-plus
   = t('index.new_user')
+= link_to list_pdf_users_path(format: "pdf"), class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  = t('index.listing_users')
+
+= link_to download_users_path, class: 'btn btn-info btn-sm list' do
+  %i.glyphicon.glyphicon-plus
+  Download

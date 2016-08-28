@@ -13,7 +13,12 @@ Rails.application.routes.draw do
     devise_for :users
 
     localized do
-      resources :users
+      resources :users do
+        collection do
+          get :list_pdf
+          get :download
+        end
+      end
       resources :references
       resources :reference_lists
     end

@@ -118,3 +118,6 @@ group :development do
   gem 'erb2haml', '~> 0.1.5'
   gem 'haml-rails', '~> 0.9.0'
 end
+
+# para generar PDFs a partir de html
+gem 'wicked_pdf', '~> 1.0', '>= 1.0.6'

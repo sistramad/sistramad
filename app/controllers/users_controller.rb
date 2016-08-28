@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         flash[:success] = 'User was successfully created.'
         format.html {
           if user_params[:avatar].present?
-            render :crop  ## Render the view for cropping
+            render :crop ## Render the view for cropping
           else
             redirect_to @user
           end
@@ -59,7 +59,7 @@ class UsersController < ApplicationController
       if @user.update(user_params)
         format.html {
           if user_params[:avatar].present?
-            render :crop  ## Render the view for cropping
+            render :crop ## Render the view for cropping
           else
             redirect_to @user, notice: 'User was successfully updated.'
           end
@@ -80,6 +80,30 @@ class UsersController < ApplicationController
       format.html { redirect_to references_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def list_pdf
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render :pdf => 'my_pdf',
+               :template => 'users/list_pdf',
+               :layout => 'pdf_default',
+               :page_size => 'Letter',
+               :orientation => 'Landscape' #,:disposition => 'attachment' #para que se dscargue el pdf
+      end
+    end
+  end
+
+  def download
+    html = render_to_string(:action => :list_pdf,
+                            :layout => 'pdf_default')
+    pdf = WickedPdf.new.pdf_from_string(html,
+                                        :page_size => 'Letter',
+                                        :orientation => 'Landscape')
+    send_data(pdf,
+              :filename => 'my_pdf.pdf',
+              :disposition => 'attachment')
   end
 
   private

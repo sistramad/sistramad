@@ -1,0 +1,5 @@
+%h1 Listado de usuarios
+
+-10.times do
+  - User.all.each do |user|
+    %p #{user.username}
