@@ -23,9 +23,12 @@
             / Sidebar user panel (optional)
             .user-panel
               .pull-left.image
-                = image_tag "user2-160x160.jpg", :class => "img-circle", :alt => "User Image"
+                = image_tag current_user.avatar_url(:thumb).to_s, :class => "img-circle", :alt => "User Image" if current_user.avatar?
+                - unless current_user.avatar?
+                  = image_tag "user_default_male.png", :class => "img-circle", :alt => "User Image" if current_user.genre == 'm'
+                  = image_tag "user_default_female.png", :class => "img-circle", :alt => "User Image" if current_user.genre == 'f'
               .pull-left.info
-                %p Alexander Pierce
+                %p #{current_user.username.capitalize}
                 / Status
                 %a{:href => "#"}
                   %i.fa.fa-circle.text-success

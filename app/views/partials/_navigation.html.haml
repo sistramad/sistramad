@@ -79,15 +79,22 @@
               / Menu Toggle Button
               %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
                 / The user image in the navbar
-                = image_tag "user2-160x160.jpg" , :class=>"user-image", :alt=>"User Image"
+                = image_tag current_user.avatar_url(:thumb).to_s, :class => "user-image", :alt => "User Image" if current_user.avatar?
+                - unless current_user.avatar?
+                  = image_tag "user_default_male.png", :class => "user-image", :alt => "User Image" if current_user.genre == 'm'
+                  = image_tag "user_default_female.png", :class => "user-image", :alt => "User Image" if current_user.genre == 'f'
                 / hidden-xs hides the username on small devices so only the image appears.
-                %span.hidden-xs Alexander Pierce
+                %span.hidden-xs #{current_user.username.capitalize}
               %ul.dropdown-menu
                 / The user image in the menu
                 %li.user-header
-                  = image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"
+                  -#= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"
+                  = image_tag current_user.avatar_url(:thumb).to_s, :class => "img-circle", :alt => "User Image" if current_user.avatar?
+                  - unless current_user.avatar?
+                    = image_tag "user_default_male.png", :class => "img-circle", :alt => "User Image" if current_user.genre == 'm'
+                    = image_tag "user_default_female.png", :class => "img-circle", :alt => "User Image" if current_user.genre == 'f'
                   %p
-                    Alexander Pierce - Web Developer
+                    #{current_user.first_name.capitalize} #{current_user.last_name.capitalize} - #{current_user.employee.type_employee.name.capitalize}
                     %small Member since Nov. 2012
                 / Menu Body
                 /
@@ -110,7 +117,8 @@
                   .pull-left
                     %a.btn.btn-default.btn-flat{:href => "#"} Profile
                   .pull-right
-                    %a.btn.btn-default.btn-flat{:href => "#"} Sign out
+                    -#%a.btn.btn-default.btn-flat{:href => "#"} Sign out
+                    = link_to 'Cerrar sesión', destroy_user_session_path, class: 'btn btn-default btn-flat', method: :delete
             / Control Sidebar Toggle Button
             %li
             %li.dropdown
