@@ -117,7 +117,6 @@
                   .pull-left
                     %a.btn.btn-default.btn-flat{:href => "#"} Profile
                   .pull-right
-                    -#%a.btn.btn-default.btn-flat{:href => "#"} Sign out
                     = link_to 'Cerrar sesión', destroy_user_session_path, class: 'btn btn-default btn-flat', method: :delete
             / Control Sidebar Toggle Button
             %li
