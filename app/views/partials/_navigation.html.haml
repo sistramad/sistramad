@@ -50,8 +50,8 @@
                             5 mins
                         / The message
                         %p Why not buy a new awesome theme?
-                    / end message
-                  / /.menu
+                / end message
+                / /.menu
                 %li.footer
                   %a{:href => "#"} See All Messages
             / /.messages-menu
@@ -71,7 +71,7 @@
                       %a{:href => "#"}
                         %i.fa.fa-users.text-aqua
                         5 new members joined today
-                    / end notification
+                / end notification
                 %li.footer
                   %a{:href => "#"} View all
             / User Account Menu
@@ -94,7 +94,10 @@
                     = image_tag "user_default_male.png", :class => "img-circle", :alt => "User Image" if current_user.genre == 'm'
                     = image_tag "user_default_female.png", :class => "img-circle", :alt => "User Image" if current_user.genre == 'f'
                   %p
-                    #{current_user.first_name.capitalize} #{current_user.last_name.capitalize} - #{current_user.employee.type_employee.name.capitalize}
+                    - if current_user.employee
+                      #{current_user.first_name.capitalize} #{current_user.last_name.capitalize} - #{current_user.employee.type_employee.name.capitalize}
+                    - else
+                      #{current_user.first_name.capitalize} #{current_user.last_name.capitalize}
                     %small Member since Nov. 2012
                 / Menu Body
                 /
