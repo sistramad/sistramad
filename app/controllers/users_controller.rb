@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :assign_role]
 
   load_and_authorize_resource :only => [:new, :edit, :destroy]
 
@@ -106,6 +106,10 @@ class UsersController < ApplicationController
               :disposition => 'attachment')
   end
 
+  def assign_role
+
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -129,6 +133,7 @@ class UsersController < ApplicationController
         :avatar_crop_x,
         :avatar_crop_y,
         :avatar_crop_w,
-        :avatar_crop_h)
+        :avatar_crop_h,
+        role_ids: [])
   end
 end

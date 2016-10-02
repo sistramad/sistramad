@@ -10,7 +10,7 @@ Rails.application.configure do
   config.eager_load = false
 
   # Show full error reports and disable caching.
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
   # Don't care if the mailer can't send.
@@ -39,9 +39,26 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # begin Mailer
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {:host => ENV["DOMAIN"]}
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+      address: ENV["SMTP_SERVER"],
+      openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+      port: ENV["SMTP_PORT"].to_i,
+      domain: ENV["MAILER_DOMAIN"],
+      authentication: "plain",
+      enable_starttls_auto: true,
+      user_name: ENV["SMTP_USER"],
+      password: ENV["SMTP_PWD"]
+  }
+
+  # end Mailer
 
   config.assets.quiet = true
 end

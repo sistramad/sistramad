@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   attr_accessor :login, :avatar, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h
 
   rolify #se pueden agregar opciones a la gema
+  # has_and_belongs_to_many :roles, :join_table => :users_roles
+  accepts_nested_attributes_for :roles, allow_destroy: true, reject_if: :all_blank
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable and :omniauthable

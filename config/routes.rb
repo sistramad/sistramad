@@ -3,7 +3,6 @@ Rails.application.routes.draw do
     resources :universities
     resources :faculties
     resources :roles
-    resources :employees
     resources :countries do
       collection do
         get :insert_records
@@ -14,6 +13,9 @@ Rails.application.routes.draw do
 
     localized do
       resources :users do
+        member do
+        end
+
         collection do
           get :list_pdf
           get :download
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
       end
       resources :references
       resources :reference_lists
+      resources :employees
     end
 
     # get 'inicio/index'

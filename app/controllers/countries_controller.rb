@@ -61,45 +61,6 @@ class CountriesController < ApplicationController
     end
   end
 
-  def insert_records
-    respond_to do |format|
-      url = "https://restcountries.eu/rest/v1/all"
-      RestClient.get(url){ |response, request, result, &block|
-
-        case response.code
-          when 200
-            #parsed_json =  ActiveSupport::JSON.decode(response)
-            obj = JSON.parse(response)
-
-            # array_regions = []
-            # array_sub_regions = []
-            # obj.each do |i|
-            #   array_regions << i['region']
-            #   array_sub_regions << i['subregion']
-            # end
-            # ap array_regions.uniq!
-            # ap array_sub_regions.uniq!
-
-          obj.each do |i|
-            country = Country.new(:name => i['name'],
-                                  :capital => i['capital'],
-                                  :latitude => i['latlng'][0],
-                                  :longitude => i['latlng'][1],
-                                  :native_name => i['nativeName'],
-                                  :alpha2code => i['alpha2Code'],
-                                  :alpha3code => i['alpha3Code'])
-            country.region_id = ReferenceList.find_by_name(i['region'].downcase) ? ReferenceList.find_by_name(i['region'].downcase).id : ReferenceConstant::WITHOUT_REGION
-            country.sub_region_id = ReferenceList.find_by_name(i['subregion'].downcase) ? ReferenceList.find_by_name(i['subregion'].downcase).id : ReferenceConstant::WITHOUT_SUB_REGION
-
-            country.save
-            end
-          else
-            response.return!(request, result, &block)
-        end }
-      format.html { head :no_content }
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_country
@@ -108,6 +69,15 @@ class CountriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def country_params
-      params.require(:country).permit(:name, :capital, :region_id, :sub_region_id, :latitude, :longitude, :nativeName, :alpha2Code, :alpha3Code)
+      params.require(:country).permit(
+          :name,
+          :capital,
+          :region_id,
+          :sub_region_id,
+          :latitude,
+          :longitude,
+          :nativeName,
+          :alpha2Code,
+          :alpha3Code)
     end
 end

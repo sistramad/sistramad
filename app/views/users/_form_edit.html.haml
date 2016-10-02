@@ -35,7 +35,8 @@
                 :include_blank => false, :placeholder => t("genre")                                                                                |
               = f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document")
               = f.input :birthday, start_year: Date.today.year - 90, end_year: Date.today.year - 12, |
-                :label => t("birthday.short"), :wrapper => :multi_select_sistramad                   |
+                :label => t("birthday.short"), :wrapper => :multi_select_sistramad
+              = f.association :roles, as: :check_boxes, :label => false, label_method: :name
             .col-md-12
               = f.button :submit, value: t('form.send'), class: 'form-control btn btn-info'
           = f.error_notification

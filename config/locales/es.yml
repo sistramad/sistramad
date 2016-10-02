@@ -295,8 +295,8 @@ es:
     male: 'Masculino'
     female: 'Femenino'
   birthday:
-    short: 'Cumpleaños'
-    long: 'Fecha de cumpleaños'
+    short: 'Nacimiento'
+    long: 'Fecha de nacimiento'
   email:
     short: 'Correo'
     long: 'Correo electronico'
