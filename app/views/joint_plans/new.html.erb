@@ -1,0 +1,29 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to t('index.listing_faculties'), faculties_path %></li>
+  <li><%= link_to t('index.new_faculty'), new_faculty_path %></li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th><%=	t('name') %></th>
+      <th><%=	t('active') %></th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% form_for @joint_plan do |f| %>
+
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+<br><br>
+
+<%= link_to new_faculty_path, class: 'btn btn-info btn-sm list' do %>
+    <i class="glyphicon glyphicon-plus"></i> <%= t('index.new_faculty') %>
+<% end %>
