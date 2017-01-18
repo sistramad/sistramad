@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #resources :reports
     resources :university_degrees
     resources :universities
     resources :faculties
@@ -10,7 +11,20 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :joint_plans do
+      collection do
+        post :download
+      end
+
+    end
+    resources :reports
+    resources :attachments
     devise_for :users
+    scope "/" do
+      resources :users do
+
+      end
+    end
 
     localized do
       resources :users

@@ -1,7 +1,7 @@
 <ul class="nav nav-tabs" role="tablist">
  <li class="active"><%= link_to t('list_attachment'), "#" %></li>
 </ul>
-<%= simple_form_for @joint_plan, :html => {:multipart => true, :class => "form-horizontal", :id => "attachment"},
+<%= simple_form_for (@attachment), :html => {:multipart => true, :class => "new_attachment"},
                     wrapper: :horizontal_file_input_sistramad,
                     wrapper_mappings: {
                         file: :horizontal_file_input_sistramad
@@ -15,19 +15,24 @@
         </thead>
 
         <tbody>
-
         <% @documents.each do |document| %>
             <tr>
-              <div class="field">
+              <%= fields_for 'attachments[]', document do |x| %>
                 <td><b><li><%= document.name %></li></b>
                   <div class="field">
-                  <div class="input-group">
+                    <div class="attachments">
+                      <div class="file_field" style="margin-right: 300px;padding-top: 5px">
+                        <%= x.file_field :file,class: "filestyle", "data-buttonName"=>"btn-primary",
+                                         "data-buttonText"=>"Seleccionar Archivo",
+                                         "data-iconName"=>"glyphicon glyphicon-paperclip",
+                                         "data-buttonBefore"=>"true"%>
+                        <%= x.hidden_field :document_id, :value => document.id%>
+                      </div>
 
-                      <%= f.file_field :file%>
-                  </div><!-- /input-group -->
-                    </div>
+                    </div><!-- /input-group -->
+                  </div>
                 </td>
-              </div>
+              <% end %>
             </tr>
 
         <% end %>

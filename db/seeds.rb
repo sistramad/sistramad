@@ -20,7 +20,7 @@ user = User.new(:username => 'test',
                 :password_confirmation => '123456')
 user.save!(:validate => false)
 
-user.add_role(:test)
+user.add_role(:docente)
 
 user = User.new(:username => 'joalbert',
                 :email => 'joalbertgonzalez@gmail.com',
@@ -34,7 +34,7 @@ user = User.new(:username => 'joalbert',
 user.save!
 
 user.add_role(:admin)
-user.add_role(:test)
+user.add_role(:docente)
 
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',
@@ -48,7 +48,35 @@ user = User.new(:username => 'lisset',
                 :password_confirmation => '123456')
 user.save!
 
-user.add_role(:test)
+user.add_role(:docente)
+
+user = User.new(:username => 'marcano',
+                :email => 'marcano@test.com',
+                :first_name => 'jose',
+                :middle_name => 'x',
+                :last_name => 'marcano',
+                :genre => 'm',
+                :identification_document => '1000',
+                :birthday => "06/10/1960".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.save!
+user.add_role(:docente)
+user.add_role(:decano)
+
+user = User.new(:username => 'asuntos',
+                :email => 'asuntos@test.com',
+                :first_name => 'Asuntos',
+                :middle_name => 'x',
+                :last_name => 'Profesorales',
+                :genre => 'm',
+                :identification_document => '1000',
+                :birthday => "06/10/1960".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.save!
+user.add_role(:docente)
+user.add_role(:asuntos)
 
 reference_region = Reference.new(:name => 'region') #1
 reference_region.save!
@@ -214,3 +242,45 @@ faculty.save!
 
 faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
+
+employee = Employee.new(:user_id => 5,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+document = Document.new(:name => 'Solicitud del Beneficiario')
+document.save!
+document = Document.new(:name => 'Fotocopia de la Cedula de identidad')
+document.save!
+document = Document.new(:name => 'Fotocopia del RIF')
+document.save!
+document = Document.new(:name => 'Fotocopia del ultimo ascenso')
+document.save!
+document = Document.new(:name => 'Plan de Trabajo')
+document.save!
+document = Document.new(:name => 'Justificacion de la escogencia del Plan')
+document.save!
+document = Document.new(:name => 'Razones de la escogencia del pais')
+document.save!
+document = Document.new(:name => 'Carta de aceptacion de cumplir con lo estipulado')
+document.save!
+document = Document.new(:name => 'Constancia de aceptacion por parte de la Universidad en la que desea realizar los estudios')
+document.save!
+document = Document.new(:name => 'Certificacion academica')
+document.save!
+document = Document.new(:name => 'Solvencias')
+document.save!
+document = Document.new(:name => 'Sintesis curricular')
+document.save!
+document = Document.new(:name => 'Constancia de manejo de idioma foraneo')
+document.save!
+document = Document.new(:name => 'Carta de Recomendacion de Aprobacion')
+document.save!
+document = Document.new(:name => 'Carta de desaprobacion')
+document.save!
+document = Document.new(:name => 'Informe Parcial')
+document.save!
+document = Document.new(:name => 'Informe Final')
+document.save!
+
+joint_plan = JointPlan.new(:name => "Planc Conjunto",:user_id => 3,:status => 1)
+joint_plan.save!

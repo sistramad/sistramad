@@ -3,15 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  $('#upload_uploaded_file').attr('name','upload[uploaded_file]')
-  $('#new_upload').fileupload
+  $('#attachment_feeile').attr('name','attachment[file]')
+  $('#1fff').fileupload
     dataType: 'script'
     add: (e, data) ->
-      types = /(\.|\/)(gif|jpe?g|png|mov|mpeg|mpeg4|avi)$/i
+      types = /(\.|\/)(gif|jpe?g|png|pdf|docx|doc)$/i
       file = data.files[0]
       if types.test(file.type) || types.test(file.name)
         data.context = $(tmpl("template-upload", file))
-        $('#new_upload').append(data.context)
+        $('#new_attachment').append(data.context)
         $('.actions input[type="submit"]').click (e) ->
           data.submit()
           e.preventDefault()           

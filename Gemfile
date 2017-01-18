@@ -107,3 +107,10 @@ gem 'rmagick', '~> 2.15', '>= 2.15.4'
 
 # para que puedan coexistir jquery y turbolinks sin problemas
 gem 'jquery-turbolinks'
+
+# para adjuntar archivos
+gem 'paperclip'
+# Para creat archivos zip
+gem 'rubyzip'
+# Creat ventanas modales (pop-ups)
+gem 'magnific-popup-rails', '~> 1.1.0'
