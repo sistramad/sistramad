@@ -36,6 +36,21 @@ user.save!
 user.add_role(:admin)
 user.add_role(:test)
 
+user = User.new(:username => 'jesus',
+                :email => 'jmanueldeabreum@gmail.com',
+                :first_name => 'jesus',
+                :middle_name => 'manuel',
+                :last_name => 'de abreu',
+                :genre => 'm',
+                :identification_document => '18241890',
+                :birthday => "21/12/1988".to_date,
+                :password => 'admin', #Devise.friendly_token[0,20]
+                :password_confirmation => 'admin')
+user.save!
+
+user.add_role(:admin)
+user.add_role(:test)
+
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',
                 :first_name => 'lisset',
