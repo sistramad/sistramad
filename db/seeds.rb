@@ -247,6 +247,15 @@ employee = Employee.new(:user_id => 5,:type_employee_id => 2,:scale_classificati
 employee.faculties << Faculty.find(1)
 employee.save!
 
+
+employee = Employee.new(:user_id => 3,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+employee = Employee.new(:user_id => 4,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
 document = Document.new(:name => 'Solicitud del Beneficiario')
 document.save!
 document = Document.new(:name => 'Fotocopia de la Cedula de identidad')
@@ -283,4 +292,7 @@ document = Document.new(:name => 'Informe Final')
 document.save!
 
 joint_plan = JointPlan.new(:name => "Planc Conjunto",:user_id => 3,:status => 1)
+joint_plan.save!
+
+joint_plan = JointPlan.new(:name => "Planc Conjunto",:user_id => 4,:status => 1)
 joint_plan.save!
