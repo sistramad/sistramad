@@ -14,29 +14,29 @@
 
 #user.add_role(:admin)
 
-user = User.new(:username => 'test',
-                :email => 'test@test.com',
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!(:validate => false)
+#user = User.new(:username => 'test',
+#                :email => 'test@test.com',
+#                :password => '123456', #Devise.friendly_token[0,20]
+#                :password_confirmation => '123456')
+#user.save!(:validate => false)
 
-user.add_role(:test)
+#user.add_role(:test)
 
-user = User.new(:username => 'joalbert',
-                :email => 'joalbertgonzalez@gmail.com',
-                :first_name => 'joalbert',
-                :middle_name => 'andrés',
-                :last_name => 'gonzález',
-                :identification_document => '18468784',
-                :birthday => "24/11/1988".to_date,
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!
+#user = User.new(:username => 'joalbert',
+#                :email => 'joalbertgonzalez@gmail.com',
+#                :first_name => 'joalbert',
+#                :middle_name => 'andrés',
+#                :last_name => 'gonzález',
+#                :identification_document => '18468784',
+#                :birthday => "24/11/1988".to_date,
+#                :password => '123456', #Devise.friendly_token[0,20]
+#                :password_confirmation => '123456')
+#user.save!
 
-user.add_role(:admin)
-user.add_role(:test)
+#user.add_role(:admin)
+#user.add_role(:test)
 
-user = User.new(:username => 'jesus',
+user = User.new(:username => 'jesusdeabreu',
                 :email => 'jmanueldeabreum@gmail.com',
                 :first_name => 'jesus',
                 :middle_name => 'manuel',
