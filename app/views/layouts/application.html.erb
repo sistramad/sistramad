@@ -60,6 +60,23 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Formación Especial</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                <% if JointPlan.where(user_id: current_user.id).empty? %>
+                    <li><%= link_to new_attachment_path,method: :get do%>
+                          <i class="fa fa-circle"></i>
+                          Nuevo Plan Conjunto
+                      <% end %></li>
+                <% end %>
+                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Estatus de Plan Conjunto</a></li>
+              </ul>
+            </li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
@@ -70,22 +87,6 @@
                 <% end %></li>
             <% end %>
 
-
-            <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-              </a>
-              <ul class="treeview-menu">
-
-                <li><%= link_to new_attachment_path,method: :get do%>
-                      <i class="fa fa-circle"></i>
-                      Nuevo Plan Conjunto
-                  <% end %></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
-              </ul>
-            </li>
           </ul>
           <!-- /.sidebar-menu -->
         </section>

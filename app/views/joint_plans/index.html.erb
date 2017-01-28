@@ -126,6 +126,8 @@
         </tr>
         </thead>
         <% @joint_plans.each do |document| %>
+            <% if document.status == 2 %>
+            <tr>
               <div class="field">
                 <td><b>
                   <li><%= document.name %></li>
@@ -144,7 +146,7 @@
                   </div>
                 </td>
                 <td>
-                  <% if document.status < 2 %>
+
                       <div class="popup-modal" href=#<%= document.id %>a>
                         <button type="button" class="btn btn-success">Adjuntar</button>
 
@@ -153,9 +155,66 @@
                         <button type="button" class="btn btn-danger">Negar</button>
 
                       </div>
-                  <% end %>
-                  </div>
 
+
+                  <div id="<%= document.id %>a" class="white-popup-block mfp-hide">
+                    <h1>Adjuntar Documento</h1>
+                    <p>Adjunte el documento de recomendación de aprobación</p>
+                    <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
+                                        wrapper: :horizontal_file_input_sistramad,
+                                        wrapper_mappings: {
+                                            file: :horizontal_file_input_sistramad
+                                        } do |f| %>
+
+                        <%= fields_for :report, document do |x| %>
+                            <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                             "data-buttonText" => "Seleccionar Archivo",
+                                             "data-iconName" => "glyphicon glyphicon-paperclip",
+                                             "data-buttonBefore" => "true" %>
+                            <%= x.hidden_field :jointplan_id, :value => document.id %>
+                            <%= x.hidden_field :user_id, :value => current_user.id %>
+                            <%= x.hidden_field :applicant_id, :value => document.user.id %>
+                            <%= x.hidden_field :document_id, :value => 14 %>
+                        <% end %>
+                        <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
+                          <a class="popup-modal-dismiss" href="#">
+                            <button type="button" class="btn btn-default">Cerrar</button>
+                          </a></p>
+
+                        </div>
+
+                    <% end %>
+
+                    <div id="<%= document.id %>r" class="white-popup-block mfp-hide">
+                      <h1>Adjuntar Documento</h1>
+                      <p>Adjunte el documento de desaprobación del plan</p>
+                      <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
+                                          wrapper: :horizontal_file_input_sistramad,
+                                          wrapper_mappings: {
+                                              file: :horizontal_file_input_sistramad
+                                          } do |f| %>
+                          <%= fields_for :report, document do |x| %>
+                              <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                               "data-buttonText" => "Seleccionar Archivo",
+                                               "data-iconName" => "glyphicon glyphicon-paperclip",
+                                               "data-buttonBefore" => "true" %>
+                              <%= x.hidden_field :jointplan_id, :value => document.id %>
+                              <%= x.hidden_field :user_id, :value => current_user.id %>
+                              <%= x.hidden_field :applicant_id, :value => document.user.id %>
+                              <%= x.hidden_field :document_id, :value => 15 %>
+                          <% end %>
+                          <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
+                            <a class="popup-modal-dismiss" href="#">
+                              <button type="button" class="btn btn-default">Cerrar</button>
+                            </a></p>
+
+                          </div>
+
+                      <% end %>
+
+                  </div>
+            </tr>
+        <% end %>
 
         <% end %>
 

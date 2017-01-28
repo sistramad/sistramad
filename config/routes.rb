@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :joint_plans do
       collection do
         post :download
+        get :status
       end
 
     end
