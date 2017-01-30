@@ -104,7 +104,9 @@
               <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
 
               <p>
-                Alexander Pierce - Web Developer
+                <%= current_user.first_name.capitalize %>
+                <%= current_user.middle_name.capitalize %>
+                <%= current_user.last_name.capitalize %>
                 <small>Miembro desde <%= current_user.remember_created_at %></small> 
               </p>
             </li>
