@@ -107,7 +107,7 @@
                 <%= current_user.first_name.capitalize %>
                 <%= current_user.middle_name.capitalize %>
                 <%= current_user.last_name.capitalize %>
-                <small>Miembro desde <%= current_user.remember_created_at %></small> 
+                <small>Miembro desde <%= current_user.created_at.to_s(:default) %></small> 
               </p>
             </li>
             <!-- Menu Body -->
