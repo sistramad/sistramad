@@ -15,8 +15,10 @@ Rails.application.routes.draw do
       collection do
         post :download
         get :status
-      end
+        post :decline
+        post :accept
 
+      end
     end
     resources :reports
     resources :attachments

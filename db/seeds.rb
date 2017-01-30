@@ -290,9 +290,10 @@ document = Document.new(:name => 'Informe Parcial')
 document.save!
 document = Document.new(:name => 'Informe Final')
 document.save!
-
-joint_plan = JointPlan.new(:name => "Planc Conjunto",:user_id => 3,:status => 1)
+document = Document.new(:name => 'Carta de Aceptación')
+document.save!
+joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1)
 joint_plan.save!
 
-joint_plan = JointPlan.new(:name => "Planc Conjunto",:user_id => 4,:status => 1)
+joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1)
 joint_plan.save!

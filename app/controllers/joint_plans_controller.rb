@@ -57,6 +57,7 @@ class JointPlansController < ApplicationController
 
   end
 
+=begin
   def save_attachment
 
     params[:attachments].each do |attachment|
@@ -75,9 +76,25 @@ class JointPlansController < ApplicationController
     end
 
   end
+=end
+
+  def accept
+      id = params[:id]
+
+
+        JointPlan.find(id).update_attribute(:status, '5')
+    redirect_to status_joint_plans_path, notice: 'Plan Aceptado Exitosamente'
+
+  end
+
+  def decline
+    id = params[:id]
+
+    JointPlan.find(id).update_attribute(:status, '6')
+    redirect_to status_joint_plans_path, notice: 'Has declinado el plan'
+  end
 
   def update
-
 
 
   end
@@ -89,7 +106,7 @@ class JointPlansController < ApplicationController
     # It's mandatory to specify the nested attributes that should be whitelisted.
     # If you use `permit` with just the key that points to the nested attributes hash,
     # it will return an empty hash.
-    params.require(:joint_plan).permit(:name, :status, user_attributes: [ :id, attachment_attributes:[:id, :file]])
+    params.require(:joint_plan).permit(:name, :status, :answer ,user_attributes: [ :id, attachment_attributes:[:id, :file]])
   end
 
 

@@ -159,7 +159,7 @@
 
                   <div id="<%= document.id %>a" class="white-popup-block mfp-hide">
                     <h1>Adjuntar Documento</h1>
-                    <p>Adjunte el documento de recomendación de aprobación</p>
+                    <p>Adjunte el documento de de aprobación</p>
                     <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
                                         wrapper: :horizontal_file_input_sistramad,
                                         wrapper_mappings: {
@@ -174,7 +174,7 @@
                             <%= x.hidden_field :jointplan_id, :value => document.id %>
                             <%= x.hidden_field :user_id, :value => current_user.id %>
                             <%= x.hidden_field :applicant_id, :value => document.user.id %>
-                            <%= x.hidden_field :document_id, :value => 14 %>
+                            <%= x.hidden_field :document_id, :value => 18 %>
                         <% end %>
                         <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
                           <a class="popup-modal-dismiss" href="#">

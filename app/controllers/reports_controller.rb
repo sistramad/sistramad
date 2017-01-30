@@ -29,10 +29,14 @@ class ReportsController < ApplicationController
     respond_to do |format|
       if @report.save
         id = params[:report][:jointplan_id]
-        if params[:report][:document_id] == "14"
+        if params[:report][:document_id] == '14'
           JointPlan.find(id).update_attribute(:status, '2')
-        else
+        end
+        if params[:report][:document_id] == '15'
           JointPlan.find(id).update_attribute(:status, '3')
+        end
+        if params[:report][:document_id] == '18'
+          JointPlan.find(id).update_attribute(:status, '4')
         end
         format.html { redirect_to joint_plans_path, notice: 'Su documento se ha cargado satisfactoriamente' }
         format.json { render :show, status: :created, location: @report }

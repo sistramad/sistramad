@@ -73,8 +73,13 @@
                           Nuevo Plan Conjunto
                       <% end %></li>
                 <% end %>
+                <li><%= link_to status_joint_plans_path,method: :get do%>
+                    <i class="fa fa-circle"></i>
+                    Estatus de Plan Conjunto
+                <% end %>
+                </li>
                 <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Estatus de Plan Conjunto</a></li>
+
               </ul>
             </li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
