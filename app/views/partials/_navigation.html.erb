@@ -91,7 +91,12 @@
             <!-- The user image in the navbar-->
             <%= image_tag "user2-160x160.jpg" , :class=>"user-image", :alt=>"User Image"%>
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs">Jesús De Abreu</span>
+            <% if current_user.first_name.empty? %>
+            <span class="hidden-xs"><%= current_user.username%></span>
+            <% else %>
+            <span class="hidden-xs"><%= current_user.first_name.camelize(:upper) %></span>
+            <span class="hidden-xs"><%= current_user.last_name.camelize(:upper) %></span>
+            <% end%>
           </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
@@ -100,7 +105,7 @@
 
               <p>
                 Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
+                <small>Miembro desde <%= current_user.remember_created_at %></small> 
               </p>
             </li>
             <!-- Menu Body -->

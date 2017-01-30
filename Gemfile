@@ -109,4 +109,5 @@ gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 # para que puedan coexistir jquery y turbolinks sin problemas
 gem 'jquery-turbolinks'
 
+# se reemplazo el servidor de web-brick a puma 
 gem "puma"

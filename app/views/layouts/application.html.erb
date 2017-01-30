@@ -33,9 +33,12 @@
               <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
+            <% if user_signed_in? %>
+              <div>Registrado como <%= current_user.username %></div>
+            <% end %>
+              <!-- @user.current.username -->
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> En Linea</a>
             </div>
           </div>
 
@@ -60,7 +63,19 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Formación Especial</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle"></i>Solicitar Nuevo Traslado</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Chequear estado del Traslado solicitado</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Traslado</a></li>
+              </ul>
+            </li>
+
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
 
 
@@ -94,8 +109,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Page Header
-            <small>Optional description</small>
+            Pagina Principal
+            <small>Sistema de tramites administrativos </small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -118,7 +133,7 @@
           Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
       </footer>
   <% end %>
 </div>

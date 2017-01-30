@@ -48,6 +48,10 @@ user = User.new(:username => 'jesusdeabreu',
                 :password_confirmation => 'jmdam182')
 user.save!
 
+
+
+
+
 user.add_role(:admin)
 user.add_role(:test)
 
@@ -229,3 +233,4 @@ faculty.save!
 
 faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
+

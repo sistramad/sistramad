@@ -16,6 +16,7 @@ class FacultiesController < ApplicationController
   # GET /faculties/new
   def new
     @faculty = Faculty.new
+    
   end
 
   # GET /faculties/1/edit
