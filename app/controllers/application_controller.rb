@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :set_locale
 
   rescue_from CanCan::AccessDenied do |exception|
     # redirect_to root_path, :alert => exception.message
@@ -28,4 +29,13 @@ class ApplicationController < ActionController::Base
     # Removing the `password` parameter from the `account_update` action.
     # devise_parameter_sanitizer.permit(:account_update, except: [:password])
   end
+
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+  def default_url_options(options={})
+    { locale: I18n.locale }
+  end
+  
 end

@@ -258,11 +258,12 @@ es:
     listing_users: 'Listado de usuarios'
   sign_in:
     log_in:     'Ingresar'
-    sign_in:    'Iniciar sesión'
+    sign_in:    'Iniciar Sesión'
     login_input: 'usuario@dominio.com o usuario'
     password: 'Contraseña'
     forgot_your_password: '¿Olvidaste tu contraseña?'
     did_not_receive_unlock_instructions: '¿No recibiste instrucciones de desbloqueo?'
+  sign_up: 'Regístrate'  
   reference: 'Referencia'
   reference_list: 'Lista de Referencia'
   name: 'Nombre'

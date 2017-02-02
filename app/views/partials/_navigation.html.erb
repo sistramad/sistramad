@@ -1,5 +1,5 @@
 <header class="main-header">
-  <% if current_user %>
+  <% if current_user  || controller_name != 'sessions' %>
   <!-- Logo -->
   <a href="#" class="logo">
     <!-- mini logo for sidebar mini 50x50 pixels -->
@@ -7,16 +7,18 @@
     <!-- logo for regular state and mobile devices -->
     <span class="logo-lg"><b>Sistramad</b></span>
   </a>
-
+  
   <!-- Header Navbar -->
   <nav class="navbar navbar-static-top" role="navigation">
     <!-- Sidebar toggle button-->
     <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
       <span class="sr-only">Toggle navigation</span>
     </a>
+    
     <!-- Navbar Right Menu -->
     <div id="menu" class="navbar-custom-menu">
       <ul class="nav navbar-nav">
+      <% if !current_user.nil?  %>
         <% if current_user.has_role? :admin %>
             <li><%= link_to t(:reference), references_path %></li>
             <li><%= link_to t(:reference_lists), reference_lists_path %></li>
@@ -41,7 +43,11 @@
                   <a href="#">
                     <div class="pull-left">
                       <!-- User Image -->
+                      <% if current_user.genre == 'm'%>
                       <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
+                      <% else %>
+                      <%= image_tag "female_user.png" , :class=>"img-circle", :alt=>"User Image"%>
+                      <% end %>
                     </div>
                     <!-- Message title and timestamp -->
                     <h4>
@@ -89,7 +95,15 @@
           <!-- Menu Toggle Button -->
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
             <!-- The user image in the navbar-->
-            <%= image_tag "user2-160x160.jpg" , :class=>"user-image", :alt=>"User Image"%>
+            <% if current_user.avatar.present? %>
+              <%= image_tag (current_user.avatar.url), :class=>"user-image" , :alt=>"User Image"%>
+            <% else %>
+              <% if current_user.genre == "m"%>
+                  <%= image_tag "user2-160x160.jpg" , :class=>"user-image" , :alt=>"User Image"%>
+              <% else %>
+                  <%= image_tag "female_user.png" , :class=>"user-image",  :alt=>"User Image"%>
+              <% end %>
+            <% end %>
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
             <% if current_user.first_name.empty? %>
             <span class="hidden-xs"><%= current_user.username%></span>
@@ -101,13 +115,20 @@
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
             <li class="user-header">
-              <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
-
+              <% if current_user.avatar.present? %>
+              <%= image_tag (current_user.avatar.url), :class=>"img-circle" , :alt=>"User Image"%>
+              <% else %>
+                <% if current_user.genre == "m"%>
+                  <%= image_tag "user2-160x160.jpg" , :class=>"img-circle" , :alt=>"User Image"%>
+                <% else %>
+                  <%= image_tag "female_user.png" , :class=>"img-circle",  :alt=>"User Image"%>
+                <% end %>
+              <% end %>
               <p>
                 <%= current_user.first_name.capitalize %>
                 <%= current_user.middle_name.capitalize %>
                 <%= current_user.last_name.capitalize %>
-                <small>Miembro desde <%= current_user.created_at.to_s(:default) %></small> 
+                <small>Miembro desde <%= current_user.created_at.to_s(:short) %></small> 
               </p>
             </li>
             <!-- Menu Body -->
@@ -125,41 +146,57 @@
               </div>
               &lt;!&ndash; /.row &ndash;&gt;
             </li>-->
+            <% end %>
             <!-- Menu Footer-->
-            <li class="user-footer">
-              <div class="pull-left">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
-              </div>
-              <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <!-- Control Sidebar Toggle Button -->
-        <li>
-          <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <i class="fa fa-gears"></i></a>
-          <ul class="dropdown-menu">
+            <% if !current_user.nil? %>
+              <li class="user-footer">
+                <div class="pull-left">
+                <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
             <li>
-              <%= link_to destroy_user_session_path, method: :delete do %>
-                  <i class="glyphicon glyphicon-log-out"></i> Cerrar sesión
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="fa fa-gears"></i></a>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <%= link_to destroy_user_session_path, method: :delete do %>
+                        <i class="glyphicon glyphicon-log-out"></i> Cerrar sesión
+            <% end %>
+              </li>
+              <% if current_user.has_role? :admin %>
+                  <li class="divider"></li>
+                  <li>
+                    <%= link_to new_user_invitation_path do %>
+                        <i class="glyphicon glyphicon-envelope"></i> Invitar
+                    <% end %>
+                  </li>
               <% end %>
-            </li>
-            <% if current_user.has_role? :admin %>
-                <li class="divider"></li>
+            <% else %> 
+                <!-- Control Sidebar Toggle Button -->
                 <li>
-                  <%= link_to new_user_invitation_path do %>
-                      <i class="glyphicon glyphicon-envelope"></i> Invitar
-                  <% end %>
-                </li>
+                  <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-gears"></i></a>
+                  <ul class="dropdown-menu">
+                      <li>
+                        <%= link_to destroy_user_session_path, method: :delete do %>
+                            <i class="glyphicon glyphicon-log-out"></i> SALIR
+                        <% end %>
+                 </li>
             <% end %>
           </ul>
         </li>
       </ul>
     </div>
   </nav>
-      <%end%>
+  <%end%>
+      
 </header>
 
