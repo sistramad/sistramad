@@ -17,11 +17,15 @@ Rails.application.routes.draw do
         get :status
         post :decline
         post :accept
-
+        get :informs
       end
     end
     resources :reports
-    resources :attachments
+    resources :attachments do
+      collection do
+        post :create_inform
+      end
+    end
     devise_for :users
     scope "/" do
       resources :users do

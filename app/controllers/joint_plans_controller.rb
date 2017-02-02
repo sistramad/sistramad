@@ -99,6 +99,14 @@ class JointPlansController < ApplicationController
 
   end
 
+  def informs
+    @joint_plan = JointPlan.new
+    @document = Document.find(16)
+    @attachment = Attachment.new
+
+
+  end
+
   private
 
 

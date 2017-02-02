@@ -11,21 +11,40 @@ class AttachmentsController < ApplicationController
     @attachments = Attachment.all
   end
 
+  def create_inform
+
+    a = params[:attachment]
+    @attachment = Attachment.new(inform_params)
+
+    if @attachment.save
+      redirect_to informs_joint_plans_path
+    end
+
+  end
+
+
   def create
 
-    params[:attachments].each do |attachment|
+    inform = false
+    a = params[:attachments]
+    a.each do |attachment|
       if attachment[1] != nil
         doc = attachment[1]
         if doc[:file] != nil
           @attachment = current_user.attachments.new(attachment_params(doc))
           @attachment.save
+          if doc[:document_id] == '16' || doc[:document_id] == '17'
+            inform = true
+          end
         end
 
       end
     end
 
-    if @attachment.save
+    if @attachment.save && !inform
       redirect_to "localhost:3000"
+    else
+      redirect_to informs_joint_plans_path , notice: "Informe subido exitosamente"
     end
 
   end

@@ -78,7 +78,11 @@
                     Estatus de Plan Conjunto
                 <% end %>
                 </li>
-                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
+                <li><%= link_to informs_joint_plans_path,method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Subir Informe
+                  <% end %>
+                </li>
 
               </ul>
             </li>
