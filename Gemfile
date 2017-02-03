@@ -109,5 +109,12 @@ gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 # para que puedan coexistir jquery y turbolinks sin problemas
 gem 'jquery-turbolinks'
 
+# para adjuntar archivos
+gem 'paperclip'
+# Para creat archivos zip
+gem 'rubyzip'
+# Creat ventanas modales (pop-ups)
+gem 'magnific-popup-rails', '~> 1.1.0' 
+
 # se reemplazo el servidor de web-brick a puma 
 gem "puma"

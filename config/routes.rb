@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :documents
     resources :university_degrees
     resources :universities
     resources :faculties
