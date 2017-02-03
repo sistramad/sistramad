@@ -6,14 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #  Mayor.create(name: 'Emanuel', city: cities.first)
 
-user = User.new(:username => 'admin',
-                :email => 'admin@admin.com',
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!(:validate => false)/
-
-user.add_role(:admin)
-
 user = User.new(:username => 'test',
                 :email => 'test@test.com',
                 :password => '123456', #Devise.friendly_token[0,20]
@@ -47,13 +39,24 @@ user = User.new(:username => 'jesusdeabreu',
                 :password => 'jmdam182', #Devise.friendly_token[0,20]
                 :password_confirmation => 'jmdam182')
 user.save!
-
-
-
-
-
 user.add_role(:admin)
 user.add_role(:test)
+
+user = User.new(:username => 'amatute',
+                :email => 'alexghoro@outlook.com',
+                :first_name => 'Alejandro',
+                :middle_name => '',
+                :last_name => 'Matute',
+                :genre => 'm',
+                :identification_document => '18347734',
+                :birthday => "15/08/1988".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+
 
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',
