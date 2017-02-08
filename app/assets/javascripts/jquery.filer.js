@@ -664,9 +664,11 @@
                                     var blob = (fromDrop ? b64toBlob(e.originalEvent.dataTransfer.getData("text/uri-list")
                                         .toString()
                                         .split(',')[1], "image/png") : items[i].getAsFile());
+                                    //noinspection JSAnnotator
                                     blob.name = Math.random()
                                         .toString(36)
                                         .substring(5);
+                                    //noinspection JSAnnotator
                                     blob.name += blob.type.indexOf("/") != -1 ? "." + blob.type.split("/")[1].toString()
                                         .toLowerCase() : ".png";
                                     f._onChange(e, [blob]);

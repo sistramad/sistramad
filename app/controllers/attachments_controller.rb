@@ -3,7 +3,7 @@ class AttachmentsController < ApplicationController
   before_filter :authenticate_user!
   def new
     @attachment = Attachment.new
-    @documents = Document.all
+    @documents = Document.where(typedoc: 1)
     @document = Document.new
   end
 
@@ -11,16 +11,6 @@ class AttachmentsController < ApplicationController
     @attachments = Attachment.all
   end
 
-  def create_inform
-
-    a = params[:attachment]
-    @attachment = Attachment.new(inform_params)
-
-    if @attachment.save
-      redirect_to informs_joint_plans_path
-    end
-
-  end
 
 
   def create
@@ -44,7 +34,7 @@ class AttachmentsController < ApplicationController
     if @attachment.save && !inform
       redirect_to "localhost:3000"
     else
-      redirect_to informs_joint_plans_path , notice: "Informe subido exitosamente"
+      redirect_to inform_joint_plans_path , notice: "Informe subido exitosamente"
     end
 
   end
@@ -55,7 +45,7 @@ class AttachmentsController < ApplicationController
 
   def attachment_params (document)
 
-    document.permit(:document_id,:file)
+    document.permit(:document_id,:file,:joint_plan_id)
   end
 
 end

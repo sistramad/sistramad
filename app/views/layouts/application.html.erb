@@ -40,18 +40,6 @@
             </div>
           </div>
 
-          <!-- search form (Optional) -->
-          <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-              <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-          <!-- /.search form -->
-
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
             <li class="header">TR&Aacute;MITES</li>
@@ -78,7 +66,7 @@
                     Estatus de Plan Conjunto
                 <% end %>
                 </li>
-                <li><%= link_to informs_joint_plans_path,method: :get do%>
+                <li><%= link_to inform_joint_plans_path,method: :get do%>
                       <i class="fa fa-circle"></i>
                       Subir Informe
                   <% end %>
@@ -86,6 +74,16 @@
 
               </ul>
             </li>
+            <% if current_user.has_role? :asuntos %>
+                <li><%= link_to joint_plans_path do%>
+                      <i class="fa fa-circle-o"></i>
+                      Ver Solicitudes
+                  <% end %></li>
+                <li><%= link_to inform_list_joint_plans_path do%>
+                      <i class="fa fa-circle-o"></i>
+                      Informes
+                  <% end %></li>
+            <% end %>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
@@ -95,6 +93,7 @@
                     Ver Solicitudes
                 <% end %></li>
             <% end %>
+
 
           </ul>
           <!-- /.sidebar-menu -->
@@ -112,17 +111,6 @@
               </div>
             </div>
         <% end -%>
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-          <h1>
-            Page Header
-            <small>Optional description</small>
-          </h1>
-          <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-            <li class="active">Here</li>
-          </ol>
-        </section>
 
         <!-- Main content -->
         <section class="content">
@@ -139,41 +127,10 @@
           Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
       </footer>
         <!-- /.content -->
-      <!--<div class="row">
-        <div id="sidebar" class="col-xs-3">
-          &lt;!&ndash; sidebar content &ndash;&gt;
-          <%#= render "partials/navigation" %>
 
-          <ul class="nav nav-pills nav-stacked">
-            <li class="active"><a href="#">Plan Septenal</a></li>
-            <li><a href="#">Ascensooooo</a></li>
-            <li><a href="#">Formación Especial</a></li>
-            <li><a href="#">Licencias</a></li>
-            <li><a href="#">Plan de Rotación</a></li>
-            <li><a href="#">Régimen de Año Sabático</a></li>
-            <li><a href="#">Traslado</a></li>
-            <li><a href="#">Cambio de Dedicación Permanente</a></li>
-            <li><a href="#">Cambio de Dedicación Temporal</a></li>
-            <li><a href="#">Permanencia en la Dedicación</a></li>
-            <li><a href="#">Regimen de Beca</a></li>
-            <li><a href="#">Regimen de Plan Conjunto</a></li>
-            <li><a href="#">Ascenso</a></li>
-            <li><a href="#">Ascenso</a></li>
-            <li><a href="#">...</a></li>
-          </ul>
-
-        </div>
-        <div id="content" class="col-xs-9">
-          &lt;!&ndash;  main content &ndash;&gt;
-          &lt;!&ndash;<p class="notice"><%= notice %></p>&ndash;&gt;
-          &lt;!&ndash;<p class="alert"><%= alert %></p>&ndash;&gt;
-
-
-        </div>
-      </div>-->
   <% end %>
 </div>
 <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>

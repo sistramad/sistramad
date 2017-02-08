@@ -57,27 +57,6 @@ class JointPlansController < ApplicationController
 
   end
 
-=begin
-  def save_attachment
-
-    params[:attachments].each do |attachment|
-      if attachment[1] != nil
-        doc = attachment[1]
-        if doc[:file] != nil
-          @attachment = current_user.attachments.new(attachment_params(doc))
-          @attachment.save
-        end
-
-      end
-    end
-
-    if @attachment.save
-      redirect_to "localhost:3000"
-    end
-
-  end
-=end
-
   def accept
       id = params[:id]
 
@@ -99,12 +78,18 @@ class JointPlansController < ApplicationController
 
   end
 
-  def informs
+  def inform
     @joint_plan = JointPlan.new
     @document = Document.find(16)
     @attachment = Attachment.new
+    @plan_id = JointPlan.where(:user_id => current_user.id).pluck(:id)
+  end
 
-
+  def inform_list
+    @joint_plans = Attachment.where('joint_plan_id > ?', 0)
+    @prueba = JointPlan.joins(attachments: :document)
+    @report = Report.new
+    @joint_plan = JointPlan.new
   end
 
   private
