@@ -13,6 +13,7 @@
         <tr>
           <th><%= "Beneficio" %></th>
           <th><%= "Subido Por" %></th>
+          <th><%= "Tipo" %></th>
           <th><%= "Documento" %></th>
           <th><%= "Aprobar" %></th>
           <th colspan="3"></th>
@@ -26,6 +27,9 @@
                     </b>
                     <td><b>
                       <li><%= User.find(document.user.id).username %></li>
+                    </b>
+                    <td><b>
+                      <li><%= document.doc%></li>
                     </b>
                     <td>
                       <li>

@@ -4,6 +4,8 @@ class JointPlansController < ApplicationController
   require 'rubygems'
   require 'zip'
   require 'tempfile'
+  require 'rbconfig'
+
 
   def new
     @joint_plan = JointPlan.new
@@ -19,9 +21,22 @@ class JointPlansController < ApplicationController
 
     @submissions = Attachment.where('user_id = ?',params[:user_id])
 
+
+    Zip.setup do |c|
+      c.on_exists_proc = true
+      c.continue_on_exists_proc = true
+      c.unicode_names = true
+      c.default_compression = Zlib::DEFAULT_COMPRESSION
+    end
     file_origin = Rails.root.to_s+'/public'
     filename = 'recuados_'+User.find(params[:user_id]).username+'.zip'
-    file = Tempfile.new(filename)
+    is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
+    if is_windows
+
+      path = 'C:/tem'
+      FileUtils.mkdir_p(path)
+      file = Tempfile.new(filename,path)
+    end
 
     begin
       Zip::OutputStream.open(file) { |zos| }
@@ -33,7 +48,7 @@ class JointPlansController < ApplicationController
           end
       end
 
-      zip_data = File.read(file.path)
+      zip_data = File.read(file.path, :encode => 'ascii-8bit')
 
       send_data(zip_data, :type => 'application/zip', :filename => filename)
     ensure
@@ -87,7 +102,7 @@ class JointPlansController < ApplicationController
 
   def inform_list
     @joint_plans = Attachment.where('joint_plan_id > ?', 0)
-    @prueba = JointPlan.joins(attachments: :document)
+    @prueba = JointPlan.joins(attachments: :document).where('attachments.joint_plan_id > ?', 0).select('attachments.joint_plan_id','documents.name as doc','id','user_id','name')
     @report = Report.new
     @joint_plan = JointPlan.new
   end
