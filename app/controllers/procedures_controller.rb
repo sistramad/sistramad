@@ -12,7 +12,6 @@ class ProceduresController < ApplicationController
   def show
   end
 
-  # GET /procedures/new
   def new
     @procedure = Procedure.new
   end
@@ -21,14 +20,16 @@ class ProceduresController < ApplicationController
   def edit
   end
 
-  # POST /procedures
-  # POST /procedures.json
   def create
     @procedure = Procedure.new(procedure_params)
+    @procedure.user = current_user
+
+    workflow = Workflow.new()
+
 
     respond_to do |format|
       if @procedure.save
-        format.html { redirect_to @procedure, notice: 'Procedure was successfully created.' }
+        format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
       else
         format.html { render :new }
