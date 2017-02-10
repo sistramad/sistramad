@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160710162431) do
+ActiveRecord::Schema.define(version: 20170209135212) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,6 +61,12 @@ ActiveRecord::Schema.define(version: 20160710162431) do
 
   add_index "faculties", ["acronym"], name: "index_faculties_on_acronym", unique: true, using: :btree
   add_index "faculties", ["name"], name: "index_faculties_on_name", unique: true, using: :btree
+
+  create_table "procedures", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "reference_lists", force: :cascade do |t|
     t.string   "name",         null: false

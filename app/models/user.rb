@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
+  has_many :procedures
+  
 
   mount_uploader :avatar, AvatarUploader
   crop_uploaded :avatar

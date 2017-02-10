@@ -129,7 +129,7 @@
                 <a href="#" class="btn btn-default btn-flat">Profile</a>
               </div>
               <div class="pull-right">
-                <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <%= link_to("Log out", destroy_user_session_path, class: 'btn btn-md btn-danger' , method: :delete) %>
               </div>
             </li>
           </ul>
