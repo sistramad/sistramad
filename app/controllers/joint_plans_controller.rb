@@ -51,10 +51,12 @@ class JointPlansController < ApplicationController
       zip_data = File.read(file.path, :encode => 'ascii-8bit')
 
       send_data(zip_data, :type => 'application/zip', :filename => filename)
+=begin
     ensure
       #Close and delete the temp file
       file.close
       file.unlink
+=end
     end
 
   end
