@@ -24,15 +24,9 @@ class ProceduresController < ApplicationController
     @procedure = Procedure.new(procedure_params)
     @procedure.user = current_user
 
-    workflow = Workflow.new()
-    workflow.name = "Año Sabatico"
-    workflow.description = "Flujo principal del trámite para año Sabatico"
-    workflow.is_active = true
-
-
-
     respond_to do |format|
       if @procedure.save
+        generate_workflow
         format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
       else
@@ -75,5 +69,42 @@ class ProceduresController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def procedure_params
       params.require(:procedure).permit(:name)
+    end
+
+    def generate_workflow
+      workflow = Workflow.new()
+      #workflow = Workflow.new(name = "Workflow Año Sabatico", description = "Flujo principal del trámite para año Sabatico", is_active = true)
+      workflow.name = "Workflow Año Sabatico"
+      workflow.description = "Flujo principal del trámite para año Sabatico"
+      workflow.is_active = true
+      workflow.procedure = @procedure
+
+      if workflow.save
+        generate_steps(workflow)
+      else
+
+      end 
+
+    end
+
+    def generate_steps(workflow)
+      step = Step.new()
+      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
+      step.name = "paso 1"
+      step.description = "descripcion del paso 1"
+      step.status = "created"
+      step.is_active = true
+      step.workflow = workflow
+      step.save
+
+      step = Step.new()
+      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
+      step.name = "paso 2"
+      step.description = "descripcion del paso 2"
+      step.status = "created"
+      step.is_active = true
+      step.workflow = workflow
+      step.save
+
     end
 end
