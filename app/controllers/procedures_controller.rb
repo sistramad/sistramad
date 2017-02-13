@@ -25,6 +25,10 @@ class ProceduresController < ApplicationController
     @procedure.user = current_user
 
     workflow = Workflow.new()
+    workflow.name = "Año Sabatico"
+    workflow.description = "Flujo principal del trámite para año Sabatico"
+    workflow.is_active = true
+
 
 
     respond_to do |format|
