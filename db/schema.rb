@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170213212243) do
+ActiveRecord::Schema.define(version: 20170213213746) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,18 @@ ActiveRecord::Schema.define(version: 20170213212243) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", unique: true, using: :btree
 
+  create_table "steps", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "status"
+    t.boolean  "is_active"
+    t.integer  "workflow_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "steps", ["workflow_id"], name: "index_steps_on_workflow_id", using: :btree
+
   create_table "universities", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "acronym"
@@ -185,6 +197,7 @@ ActiveRecord::Schema.define(version: 20170213212243) do
 
   add_foreign_key "employees", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
+  add_foreign_key "steps", "workflows"
   add_foreign_key "universities", "countries"
   add_foreign_key "university_degrees", "universities"
 end
