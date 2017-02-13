@@ -36,6 +36,8 @@ class JointPlansController < ApplicationController
       path = 'C:/tem'
       FileUtils.mkdir_p(path)
       file = Tempfile.new(filename,path)
+    else
+      file = Tempfile.new(filename)
     end
 
     begin
@@ -48,15 +50,14 @@ class JointPlansController < ApplicationController
           end
       end
 
-      zip_data = File.read(file.path, :encode => 'ascii-8bit')
+      zip_data = File.read(file.path)
 
       send_data(zip_data, :type => 'application/zip', :filename => filename)
-=begin
+
     ensure
       #Close and delete the temp file
       file.close
       file.unlink
-=end
     end
 
   end
