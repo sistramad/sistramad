@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
-  has_many :procedures
+  has_many :procedures, dependent: :destroy
+  has_many :workflows, through: :procedures
+  has_many :steps, through: :workflows
   
 
   mount_uploader :avatar, AvatarUploader

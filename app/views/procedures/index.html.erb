@@ -1,16 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Trámite para solicitar Año Sabatico:</h1>
+<div class="jumbotron text-center">
+  <h1>Solicitar Año Sabatico:</h1>
+  <%= link_to new_procedure_path, class: 'btn btn-info btn-sm list' do %>
+    <i class="glyphicon glyphicon-plus"></i> Nueva Solicitud
+  <% end %>
+</div>
 
-<p>
-  <h4>Requisitos:</h4>
-  <ul>
-    <li>Nunc egestas diam ut elit accumsan interdum.</li>
-    <li>Aenean viverra nibh id dolor blandit, eget rhoncus orci euismod.</li>
-    <li>Etiam molestie nisl vel diam molestie eleifend.</li>
-    <li>In convallis urna id dolor iaculis, et pellentesque dui consectetur.</li>
-    <li>Etiam molestie nisl vel diam molestie eleifend.</li>
-  </ul>
-</p>
-
-<%= link_to 'Solicitar Trámite', new_procedure_path %>
+<%= render 'procedure' %>

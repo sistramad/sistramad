@@ -1,10 +1,11 @@
 class ProceduresController < ApplicationController
   before_action :set_procedure, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /procedures
   # GET /procedures.json
   def index
-    @procedures = Procedure.all
+    @procedures = @user.procedures
   end
 
   # GET /procedures/1
@@ -55,7 +56,7 @@ class ProceduresController < ApplicationController
   def destroy
     @procedure.destroy
     respond_to do |format|
-      format.html { redirect_to procedures_url, notice: 'Procedure was successfully destroyed.' }
+      format.html { redirect_to procedures_path, notice: 'La solicitud fue cancelada con éxito.' }
       format.json { head :no_content }
     end
   end
@@ -64,6 +65,11 @@ class ProceduresController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_procedure
       @procedure = Procedure.find(params[:id])
+    end
+
+
+    def set_user
+      @user = User.find(current_user)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
