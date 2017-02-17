@@ -11,10 +11,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170203022358) do
+ActiveRecord::Schema.define(version: 20170215001246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "attachments", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "document_id"
+    t.string   "link"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
 
   create_table "countries", force: :cascade do |t|
     t.string   "name",          null: false
@@ -69,6 +81,61 @@ ActiveRecord::Schema.define(version: 20170203022358) do
   add_index "faculties", ["acronym"], name: "index_faculties_on_acronym", unique: true, using: :btree
   add_index "faculties", ["name"], name: "index_faculties_on_name", unique: true, using: :btree
 
+  create_table "formalities_documents", force: :cascade do |t|
+    t.integer  "formalities_master_id"
+    t.integer  "document_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "formalities_documents", ["document_id"], name: "index_formalities_documents_on_document_id", using: :btree
+  add_index "formalities_documents", ["formalities_master_id"], name: "index_formalities_documents_on_formalities_master_id", using: :btree
+
+  create_table "formalities_masters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.string   "table_manager"
+    t.boolean  "isactive"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "joint_plans", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.integer  "status"
+    t.datetime "created"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "joint_plans", ["user_id"], name: "index_joint_plans_on_user_id", using: :btree
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "item_id"
+    t.string   "item_type"
+    t.boolean  "viewed",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "notifications", ["item_type", "item_id"], name: "index_notifications_on_item_type_and_item_id", using: :btree
+  add_index "notifications", ["user_id"], name: "index_notifications_on_user_id", using: :btree
+
+  create_table "professors_transfers", force: :cascade do |t|
+    t.string   "name"
+    t.string   "status"
+    t.integer  "user_id"
+    t.boolean  "isactive"
+    t.boolean  "processed"
+    t.boolean  "isapproved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "professors_transfers", ["user_id"], name: "index_professors_transfers_on_user_id", using: :btree
+
   create_table "reference_lists", force: :cascade do |t|
     t.string   "name",         null: false
     t.text     "description"
@@ -85,6 +152,19 @@ ActiveRecord::Schema.define(version: 20170203022358) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "document_id"
+    t.integer  "jointplan_id"
+    t.integer  "applicant_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -168,6 +248,11 @@ ActiveRecord::Schema.define(version: 20170203022358) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true, using: :btree
 
   add_foreign_key "employees", "users"
+  add_foreign_key "formalities_documents", "documents"
+  add_foreign_key "formalities_documents", "formalities_masters"
+  add_foreign_key "joint_plans", "users"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "professors_transfers", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
   add_foreign_key "universities", "countries"
   add_foreign_key "university_degrees", "universities"

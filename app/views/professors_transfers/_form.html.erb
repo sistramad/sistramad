@@ -1,0 +1,16 @@
+<%= simple_form_for(@professors_transfer) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :status %>
+    <%= f.association :user %>
+    <%= f.input :isactive %>
+    <%= f.input :processed %>
+    <%= f.input :isapproved %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

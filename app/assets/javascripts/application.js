@@ -15,9 +15,24 @@
 //= require jquery_ujs
 //= require app
 //= require bootstrap-sprockets
+//= require jquery.filer
+//= require magnific-popup
 
 
 
 $(document).ready(function() {
     $('.has-tooltip').tooltip();
+});
+
+$(function () {
+    $('.popup-modal').magnificPopup({
+        type: 'inline',
+        preloader: false,
+        focus: '#username',
+        modal: true
+    });
+    $(document).on('click', '.popup-modal-dismiss', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
+    });
 });

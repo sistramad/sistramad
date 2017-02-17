@@ -1,0 +1,2 @@
+module FormalitiesDocumentsHelper
+end

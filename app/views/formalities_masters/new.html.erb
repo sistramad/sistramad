@@ -1,0 +1,10 @@
+<h1><%= t('index.new_formalities_master')%></h1>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li><%= link_to t('index.listing_formalities_masters'), formalities_masters_path %></li>
+  <li class="active"><%= link_to t('index.new_formalities_master'), formalities_masters_path %></li>
+</ul>
+
+<%= render 'form' %>
+
+<%= link_to t('back'), formalities_masters_path, class: 'btn btn-info' %>

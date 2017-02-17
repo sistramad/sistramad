@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @professors_transfer.name %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @professors_transfer.status %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @professors_transfer.user %>
+</p>
+
+<p>
+  <strong>Isactive:</strong>
+  <%= @professors_transfer.isactive %>
+</p>
+
+<p>
+  <strong>Processed:</strong>
+  <%= @professors_transfer.processed %>
+</p>
+
+<p>
+  <strong>Isapproved:</strong>
+  <%= @professors_transfer.isapproved %>
+</p>
+
+<%= link_to 'Edit', edit_professors_transfer_path(@professors_transfer) %> |
+<%= link_to 'Back', professors_transfers_path %>

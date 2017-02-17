@@ -1,0 +1,1 @@
+json.array! @professors_transfers, partial: 'professors_transfers/professors_transfer', as: :professors_transfer

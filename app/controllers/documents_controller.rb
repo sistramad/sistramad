@@ -13,6 +13,7 @@ class DocumentsController < ApplicationController
   end
 
   # GET /documents/new
+
   def new
     @document = Document.new
   end
@@ -72,3 +73,5 @@ class DocumentsController < ApplicationController
       params.require(:document).permit(:name, :status)
     end
 end
+
+

@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Professors Transfers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Status</th>
+      <th>User</th>
+      <th>Isactive</th>
+      <th>Processed</th>
+      <th>Isapproved</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @professors_transfers.each do |professors_transfer| %>
+      <tr>
+        <td><%= professors_transfer.name %></td>
+        <td><%= professors_transfer.status %></td>
+        <td><%= professors_transfer.user %></td>
+        <td><%= professors_transfer.isactive %></td>
+        <td><%= professors_transfer.processed %></td>
+        <td><%= professors_transfer.isapproved %></td>
+        <td><%= link_to 'Show', professors_transfer %></td>
+        <td><%= link_to 'Edit', edit_professors_transfer_path(professors_transfer) %></td>
+        <td><%= link_to 'Destroy', professors_transfer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Professors transfer', new_professors_transfer_path %>

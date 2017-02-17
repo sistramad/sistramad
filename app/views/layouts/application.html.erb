@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"> </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -43,11 +44,10 @@
             </div>
             <div class="pull-left info">
             <% if user_signed_in? %>
-              <div><%= current_user.username %></div>
+              <div><%= current_user.first_name %> <%= current_user.last_name %></div>
             <% end %>
-              <!-- @user.current.username -->
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i>en lines</a>
+              <a href="#"><i class="fa fa-circle text-success"></i>en linea</a>
             </div>
           </div>
           <% end %>
@@ -80,9 +80,18 @@
             </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle"></i>Solicitar Nuevo Traslado</a></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Chequear estado del Traslado solicitado</a></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Traslado</a></li>
+                <% if ProfessorsTransfer.where(user_id: current_user.id).empty? %>
+                      <% tramite = FormalitiesMaster.find(1).name %>
+                      <li><%= link_to new_attachment_path(:name => tramite),method: :get do%>
+                            <i class="fa fa-circle"></i>
+                            Solicitar Nuevo Traslado
+                      <% end %>
+                      </li>
+                <% end %>
+                <li><%= link_to status_joint_plans_path,method: :get do%>
+                    <i class="fa fa-circle"></i>
+                    Estatus de Traslado
+                <% end %> 
               </ul>
             </li>
 
@@ -91,15 +100,38 @@
 
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
-            <span class="pull-right-container">
+                <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle"></i>Nuevo Plan Conjunto</a></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
+                <% if JointPlan.where(user_id: current_user.id).empty? %>
+                    <% tramite = FormalitiesMaster.find(2).name %>
+                    <li><%= link_to new_attachment_path(:name => tramite),method: :get do%>
+                          <i class="fa fa-circle"></i>
+                          Nuevo Plan Conjunto
+                      <% end %></li>
+                <% end %>
+                <li><%= link_to status_joint_plans_path,method: :get do%>
+                    <i class="fa fa-circle"></i>
+                    Estatus de Plan Conjunto
+                <% end %>
+                </li>
+                <li><%= link_to informs_joint_plans_path,method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Subir Informe
+                  <% end %>
+                </li>
+
               </ul>
             </li>
+            <% if current_user.has_role? :decano %>
+                <li><%= link_to joint_plans_path do%>
+                    <i class="fa fa-circle-o"></i>
+                    Ver Solicitudes
+                <% end %></li>
+            <% end %>
+
           </ul>
           <!-- /.sidebar-menu -->
         </section>

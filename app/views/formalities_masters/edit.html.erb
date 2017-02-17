@@ -1,0 +1,11 @@
+<h1><%=t('Editing_Formalities_Master')%></h1>
+<%= render 'form' %>
+
+<div class="col-md-3 pull-left">
+  <div class="btn-toolbar">
+    <div class="btn-group">
+      <%= link_to t('edit'), @formalities_master, class: 'btn btn-info'%>
+      <%= link_to t('back'), formalities_masters_path, class: 'btn btn-info' %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1 @@
+json.array! @formalities_masters, partial: 'formalities_masters/formalities_master', as: :formalities_master

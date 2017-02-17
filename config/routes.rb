@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+  
+  resources :formalities_documents
+  resources :formalities_masters
+  resources :professors_transfers
   resources :documents
+  #resources :reports
     resources :university_degrees
     resources :universities
     resources :faculties
@@ -11,7 +16,27 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :joint_plans do
+      collection do
+        post :download
+        get :status
+        post :decline
+        post :accept
+        get :informs
+      end
+    end
+    resources :reports
+    resources :attachments do
+      collection do
+        post :create_inform
+      end
+    end
     devise_for :users
+    scope "/" do
+      resources :users do
+
+      end
+    end
 
     localized do
       resources :users
