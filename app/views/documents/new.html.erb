@@ -1,0 +1,23 @@
+<% if !@document.errors.empty? %>
+  <div class="alert alert-error">
+    <ul>
+      <% @document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<div class="well">
+  <%= form_for @document, html: { multipart: true } do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :attachment %>
+    <%= f.file_field :attachment %>
+  </div>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+</div>

@@ -14,7 +14,8 @@ class ProceduresController < ApplicationController
   end
 
   def new
-    @procedure = Procedure.new
+    @procedure = Procedure.new   
+
   end
 
   # GET /procedures/1/edit
