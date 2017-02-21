@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   has_many :procedures, dependent: :destroy
   has_many :workflows, through: :procedures
   has_many :steps, through: :workflows
+  has_many :documents
   
 
   mount_uploader :avatar, AvatarUploader

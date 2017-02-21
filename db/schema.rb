@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220195232) do
+ActiveRecord::Schema.define(version: 20170220224116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,9 +36,14 @@ ActiveRecord::Schema.define(version: 20170220195232) do
   create_table "documents", force: :cascade do |t|
     t.string   "name"
     t.string   "attachment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "user_id"
+    t.integer  "procedure_id"
   end
+
+  add_index "documents", ["procedure_id"], name: "index_documents_on_procedure_id", using: :btree
+  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.integer  "user_id",                 null: false
@@ -202,6 +207,8 @@ ActiveRecord::Schema.define(version: 20170220195232) do
     t.integer  "procedure_id"
   end
 
+  add_foreign_key "documents", "procedures"
+  add_foreign_key "documents", "users"
   add_foreign_key "employees", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
   add_foreign_key "steps", "workflows"
