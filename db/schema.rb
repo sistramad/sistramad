@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170220224116) do
+ActiveRecord::Schema.define(version: 20170222151322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,15 @@ ActiveRecord::Schema.define(version: 20170220224116) do
 
   add_index "countries", ["alpha2code"], name: "index_countries_on_alpha2code", unique: true, using: :btree
   add_index "countries", ["alpha3code"], name: "index_countries_on_alpha3code", unique: true, using: :btree
+
+  create_table "document_masters", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "procedure"
+    t.boolean  "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
