@@ -76,7 +76,7 @@ class ProceduresController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def procedure_params
-      params.require(:procedure).permit(:name, documents_attributes: [:id, :name, :attachment, :user_id])
+      params.require(:procedure).permit(:name, documents_attributes: [:name, :attachment])
     end
 
     def generate_workflow

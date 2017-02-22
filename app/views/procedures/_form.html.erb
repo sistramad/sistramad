@@ -6,57 +6,24 @@
         <%= current_user.username %>
       </div>
       <div class="panel-body">
-      
-        <%= simple_form_for setup_procedure(@procedure), :html => {:multipart => true, :class => "form-horizontal"} do |f| %>
+       
+          <%= simple_form_for setup_procedure(@procedure), html: { multipart: true } do |f| %>
 
-            <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-9">
-                
-                <%= f.simple_fields_for :documents do |ff| %>
-                  
-                  <div class="form-group">
+            <%= f.simple_fields_for :documents do |ff| %>               
 
-                    <div  class="col-sm-8 control-label">
-                      <%= ff.text_field :name %> 
-                    </div>
+                  <%= ff.input :attachment, label: "Archivo:" %>
 
-                    <label class="col-sm-2 btn btn-primary btn-file">
-                      Selecionar Archivo... <input type="file" hidden>
-                    </label>  
-                   
-                    <% if ff.object.persisted? %>
-                      <%= ff.check_box :_destroy %>
-                      <%= ff.label :_destroy, "Destroy" %>
-                    <% end %>
+                  <% if ff.object.persisted? %>
+                    <%= ff.check_box :_destroy %>
+                    <%= ff.label :_destroy, "Destroy" %>
+                  <% end %>
 
-                  </div>
-                <% end %>  
-
-                <div class="col-md-4 col-md-offset-6">
-                  <%= f.button :submit,'Solicitar Año Sabatico' , class: 'form-control btn btn-info' %>
-                </div>
-
-            </div>          
-
-
-            <div class="row">
-              <div class="col-md-4 col-md-offset-4">
-              <%= f.error_notification %>
-                <% if @procedure.errors.any? %>
-                  <div id="error_explanation">
-                    <h2><%= pluralize(@procedure.errors.count, "error") %> ha prohibido que se realice la solicitud:</h2>
-                    <ul>
-                      <% @procedure.errors.full_messages.each do |message| %>
-                          <li><%= message %></li>
-                      <% end %>
-                    </ul>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-            
-        <% end %>
+              <% end %>
+            <%= f.button :submit%>
+          <% end %>
+     
       </div>
     </div>
   </div>
 </div>
+#procedure_documents_attributes_0_name
