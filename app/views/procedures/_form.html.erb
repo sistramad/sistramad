@@ -6,24 +6,20 @@
         <%= current_user.username %>
       </div>
       <div class="panel-body">
-       
-          <%= simple_form_for setup_procedure(@procedure), html: { multipart: true } do |f| %>
+      
+        <%= simple_form_for setup_procedure(@procedure) , html: { multipart: true } do |f| %>  
 
-            <%= f.simple_fields_for :documents do |ff| %>               
+            <%= f.input :name, label: "Nombre del Tramite:" %>
 
-                  <%= ff.input :attachment, label: "Archivo:" %>
-
-                  <% if ff.object.persisted? %>
-                    <%= ff.check_box :_destroy %>
-                    <%= ff.label :_destroy, "Destroy" %>
-                  <% end %>
-
+              <%= f.simple_fields_for :documents do |ff| %>
+                <%= ff.input :name%>
+                <%= ff.input :attachment%>                  
               <% end %>
-            <%= f.button :submit%>
-          <% end %>
-     
+
+            <%= f.button :submit %>
+        <% end %>
+    
       </div>
     </div>
   </div>
 </div>
-#procedure_documents_attributes_0_name

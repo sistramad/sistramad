@@ -4,9 +4,8 @@ module FormHelper
 
     procedure_documents.each do |document|
       procedure.documents.build(name: document.name)
+      puts document.name
     end
-
-    #3.times { procedure.documents.build }    
     procedure
   end
 

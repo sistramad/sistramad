@@ -14,7 +14,7 @@ class ProceduresController < ApplicationController
   end
 
   def new
-    @procedure = Procedure.new  
+    @procedure = Procedure.new    
   end
 
   # GET /procedures/1/edit
@@ -23,16 +23,18 @@ class ProceduresController < ApplicationController
 
   def create
     @procedure = Procedure.new(procedure_params)
-    @procedure.user = @user
+    @procedure.user = @user  
    
-
     respond_to do |format|
       if @procedure.save
-        set_documents_to_user
-        generate_workflow
+        set_documents_to_user()
+        generate_workflow()
         format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
       else
+        puts "Errors"
+        puts @procedure.errors.full_messages
+        @procedure.errors.full_messages
         format.html { render :new }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end
@@ -64,19 +66,25 @@ class ProceduresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def procedure_params
+      params.require(:procedure).permit(:name, documents_attributes: [:id,:name, :attachment])
+    end
+
     def set_procedure
       @procedure = Procedure.find(params[:id])
     end
 
+    def documents_look_up
+      DocumentMaster.where(procedure: "Año Sabatico", active: true)   
+    end
 
     def set_user
       @user = User.find(current_user)
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def procedure_params
-      params.require(:procedure).permit(:name, documents_attributes: [:name, :attachment])
+    def set_documents_to_user
+      @user.documents << @procedure.documents
     end
 
     def generate_workflow
@@ -93,13 +101,6 @@ class ProceduresController < ApplicationController
 
       end 
 
-    end
-
-    def set_documents_to_user
-      @user.documents << @procedure.documents
-      #@procedure.documents.each do |document|
-      #   @user.documents << document
-      #end
     end
 
     def generate_steps(workflow)
