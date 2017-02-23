@@ -3,8 +3,7 @@ module FormHelper
     procedure_documents = procedure_documents_look_up(procedure)
 
     procedure_documents.each do |document|
-      procedure.documents.build(name: document.name)
-      puts document.name
+      procedure.documents.build(name: document.name)      
     end
     procedure
   end
