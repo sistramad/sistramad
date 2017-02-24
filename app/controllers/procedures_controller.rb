@@ -14,7 +14,9 @@ class ProceduresController < ApplicationController
   end
 
   def new
-    @procedure = Procedure.new    
+    @procedure = Procedure.new   
+    @documents = Array.new 
+    @documents = documents_require()
   end
 
   # GET /procedures/1/edit
@@ -23,10 +25,22 @@ class ProceduresController < ApplicationController
 
   def create
     @procedure = Procedure.new(procedure_params)
-    @procedure.user = @user  
+    @procedure.user = @user
+    @documents = Array.new
+
+    documents_param = params[:documents]   
+
+
+    documents_param.each do |param|     
+      document = param[1]
+      doc = Document.new(document_params(document))      
+      doc.save
+      @documents << doc    
+    end
    
     respond_to do |format|
       if @procedure.save
+        set_documents_to_procedure()
         set_documents_to_user()
         generate_workflow()
         format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
@@ -71,8 +85,20 @@ class ProceduresController < ApplicationController
       params.require(:procedure).permit(:name, documents_attributes: [:id,:name, :attachment])
     end
 
+    def document_params (document)
+      document.permit(:name,:attachment)
+    end
+
     def set_procedure
       @procedure = Procedure.find(params[:id])
+    end
+
+    def documents_require
+      procedure_documents = documents_look_up()
+      procedure_documents.each do |doc|
+        @documents << Document.new(name: doc.name)      
+      end
+      procedure_documents
     end
 
     def documents_look_up
@@ -83,6 +109,10 @@ class ProceduresController < ApplicationController
       @user = User.find(current_user)
     end
 
+    def set_documents_to_procedure
+      @procedure.documents << @documents
+    end
+    
     def set_documents_to_user
       @user.documents << @procedure.documents
     end

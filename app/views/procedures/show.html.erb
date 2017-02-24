@@ -1,9 +1,18 @@
 <p id="notice"><%= notice %></p>
+<div class="well"> 
+  <p>
+    <strong>Nombre del Trámite:</strong>
+    <h1><%= @procedure.name %></h1>
+  </p>
+<div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @procedure.name %>
-</p>
+<div>
+  <ul>
+    <% @procedure.documents.each do |document|%>
+      <li><%= link_to document.name, document.attachment_url %></li>
+    <%end%>
+  </ul> 
+</div>
 
 <%= link_to 'Edit', edit_procedure_path(@procedure) %> |
 <%= link_to 'Back', procedures_path %>
