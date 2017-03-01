@@ -315,14 +315,17 @@ es:
   formalities_master: 'Trámite'
   formalities_documents: 'Recaudos para Trámites'
   formalities_document: 'Recaudo para Trámite'
+  professors_transfer: 'Traslado'
   faculty: 'Facultad'
   acronym: 'acronimo'
   active: 'Activo'
+  status: 'Estado'
   isactive: 'Activo'
   requirements: 'Recaudos'
   table_manager: 'Tabla Asociada'
   Editing_Formalities_Master: 'Editar Trámite'
   form:
     send: 'Enviar'
+    update: 'Actualizar'
   form_reference_list:
       hint_name: 'Escriba el nombre de la referencia de lista.'

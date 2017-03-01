@@ -111,10 +111,13 @@ gem 'jquery-turbolinks'
 
 # para adjuntar archivos
 gem 'paperclip'
-# Para creat archivos zip
+# Para crear archivos zip
 gem 'rubyzip'
-# Creat ventanas modales (pop-ups)
+# Crear ventanas modales (pop-ups)
 gem 'magnific-popup-rails', '~> 1.1.0' 
+
+# Creat ventanas modales (pop-ups)
+gem 'aasm'
 
 # se reemplazo el servidor de web-brick a puma 
 gem "puma"

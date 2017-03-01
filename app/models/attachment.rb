@@ -4,6 +4,7 @@ class Attachment < ActiveRecord::Base
   belongs_to :user
   belongs_to :document
   belongs_to :joint_plan
+  belongs_to :professors_transfer
   has_attached_file :file , :default_url => '/uploads'
   validates_attachment :file, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf )}
   validates :file, :presence => true

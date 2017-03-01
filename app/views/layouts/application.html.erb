@@ -81,17 +81,31 @@
               </a>
               <ul class="treeview-menu">
                 <% if ProfessorsTransfer.where(user_id: current_user.id).empty? %>
-                      <% tramite = FormalitiesMaster.find(1).name %>
-                      <li><%= link_to new_attachment_path(:name => tramite),method: :get do%>
+                      <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
                             <i class="fa fa-circle"></i>
                             Solicitar Nuevo Traslado
                       <% end %>
                       </li>
-                <% end %>
-                <li><%= link_to status_joint_plans_path,method: :get do%>
-                    <i class="fa fa-circle"></i>
-                    Estatus de Traslado
+                <% else %>
+                    <% if ProfessorsTransfer.find_by_user_id(current_user.id).DR? %>
+                    <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
+                            <i class="fa fa-circle"></i>
+                            Enviar Recaudos Faltantes
+                      <% end %>
+                      </li>
+                    <% end %>
+                    <li><%= link_to status_professors_transfers_path ,method: :get do%>
+                        <i class="fa fa-circle"></i>
+                        Estatus de Traslado
+                    <% end %>
+                    </li> 
                 <% end %> 
+                <% if current_user.has_role? :decano %>
+                    <li><%= link_to professors_transfers_path do%>
+                        <i class="fa fa-circle-o"></i>
+                        Ver Solicitudes de Traslados
+                    <% end %></li>
+                <% end %>
               </ul>
             </li>
 
@@ -106,8 +120,7 @@
               </a>
               <ul class="treeview-menu">
                 <% if JointPlan.where(user_id: current_user.id).empty? %>
-                    <% tramite = FormalitiesMaster.find(2).name %>
-                    <li><%= link_to new_attachment_path(:name => tramite),method: :get do%>
+                    <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(2).name),method: :get do%>
                           <i class="fa fa-circle"></i>
                           Nuevo Plan Conjunto
                       <% end %></li>
@@ -128,7 +141,7 @@
             <% if current_user.has_role? :decano %>
                 <li><%= link_to joint_plans_path do%>
                     <i class="fa fa-circle-o"></i>
-                    Ver Solicitudes
+                    Ver Solicitudes de Plan Conjunto
                 <% end %></li>
             <% end %>
 
@@ -172,10 +185,10 @@
       <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-          Anything you want
+          FACYT
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2017 <a href="#">University of Carabobo</a>.</strong> All rights reserved.
       </footer>
   <% end %>
 </div>

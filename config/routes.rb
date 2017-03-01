@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :formalities_documents
   resources :formalities_masters
-  resources :professors_transfers
+  #resources :professors_transfers
   resources :documents
   #resources :reports
     resources :university_degrees
@@ -25,12 +25,23 @@ Rails.application.routes.draw do
         get :informs
       end
     end
+
+    resources :professors_transfers do
+      collection do
+        #post :download
+        get :status
+      end
+    end
+
+
     resources :reports
+
     resources :attachments do
       collection do
         post :create_inform
       end
     end
+
     devise_for :users
     scope "/" do
       resources :users do

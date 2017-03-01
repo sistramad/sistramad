@@ -1,0 +1,19 @@
+<h2>Estado de Solicitud de Traslado</h2>
+<div class="jumbotron" style="border-radius: 15px; background-color: #dae4f1">
+  <div class="container">
+    <% professorstransfer = ProfessorsTransfer.find_by_user_id(current_user.id)  %>
+    <% id = ProfessorsTransfer.find_by_user_id(current_user.id).id %>
+    <% if professorstransfer.DR? %>
+        <p>Su Solicitud se encuentra en proceso, aun le faltan recaudos por cargar</p>
+    <%end%>
+    <% if professorstransfer.IP? %>
+        <p>Su Solicitud esta en Progreso</p>
+    <%end%>
+    <% if professorstransfer.RE? %>
+        <p>Su Solicitud Fue Denegada</p>
+    <%end%>
+    <% if professorstransfer.AP? %>
+        <p>Su Solicitud ha sido aprobada y Aceptada</p>
+    <%end%>
+  </div>
+</div>

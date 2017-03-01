@@ -16,12 +16,13 @@ class ProfessorsTransfersController < ApplicationController
   # GET /professors_transfers/1
   # GET /professors_transfers/1.json
   def show
+    @professors_transfer = ProfessorsTransfer.find(params[:id])
   end
 
   # GET /professors_transfers/new
   def new
     @professors_transfer = ProfessorsTransfer.new
-    @documents = FormalitiesMaster.find(id:lol).formalities_document.document
+    @documents = FormalitiesMaster.find_by_name(params[:name]).documents
     @user =  @professors_transfer.user
     @attachment = Attachment.new
   end

@@ -1,34 +1,35 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t("professors_transfer") %></div>
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9">
+              <div class="form-group">
 
-<p>
-  <strong>Name:</strong>
-  <%= @professors_transfer.name %>
-</p>
+                <label for="user" class="control-label col-sm-5 col-md-4"><%= t("user") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @professors_transfer.user.first_name%>
+                    <%= @professors_transfer.user.last_name%>
+                  </p>
+                </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @professors_transfer.status %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @professors_transfer.user %>
-</p>
-
-<p>
-  <strong>Isactive:</strong>
-  <%= @professors_transfer.isactive %>
-</p>
-
-<p>
-  <strong>Processed:</strong>
-  <%= @professors_transfer.processed %>
-</p>
-
-<p>
-  <strong>Isapproved:</strong>
-  <%= @professors_transfer.isapproved %>
-</p>
-
-<%= link_to 'Edit', edit_professors_transfer_path(@professors_transfer) %> |
-<%= link_to 'Back', professors_transfers_path %>
+                <label for="status" class="control-label col-sm-5 col-md-4"><%= t("status") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @professors_transfer.status %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <div class="btn-group btn-group-justified">
+        <%= link_to t('back'), professors_transfers_path, class: 'btn btn-info' %>
+      </div>
+    </div>
+  </div>
+</div>

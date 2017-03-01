@@ -20,7 +20,7 @@ class JointPlansController < ApplicationController
     @submissions = Attachment.where('user_id = ?',params[:user_id])
 
     file_origin = Rails.root.to_s+'/public'
-    filename = 'recuados_'+User.find(params[:user_id]).username+'.zip'
+    filename = 'recaudos_'+User.find(params[:user_id]).username+'.zip'
     file = Tempfile.new(filename)
 
     begin

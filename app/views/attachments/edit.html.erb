@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= "Actualizar #{@attachment.document.name} de #{@attachment.user.first_name.capitalize} #{@attachment.user.last_name.capitalize}" %></div>
+      <div class="panel-body">
+        <%= simple_form_for (@attachment), :html => {:multipart => true, :class => "new_attachment"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input_sistramad
+                            } do |f| %>
+            <%= f.error_notification %>
+
+            <% if @attachment.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@attachment.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                  <ul>
+                    <% @attachment.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <div class="file_field" style="margin-right: 300px;padding-top: 5px">
+                          <%= f.file_field :file,class: "filestyle", "data-buttonName"=>"btn-primary",
+                           "data-buttonText"=>"Seleccionar Archivo",
+                           "data-iconName"=>"glyphicon glyphicon-paperclip",
+                           "data-buttonBefore"=>"true"%>
+                          <%= f.hidden_field :document_id, :value => @attachment.document_id%>
+                        </div>
+              </div>
+              <%= fields_for 'tramite', @formalities_master do |tramite| %>
+                  <%= tramite.hidden_field :name, :value => @formalities_master.name %>
+              <% end %>
+              <center>
+              <div class="col-md-12">
+                <%= f.button :submit, value: t('form.update'), class: ' btn btn-info' %>
+              </div>
+              </center>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
