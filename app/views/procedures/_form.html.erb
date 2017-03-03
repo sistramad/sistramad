@@ -1,20 +1,23 @@
-
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-info panel-user">
       <div class="panel-heading center">
-        <%= current_user.username %>
+        <h2> FORM2 </h2>
       </div>
       <div class="panel-body">
+
       
-        <%= simple_form_for setup_procedure(@procedure) , html: { multipart: true } do |f| %>  
-
-            <%= f.input :name, label: "Nombre del Tramite:" %>
-
-              <%= f.simple_fields_for :documents do |ff| %>
-                <%= ff.input :name%>
-                <%= ff.input :attachment%>                  
+        <%= simple_form_for @procedure, html: { multipart: true } do |f| %>  
+          <%= f.input :name, label: "Nombre del Tramite:" %>
+          <% @documents.each do |document| %>
+            <div>
+              <%= fields_for 'documents[]', document do |ff| %>
+                <%= ff.label :name %>
+                <%= ff.text_field :name %>            
+                <%= ff.file_field :attachment  %>                 
               <% end %>
+            </div>
+          <% end %>
 
             <%= f.button :submit %>
         <% end %>
