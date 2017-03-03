@@ -1,0 +1,40 @@
+<% if !@document.errors.empty? %>
+  <div class="alert alert-error">
+    <ul>
+      <% @document.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-info">
+      <div class="panel-heading center">Cargar Documento</div>
+      <div class="panel-body">
+        <%= simple_form_for @document, :html => {:class => "form-horizontal"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input
+                            } do |f| %>
+            <%= f.error_notification %>
+            <div class="row">
+
+            
+                <div class="col-md-2">
+                  <dt><%= @document.name %>:</dt>
+                </div>
+
+                <div class="col-md-8">
+                  <%= f.input :attachment, as: :file, label: false %>
+                </div>
+             
+            </div>
+            <div class="col-md-2">
+              <%= f.button :submit, value: "Finalizar", class: 'form-control btn btn-info' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

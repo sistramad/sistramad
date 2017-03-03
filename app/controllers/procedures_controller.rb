@@ -16,33 +16,28 @@ class ProceduresController < ApplicationController
   def new
     @procedure = Procedure.new   
     @documents = Array.new 
-    @documents = documents_require()
+    @documents = documents_required()
   end
 
   # GET /procedures/1/edit
   def edit
+
   end
 
   def create
     @procedure = Procedure.new(procedure_params)
     @procedure.user = @user
+
     @documents = Array.new
-
-    documents_param = params[:documents]   
-
-
-    documents_param.each do |param|     
-      document = param[1]
-      doc = Document.new(document_params(document))      
-      doc.save
-      @documents << doc    
-    end
+    create_documents()
    
     respond_to do |format|
       if @procedure.save
+        
         set_documents_to_procedure()
         set_documents_to_user()
         generate_workflow()
+        
         format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
       else
@@ -81,6 +76,10 @@ class ProceduresController < ApplicationController
 
   private
 
+    def set_user
+      @user = User.find(current_user)
+    end
+
     def procedure_params
       params.require(:procedure).permit(:name, documents_attributes: [:id,:name, :attachment])
     end
@@ -93,20 +92,22 @@ class ProceduresController < ApplicationController
       @procedure = Procedure.find(params[:id])
     end
 
-    def documents_require
-      procedure_documents = documents_look_up()
+    def documents_required
+      procedure_documents = DocumentMaster.where(procedure: "Año Sabatico", active: true)
       procedure_documents.each do |doc|
         @documents << Document.new(name: doc.name)      
       end
       procedure_documents
-    end
+    end  
 
-    def documents_look_up
-      DocumentMaster.where(procedure: "Año Sabatico", active: true)   
-    end
-
-    def set_user
-      @user = User.find(current_user)
+    def create_documents
+      documents_param = params[:documents]   
+      documents_param.each do |param|     
+        document = param[1]
+        doc = Document.new(document_params(document))      
+        doc.save
+        @documents << doc    
+      end
     end
 
     def set_documents_to_procedure
