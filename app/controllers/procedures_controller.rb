@@ -1,5 +1,5 @@
 class ProceduresController < ApplicationController
-  before_action :set_procedure, only: [:show, :edit, :update, :destroy]
+  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate]
   before_action :set_user
 
   # GET /procedures
@@ -72,6 +72,11 @@ class ProceduresController < ApplicationController
       format.html { redirect_to procedures_path, notice: 'La solicitud fue cancelada con éxito.' }
       format.json { head :no_content }
     end
+  end
+
+  #GET /procedures/1
+  def validate
+    validate_procedure()
   end
 
   private
@@ -152,6 +157,14 @@ class ProceduresController < ApplicationController
       step.is_active = true
       step.workflow = workflow
       step.save
+    end
 
+    def validate_procedure
+      puts "validando el procedimiento:"
+      puts @procedure.name
+
+      validator = ProcecureValidator.new(@procedure.code)
+      validator.validate(@procedure)
+      
     end
 end

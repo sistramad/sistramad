@@ -1,12 +1,21 @@
 Rails.application.routes.draw do
 
   resources :documents
-  resources :procedures
+  resources :procedures do
+    member do
+      get :validate
+    end
+  end
+  
+  
+  #get 'procedures/:id', to: 'procedures#validate', as: 'validate_procedure'
+
   resources :university_degrees
   resources :universities
   resources :faculties
   resources :roles
   resources :employees
+
   resources :countries do
     collection do
       get :insert_records
