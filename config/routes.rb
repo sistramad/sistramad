@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+require 'action_cable'
 Rails.application.routes.draw do
   #resources :reports
     resources :university_degrees
@@ -57,4 +59,7 @@ Rails.application.routes.draw do
         root 'devise/sessions#new', as: :unauthenticated_root
       end
     end
+
+    mount ActionCable.server => '/cable'
+    mount Sidekiq::Web => '/sidekiq'
 end

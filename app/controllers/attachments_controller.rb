@@ -16,18 +16,19 @@ class AttachmentsController < ApplicationController
   def create
 
     inform = false
-    a = params[:attachments]
+    a = params.to_unsafe_h.slice(:attachments)
     a.each do |attachment|
       if attachment[1] != nil
-        doc = attachment[1]
-        if doc[:file] != nil
-          @attachment = current_user.attachments.new(attachment_params(doc))
-          @attachment.save
-          if doc[:document_id] == '16' || doc[:document_id] == '17'
-            inform = true
+        attach = attachment[1]
+        attach.each do |doc|
+          if doc[1][:file] != nil
+            @attachment = current_user.attachments.new(attachment_params(doc[1]))
+            @attachment.save
+            if doc[1][:document_id] == '16' || doc[1][:document_id] == '17'
+              inform = true
+            end
           end
         end
-
       end
     end
 
@@ -43,9 +44,10 @@ class AttachmentsController < ApplicationController
       @user = current_user
     end
 
+
   def attachment_params (document)
 
-    document.permit(:document_id,:file,:joint_plan_id)
+    ActionController::Parameters.new(document).permit(:document_id,:file,:joint_plan_id)
   end
 
 end

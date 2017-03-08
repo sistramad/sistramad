@@ -1,5 +1,5 @@
 class Attachment < ActiveRecord::Base
-  #include Notificable
+  include Notificable
 
   belongs_to :user
   belongs_to :document
@@ -9,7 +9,7 @@ class Attachment < ActiveRecord::Base
   validates :file, :presence => true
 
   def user_ids
-    #self.user_id
+    self.user_id
   end
 
 end

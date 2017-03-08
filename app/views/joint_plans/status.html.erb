@@ -2,7 +2,6 @@
 <div class="jumbotron" style="border-radius: 15px; background-color: #dae4f1">
   <div class="container">
     <% status1 = JointPlan.select(:status).find_by_user_id(current_user.id)  %>
-    <% jointplan = JointPlan.find_by_user_id(current_user.id)  %>
     <% id = JointPlan.find_by_user_id(current_user.id).id %>
     <% if status1.status  == 1%>
         <p>Su Solicitud esta en proceso</p>

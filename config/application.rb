@@ -1,14 +1,15 @@
 require File.expand_path('../boot', __FILE__)
 
-require "rails"
+require "rails/all"
 # Pick the frameworks you want:
-require "active_model/railtie"
-require "active_job/railtie"
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "action_view/railtie"
-require "sprockets/railtie"
+#require "active_model/railtie"
+#require "active_job/railtie"
+#require "active_record/railtie"
+#require "action_controller/railtie"
+#require "action_mailer/railtie"
+#require "action_view/railtie"
+#require "sprockets/railtie"
+#require "action_cable"
 # require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
@@ -30,7 +31,7 @@ module Sistramad
     config.i18n.default_locale = :es
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    #config.active_record.raise_in_transactional_callbacks = true
 
     # autoload lib path
     config.autoload_paths += %W(#{config.root}/lib)
@@ -38,5 +39,6 @@ module Sistramad
 
     #predefinir sass
     config.sass.preferred_syntax = :sass
+    config.active_job.queue_adapter = :sidekiq
   end
 end

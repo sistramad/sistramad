@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :attachments
 
   mount_uploader :avatar, AvatarUploader
-  crop_uploaded :avatar
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :identification_document, :numericality => { only_integer: true, allow_nil: true }
@@ -32,5 +31,13 @@ class User < ActiveRecord::Base
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
+  end
+
+  def notification_count
+    Notification.for_user(self.id)
+  end
+
+  def user_id
+    current_user.id
   end
 end

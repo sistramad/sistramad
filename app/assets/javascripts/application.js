@@ -11,12 +11,12 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.jcrop
 //= require jquery_ujs
 //= require app
 //= require bootstrap-sprockets
 //= require jquery.filer
 //= require magnific-popup
+//= require cable
 
 
 
