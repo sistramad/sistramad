@@ -16,7 +16,7 @@
 //= require bootstrap-sprockets
 //= require jquery.filer
 //= require magnific-popup
-//= require cable
+//= require_tree .
 
 
 

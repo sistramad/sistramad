@@ -1,5 +1,4 @@
 require 'sidekiq/web'
-require 'action_cable'
 Rails.application.routes.draw do
   #resources :reports
     resources :university_degrees
