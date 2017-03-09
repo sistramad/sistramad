@@ -16,12 +16,8 @@ class ProceduresController < ApplicationController
 
   def new
     code = params[:code]
-
     procedure_factory = ProcedureFactory.new
     proce = procedure_factory.build(code)
-
-    proce.requirements_valid?
-    
     
     @procedure = Procedure.new    
     @procedure.name = proce.name
@@ -45,7 +41,6 @@ class ProceduresController < ApplicationController
    
     respond_to do |format|
       if @procedure.save
-        
         set_documents_to_procedure()
         set_documents_to_user()
         generate_workflow()
@@ -88,11 +83,11 @@ class ProceduresController < ApplicationController
 
   #GET /procedures/1
   def validate
-    if @procedure.requirements_approved?
-      puts "Cambiar de estado DRAFT -> INPROGRESS"
-      render 'show'
+    if validate_pre_requirements?
+      redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
-      #Notificar al usuario
+      flash[:error] =  'La solicitud no ha podido completarse, asegurese de haber cargado todos los requerimientos necesarios'
+      render :show 
     end
   end
 
@@ -176,13 +171,11 @@ class ProceduresController < ApplicationController
       step.save
     end
 
-    def validate_procedure
-      puts "validando el procedimiento:"
-      puts @procedure.name
-
-      procedure = ProcedureFactory.new(@procedure)
-
-      procedure.validate
-
+    def validate_pre_requirements?
+      puts "validando el procedimiento: #{@procedure.name} - #{@procedure.code}"     
+      procedure_factory = ProcedureFactory.new
+      proc = procedure_factory.build(@procedure.code)
+      @procedure.start! if proc.pre_requirements_valid?
+      @procedure.in_progress?
     end
 end

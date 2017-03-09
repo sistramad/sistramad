@@ -7,10 +7,10 @@ class SabbaticalYear < SystemProcedure
     @code = "T-AS100"
   end
 
-  def requirements_valid?
-    puts "Sabbatical Year Validations"
-    puts "Sabbatical Year Validations"
-    puts "Sabbatical Year Validations"
+  def pre_requirements_valid?
+    puts "Sabbatical Year Validations 1"
+    puts "Sabbatical Year Validations 2"
+    puts "Sabbatical Year Validations 3"
     true
   end
   
