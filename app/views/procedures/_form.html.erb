@@ -9,6 +9,7 @@
       
         <%= simple_form_for @procedure, html: { multipart: true } do |f| %>  
           <%= f.input :name, label: "Nombre del Tramite:" %>
+          <%= f.input :code, label: "Código:" %>
           <% @documents.each do |document| %>
             <div>
               <%= fields_for 'documents[]', document do |ff| %>

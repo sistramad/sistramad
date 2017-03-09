@@ -6,4 +6,11 @@ class Procedure < ActiveRecord::Base
   has_many :steps, through: :workflows
   has_many :documents , dependent: :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true, :reject_if => :all_blank
+
+  def requirements_approved?
+    puts name
+    puts code
+    true
+  end
+  
 end

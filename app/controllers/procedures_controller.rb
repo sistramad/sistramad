@@ -1,3 +1,4 @@
+
 class ProceduresController < ApplicationController
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate]
   before_action :set_user
@@ -14,7 +15,18 @@ class ProceduresController < ApplicationController
   end
 
   def new
-    @procedure = Procedure.new   
+    code = params[:code]
+
+    procedure_factory = ProcedureFactory.new
+    proce = procedure_factory.build(code)
+
+    proce.requirements_valid?
+    
+    
+    @procedure = Procedure.new    
+    @procedure.name = proce.name
+    @procedure.code = proce.code
+
     @documents = Array.new 
     @documents = documents_required()
   end
@@ -76,17 +88,22 @@ class ProceduresController < ApplicationController
 
   #GET /procedures/1
   def validate
-    validate_procedure()
+    if @procedure.requirements_approved?
+      puts "Cambiar de estado DRAFT -> INPROGRESS"
+      render 'show'
+    else
+      #Notificar al usuario
+    end
   end
 
   private
 
     def set_user
-      @user = User.find(current_user)
+      @user = User.find(current_user.id)
     end
 
     def procedure_params
-      params.require(:procedure).permit(:name, documents_attributes: [:id,:name, :attachment])
+      params.require(:procedure).permit(:name, :code, documents_attributes: [:id,:name, :attachment])
     end
 
     def document_params (document)
@@ -163,8 +180,9 @@ class ProceduresController < ApplicationController
       puts "validando el procedimiento:"
       puts @procedure.name
 
-      validator = ProcecureValidator.new(@procedure.code)
-      validator.validate(@procedure)
-      
+      procedure = ProcedureFactory.new(@procedure)
+
+      procedure.validate
+
     end
 end
