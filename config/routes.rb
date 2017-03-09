@@ -22,6 +22,7 @@ Rails.application.routes.draw do
         get :inform_list
       end
     end
+    resources :notifications
     resources :reports
     resources :attachments do
       collection do
