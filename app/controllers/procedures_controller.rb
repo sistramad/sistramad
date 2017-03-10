@@ -83,7 +83,7 @@ class ProceduresController < ApplicationController
 
   #GET /procedures/1
   def validate
-    if validate_pre_requirements?
+    if initial_requirements_valid?
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] =  'La solicitud no ha podido completarse, asegurese de haber cargado todos los requerimientos necesarios'
@@ -171,11 +171,12 @@ class ProceduresController < ApplicationController
       step.save
     end
 
-    def validate_pre_requirements?
-      puts "validando el procedimiento: #{@procedure.name} - #{@procedure.code}"     
+    def initial_requirements_valid?
+      puts "validando el procedimiento: #{@procedure.name} - #{@procedure.code}"   
+
       procedure_factory = ProcedureFactory.new
-      proc = procedure_factory.build(@procedure.code)
-      @procedure.start! if proc.pre_requirements_valid?
+      m_procedure = procedure_factory.build(@procedure.code)
+      @procedure.start! if m_procedure.requirements_valid?(@procedure)
       @procedure.in_progress?
     end
 end

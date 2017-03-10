@@ -1,6 +1,3 @@
-require 'sabbatical_year'
-require 'other_procedure'
-
 class ProcedureFactory
   def build(code)
     case code

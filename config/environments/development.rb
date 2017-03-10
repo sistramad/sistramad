@@ -44,4 +44,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   config.assets.quiet = true
+
+  config.autoload_paths += %W(#{config.root}/app)
 end
