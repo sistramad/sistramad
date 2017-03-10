@@ -33,7 +33,7 @@ class AttachmentsController < ApplicationController
     end
 
     if @attachment.save && !inform
-      redirect_to "localhost:3000"
+      redirect_to request.referrer, notice: "Archivo subido exitosamente"
     else
       redirect_to inform_joint_plans_path , notice: "Informe subido exitosamente"
     end

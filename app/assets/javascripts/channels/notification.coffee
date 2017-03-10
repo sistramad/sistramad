@@ -7,5 +7,5 @@ App.notification = App.cable.subscriptions.create "NotificationChannel",
 
   received: (data) ->
     if data.action == "new_notification"
-      $("notification").html(data.message)
+      $("#notification").html(data.message)
 

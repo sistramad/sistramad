@@ -1,8 +1,8 @@
 <li class="dropdown notifications-menu">
   <!-- Menu toggle button -->
   <!--<a href="" class="dropdown-toggle" data-toggle="dropdown">-->
-    <%= link_to notifications_path, :id => "notification", :class => "dropdown-toggle fa fa-bell-o", "data-toggle"=>"dropdown", :remote => true, :data=>{type: 'script'} do%>
-      <span class="label label-warning" style="font-family: sans-serif"><%= current_user.notification_count %></span>
+    <%= link_to notifications_path, :id => "notifications", :class => "dropdown-toggle fa fa-bell-o", "data-toggle"=>"dropdown", :remote => true, :data=>{type: 'script'} do%>
+      <span id = "notification" class="label label-warning" style="font-family: sans-serif"><%= current_user.notification_count %></span>
     <% end %>
   <ul class="dropdown-menu">
     <li class="header">Tienes <%= current_user.notification_count %> notificaiones</li>
