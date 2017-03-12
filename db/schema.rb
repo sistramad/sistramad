@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309141206) do
+ActiveRecord::Schema.define(version: 20170312014020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20170309141206) do
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.integer  "procedure_id"
+    t.string   "code"
   end
 
   add_index "documents", ["procedure_id"], name: "index_documents_on_procedure_id", using: :btree

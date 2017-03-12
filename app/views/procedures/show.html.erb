@@ -21,7 +21,7 @@
         <tr>
           <th>Nombre:</th>
           <th>Código:</th>
-          <th>Archivo:</th> 
+          <th>Archivo adjunto:</th> 
           <th>Acciones:</th>
         </tr>
         </thead>
@@ -30,11 +30,11 @@
         <% @procedure.documents.each do |document|%>
             <tr>
               <td><%= document.name %></td>
-              <td>Código no encontrado</td>
+              <td><%= document.code %></td>
               <% if document.attachment_url %>
-                <td><%= link_to document.name , document.attachment_url %></td>
+                <td> <%= link_to document.name , document.attachment_url %> <i class="glyphicon glyphicon-ok"></i> </td>
               <% else %>
-                <td>Necesita cargar archivo</td>
+                <td> Sin archivo adjunto <i class="glyphicon glyphicon-warning-sign"></i> </td> 
               <% end %>
             
               <td>

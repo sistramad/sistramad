@@ -15,7 +15,9 @@
               <%= fields_for 'documents[]', document do |ff| %>
                 <%= ff.label :name %>
                 <%= ff.text_field :name %>            
-                <%= ff.file_field :attachment  %>                 
+                <%= ff.label :code %>
+                <%= ff.text_field :code %>   
+                <%= ff.file_field :attachment %>                 
               <% end %>
             </div>
           <% end %>

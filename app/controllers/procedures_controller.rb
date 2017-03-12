@@ -86,7 +86,7 @@ class ProceduresController < ApplicationController
     if initial_requirements_valid?
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
-      flash[:error] =  'La solicitud no ha podido completarse, asegurese de haber cargado todos los requerimientos necesarios'
+      flash[:error] =  'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
       render :show 
     end
   end
@@ -98,11 +98,11 @@ class ProceduresController < ApplicationController
     end
 
     def procedure_params
-      params.require(:procedure).permit(:name, :code, documents_attributes: [:id,:name, :attachment])
+      params.require(:procedure).permit(:name, :code, documents_attributes: [:id,:name,:code, :attachment])
     end
 
     def document_params (document)
-      document.permit(:name,:attachment)
+      document.permit(:name,:code,:attachment)
     end
 
     def set_procedure
@@ -110,9 +110,10 @@ class ProceduresController < ApplicationController
     end
 
     def documents_required
-      procedure_documents = DocumentMaster.where(procedure: "Año Sabatico", active: true)
+      procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true)
       procedure_documents.each do |doc|
-        @documents << Document.new(name: doc.name)      
+        puts doc.code
+        @documents << Document.new(name: doc.name, code: doc.code)      
       end
       procedure_documents
     end  

@@ -9,7 +9,8 @@ class SabbaticalYear < SystemProcedure
     @name = "Año Sabatico"
     @code = "T-AS100"
     @required_documents = { CI: "Cédula de Identidad", RIF: "Año Sabatico", CAC: "Carta de Aceptación", 
-                            UAS: "Ultimo ascenso", SCU: "Sintesis curricular", SBI: "Solvencia Biblioteca", SDAE: "Solvencia DAE"}
+                            UAS: "Ultimo ascenso", SCU: "Sintesis curricular", SBI: "Solvencia Biblioteca", 
+                            SDAE: "Solvencia DAE"}
   end
 
   def requirements_valid?(procedure)   
@@ -28,7 +29,7 @@ class SabbaticalYear < SystemProcedure
   end
 
   def request_day_allowed?
-    @procedure.created_at.between?(Date.new(Date.today.year,01,01) , Date.new(Date.today.year,03,31))
+    @procedure.created_at.between?(Date.new(Date.today.year,01,01) , Date.new(Date.today.year,03,31)) #Primeros 3 meses del año. 
   end
   
 end
