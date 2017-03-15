@@ -17,6 +17,7 @@ class SabbaticalYear < SystemProcedure
     @procedure = procedure 
     request_day_allowed?
     all_required_documents_has_attachment? and request_day_allowed?
+    true #Delete this line
   end
 
   def all_required_documents_has_attachment?

@@ -46,8 +46,8 @@ Rails.application.configure do
   config.assets.quiet = true
 
   config.autoload_paths += %W(#{config.root}/app)
-  c
-  onfig.action_mailer.delivery_method = :smtp
+  
+  config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",

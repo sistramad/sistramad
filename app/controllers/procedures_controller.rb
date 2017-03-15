@@ -174,10 +174,9 @@ class ProceduresController < ApplicationController
     end
 
     def initial_requirements_valid?
-      puts "validando el procedimiento: #{@procedure.name} - #{@procedure.code}"   
-
       procedure_factory = ProcedureFactory.new
       m_procedure = procedure_factory.build(@procedure.code)
+      
       @procedure.start! if m_procedure.requirements_valid?(@procedure)
       @procedure.in_progress?
     end
