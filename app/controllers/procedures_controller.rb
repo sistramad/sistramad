@@ -84,7 +84,8 @@ class ProceduresController < ApplicationController
   #GET /procedures/1
   def validate
     if initial_requirements_valid?
-      NotificationMailer.sample_email(@user).deliver_now
+      SendEmailJob.set(wait: 10.seconds).perform_later(@user)
+      #NotificationMailer.sample_email(@user).deliver_now
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] =  'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
@@ -176,7 +177,7 @@ class ProceduresController < ApplicationController
     def initial_requirements_valid?
       procedure_factory = ProcedureFactory.new
       m_procedure = procedure_factory.build(@procedure.code)
-      
+
       @procedure.start! if m_procedure.requirements_valid?(@procedure)
       @procedure.in_progress?
     end

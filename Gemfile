@@ -29,6 +29,10 @@ gem 'aasm'
 #guarda variables de entorno:
 gem 'figaro'
 
+# Backend para procesos en background
+gem 'delayed_job_active_record'
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -106,7 +110,7 @@ gem 'pry-rails', '~> 0.3.4', :group => :development
 gem 'route_translator', '~> 4.4'
 
 # para abrir correos desde local
-gem "letter_opener", :group => :development
+gem "letter_opener", :group => :production
 
 #para que no salgan las peticiones de precompilado assets en la consola
 gem 'quiet_assets', '~> 1.1', :group => :development

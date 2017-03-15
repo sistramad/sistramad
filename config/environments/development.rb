@@ -49,6 +49,7 @@ Rails.application.configure do
   
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
+=begin
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
@@ -57,4 +58,6 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
+  config.active_job.queue_adapter = :delayed_job
+=end  
 end

@@ -80,6 +80,7 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   
+  # Configuracion para mandar correos con Gmail en produccion
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
@@ -88,5 +89,8 @@ Rails.application.configure do
     :authentication       => "plain",
     :enable_starttls_auto => true
   }
+
+  # Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
+  config.active_job.queue_adapter = :delayed_job
 
 end
