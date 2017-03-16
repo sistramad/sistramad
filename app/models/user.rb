@@ -23,11 +23,15 @@ class User < ActiveRecord::Base
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :identification_document, :numericality => { only_integer: true, allow_nil: true }
+
   # Only allow letter, number, underscore and punctuation.
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
   scope :without_employee, -> { where.not(:id => User.joins(:employee).map(&:id)) }
 
+  def self.find_asuntos_profesorales_members
+    User.joins(:groups).where(groups: {name: "Direción de asuntos profesorales"})
+  end
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup #copia con el metodo .dup a conditions

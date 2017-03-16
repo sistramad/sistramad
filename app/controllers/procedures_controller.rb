@@ -85,7 +85,6 @@ class ProceduresController < ApplicationController
   def validate
     if initial_requirements_valid?
       SendEmailJob.set(wait: 10.seconds).perform_later(@user)
-      #NotificationMailer.sample_email(@user).deliver_now
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] =  'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
