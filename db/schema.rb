@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315161030) do
+ActiveRecord::Schema.define(version: 20170316013711) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 20170315161030) do
   add_index "faculties", ["acronym"], name: "index_faculties_on_acronym", unique: true, using: :btree
   add_index "faculties", ["name"], name: "index_faculties_on_name", unique: true, using: :btree
 
+  create_table "groups", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code"
+    t.string   "description"
+    t.boolean  "active"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.text     "content"
@@ -177,6 +186,16 @@ ActiveRecord::Schema.define(version: 20170315161030) do
 
   add_index "university_degrees", ["university_id"], name: "index_university_degrees_on_university_id", using: :btree
 
+  create_table "user_groups", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
+  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "first_name",                        default: "",  null: false
@@ -242,4 +261,6 @@ ActiveRecord::Schema.define(version: 20170315161030) do
   add_foreign_key "steps", "workflows"
   add_foreign_key "universities", "countries"
   add_foreign_key "university_degrees", "universities"
+  add_foreign_key "user_groups", "groups"
+  add_foreign_key "user_groups", "users"
 end

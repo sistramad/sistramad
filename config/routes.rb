@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :groups
+  resources :user_groups, except: [:show, :edit, :update]
   resources :documents
   resources :procedures do
     member do

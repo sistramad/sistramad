@@ -15,7 +15,8 @@ class User < ActiveRecord::Base
   has_many :workflows, through: :procedures
   has_many :steps, through: :workflows
   has_many :documents
-  
+  has_many :user_groups
+  has_many :groups, through: :user_groups
 
   mount_uploader :avatar, AvatarUploader
   crop_uploaded :avatar
@@ -26,6 +27,7 @@ class User < ActiveRecord::Base
   validates_format_of :username, with: /^[a-zA-Z0-9_\.]*$/, :multiline => true
 
   scope :without_employee, -> { where.not(:id => User.joins(:employee).map(&:id)) }
+
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup #copia con el metodo .dup a conditions
