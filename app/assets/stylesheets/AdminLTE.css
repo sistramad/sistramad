@@ -69,6 +69,12 @@ body {
 .layout-top-nav .main-footer {
   margin-left: 0;
 }
+
+#dates{
+
+    width: 37.4%;
+    margin-right: 5px;
+}
 @media (max-width: 767px) {
   .content-wrapper,
   .right-side,
@@ -147,9 +153,14 @@ body.hold-transition .main-header .logo {
   padding: 15px;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  width: 100%;
 }
+
+.not-active > a {
+    pointer-events: none;
+    color: darkgray;
+}
+
 /* H1 - H6 font */
 h1,
 h2,

@@ -1,10 +1,10 @@
 # encoding: utf-8
 
 class AvatarUploader < CarrierWave::Uploader::Base
-
   # Include RMagick or MiniMagick support:
-  include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
+  #include CarrierWave::RMagick
+
+  include CarrierWave::MiniMagick
 
   CarrierWave::SanitizedFile.sanitize_regexp = /[^[:word:]\.\-\+]/
 
@@ -61,5 +61,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   def filename
     super.chomp(File.extname(super)) + '.png' if original_filename.present?
   end
-
+  version :large do
+    resize_to_limit(600, 600)
+  end
 end

@@ -40,4 +40,8 @@ class User < ActiveRecord::Base
   def user_id
     current_user.id
   end
+
+  def crop_avatar
+    avatar.recreate_versions! if avatar_crop_x.present?
+  end
 end

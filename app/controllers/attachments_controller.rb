@@ -5,6 +5,7 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.new
     @documents = Document.where(typedoc: 1)
     @document = Document.new
+    @joint_plan = JointPlan.new
   end
 
   def index
@@ -17,6 +18,7 @@ class AttachmentsController < ApplicationController
 
     inform = false
     a = params.to_unsafe_h.slice(:attachments)
+    joint_plan_params = params.to_unsafe_h.slice(:joint_plan)
     a.each do |attachment|
       if attachment[1] != nil
         attach = attachment[1]
@@ -33,6 +35,8 @@ class AttachmentsController < ApplicationController
     end
 
     if @attachment.save && !inform
+      jointPlan = JointPlan.new(:name => 'Plan Conjunto',:user_id=>current_user.id,:status=>1,:begin_plan => joint_plan_params[:joint_plan][:begin_plan],:end_plan=>joint_plan_params[:joint_plan][:end_plan])
+      jointPlan.save
       redirect_to request.referrer, notice: "Archivo subido exitosamente"
     else
       redirect_to inform_joint_plans_path , notice: "Informe subido exitosamente"

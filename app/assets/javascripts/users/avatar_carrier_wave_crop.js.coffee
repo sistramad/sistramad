@@ -1,4 +1,4 @@
-###jQuery ->
+jQuery ->
   new CarrierWaveCropper()
 
 class CarrierWaveCropper
