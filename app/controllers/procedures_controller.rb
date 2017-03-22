@@ -6,7 +6,7 @@ class ProceduresController < ApplicationController
   # GET /procedures
   # GET /procedures.json
   def index
-    @procedures = @user.procedures
+    @procedures = @user.procedures.sort_by &:created_at 
   end
 
   # GET /procedures/1
@@ -75,7 +75,7 @@ class ProceduresController < ApplicationController
   # DELETE /procedures/1.json
   def destroy
     @procedure.destroy
-    respond_to do |format|
+      respond_to do |format|
       format.html { redirect_to procedures_path, notice: 'La solicitud fue cancelada con éxito.' }
       format.json { head :no_content }
     end
@@ -84,12 +84,18 @@ class ProceduresController < ApplicationController
   #GET /procedures/1
   def validate
     if initial_requirements_valid?
-      SendEmailJob.set(wait: 10.seconds).perform_later(@user)
+      @procedure.start! 
+      SendEmailJob.set(wait: 10.seconds).perform_later(@user, 'initial_validation_success')
+      send_email_to_notify_responsibles()
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
-      flash[:error] =  'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
+      flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
       render :show 
     end
+  end
+
+  def consult
+    
   end
 
   private
@@ -116,7 +122,7 @@ class ProceduresController < ApplicationController
         puts doc.code
         @documents << Document.new(name: doc.name, code: doc.code)      
       end
-      procedure_documents
+      return procedure_documents
     end  
 
     def create_documents
@@ -148,7 +154,7 @@ class ProceduresController < ApplicationController
       if workflow.save
         generate_steps(workflow)
       else
-
+        # Render son error notification
       end 
 
     end
@@ -175,9 +181,15 @@ class ProceduresController < ApplicationController
 
     def initial_requirements_valid?
       procedure_factory = ProcedureFactory.new
+      puts @procedure.code 
       m_procedure = procedure_factory.build(@procedure.code)
+      m_procedure.requirements_valid?(@procedure)
+    end
 
-      @procedure.start! if m_procedure.requirements_valid?(@procedure)
-      @procedure.in_progress?
+    def send_email_to_notify_responsibles()
+      responsible = User.find_asuntos_profesorales_members
+      responsible.each do |user|
+         SendEmailJob.set(wait: 10.seconds).perform_later(user, 'need_to_approve')
+      end
     end
 end
