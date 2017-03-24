@@ -332,7 +332,7 @@ document = Document.new(:name => 'Copia de Oficio de Designación como Docente')
 document.save!
 
 #Para Heroku
-formalities_master = FormalitiesMaster.new (:name => "Traslados",:description =>"Se entiende por traslado al procedimiento académico administrativo mediante el cual un miembro del personal Docente y de Investigación puede ser transferido, en forma Parcial o Total, transitoria o permanentemente, a otra Unidad Académica de Adscripción en (...)",:table_manager=> "ProfessorsTransfer",:isactive => true)
-
-formalities_master = FormalitiesMaster.new (:name => "Plan Conjunto",:description =>"Se entiende por Plan Conjunto a la combinación secuencial de un año sabático y una beca sueldo en la que el componente de Año Sabático queda incluido como parte del plan de formación al grado académico correspondiente y goza de todos los beneficios y sopor (...)",:table_manager=>"JointPlan",:isactive => true)
-
+formalities_master = FormalitiesMaster.new(:name => 'Traslados',:description =>'Se entiende por traslado al procedimiento académico administrativo mediante el cual un miembro del personal Docente y de Investigación puede ser transferido, en forma Parcial o Total, transitoria o permanentemente, a otra Unidad Académica de Adscripción en',:table_manager => 'ProfessorsTransfer',:isactive => true)
+formalities_master.save!
+formalities_master = FormalitiesMaster.new(:name => 'Plan Conjunto',:description =>'Se entiende por Plan Conjunto a la combinación secuencial de un año sabático y una beca sueldo en la que el componente de Año Sabático queda incluido como parte del plan de formación al grado académico correspondiente y goza de todos los beneficios y sopor',:table_manager =>'JointPlan',:isactive => true)
+formalities_master.save!
