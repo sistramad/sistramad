@@ -1,7 +1,8 @@
 class ProfessorsTransfersController < ApplicationController
   
-  #before_action :set_professors_transfer, only: [:show, :edit, :update, :destroy]
-  
+  before_action :set_professors_transfer, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
+  before_action :set_faculties, only: [:new,:edit]
   before_filter :authenticate_user!
   require 'rubygems'
   require 'zip'
@@ -10,21 +11,20 @@ class ProfessorsTransfersController < ApplicationController
   # GET /professors_transfers
   # GET /professors_transfers.json
   def index
-    @professors_transfers = ProfessorsTransfer.all
+    @professors_transfers = ProfessorsTransfer.where(status: 'IP').page(params[:page]).per(15)
   end
 
   # GET /professors_transfers/1
   # GET /professors_transfers/1.json
   def show
-    @professors_transfer = ProfessorsTransfer.find(params[:id])
   end
 
   # GET /professors_transfers/new
   def new
     @professors_transfer = ProfessorsTransfer.new
-    @documents = FormalitiesMaster.find_by_name(params[:name]).documents
-    @user =  @professors_transfer.user
-    @attachment = Attachment.new
+    #@documents = FormalitiesMaster.find_by_name(params[:name]).documents
+    #@user =  @professors_transfer.user
+    #@attachment = Attachment.new
   end
 
   # GET /professors_transfers/1/edit
@@ -52,7 +52,7 @@ class ProfessorsTransfersController < ApplicationController
   def update
     respond_to do |format|
       if @professors_transfer.update(professors_transfer_params)
-        format.html { redirect_to @professors_transfer, notice: 'Professors transfer was successfully updated.' }
+        format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
         format.json { render :show, status: :ok, location: @professors_transfer }
       else
         format.html { render :edit }
@@ -71,14 +71,54 @@ class ProfessorsTransfersController < ApplicationController
     end
   end
 
+  def download
+
+    documentos = FormalitiesDocument.select([:document_id]).where(formalities_master_id: 1)  
+    @submissions = Attachment.where(user_id: params[:user_id],document_id: documentos)
+
+    file_origin = Rails.root.to_s+'/public'
+    @user = User.find(params[:user_id])
+    filename = 'recaudos_'+@user.first_name.capitalize+'_'+
+    @user.middle_name.capitalize+'_'+@user.last_name.capitalize+'.zip'
+    file = Tempfile.new(filename)
+
+    begin
+      Zip::OutputStream.open(file) { |zos| }
+
+      #Añadiendo archivos al Zip
+      Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
+        @submissions.each do |filename|
+          zipfile.add(filename.file_file_name, file_origin + filename.file.url(:original, false))
+          end
+      end
+
+      zip_data = File.read(file.path)
+
+      send_data(zip_data, :type => 'application/zip', :filename => filename)
+    ensure
+      #Close and delete the temp file
+      file.close
+      file.unlink
+    end
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_professors_transfer
       @professors_transfer = ProfessorsTransfer.find(params[:id])
     end
 
+    def set_user
+       @user = current_user
+    end
+
+    def set_faculties
+       @faculties = current_user.employee.faculties
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def professors_transfer_params
-      params.require(:professors_transfer).permit(:name, :status, :user_id, :isactive, :processed, :isapproved)
+      params.require(:professors_transfer).permit(:faculty_from_id , :faculty_to_id )
     end
 end

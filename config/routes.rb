@@ -28,7 +28,7 @@ Rails.application.routes.draw do
 
     resources :professors_transfers do
       collection do
-        #post :download
+        post :download
         get :status
       end
     end

@@ -80,31 +80,33 @@
             </span>
               </a>
               <ul class="treeview-menu">
-                <% if ProfessorsTransfer.where(user_id: current_user.id).empty? %>
+                <% if (ProfessorsTransfer.where(user_id: current_user.id).empty? && (current_user.has_role? :docente)) %>
                       <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
                             <i class="fa fa-circle"></i>
                             Solicitar Nuevo Traslado
                       <% end %>
                       </li>
                 <% else %>
+                  <% if ProfessorsTransfer.exists?(user_id: current_user.id) %>
                     <% if ProfessorsTransfer.find_by_user_id(current_user.id).DR? %>
-                    <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
-                            <i class="fa fa-circle"></i>
-                            Enviar Recaudos Faltantes
-                      <% end %>
-                      </li>
+                        <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
+                                <i class="fa fa-circle"></i>
+                                Enviar Recaudos Faltantes
+                        <% end %>
+                          </li>
                     <% end %>
                     <li><%= link_to status_professors_transfers_path ,method: :get do%>
                         <i class="fa fa-circle"></i>
                         Estatus de Traslado
                     <% end %>
                     </li> 
-                <% end %> 
+                  <% end %> 
+                <% end %>  
                 <% if current_user.has_role? :decano %>
                     <li><%= link_to professors_transfers_path do%>
                         <i class="fa fa-circle-o"></i>
                         Ver Solicitudes de Traslados
-                    <% end %></li>
+                  <% end %></li>
                 <% end %>
               </ul>
             </li>

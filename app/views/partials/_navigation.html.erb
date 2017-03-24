@@ -20,6 +20,7 @@
       <ul class="nav navbar-nav">
       <% if !current_user.nil?  %>
         <% if current_user.has_role? :admin %>
+            <li><%= link_to t(:formalities_document), formalities_documents_path %></li>
             <li><%= link_to t(:reference), references_path %></li>
             <li><%= link_to t(:reference_lists), reference_lists_path %></li>
             <li><%= link_to t(:users), users_path %></li>
@@ -154,7 +155,8 @@
                 <a href="#" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Cerrar Sesión</a>
+                   <%= link_to destroy_user_session_path, method: :delete do %>
+                   <a class="btn btn-default btn-flat"> Cerrar sesión </a><% end %>
                 </div>
               </li>
             </ul>
@@ -168,8 +170,8 @@
                       <li>
                         <%= link_to destroy_user_session_path, method: :delete do %>
                         <i class="glyphicon glyphicon-log-out"></i> Cerrar sesión
-            <% end %>
-              </li>
+                        <% end %>
+                      </li>
               <% if current_user.has_role? :admin %>
                   <li class="divider"></li>
                   <li>

@@ -23,13 +23,15 @@
             <% end %>
 
             <div class="row">
-              <div class="form-inputs" class="col-xs-12 col-sm-12 col-md-9">
+              <div class="col-xs-12 col-sm-12 col-md-9">
     				<%= f.association :formalities_master, :label => t("formalities_master"), :placeholder => t("name") %>
     				<%= f.association :document, :label => t("requirements"), :placeholder => t("name") %>
   			  </div>
+  			  <center>
               <div class="col-md-12">
-                <%= f.button :submit, value: t('form.send'), class: 'form-control btn btn-info' %>
+                <%= f.button :submit, value: t('form.send'), class: ' btn btn-info' %>
               </div>
+              </center>
             </div>
         <% end %>
       </div>

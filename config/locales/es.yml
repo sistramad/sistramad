@@ -248,6 +248,7 @@ es:
       listing_faculties: 'Listado de facultades'
       listing_formalities_masters: 'Listado de Trámites'
       listing_formalities_documents: 'Listado de Recaudos para Trámite'
+      listing_professors_transfers: 'Listado de Traslados'
       new_user: 'Nuevo usuario'
       new_reference: 'Nueva referencia'
       new_reference_list: 'Nueva lista de referencia'
@@ -323,6 +324,8 @@ es:
   isactive: 'Activo'
   requirements: 'Recaudos'
   table_manager: 'Tabla Asociada'
+  faculty_from: 'Facultad de Orígen'
+  faculty_to: 'Facultad Destino'
   Editing_Formalities_Master: 'Editar Trámite'
   form:
     send: 'Enviar'

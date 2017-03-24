@@ -1,16 +1,40 @@
-<%= simple_form_for(@professors_transfer) do |f| %>
-  <%= f.error_notification %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t('professors_transfers') %></div>
+      <div class="panel-body">
+        <%= simple_form_for @professors_transfer, :html => {:multipart => true, :class => "form-horizontal"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input_sistramad
+                            } do |pf| %>
+            <%= pf.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :status %>
-    <%= f.association :user %>
-    <%= f.input :isactive %>
-    <%= f.input :processed %>
-    <%= f.input :isapproved %>
-  </div>
+            <% if @professors_transfer.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@professors_transfer.errors.count, "error") %> prohibited this user from being saved:</h2>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+                  <ul>
+                    <% @professors_transfer.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-9">
+              <%= pf.input :faculty_from_id, collection: @faculties ,:label => t("faculty_from") %>
+              <%= pf.input :faculty_to_id , collection: Faculty.where.not(id: @faculties.map(&:id)),:label => t("faculty_to")  %>
+          </div>
+          <center>
+              <div class="col-md-12">
+                <%= pf.button :submit, value: "Guardar", class: ' btn btn-info' %>
+              </div>
+          </center>
+            </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>

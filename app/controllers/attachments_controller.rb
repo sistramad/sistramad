@@ -55,9 +55,21 @@ class AttachmentsController < ApplicationController
       instance =FormalitiesMaster.find_by_name(params[:tramite][:name]).table_manager.classify.constantize
       if (!instance.exists?(user_id: current_user.id))
         @instance =  instance.new(user_id: current_user.id,name: params[:tramite][:name])
-        if ((params[:tramite][:docs].to_i == uploads) && (params[:tramite][:name]== "Traslados"))
-          @instance.procesar
-        end
+        if (params[:tramite][:name]== "Traslados")
+          if (params[:tramite][:docs].to_i == uploads) 
+            @instance.procesar
+          end
+          respond_to do |format|
+            if @instance.save
+                format.html { redirect_to edit_professors_transfer_path (@instance), 
+                  notice: 'Para terminar de Solicitar indique Facultad de Origen y Destino.' }
+                format.json { render :show, status: :created, location: @instance }
+            else
+               format.html { render :new }
+               format.json { render json: @instance.errors, status: :unprocessable_entity }
+            end
+          end
+        else
           respond_to do |format|
               if @instance.save
                   format.html { redirect_to @instance, notice: 'El Trámite se Solicito Correctamente.' }
@@ -67,13 +79,14 @@ class AttachmentsController < ApplicationController
                  format.json { render json: @instance.errors, status: :unprocessable_entity }
               end
           end
+        end  
       else
         @instance = instance.find_by(user_id: current_user.id)
         if ((params[:tramite][:docs].to_i == uploads) && (params[:tramite][:name]== "Traslados"))
           @instance.procesar
           @instance.save
         end
-        redirect_to @instance , notice: "SE Actualizo estado de Trámite"
+        redirect_to @instance , notice: "Se Actualizo estado de Trámite"
       end      
     else
       redirect_to informs_joint_plans_path , notice: "Informe subido exitosamente"
