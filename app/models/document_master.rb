@@ -1,2 +1,2 @@
-class DocumentMaster < ActiveRecord::Base
+class DocumentMaster < ApplicationRecord
 end

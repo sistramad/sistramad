@@ -23,8 +23,13 @@ class ProceduresController < ApplicationController
     @procedure.name = proce.name
     @procedure.code = proce.code
 
-    @documents = Array.new 
+    @documents = Array.new
     @documents = documents_required()
+
+    @documents.each do |obj| #need to be fix
+      puts obj
+    end
+    
   end
 
   # GET /procedures/1/edit
@@ -38,24 +43,26 @@ class ProceduresController < ApplicationController
 
     @documents = Array.new
     create_documents()
-   
-    respond_to do |format|
-      if @procedure.save
-        set_documents_to_procedure()
-        set_documents_to_user()
-        generate_workflow()
+
+    # respond_to do |format|
+    #   if @procedure.save
+    #     set_documents_to_procedure()
+    #     set_documents_to_user()
+    #     generate_workflow()
         
-        format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
-        format.json { render :show, status: :created, location: @procedure }
-      else
-        puts "Errors"
-        puts @procedure.errors.full_messages
-        @procedure.errors.full_messages
-        format.html { render :new }
-        format.json { render json: @procedure.errors, status: :unprocessable_entity }
-      end
-    end
+    #     format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
+    #     format.json { render :show, status: :created, location: @procedure }
+    #   else
+    #     puts "Errors"
+    #     puts @procedure.errors.full_messages
+    #     @procedure.errors.full_messages
+    #     format.html { render :new }
+    #     format.json { render json: @procedure.errors, status: :unprocessable_entity }
+    #   end
+    # end
+    redirect_to procedures_path
   end
+  
 
   # PATCH/PUT /procedures/1
   # PATCH/PUT /procedures/1.json
@@ -105,11 +112,11 @@ class ProceduresController < ApplicationController
     end
 
     def procedure_params
-      params.require(:procedure).permit(:name, :code, documents_attributes: [:id,:name,:code, :attachment])
+      params.require(:procedure).permit(:name, :code, documents: [:id,:name,:code, :attachment])
     end
 
-    def document_params (document)
-      document.permit(:name,:code,:attachment)
+    def document_params ()
+      parametros = params.permit(documents: [:name,:code, :attachment])
     end
 
     def set_procedure
@@ -119,20 +126,24 @@ class ProceduresController < ApplicationController
     def documents_required
       procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true)
       procedure_documents.each do |doc|
-        puts doc.code
         @documents << Document.new(name: doc.name, code: doc.code)      
       end
-      return procedure_documents
+      @documents 
     end  
 
     def create_documents
-      documents_param = params[:documents]   
-      documents_param.each do |param|     
-        document = param[1]
-        doc = Document.new(document_params(document))      
-        doc.save
-        @documents << doc    
-      end
+      puts "Creando Los documentos"
+
+      raise document_params.to_yaml
+      puts "fin parametros"
+
+      # documents_param = params.permit[:documents]
+      # documents_param.each do |param|     
+      #   document = param[1]
+      #      #doc = Document.new(document_params(document))      
+      #   #doc.save
+      #   #@documents << doc    
+      #end
     end
 
     def set_documents_to_procedure

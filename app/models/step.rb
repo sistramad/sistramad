@@ -1,3 +1,3 @@
-class Step < ActiveRecord::Base
+class Step < ApplicationRecord
   belongs_to :workflow
 end

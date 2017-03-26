@@ -11,8 +11,8 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.jcrop
 //= require jquery_ujs
+//= require jquery.Jcrop
 //= require app
 //= require bootstrap-sprockets
 

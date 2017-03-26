@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login, :avatar, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h
@@ -19,7 +19,6 @@ class User < ActiveRecord::Base
   has_many :groups, through: :user_groups
 
   mount_uploader :avatar, AvatarUploader
-  crop_uploaded :avatar
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :identification_document, :numericality => { only_integer: true, allow_nil: true }

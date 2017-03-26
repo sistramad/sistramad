@@ -1,4 +1,4 @@
-class Procedure < ActiveRecord::Base
+class Procedure < ApplicationRecord
   include AASM
   belongs_to :user
   validates :user_id, presence: true
