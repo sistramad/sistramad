@@ -133,8 +133,6 @@ class ProceduresController < ApplicationController
 
     def create_documents
       puts "Creando Los documentos"
-
-      raise document_params.to_yaml
       puts "fin parametros"
 
       # documents_param = params.permit[:documents]
