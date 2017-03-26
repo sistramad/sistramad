@@ -5,7 +5,6 @@
         <h3>Requisitos para iniciar solicitud de Año Sabatico</h1>
       </div>
       <div class="panel-body">
-
       
         <%= simple_form_for @procedure, html: { multipart: true } do |f| %>  
           <%= f.input :name, label: "Nombre del Tramite:" %>
@@ -17,7 +16,7 @@
                 <%= ff.text_field :name %>            
                 <%= ff.label :code %>
                 <%= ff.text_field :code %>   
-                <%= ff.file_field :attachment %>               
+                <%= ff.file_field :attachment %>                 
               <% end %>
             </div>
           <% end %>
