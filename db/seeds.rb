@@ -7,71 +7,71 @@
 #  Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-user = User.new(:username => 'test',
-                :email => 'test@test.com',
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!(:validate => false)
+# user = User.new(:username => 'test',
+#                 :email => 'test@test.com',
+#                 :password => '123456', #Devise.friendly_token[0,20]
+#                 :password_confirmation => '123456')
+# user.save!(:validate => false)
 
-user.add_role(:test)
+# user.add_role(:test)
 
-user = User.new(:username => 'joalbert',
-                :email => 'joalbertgonzalez@gmail.com',
-                :first_name => 'joalbert',
-                :middle_name => 'andrés',
-                :last_name => 'gonzález',
-                :identification_document => '18468784',
-                :birthday => "24/11/1988".to_date,
-                :password => '123456', #Devise.friendly_token[0,20]
-               :password_confirmation => '123456')
-user.save!
+# user = User.new(:username => 'joalbert',
+#                 :email => 'joalbertgonzalez@gmail.com',
+#                 :first_name => 'joalbert',
+#                 :middle_name => 'andrés',
+#                 :last_name => 'gonzález',
+#                 :identification_document => '18468784',
+#                 :birthday => "24/11/1988".to_date,
+#                 :password => '123456', #Devise.friendly_token[0,20]
+#                :password_confirmation => '123456')
+# user.save!
 
-user.add_role(:admin)
-user.add_role(:test)
+# user.add_role(:admin)
+# user.add_role(:test)
 
-user = User.new(:username => 'jesusdeabreu',
-                :email => 'jmanueldeabreum@gmail.com',
-                :first_name => 'jesus',
-                :middle_name => 'manuel',
-                :last_name => 'de abreu',
-                :genre => 'm',
-                :identification_document => '18241890',
-                :birthday => "21/12/1988".to_date,
-                :password => 'jmdam182', #Devise.friendly_token[0,20]
-                :password_confirmation => 'jmdam182')
-user.save!
-user.add_role(:admin)
-user.add_role(:test)
+# user = User.new(:username => 'jesusdeabreu',
+#                 :email => 'jmanueldeabreum@gmail.com',
+#                 :first_name => 'jesus',
+#                 :middle_name => 'manuel',
+#                 :last_name => 'de abreu',
+#                 :genre => 'm',
+#                 :identification_document => '18241890',
+#                 :birthday => "21/12/1988".to_date,
+#                 :password => 'jmdam182', #Devise.friendly_token[0,20]
+#                 :password_confirmation => 'jmdam182')
+# user.save!
+# user.add_role(:admin)
+# user.add_role(:test)
 
-user = User.new(:username => 'amatute',
-                :email => 'alexghoro@outlook.com',
-                :first_name => 'Alejandro',
-                :middle_name => '',
-                :last_name => 'Matute',
-                :genre => 'm',
-                :identification_document => '18347734',
-                :birthday => "15/08/1988".to_date,
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!
-user.add_role(:admin)
-user.add_role(:test)
+# user = User.new(:username => 'amatute',
+#                 :email => 'alexghoro@outlook.com',
+#                 :first_name => 'Alejandro',
+#                 :middle_name => '',
+#                 :last_name => 'Matute',
+#                 :genre => 'm',
+#                 :identification_document => '18347734',
+#                 :birthday => "15/08/1988".to_date,
+#                 :password => '123456', #Devise.friendly_token[0,20]
+#                 :password_confirmation => '123456')
+# user.save!
+# user.add_role(:admin)
+# user.add_role(:test)
 
 
 
-user = User.new(:username => 'lisset',
-                :email => 'liss612@gmail.com',
-                :first_name => 'lisset',
-                :middle_name => 'alexandra',
-                :last_name => 'orozco',
-                :genre => 'f',
-                :identification_document => '18686803',
-                :birthday => "06/10/1987".to_date,
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!
+# user = User.new(:username => 'lisset',
+#                 :email => 'liss612@gmail.com',
+#                 :first_name => 'lisset',
+#                 :middle_name => 'alexandra',
+#                 :last_name => 'orozco',
+#                 :genre => 'f',
+#                 :identification_document => '18686803',
+#                 :birthday => "06/10/1987".to_date,
+#                 :password => '123456', #Devise.friendly_token[0,20]
+#                 :password_confirmation => '123456')
+# user.save!
 
-user.add_role(:test)
+# user.add_role(:test)
 
 # reference_region = Reference.new(:name => 'region') #1
 # reference_region.save!
