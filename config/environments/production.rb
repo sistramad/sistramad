@@ -91,6 +91,6 @@ Rails.application.configure do
   }
 
   # Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
-  config.active_job.queue_adapter = :delayed_job
+  config.active_job.queue_adapter = :delayed_job # para ejecutar el job: $ bundle exec rake jobs:work
 
 end
