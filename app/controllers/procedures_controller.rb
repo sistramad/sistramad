@@ -38,7 +38,7 @@ class ProceduresController < ApplicationController
 
     @documents = Array.new
     create_documents()
-   
+
     respond_to do |format|
       if @procedure.save
         set_documents_to_procedure()
@@ -55,7 +55,7 @@ class ProceduresController < ApplicationController
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end
     end
-  end
+  end 
 
   # PATCH/PUT /procedures/1
   # PATCH/PUT /procedures/1.json
@@ -108,10 +108,6 @@ class ProceduresController < ApplicationController
       params.require(:procedure).permit(:name, :code, documents_attributes: [:id,:name,:code, :attachment])
     end
 
-    def document_params (document)
-      document.permit(:name,:code,:attachment)
-    end
-
     def set_procedure
       @procedure = Procedure.find(params[:id])
     end
@@ -119,19 +115,17 @@ class ProceduresController < ApplicationController
     def documents_required
       procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true)
       procedure_documents.each do |doc|
-        puts doc.code
         @documents << Document.new(name: doc.name, code: doc.code)      
       end
       return procedure_documents
     end  
 
     def create_documents
-      documents_param = params[:documents]   
-      documents_param.each do |param|     
-        document = param[1]
-        doc = Document.new(document_params(document))      
+      documents_param = params.permit(documents: [:name, :code, :attachment])
+      documents_param[:documents].each do |k, document_hash|
+        doc = Document.new(document_hash)
         doc.save
-        @documents << doc    
+        @documents << doc
       end
     end
 
@@ -181,7 +175,6 @@ class ProceduresController < ApplicationController
 
     def initial_requirements_valid?
       procedure_factory = ProcedureFactory.new
-      puts @procedure.code 
       m_procedure = procedure_factory.build(@procedure.code)
       m_procedure.requirements_valid?(@procedure)
     end
