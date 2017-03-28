@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :procedures do
     member do
       get :validate
+      get :consult
     end
   end
   

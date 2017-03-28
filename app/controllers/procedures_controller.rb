@@ -1,6 +1,6 @@
 
 class ProceduresController < ApplicationController
-  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate]
+  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
   before_action :set_user
 
   # GET /procedures
@@ -95,6 +95,7 @@ class ProceduresController < ApplicationController
   end
 
   def consult
+
     
   end
 
@@ -156,18 +157,27 @@ class ProceduresController < ApplicationController
     def generate_steps(workflow)
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "paso 1"
-      step.description = "descripcion del paso 1"
-      step.status = "created"
+      step.name = "Paso 1"
+      step.description = "Carga de recaudos."
+      step.status = "Completado"
       step.is_active = true
       step.workflow = workflow
       step.save
 
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "paso 2"
-      step.description = "descripcion del paso 2"
-      step.status = "created"
+      step.name = "Paso 2"
+      step.description = "Carga del plan de trabajo."
+      step.status = " - "
+      step.is_active = true
+      step.workflow = workflow
+      step.save
+
+      step = Step.new()
+      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
+      step.name = "Paso 3"
+      step.description = "descripcion del paso 3"
+      step.status = " - "
       step.is_active = true
       step.workflow = workflow
       step.save

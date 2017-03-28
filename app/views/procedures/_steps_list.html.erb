@@ -1,0 +1,35 @@
+<div class="well">
+  <div>
+    <p><strong> <h2 class="text-center">Lista de pasos para completar solicitud:</h2> </strong></p>
+  </div>
+  <br>
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Paso:</th>
+            <th>Descripcion:</th>
+            <th>Estado:</th>
+            <th>Responsable:</th>
+            <th>Fecha de Aprobacion:</th>  
+          </tr>
+        </thead>
+        <tbody>
+        <% @procedure.steps.each do |step|%>
+          <tr>
+            <td> <%= step.name%> </td>
+            <td> <%= step.description %> </td>
+            <td> <%= step.status %> </td>
+            <td> El Vogue </td>
+            <td>
+              <%= step.created_at.strftime("%d-%m-%Y")  %>
+            </td>
+          
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

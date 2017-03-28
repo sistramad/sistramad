@@ -15,19 +15,19 @@
       </thead>
       <tbody>
         <% @procedures.each do |procedure| %>
-            <tr>
-              <td class="text-center"><%= link_to procedure.name, procedure_path(procedure) %> </td>
-              <td class="text-center"><%= procedure.code %></td>
-              <td class="text-center"><%= procedure.created_at.strftime("%Y-%m-%d") %></td>
-              <td>
-                <div class="btn-toolbar">
-                  <div class="btn-group btn-group-xs">
-                    <%= link_to 'Consultar' ,procedure_path(procedure), class: 'btn btn-primary list' %>
-                    <%= link_to 'Cancelar', procedure_path(procedure), method: :delete, data: {confirm: '¿Está seguro de elimniar solicitud?'}, class: 'btn btn-danger list' %>
-                  </div>
+          <tr>
+            <td class="text-center"><%= link_to procedure.name, procedure_path(procedure) %> </td>
+            <td class="text-center"><%= procedure.code %></td>
+            <td class="text-center"><%= procedure.created_at.strftime("%Y-%m-%d") %></td>
+            <td>
+              <div class="btn-toolbar">
+                <div class="btn-group btn-group-xs">
+                  <%= link_to 'Consultar' ,procedure_path(procedure), class: 'btn btn-primary list' %>
+                  <%= link_to 'Cancelar', procedure_path(procedure), method: :delete, data: {confirm: '¿Está seguro de elimniar solicitud?'}, class: 'btn btn-danger list' %>
                 </div>
-              </td>
-            </tr>
+              </div>
+            </td>
+          </tr>
         <% end %>
       </tbody>
     </table>
