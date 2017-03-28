@@ -46,4 +46,15 @@ Rails.application.configure do
 
   config.action_cable.url = "ws://localhost:3000/cable"
 
+  config.action_mailer.delivery_method = :smtp
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+      :address              => "smtp.gmail.com",
+      :port                 => 587,
+      :user_name            => 'tgh.lfagundez@gmail.com',
+      :password             => 'luis23989',
+      :authentication       => "plain",
+      :enable_starttls_auto => true
+  }
+
 end

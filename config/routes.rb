@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         get :status
         post :decline
         post :accept
+        post :view
         get :inform
         get :inform_list
       end

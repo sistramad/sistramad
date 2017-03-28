@@ -76,6 +76,8 @@ class JointPlansController < ApplicationController
   end
 
   def accept
+
+      NotifierMailer.send_notification_email.deliver
       id = params[:id]
 
 
@@ -96,7 +98,19 @@ class JointPlansController < ApplicationController
 
   end
 
-  def inform
+  def view
+
+    @filename = Report.where(applicant_id: current_user.id)
+    @filename.each do |file|
+      file_origin = Rails.root.to_s+'/public'
+      pdf_filename = file_origin+file.file.url(:original,false)
+      send_file(pdf_filename, :filename => file.file_file_name, :disposition => 'inline', :type => file.file_content_type, :target => '_blank')
+    end
+
+
+  end
+
+  def informs
     @joint_plan = JointPlan.new
     @document = Document.find(16)
     @attachment = Attachment.new

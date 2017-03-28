@@ -20,6 +20,10 @@
         <div class="field" style="display: flex;margin-top: 35px">
           <%= button_to 'Aceptar', accept_joint_plans_path(id: id),:action => :'accept',:method => :post,:class => 'btn btn-success btn-lg'%>
           <%= button_to 'Declinar', decline_joint_plans_path(id: id),:action => :'decline',:method => :post,:class => 'btn btn-danger btn-lg',:style =>'margin-left:5px'%>
+          <%= button_to view_joint_plans_path,:formtarget => "_blank",:action => :'view',:method => :post,:class => 'btn btn-primary btn-lg',:style =>'margin-left:5px' do%>
+              <i class="glyphicon glyphicon-paperclip"></i>
+              Ver Oficio
+          <%end%>
 
 
         </div>
