@@ -84,10 +84,9 @@ class ProceduresController < ApplicationController
   #GET /procedures/1
   def validate
     if initial_requirements_valid?
-      @procedure.start! 
-      SendEmailJob.set(wait: 10.seconds).perform_later(@user, 'initial_validation_success')
-      send_email_to_notify_responsibles()
-      redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      update_procedure()
+      send_emails()
+      redirect_to procedure_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
       render :show 
@@ -95,7 +94,6 @@ class ProceduresController < ApplicationController
   end
 
   def consult
-
     
   end
 
@@ -157,28 +155,31 @@ class ProceduresController < ApplicationController
     def generate_steps(workflow)
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "Paso 1"
+      step.name = "1"
       step.description = "Carga de recaudos."
       step.status = "Completado"
       step.is_active = true
+      step.group = Group.find_by(name: 'Direción de asuntos profesorales')
       step.workflow = workflow
       step.save
 
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "Paso 2"
+      step.name = "2"
       step.description = "Carga del plan de trabajo."
       step.status = " - "
       step.is_active = true
+      step.group = Group.find_by(name: 'Consejo de departamento')
       step.workflow = workflow
       step.save
 
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "Paso 3"
-      step.description = "descripcion del paso 3"
+      step.name = "3"
+      step.description = "Generar constacia de aprobacion."
       step.status = " - "
       step.is_active = true
+       step.group = Group.find_by(name: 'Consejo de departamento')
       step.workflow = workflow
       step.save
     end
@@ -189,10 +190,22 @@ class ProceduresController < ApplicationController
       m_procedure.requirements_valid?(@procedure)
     end
 
+     def update_procedure
+      @procedure.start! 
+      step = @procedure.workflows.first.steps.where(name: "1")
+      step.update(approved_at: Time.now)
+    end
+
+    def send_emails()
+      SendEmailJob.set(wait: 10.seconds).perform_later(@user, 'initial_validation_success')
+      send_email_to_notify_responsibles()
+    end
+
     def send_email_to_notify_responsibles()
       responsible = User.find_asuntos_profesorales_members
       responsible.each do |user|
          SendEmailJob.set(wait: 10.seconds).perform_later(user, 'need_to_approve')
       end
     end
+   
 end

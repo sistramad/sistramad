@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h2>Consulta de Solicitud</h2>
+  <h2>Consulta de solicitud</h2>
 </div>
 
 <div class="well">  
@@ -10,7 +10,7 @@
   </h3>
   <h3>
    <strong>Fecha de creacion: </strong> 
-    <%= @procedure.created_at %>  
+    <%= @procedure.created_at.strftime("%d-%m-%Y") %>  
   </h3>
   <h3> <strong> Usuario: </strong> <%= @procedure.user.username %> </h3>  
   <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 

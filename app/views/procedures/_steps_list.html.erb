@@ -16,16 +16,17 @@
           </tr>
         </thead>
         <tbody>
-        <% @procedure.steps.each do |step|%>
+        <% @procedure.steps.order(:name).each do |step|%>
           <tr>
             <td> <%= step.name%> </td>
             <td> <%= step.description %> </td>
             <td> <%= step.status %> </td>
-            <td> El Vogue </td>
-            <td>
-              <%= step.created_at.strftime("%d-%m-%Y")  %>
-            </td>
-          
+            <td> <%= step.group.name %> </td>
+            <% if step.approved_at.nil? %>
+              <td> - </td>
+            <%else%>
+              <td> <%= step.approved_at.strftime("%d-%m-%Y") %> </td>
+            <%end%>
           </tr>
         <% end %>
         </tbody>

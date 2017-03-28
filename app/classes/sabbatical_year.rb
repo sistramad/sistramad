@@ -15,14 +15,8 @@ class SabbaticalYear < SystemProcedure
 
   def requirements_valid?(procedure)   
     @procedure = procedure 
-    request_day_allowed?
-
-    if all_required_documents_has_attachment? and request_day_allowed?
-      SendEmailJob.set(wait: 10.seconds).perform_later(@user)
-      return true
-    else
-      return true #Change to FALSE after testing
-    end
+    all_required_documents_has_attachment? and request_day_allowed?
+    true #TODO delete this line is just for testing
   end
 
   def all_required_documents_has_attachment?

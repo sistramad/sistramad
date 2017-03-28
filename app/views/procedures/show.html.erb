@@ -16,8 +16,10 @@
     <% end %>
   </div>
 </div>
- 
-<%= render 'requirement_list' %>
+
+<% if @procedure.in_draft? %>
+  <%= render 'requirement_list' %>
+<% end %>
 
 <%= link_to 'Edit', edit_procedure_path(@procedure) %> |
 <%= link_to 'Back', procedures_path %>

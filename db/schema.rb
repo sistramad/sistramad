@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170316013711) do
+ActiveRecord::Schema.define(version: 20170328023954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,9 @@ ActiveRecord::Schema.define(version: 20170316013711) do
     t.integer  "workflow_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "group_id"
+    t.datetime "approved_at"
+    t.index ["group_id"], name: "index_steps_on_group_id", using: :btree
     t.index ["workflow_id"], name: "index_steps_on_workflow_id", using: :btree
   end
 
@@ -243,6 +246,7 @@ ActiveRecord::Schema.define(version: 20170316013711) do
   add_foreign_key "documents", "users"
   add_foreign_key "employees", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
+  add_foreign_key "steps", "groups"
   add_foreign_key "steps", "workflows"
   add_foreign_key "universities", "countries"
   add_foreign_key "university_degrees", "universities"
