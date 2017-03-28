@@ -35,8 +35,8 @@ class ProceduresController < ApplicationController
   def create
     @procedure = Procedure.new(procedure_params)
     @procedure.user = @user
-
     @documents = Array.new
+
     create_documents()
 
     respond_to do |format|
@@ -44,6 +44,7 @@ class ProceduresController < ApplicationController
         set_documents_to_procedure()
         set_documents_to_user()
         generate_workflow()
+        #generate_steps()
         
         format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
