@@ -1,30 +1,52 @@
-<div class="row">
-  <div class="col-md-12">
-    <div class="panel panel-info panel-user">
-      <div class="panel-heading center">
-        <h3>Requisitos para iniciar solicitud de Año Sabatico</h1>
-      </div>
-      <div class="panel-body">
-      
-        <%= simple_form_for @procedure, html: { multipart: true } do |f| %>  
-          <%= f.input :name, label: "Nombre del Tramite:" %>
-          <%= f.input :code, label: "Código:" %>
-          <% @documents.each do |document| %>
-            <div>
-              <%= fields_for 'documents[]', document do |ff| %>
-                <%= ff.label :name %>
-                <%= ff.text_field :name %>            
-                <%= ff.label :code %>
-                <%= ff.text_field :code %>   
-                <%= ff.file_field :attachment %>                 
-              <% end %>
-            </div>
-          <% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="panel panel-info panel-user">
+        <div class="panel-heading center">
+          <h3>Requisitos para iniciar solicitud de Año Sabatico</h1>
+        </div>
+        <div class="panel-body">
+          <div>
+            <p> 
+              <h4>  
+                Debe subir al sistema cada documento que se indica a continuacion en los formatos permitidos,
+                el peso maximo de cada archivo no puede ser superior a 1MB.
+              </h4>
+            </p>
+            <p> 
+              <h4>  
+                Los formatos permitidos son: <strong> .pdf, .doc, .jpeg, .jpj, .png, .docx, .odt</strong>
+              <h4>
+            </p>
+          </div>
+        
+          <%= simple_form_for @procedure, :html => {:multipart => true, :class => "form-horizontal"} do |f| %> 
 
-            <%= f.button :submit %>
-        <% end %>
-    
+            <%= f.input :name, label: "Nombre del Tramite:", wrapper_html: { class: 'hidden'} %>
+            <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>
+
+            <% @documents.each do |document| %>
+              <div class = "well well-sm">
+                <%= simple_fields_for 'documents[]', document do |ff| %>
+                  <dl>
+                    <dt> <h3> <%=document.name %> </h3> </dt>
+                    <dd>  
+                      <%= ff.input :name, label: document.name, wrapper_html: { class: 'hidden'}%>
+                      <%= ff.input :code, label: document.code, wrapper_html: { class: 'hidden'}%>
+                      <%= ff.file_field :attachment %>
+                    </dd>
+                  </dl>
+                <% end %>
+              </div>
+            <% end %>
+
+              <%= f.button :submit %>
+          <% end %>
+      
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<%= javascript_include_tag "users/avatar_preview_text_input", 'data-turbolinks-track' => true %>
