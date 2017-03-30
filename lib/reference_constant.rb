@@ -15,6 +15,8 @@ module ReferenceConstant
 
   TYPE_EMPLOYEE = 5
 
+  
+
   module ScaleClassificationConst
     INSTRUCTOR = 30
     ASISTENTE = 31

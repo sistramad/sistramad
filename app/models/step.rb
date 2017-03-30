@@ -5,6 +5,7 @@ class Step < ApplicationRecord
 
   aasm column: 'state' do
     state :in_draft, :initial => true
+    
     state :in_draft, :in_progress, :approved , :disapproved
 
     event :start do

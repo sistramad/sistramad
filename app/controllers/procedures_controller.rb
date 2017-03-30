@@ -85,7 +85,7 @@ class ProceduresController < ApplicationController
   #GET /procedures/1
   def validate
     if initial_requirements_valid?
-      update_procedure()
+      update_procedure_elements()
       send_emails()
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
@@ -166,7 +166,9 @@ class ProceduresController < ApplicationController
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
       step.name = "2"
-      step.description = "Carga del plan de trabajo."
+      step.description = "Cargar plan de trabajo."
+      step.start!
+      step.approve!
       step.is_active = true
       step.group = Group.find_by(name: 'Consejo de departamento')
       step.workflow = workflow
@@ -176,8 +178,19 @@ class ProceduresController < ApplicationController
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
       step.name = "3"
       step.description = "Generar constacia de aprobacion."
+      step.start!
+      step.disapprove!
       step.is_active = true
        step.group = Group.find_by(name: 'Consejo de departamento')
+      step.workflow = workflow
+      step.save
+
+      step = Step.new()
+      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
+      step.name = "4"
+      step.description = "Descargar constacia de aprobacion."
+      step.is_active = true
+      step.group = Group.find_by(name: 'Consejo de departamento')
       step.workflow = workflow
       step.save
     end
@@ -188,9 +201,10 @@ class ProceduresController < ApplicationController
       m_procedure.requirements_valid?(@procedure)
     end
 
-     def update_procedure
+     def update_procedure_elements
       @procedure.start! 
-      step = @procedure.workflows.first.steps.where(name: "1")
+      step = @procedure.workflows.first.steps.where(description: "Evaluación de recaudos.").first
+      step.start!
       step.update(approved_at: Time.now)
     end
 
