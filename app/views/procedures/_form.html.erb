@@ -26,7 +26,7 @@
             <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>
 
             <% @documents.each do |document| %>
-              <div class = "well well-sm">
+              <div class = "well well-sm col-md-6">
                 <%= simple_fields_for 'documents[]', document do |ff| %>
                   <dl>
                     <dt> <h3> <%=document.name %> </h3> </dt>
@@ -39,8 +39,9 @@
                 <% end %>
               </div>
             <% end %>
-
-              <%= f.button :submit %>
+            <div class = "col-md-12 col-md-offset-5">
+              <%= f.button :submit , "Cargar Documentos" , class: 'btn btn-success btn-md list'%>
+            </div>
           <% end %>
       
         </div>
@@ -49,4 +50,3 @@
   </div>
 </div>
 
-<%= javascript_include_tag "users/avatar_preview_text_input", 'data-turbolinks-track' => true %>

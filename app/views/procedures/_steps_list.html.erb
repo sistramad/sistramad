@@ -18,12 +18,13 @@
         <tbody>
         <% @procedure.steps.order(:name).each do |step|%>
           <tr>
-            <td> <%= step.name%> </td>
-            <td> <%= step.description %> </td>
-            <td> <%= step.status %> </td>
-            <td> <%= step.group.name %> </td>
+            <h4> <td><%= step.name%> </td> </h4>
+            <h4> <td><%= step.description %> </td></h4>
+            <h4> <td><h4> <span class="label label-info"><%= step.status %> </span> </h4> </td> </h4>
+            <h4> <td><%= step.group.name %> </td></h4>
+            
             <% if step.approved_at.nil? %>
-              <td> - </td>
+              <td> </td>
             <%else%>
               <td> <%= step.approved_at.strftime("%d-%m-%Y") %> </td>
             <%end%>

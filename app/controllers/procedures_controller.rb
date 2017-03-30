@@ -87,7 +87,7 @@ class ProceduresController < ApplicationController
     if initial_requirements_valid?
       update_procedure()
       send_emails()
-      redirect_to procedure_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
       render :show 

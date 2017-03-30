@@ -1,17 +1,42 @@
-<div class="well text-center">  
-  <h3> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h3>      
-  <h3> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h3> 
-  <h3> <strong> Usuario: </strong> <%= @procedure.user.username %> </h3>  
-  <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 
-  <h3> <strong> Estado: </strong> <%= @procedure.state %>  </h3> 
+<div class="well">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2> <strong> Informacion de la solicitud: <strong></h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <h3> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h3>      
+        <h3> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h3> 
+        <h3> <strong> Usuario: </strong> <%= @procedure.user.username %> </h3>  
+        <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 
+        <h3> <strong> Estado: </strong> <%= @procedure.state %>  </h3> 
+      </div>
+      
+      <% if @procedure.in_draft? %>
+        <div class="col-md-6">
+          <br>
+          <ul>
+            <h4>
+              <p> <li> Debe cargar todos los recaudos.</li> </p>
+              <p> <li> La solicitud tienes que hacerse en los primeros 3 meses del año en curso. </li></p>
+              <p> <li> Recibirá un correo electronico con las instrucciones a seguir una vez su solicitud haya sido evaludada.</li> </p>
+              <p> <li> Recibirá un correo electronico con las instrucciones a seguir una vez su solicitud haya sido evaludada.</li> </p>
+            </h4>
+          </ul>
+        </div>
+      <% end %>
+
+    </div>
+    <br>
+  </div>
+
   <div class="text-center">
     <% if @procedure.in_draft? %>
       <%= link_to validate_procedure_path(@procedure), class: 'btn btn-success btn-lg list' do %>
-        <i class="glyphicon glyphicon-cog"></i> Confirmar Solicitud
-      <% end %>
-    <% else %>
-      <%= link_to consult_procedure_path(@procedure), class: 'btn btn-info btn-lg list' do %>
-        <i class="glyphicon glyphicon-cog"></i> Consultar Solicitud
+        <i class="glyphicon glyphicon-cog"></i> Solicitar evaluacion de recaudos
       <% end %>
     <% end %>
   </div>
@@ -19,7 +44,10 @@
 
 <% if @procedure.in_draft? %>
   <%= render 'requirement_list' %>
+<% else %>
+  <%= render 'steps_list' %>
 <% end %>
 
 <%= link_to 'Edit', edit_procedure_path(@procedure) %> |
 <%= link_to 'Back', procedures_path %>
+  
