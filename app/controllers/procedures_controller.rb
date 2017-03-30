@@ -157,8 +157,7 @@ class ProceduresController < ApplicationController
       step = Step.new()
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
       step.name = "1"
-      step.description = "Carga de recaudos."
-      step.status = "Completado"
+      step.description = "Evaluación de recaudos."
       step.is_active = true
       step.group = Group.find_by(name: 'Direción de asuntos profesorales')
       step.workflow = workflow
@@ -168,7 +167,6 @@ class ProceduresController < ApplicationController
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
       step.name = "2"
       step.description = "Carga del plan de trabajo."
-      step.status = " - "
       step.is_active = true
       step.group = Group.find_by(name: 'Consejo de departamento')
       step.workflow = workflow
@@ -178,7 +176,6 @@ class ProceduresController < ApplicationController
       #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
       step.name = "3"
       step.description = "Generar constacia de aprobacion."
-      step.status = " - "
       step.is_active = true
        step.group = Group.find_by(name: 'Consejo de departamento')
       step.workflow = workflow

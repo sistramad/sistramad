@@ -11,7 +11,7 @@
             <th>Paso:</th>
             <th>Descripcion:</th>
             <th>Estado:</th>
-            <th>Responsable:</th>
+            <th>Responsable de aprobación:</th>
             <th>Fecha de Aprobacion:</th>  
           </tr>
         </thead>
@@ -20,7 +20,7 @@
           <tr>
             <h4> <td><%= step.name%> </td> </h4>
             <h4> <td><%= step.description %> </td></h4>
-            <h4> <td><h4> <span class="label label-info"><%= step.status %> </span> </h4> </td> </h4>
+            <h4> <td><h4> <span class="label label-info"><%= state_translate(step.state) %> </span> </h4> </td> </h4>
             <h4> <td><%= step.group.name %> </td></h4>
             
             <% if step.approved_at.nil? %>

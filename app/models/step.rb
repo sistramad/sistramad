@@ -1,10 +1,15 @@
 class Step < ApplicationRecord
+  include AASM
   belongs_to :workflow
   belongs_to :group
 
   aasm column: 'state' do
-    state :in_progress, :initial => true
-    state :in_progress, :approved , :disapproved
+    state :in_draft, :initial => true
+    state :in_draft, :in_progress, :approved , :disapproved
+
+    event :start do
+      transitions :from => :in_draft, :to => :in_progress
+    end
 
     event :approve do
       transitions :from => [:in_progress, :disapproved], :to => :approved
@@ -15,9 +20,10 @@ class Step < ApplicationRecord
     end
 
     event :reset do
-      transitions :from => [:approved :disapproved], :to => :in_progress
+      transitions :from => [:in_progress,:approved,:disapproved], :to => :in_draft
     end
    
   end
+
 
 end
