@@ -16,12 +16,11 @@ class ProceduresController < ApplicationController
 
   def new
     code = params[:code]
-    procedure_factory = ProcedureFactory.new
-    proce = procedure_factory.build(code)
+    procedure = get_procedure_from_factory(code)
     
     @procedure = Procedure.new    
-    @procedure.name = proce.name
-    @procedure.code = proce.code
+    @procedure.name = procedure.name
+    @procedure.code = procedure.code
 
     @documents = Array.new 
     @documents = documents_required()
@@ -112,6 +111,11 @@ class ProceduresController < ApplicationController
       @procedure = Procedure.find(params[:id])
     end
 
+    def get_procedure_from_factory(code)
+      factory = ProcedureFactory.new
+      factory.build(code)
+    end
+
     def documents_required
       procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true)
       procedure_documents.each do |doc|
@@ -196,8 +200,7 @@ class ProceduresController < ApplicationController
     end
 
     def initial_requirements_valid?
-      procedure_factory = ProcedureFactory.new
-      m_procedure = procedure_factory.build(@procedure.code)
+      m_procedure = get_procedure_from_factory(@procedure.code)
       m_procedure.requirements_valid?(@procedure)
     end
 
