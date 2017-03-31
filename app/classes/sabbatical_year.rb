@@ -4,13 +4,41 @@ class SabbaticalYear < SystemProcedure
   @procedure
   @required_documents
 
-
   def initialize     
     @name = "Año Sabatico"
     @code = "T-AS100"
     @required_documents = { CI: "Cédula de Identidad", RIF: "Año Sabatico", CAC: "Carta de Aceptación", 
                             UAS: "Ultimo ascenso", SCU: "Sintesis curricular", SBI: "Solvencia Biblioteca", 
                             SDAE: "Solvencia DAE"}
+  end
+  
+  def generate_workflow(procedure)
+      puts procedure.name
+      workflow = Workflow.new()
+      #workflow = Workflow.new(name = "Workflow Año Sabatico", description = "Flujo principal del trámite para año Sabatico", is_active = true)
+      workflow.name = "Workflow Año Sabatico Test"
+      workflow.description = "Flujo principal del trámite para año Sabatico"
+      workflow.is_active = true
+      workflow.procedure = procedure
+      if workflow.save
+        generate_steps(workflow)
+      else
+        # Render son error notification
+      end 
+  end
+
+  def generate_steps(workflow)
+    create_step(workflow, "#1", "Evaluación de recaudos.","Direción de asuntos profesorales")
+    create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
+    create_step(workflow, "#3", "Generar constacia de aprobacion.","Consejo de departamento")
+    create_step(workflow, "#4", "Completar solicitud","Consejo de departamento")
+  end
+
+  def create_step(workflow, name, description, group_name)
+    step = Step.new(name: name, description: description, is_active: true)
+    step.group = Group.find_by(name: group_name)
+    step.workflow = workflow
+    step.save
   end
 
   def requirements_valid?(procedure)   

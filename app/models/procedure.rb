@@ -30,10 +30,5 @@ class Procedure < ApplicationRecord
 
   end
 
-  def requirements_approved?
-    puts name
-    puts code
-    true
-  end
   
 end

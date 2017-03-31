@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h2> <strong> Informacion de la solicitud: <strong></h1>
+        <h2> <strong> Información de la solicitud: <strong></h1>
       </div>
     </div>
 
@@ -12,7 +12,7 @@
         <h3> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h3> 
         <h3> <strong> Usuario: </strong> <%= @procedure.user.username %> </h3>  
         <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 
-        <h3> <strong> Estado: </strong> <%= @procedure.state %>  </h3> 
+        <h3> <strong> Estado: </strong> <%= @procedure.state %>  </h3>
       </div>
       
       <% if @procedure.in_draft? %>

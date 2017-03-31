@@ -15,12 +15,16 @@ class ProceduresController < ApplicationController
   end
 
   def new
+
     code = params[:code]
-    procedure = get_procedure_from_factory(code)
+    #procedure = get_procedure_from_factory(code)
+    procedure_concrete = get_procedure_from_factory(code)
     
     @procedure = Procedure.new    
-    @procedure.name = procedure.name
-    @procedure.code = procedure.code
+    # @procedure.name = procedure.name
+    # @procedure.code = procedure.code
+    @procedure.name = procedure_concrete.name
+    @procedure.code = procedure_concrete.code
 
     @documents = Array.new 
     @documents = documents_required()
@@ -34,16 +38,16 @@ class ProceduresController < ApplicationController
   def create
     @procedure = Procedure.new(procedure_params)
     @procedure.user = @user
+    procedure_concrete = get_procedure_from_factory(@procedure.code)
+    
     @documents = Array.new
-
     create_documents()
 
     respond_to do |format|
       if @procedure.save
         set_documents_to_procedure()
         set_documents_to_user()
-        generate_workflow()
-        #generate_steps()
+        procedure_concrete.generate_workflow(@procedure)
         
         format.html { redirect_to @procedure, notice: 'La solicitude del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
@@ -139,64 +143,6 @@ class ProceduresController < ApplicationController
     
     def set_documents_to_user
       @user.documents << @procedure.documents
-    end
-
-    def generate_workflow
-      workflow = Workflow.new()
-      #workflow = Workflow.new(name = "Workflow Año Sabatico", description = "Flujo principal del trámite para año Sabatico", is_active = true)
-      workflow.name = "Workflow Año Sabatico"
-      workflow.description = "Flujo principal del trámite para año Sabatico"
-      workflow.is_active = true
-      workflow.procedure = @procedure
-
-      if workflow.save
-        generate_steps(workflow)
-      else
-        # Render son error notification
-      end 
-
-    end
-
-    def generate_steps(workflow)
-      step = Step.new()
-      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "1"
-      step.description = "Evaluación de recaudos."
-      step.is_active = true
-      step.group = Group.find_by(name: 'Direción de asuntos profesorales')
-      step.workflow = workflow
-      step.save
-
-      step = Step.new()
-      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "2"
-      step.description = "Cargar plan de trabajo."
-      step.start!
-      step.approve!
-      step.is_active = true
-      step.group = Group.find_by(name: 'Consejo de departamento')
-      step.workflow = workflow
-      step.save
-
-      step = Step.new()
-      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "3"
-      step.description = "Generar constacia de aprobacion."
-      step.start!
-      step.disapprove!
-      step.is_active = true
-       step.group = Group.find_by(name: 'Consejo de departamento')
-      step.workflow = workflow
-      step.save
-
-      step = Step.new()
-      #step = Steps.new(name = "paso 1", description = "description paso 1", status = "created", is_active = true)
-      step.name = "4"
-      step.description = "Descargar constacia de aprobacion."
-      step.is_active = true
-      step.group = Group.find_by(name: 'Consejo de departamento')
-      step.workflow = workflow
-      step.save
     end
 
     def initial_requirements_valid?
