@@ -121,3 +121,5 @@ gem 'sidekiq'
 gem 'sinatra', github:"sinatra/sinatra"
 gem 'puma'
 gem 'rails_semantic_logger'
+gem 'mini_magick'
+gem 'chronic'
