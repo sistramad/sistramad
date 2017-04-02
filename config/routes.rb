@@ -9,9 +9,8 @@ Rails.application.routes.draw do
       get :consult
     end
   end
-  
-  
-  #get 'procedures/:id', to: 'procedures#validate', as: 'validate_procedure'
+
+  get "admin_procedures" => "admin_procedures#index"
 
   resources :university_degrees
   resources :universities

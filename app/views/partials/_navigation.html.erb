@@ -18,7 +18,7 @@
     <div id="menu" class="navbar-custom-menu">
       <ul class="nav navbar-nav">
         <% if current_user.has_role? :admin %>
-            <li><%= link_to 'Administracion de Tramites', procedures_path %></li>
+            <li><%= link_to 'Administrar Trámites', admin_procedures_path %></li>
             <li><%= link_to t(:reference), references_path %></li>
             <li><%= link_to t(:reference_lists), reference_lists_path %></li>
             <li><%= link_to t(:users), users_path %></li>

@@ -1,0 +1,2 @@
+module AdminProceduresHelper
+end

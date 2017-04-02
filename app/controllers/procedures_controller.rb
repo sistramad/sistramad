@@ -101,6 +101,7 @@ class ProceduresController < ApplicationController
     
   end
 
+
   private
 
     def set_user
