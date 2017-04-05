@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   end
 
   get "admin_procedures" => "admin_procedures#index"
+  get "/show_view" => "admin_procedures#show_step"
+
 
   resources :university_degrees
   resources :universities
