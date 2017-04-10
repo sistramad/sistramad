@@ -6,7 +6,7 @@ class ProceduresController < ApplicationController
   # GET /procedures
   # GET /procedures.json
   def index
-    @procedures = @user.procedures.sort_by &:created_at 
+    @procedures = @user.procedures.sort_by &:created_at  
   end
 
   # GET /procedures/1
@@ -85,6 +85,16 @@ class ProceduresController < ApplicationController
     end
   end
 
+  def show_step
+  end
+
+  def show_requirements
+    @procedure = Procedure.find(params[:procedure])
+    render 'requirements'
+  end
+
+
+
   #GET /procedures/1
   def validate
     if initial_requirements_valid?
@@ -122,7 +132,7 @@ class ProceduresController < ApplicationController
     end
 
     def documents_required
-      procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true)
+      procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true, initially_required: true)
       procedure_documents.each do |doc|
         @documents << Document.new(name: doc.name, code: doc.code)      
       end
@@ -169,5 +179,5 @@ class ProceduresController < ApplicationController
          SendEmailJob.set(wait: 10.seconds).perform_later(user, 'need_to_approve')
       end
     end
-   
+
 end

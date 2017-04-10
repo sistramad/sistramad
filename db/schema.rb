@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170405012343) do
+ActiveRecord::Schema.define(version: 20170405165007) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,8 +51,9 @@ ActiveRecord::Schema.define(version: 20170405012343) do
     t.string   "code"
     t.string   "procedure"
     t.boolean  "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.boolean  "initially_required"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -156,8 +157,6 @@ ActiveRecord::Schema.define(version: 20170405012343) do
     t.integer  "group_id"
     t.datetime "approved_at"
     t.text     "info"
-    t.string   "user_view"
-    t.string   "admin_view"
     t.index ["group_id"], name: "index_steps_on_group_id", using: :btree
     t.index ["workflow_id"], name: "index_steps_on_workflow_id", using: :btree
   end

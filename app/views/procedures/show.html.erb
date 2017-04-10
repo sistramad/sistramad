@@ -26,6 +26,8 @@
             </h4>
           </ul>
         </div>
+      <% elsif @procedure.in_progress? and @procedure.name == 'Año Sabatico'  %>
+        <%= render 'sabbatical_year_control_panel' %>  
       <% end %>
 
     </div>

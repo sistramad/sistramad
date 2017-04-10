@@ -28,17 +28,15 @@ class SabbaticalYear < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Evaluación de recaudos.","Direción de asuntos profesorales", "documents_list","documents_list")
-    create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento","upload_document","show_document")
-    create_step(workflow, "#3", "Generar constacia de aprobacion.","Consejo de departamento","show_document","upload_document")
-    create_step(workflow, "#4", "Completar solicitud","Consejo de departamento","#", "approve_procedure")
+    create_step(workflow, "#1", "Evaluación de recaudos.","Direción de asuntos profesorales")
+    create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
+    create_step(workflow, "#3", "Generar constacia de aprobacion.","Consejo de departamento")
+    create_step(workflow, "#4", "Completar solicitud","Consejo de departamento")
   end
 
-  def create_step(workflow, name, description, group_name, user_view, admin_view)
+  def create_step(workflow, name, description, group_name)
     step = Step.new(name: name, description: description, is_active: true)
     step.group = Group.find_by(name: group_name)
-    step.user_view = user_view
-    step.admin_view = admin_view 
     step.workflow = workflow
     step.save
   end

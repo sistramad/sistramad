@@ -7,12 +7,16 @@ Rails.application.routes.draw do
     member do
       get :validate
       get :consult
+      get :show_step
+      get :show_requirements
     end
   end
 
-  get "admin_procedures" => "admin_procedures#index"
-  get "/show_view" => "admin_procedures#show_step"
-
+  resources :admin_procedures do
+    member do
+      get :show_step
+    end
+  end
 
   resources :university_degrees
   resources :universities
