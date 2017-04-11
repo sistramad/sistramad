@@ -14,7 +14,9 @@ Rails.application.routes.draw do
 
   resources :admin_procedures do
     member do
-      get :show_step
+      get :show
+      get :show_initial_requirements
+      get :approve_initial_requirements
     end
   end
 

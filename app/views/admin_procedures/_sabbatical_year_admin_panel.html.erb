@@ -1,0 +1,24 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Acciones disponibles:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+          <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          
+          <% @document = @procedure.documents.find_by(name: "Plan de Trabajo")%>
+          <% unless @document.nil? %>
+            <p><li> <%= link_to "Aprobar plan de trabajo.", document_path(@document) %> </li></p>
+          <% end %>
+          
+          <p> <li> Descargar constancia de aprobación.</li> </p>
+          <p> <li> Conpletar solicitud.</li> </p>
+          <p> <li> Contactar responsables.</li> </p>
+        </h4>
+      </ul>
+    </div>
+  </div>
+</div>

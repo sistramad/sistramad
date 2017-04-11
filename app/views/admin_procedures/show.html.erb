@@ -13,7 +13,14 @@
         <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 
         <h3> <strong> Estado: </strong> <%= @procedure.state %>  </h3>
       </div>
+
+      <% if @procedure.in_progress? and @procedure.name == 'Año Sabatico'%>
+        <%= render 'sabbatical_year_admin_panel' %>  
+      <% end %>
+
     </div>
+
+ 
     <br>
   </div>
 </div>

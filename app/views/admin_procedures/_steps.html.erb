@@ -13,7 +13,6 @@
             <th>Estado:</th>
             <th>Responsable de aprobación:</th>
             <th>Fecha de Aprobacion:</th>  
-            <th>Acción:</th>
           </tr>
         </thead>
         <tbody>
@@ -35,18 +34,10 @@
             <h4> <td><%= step.group.name %> </td></h4>
             
             <% if step.approved_at.nil? %>
-              <td> </td>
+              <td>--  /  --  /  ----</td>
             <%else%>
               <td> <%= step.approved_at.strftime("%d-%m-%Y") %> </td>
             <%end%>
-
-            <td>
-              <div class="btn-toolbar">
-                <div class="btn-group btn-group-xs">
-                  <%= link_to 'Consultar' , show_step_admin_procedure_path(:step => step, :procedure => @procedure), class: 'btn btn-info list' %>
-                </div>
-              </div>
-            </td>
 
           </tr>
         <% end %>

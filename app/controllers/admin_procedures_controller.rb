@@ -9,26 +9,28 @@ class AdminProceduresController < ApplicationController
     
   end
 
-  def show_step
-    @step = Step.find(params[:step])
+  def show_initial_requirements
     @procedure = Procedure.find(params[:procedure])
-  
-    case @step.admin_view
-      when 'documents_list'  then 
-        render 'documents_list'
-      when 'show_document' then 
-        @document = @procedure.documents.where(name: "Plan de Trabajo")
-        render 'show_document'
-      when 'upload_document' then  
-        render 'upload_document'
-      when 'approve_procedure' then 
-        render 'approve_procedure'
+  end
+
+  def approve_initial_requirements
+    procedure = params[:id]
+    @procedure = Procedure.find(procedure)
+    step = @procedure.steps.find_by(name: params[:step])
+    if step.in_progress?
+      step.approve!
+      flash[:success] = 'Los documentos han sido aprovados con exito.'
+      render 'show'
+    else
+      flash[:error] = 'Imposible realizar ésta acción, los documentos ya fueron aprobados.'
+      render 'show_initial_requirements'
     end
   end
 
-  def set_procedure
-    @procedure = Procedure.find(params[:id])
-  end
+  private
 
+    def set_procedure
+      @procedure = Procedure.find(params[:id])
+    end
   
 end
