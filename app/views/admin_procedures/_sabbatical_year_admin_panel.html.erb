@@ -7,15 +7,18 @@
     <div class="panel-body">
       <ul>
         <h4>
-          <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <% step = @procedure.steps.find_by(name: "#1")%>
+          <% unless step.state != 'in_progress'%>
+            <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <% end %>
           
           <% @document = @procedure.documents.find_by(name: "Plan de Trabajo")%>
-          <% unless @document.nil? %>
+          <% unless @document.nil?%>
             <p><li> <%= link_to "Aprobar plan de trabajo.", document_path(@document) %> </li></p>
           <% end %>
           
           <p> <li> Descargar constancia de aprobación.</li> </p>
-          <p> <li> Conpletar solicitud.</li> </p>
+          <p> <li> Completar solicitud.</li> </p>
           <p> <li> Contactar responsables.</li> </p>
         </h4>
       </ul>
