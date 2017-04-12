@@ -13,7 +13,8 @@
           <% end %>
           
           <% @document = @procedure.documents.find_by(name: "Plan de Trabajo")%>
-          <% unless @document.nil?%>
+          <% step = @procedure.steps.find_by(name: "#2")%>
+          <% unless @document.nil? or step.state != 'in_progress'%>
             <p><li> <%= link_to "Aprobar plan de trabajo.", show_document_admin_procedure_path(document_code: 'PDT', step: '#2') %> </li></p>
           <% end %>
           
