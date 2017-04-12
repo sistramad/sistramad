@@ -14,7 +14,7 @@
           
           <% @document = @procedure.documents.find_by(name: "Plan de Trabajo")%>
           <% unless @document.nil?%>
-            <p><li> <%= link_to "Aprobar plan de trabajo.", document_path(@document) %> </li></p>
+            <p><li> <%= link_to "Aprobar plan de trabajo.", show_document_admin_procedure_path(document_code: 'PDT', step: '#2') %> </li></p>
           <% end %>
           
           <p> <li> Descargar constancia de aprobación.</li> </p>

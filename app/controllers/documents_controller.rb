@@ -1,5 +1,5 @@
 class DocumentsController < ApplicationController
-  before_action :set_document, only: [:edit, :update, :destroy ]
+  before_action :set_document, only: [:edit, :update, :destroy, :show]
 
  def index
     @documents = Document.all
@@ -33,6 +33,10 @@ class DocumentsController < ApplicationController
 
   def edit
 
+  end
+
+  def show
+   
   end
 
   def update
