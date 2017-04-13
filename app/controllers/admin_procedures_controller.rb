@@ -1,4 +1,5 @@
 class AdminProceduresController < ApplicationController
+  include EmailService
   before_action :set_procedure, only: [:show]
 
   def index
@@ -36,8 +37,6 @@ class AdminProceduresController < ApplicationController
   def approve_document
     @document = Document.find(params[:id])
     @procedure = Procedure.find(procedure)
-    puts @procedure.name
-    puts @document.name
   end
 
   def approve_step
@@ -45,6 +44,7 @@ class AdminProceduresController < ApplicationController
     step = Step.find(params[:step])
     if step.in_progress?
       step.approve!
+      send_email(@procedure.user, 'step_approved')
       flash[:success] = 'Paso aprobado con exito!.'
     else
       flash[:error] = 'Imposible realizar ésta acción.'

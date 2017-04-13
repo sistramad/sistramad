@@ -1,5 +1,6 @@
 
 class ProceduresController < ApplicationController
+  include EmailService
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
   before_action :set_user
 
@@ -99,10 +100,11 @@ class ProceduresController < ApplicationController
   def validate
     if initial_requirements_valid?
       update_procedure_elements()
-      send_emails()
+      send_email(@user, 'initial_validation_success')
+      send_emails(User.find_asuntos_profesorales_members,'need_to_approve')
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
-      flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios'
+      flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
       render :show 
     end
   end
@@ -166,18 +168,6 @@ class ProceduresController < ApplicationController
       step = @procedure.workflows.first.steps.where(description: "Evaluación de recaudos.").first
       step.start!
       step.update(approved_at: Time.now)
-    end
-
-    def send_emails()
-      SendEmailJob.set(wait: 10.seconds).perform_later(@user, 'initial_validation_success')
-      send_email_to_notify_responsibles()
-    end
-
-    def send_email_to_notify_responsibles()
-      responsible = User.find_asuntos_profesorales_members
-      responsible.each do |user|
-         SendEmailJob.set(wait: 10.seconds).perform_later(user, 'need_to_approve')
-      end
     end
 
 end
