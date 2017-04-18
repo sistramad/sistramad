@@ -10,14 +10,22 @@
           <p> <li> <%= link_to "Consultar recaudos.", show_requirements_procedure_path(procedure: @procedure) %> </li> </p>
           
           <% @document = @procedure.documents.find_by(name: "Plan de Trabajo")%>
-          <% if @document.nil? %>
+          <% step = @procedure.steps.find_by(name: "#2")%>
+          <% if @document.nil?%>
             <p><li> <%= link_to "Cargar plan de trabajo.", new_document_path(name: 'Plan de Trabajo', code: 'PDT', procedure: @procedure, step: '#2' ) %> </li></p>
-          <% else %>
+          <% elsif !step.approved? %>
             <p><li> <%= link_to "Editar plan de trabajo.", edit_document_path(@document) %> </li></p>
+          <% end %>
+
+          <% @document = @procedure.documents.find_by(name: "Constancia de antiguedad")%>
+          <% if @document.nil? %>
+            <p><li> <%= link_to "Cargar constancia de antiguedad.", new_document_path(name: 'Constancia de antiguedad', code: 'CDA', procedure: @procedure, step: '#3' ) %> </li></p>
+          <% else %>
+            <p><li> <%= link_to "Editar constancia de antiguedad.", edit_document_path(@document) %> </li></p>
           <% end %>
           
           <p> <li> Descargar constancia de aprobación.</li> </p>
-          <p> <li> Conpletar solicitud.</li> </p>
+          <p> <li> Completar solicitud.</li> </p>
           <p> <li> Contactar responsables.</li> </p>
         </h4>
       </ul>

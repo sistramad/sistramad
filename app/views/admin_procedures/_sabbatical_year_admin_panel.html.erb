@@ -17,6 +17,12 @@
           <% unless @document.nil? or step.state != 'in_progress'%>
             <p><li> <%= link_to "Aprobar plan de trabajo.", show_document_admin_procedure_path(document_code: 'PDT', step: '#2') %> </li></p>
           <% end %>
+
+          <% @document = @procedure.documents.find_by(code: "CDA")%>
+          <% step = @procedure.steps.find_by(name: "#3")%>
+          <% unless @document.nil? or step.state != 'in_progress'%>
+            <p><li> <%= link_to "Aprobar constancia de antiguedad.", show_document_admin_procedure_path(document_code: 'CDA', step: '#3') %> </li></p>
+          <% end %>
           
           <p> <li> Descargar constancia de aprobación.</li> </p>
           <p> <li> Completar solicitud.</li> </p>

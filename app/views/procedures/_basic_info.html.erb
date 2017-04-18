@@ -1,0 +1,16 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-info">
+    <div 
+      class="panel-heading">Datos básicos:
+    </div>
+    <div class="panel-body">
+      <h4> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h4>      
+      <h4> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h4> 
+      <h4> <strong> Usuario: </strong> <%= @procedure.user.username %> </h4>  
+      <h4> <strong> Nombre: </strong> <%= @procedure.user.first_name  %> <%= @procedure.user.last_name%> </h4>  
+      <h4> <strong> Correo: </strong> <%= @procedure.user.email %>  </h4> 
+      <h4> <strong> Estado: </strong> <%= @procedure.state %>  </h4>
+    </div>
+  </div>
+</div>

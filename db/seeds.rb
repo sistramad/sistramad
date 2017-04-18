@@ -247,8 +247,9 @@ DocumentMaster.new(name: "Solvencia Biblioteca", code: "SBI", procedure: "Año S
 DocumentMaster.new(name: "Solvencia DAE", code: "SDAE", procedure: "Año Sabatico", active: true , initially_required: true).save
 DocumentMaster.new(name: "Certificado de idioma", code: "CID", procedure: "Año Sabatico", active: true , initially_required: true).save
 DocumentMaster.new(name: "Plan de Trabajo", code: "PDT", procedure: "Año Sabatico", active: true , initially_required: false).save
+DocumentMaster.new(name: "Constancia de antiguedad", code: "CDA", procedure: "Año Sabatico", active: true , initially_required: false).save
+DocumentMaster.new(name: "Constancia de aprobación", code: "CDAP", procedure: "Año Sabatico", active: true , initially_required: false).save
 
 Group.new(name: "Direción de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
-
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
 

@@ -54,16 +54,15 @@ Rails.application.configure do
 
   # Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
   # para ejecutar el job: $ bundle exec rake jobs:work
-  
-  config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
-    :user_name            => ENV['gmail_username'],
-    :password             => ENV['gmail_password'],
-    :authentication       => "plain",
-    :enable_starttls_auto => true
-  }
+  # config.action_mailer.smtp_settings = {
+  #   :address              => "smtp.gmail.com",
+  #   :port                 => 587,
+  #   :user_name            => ENV['gmail_username'],
+  #   :password             => ENV['gmail_password'],
+  #   :authentication       => "plain",
+  #   :enable_starttls_auto => true
+  # }
 
-  config.active_job.queue_adapter = :delayed_job 
+  # config.active_job.queue_adapter = :delayed_job 
 
 end

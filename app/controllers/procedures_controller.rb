@@ -165,7 +165,7 @@ class ProceduresController < ApplicationController
 
      def update_procedure_elements
       @procedure.start! 
-      step = @procedure.workflows.first.steps.where(description: "Evaluación de recaudos.").first
+      step = @procedure.workflows.first.steps.where(description: "Carga y evaluación de recaudos.").first
       step.start!
       step.update(approved_at: Time.now)
     end

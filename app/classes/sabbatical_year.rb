@@ -15,7 +15,6 @@ class SabbaticalYear < SystemProcedure
   def generate_workflow(procedure)
       puts procedure.name
       workflow = Workflow.new()
-      #workflow = Workflow.new(name = "Workflow Año Sabatico", description = "Flujo principal del trámite para año Sabatico", is_active = true)
       workflow.name = "Workflow Año Sabatico Test"
       workflow.description = "Flujo principal del trámite para año Sabatico"
       workflow.is_active = true
@@ -28,10 +27,11 @@ class SabbaticalYear < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Evaluación de recaudos.","Direción de asuntos profesorales")
+    create_step(workflow, "#1", "Carga y evaluación de recaudos.","Direción de asuntos profesorales")
     create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
-    create_step(workflow, "#3", "Generar constacia de aprobacion.","Consejo de departamento")
-    create_step(workflow, "#4", "Completar solicitud","Consejo de departamento")
+    create_step(workflow, "#3", "Cargar constacia de antiguedad.","Consejo de departamento")
+    create_step(workflow, "#4", "Generar constacia de aprobacion.","Consejo de departamento")
+    create_step(workflow, "#5", "Completar solicitud","Consejo de departamento")
   end
 
   def create_step(workflow, name, description, group_name)
