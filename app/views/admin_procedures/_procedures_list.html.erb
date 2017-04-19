@@ -9,6 +9,8 @@
           <thead>
             <tr>
               <th>Usuario</th>
+              <th>Nombre</th>
+              <th>Cédula</th>
               <th>Correo electronico</th>
               <th>Solicitud </th>
               <th>Código de trámite</th>
@@ -20,6 +22,8 @@
             <% @procedures.each do |procedure| %>
               <tr>
                 <td><%= procedure.user.username %></td>
+                <td><%= procedure.user.first_name%> <%= procedure.user.last_name%></td>
+                <td><%= procedure.user.identification_document %></td>
                 <td><%= procedure.user.email %></td>
                 <td><%= procedure.name %> </td>
                 <td><%= procedure.code %></td>

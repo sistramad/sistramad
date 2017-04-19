@@ -1,6 +1,6 @@
 class AdminProceduresController < ApplicationController
   include EmailService
-  before_action :set_procedure, only: [:show]
+  before_action :set_procedure, only: [:show, :complete]
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -50,6 +50,24 @@ class AdminProceduresController < ApplicationController
       flash[:error] = 'Imposible realizar ésta acción.'
     end
     redirect_to  admin_procedure_path(@procedure)
+  end
+
+  def complete
+    steps_approved = true
+    @procedure.steps.each do |step|
+      unless step.approved?
+        steps_approved = false
+      end
+    end
+    
+    if @procedure.in_progress? and steps_approved
+      @procedure.approve!
+      flash[:success] = 'Solicitud aprobada con exito!'
+      redirect_to  admin_procedure_path(@procedure)
+    else
+      flash[:error] = 'Imposible completar la solicitud, todos los pasos deben estar aprobados.'
+      redirect_to  admin_procedure_path(@procedure) 
+    end 
   end
 
   private

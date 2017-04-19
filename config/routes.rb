@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :approve_document
       get :show_document
       get :approve_step
+      get :complete
     end
   end
 

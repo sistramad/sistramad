@@ -31,7 +31,6 @@ class SabbaticalYear < SystemProcedure
     create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
     create_step(workflow, "#3", "Cargar constacia de antiguedad.","Consejo de departamento")
     create_step(workflow, "#4", "Generar constacia de aprobacion.","Consejo de departamento")
-    create_step(workflow, "#5", "Completar solicitud","Consejo de departamento")
   end
 
   def create_step(workflow, name, description, group_name)

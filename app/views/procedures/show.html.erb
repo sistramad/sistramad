@@ -18,10 +18,18 @@
             </h4>
           </ul>
         </div>
-      <% elsif @procedure.in_progress? and @procedure.name == 'Año Sabatico'  %>
+      <% end %>
+      <% if @procedure.state != 'in_draft' and @procedure.name == 'Año Sabatico'%>
         <%= render 'sabbatical_year_control_panel' %>  
       <% end %>
+      
     </div>
+    <div class="row">
+        <% if @procedure.approved? %>
+          <%= render 'extra_requests'%>  
+        <% end %>
+    </div>
+
     <br>
   </div>
   <div class="text-center">
@@ -33,11 +41,7 @@
   </div>
 </div>
 
-<% if @procedure.approved? %>
-  <%= render 'extra_requests'%>  
-<% end %>
-  <%= render 'extra_requests'%>  
-<br>
+
 
 <% if @procedure.in_draft? %>
   <%= render 'requirement_list' %>

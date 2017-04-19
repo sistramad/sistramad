@@ -25,7 +25,8 @@ class DocumentsController < ApplicationController
 
     if @document.save
       update_step()
-      redirect_to procedure_path(@procedure), notice: "El documento #{@document.name} ha sido cargado."
+      #TODO redireccionar al path de admin_procedure si el usuario es Administrador!
+      redirect_to procedure_path(@procedure), notice: "El documento #{@document.name} ha sido cargado con exito."
     else
       render "new"
     end
@@ -64,11 +65,11 @@ private
 
   def update_step()
     step_name = params[:step]
-    puts step_name
     unless @procedure.nil?
       step = @procedure.workflows.first.steps.where(name: step_name).first
       unless step.nil?
         step.start!
+        step.update(approved_at: Time.now)
       end
     end
   end
