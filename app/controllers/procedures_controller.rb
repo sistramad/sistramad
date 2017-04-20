@@ -53,8 +53,6 @@ class ProceduresController < ApplicationController
         format.html { redirect_to @procedure, notice: 'La solicitud del trámite se ha creado exitosamente.' }
         format.json { render :show, status: :created, location: @procedure }
       else
-        puts "Errors"
-        puts @procedure.errors.full_messages
         @procedure.errors.full_messages
         format.html { render :new }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
