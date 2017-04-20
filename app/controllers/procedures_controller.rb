@@ -16,16 +16,16 @@ class ProceduresController < ApplicationController
   end
 
   def new
-
     code = params[:code]
-    #procedure = get_procedure_from_factory(code)
     procedure_concrete = get_procedure_from_factory(code)
     
     @procedure = Procedure.new    
-    # @procedure.name = procedure.name
-    # @procedure.code = procedure.code
     @procedure.name = procedure_concrete.name
     @procedure.code = procedure_concrete.code
+
+    if params.has_key?(:parent_id)
+      @procedure.parent = Procedure.find(params[:parent_id])
+    end
 
     @documents = Array.new 
     @documents = documents_required()
@@ -96,21 +96,14 @@ class ProceduresController < ApplicationController
 
   #GET /procedures/1
   def validate
-    if initial_requirements_valid?
-      update_procedure_elements()
-      send_email(@user, 'initial_validation_success')
-      send_emails(User.find_asuntos_profesorales_members,'need_to_approve')
+    procedure = get_procedure_from_factory(@procedure)
+    if procedure.initial_requirements_valid?   
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
       render :show 
     end
   end
-
-  def consult
-    
-  end
-
 
   private
 
@@ -119,7 +112,7 @@ class ProceduresController < ApplicationController
     end
 
     def procedure_params
-      params.require(:procedure).permit(:name, :code, documents_attributes: [:id,:name,:code, :attachment])
+      params.require(:procedure).permit(:name, :code, :parent_procedure_id, documents_attributes: [:id,:name,:code, :attachment])
     end
 
     def set_procedure
@@ -154,18 +147,6 @@ class ProceduresController < ApplicationController
     
     def set_documents_to_user
       @user.documents << @procedure.documents
-    end
-
-    def initial_requirements_valid?
-      m_procedure = get_procedure_from_factory(@procedure.code)
-      m_procedure.requirements_valid?(@procedure)
-    end
-
-     def update_procedure_elements
-      @procedure.start! 
-      step = @procedure.workflows.first.steps.where(description: "Carga y evaluación de recaudos.").first
-      step.start!
-      step.update(approved_at: Time.now)
     end
 
 end

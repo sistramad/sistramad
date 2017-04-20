@@ -28,8 +28,12 @@ class User < ApplicationRecord
 
   scope :without_employee, -> { where.not(:id => User.joins(:employee).map(&:id)) }
 
+  def self.find_group_members(code)
+    User.joins(:groups).where(groups: {code: code})
+  end
+
   def self.find_asuntos_profesorales_members
-    User.joins(:groups).where(groups: {name: "Direción de asuntos profesorales"})
+    User.joins(:groups).where(groups: {code: "D20"})
   end
 
   def self.find_for_database_authentication(warden_conditions)

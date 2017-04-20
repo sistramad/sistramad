@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <div class="panel panel-info panel-user">
         <div class="panel-heading center">
-          <h3>Requisitos para iniciar solicitud de Año Sabatico</h1>
+          <h3>Requisitos para iniciar trámite: <%= @procedure.name%> </h1>
         </div>
         <div class="panel-body">
           <div>
@@ -24,6 +24,7 @@
 
             <%= f.input :name, label: "Nombre del Tramite:", wrapper_html: { class: 'hidden'} %>
             <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>
+            <%= f.input :parent_procedure_id, label: "Parent:", wrapper_html: { class: 'hidden'} %>
 
             <% @documents.each do |document| %>
               <div class = "well well-sm col-md-6">

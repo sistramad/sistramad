@@ -14,8 +14,8 @@ class SabbaticalYear < SystemProcedure
   
   def generate_workflow(procedure)
       workflow = Workflow.new()
-      workflow.name = "Workflow Año Sabatico Test"
-      workflow.description = "Flujo principal del trámite para año Sabatico"
+      workflow.name = "Workflow Año Sabatico"
+      workflow.description = "Flujo principal del trámite Año Sabatico"
       workflow.is_active = true
       workflow.procedure = procedure
       if workflow.save

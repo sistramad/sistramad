@@ -8,8 +8,10 @@
       <ul>
         <h4>
           <p>
-            <li> 
-            <%= link_to '#', class: 'btn btn-primary btn-md list' do %>
+            <li>
+
+
+            <%= link_to new_procedure_path(code: 'T-AS101', parent_id: @procedure), class: 'btn btn-primary btn-md list' do %>
               <i class="glyphicon glyphicon-plus"></i> Solicitud de modificación del Plan de Trabajo
             <% end %>
             </li>
