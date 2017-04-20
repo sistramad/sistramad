@@ -8,6 +8,10 @@ class Procedure < ApplicationRecord
   has_many :documents , dependent: :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true, :reject_if => :all_blank
 
+  belongs_to :parent, :class_name => "Procedure", :foreign_key => "procedure_parent_id"
+  has_many :sub_procedure, :class_name => "Procedure", :foreign_key => "procedure_parent_id"
+
+
   aasm column: 'state' do
     state :in_draft, :initial => true
     state :in_progress, :approved , :completed, :closed
