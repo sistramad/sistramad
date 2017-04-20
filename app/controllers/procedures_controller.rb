@@ -84,9 +84,6 @@ class ProceduresController < ApplicationController
     end
   end
 
-  def show_step
-  end
-
   def show_requirements
     @procedure = Procedure.find(params[:procedure])
     render 'requirements'
@@ -96,8 +93,10 @@ class ProceduresController < ApplicationController
 
   #GET /procedures/1
   def validate
-    procedure = get_procedure_from_factory(@procedure)
-    if procedure.initial_requirements_valid?   
+    procedure = get_procedure_from_factory(@procedure.code)
+    procedure.procedure = @procedure
+    
+    if procedure.initial_requirements_valid?  
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'

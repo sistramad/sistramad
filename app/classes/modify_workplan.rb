@@ -1,7 +1,9 @@
 class ModifyWorkplan < SystemProcedure
+  include EmailService
   attr_accessor :name
   attr_accessor :code
-  @procedure
+  
+  attr_accessor :procedure
   @required_documents
 
   def initialize     
@@ -35,11 +37,10 @@ class ModifyWorkplan < SystemProcedure
     step.save
   end
 
-  def initial_requirements_valid?(procedure)   
-    @procedure = procedure 
+  def initial_requirements_valid?()
     if all_required_documents_has_attachment?
-      update_procedure_elements(@procedure)
-      send_email(@procedure.user, 'initial_validation_success')
+      update_procedure_elements()
+      send_email(self.procedure.user, 'initial_validation_success')
       users = User.find_group_members('C10')
       send_emails(users,'need_to_approve')
       return true
@@ -49,21 +50,21 @@ class ModifyWorkplan < SystemProcedure
   end
 
   def all_required_documents_has_attachment?
-    @procedure.documents.each do |doc|
+    self.procedure.documents.each do |doc|
       if !doc.attachment.present? and @required_documents.has_value?(doc.name)
         return false
       end 
     end
   end
 
-  def update_procedure_elements(procedure)
-    procedure.start! 
-    start_step(procedure,'#1')
-    start_step(procedure,'#2')
+  def update_procedure_elements()
+    self.procedure.start! 
+    start_step('#1')
+    start_step('#2')
   end
 
-  def start_step(procedure, name)
-    step = procedure.workflows.first.steps.where(name: name).first
+  def start_step(name)
+    step = self.procedure.workflows.first.steps.where(name: name).first
     step.start!
     step.update(approved_at: Time.now)
   end 
