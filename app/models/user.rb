@@ -32,10 +32,6 @@ class User < ApplicationRecord
     User.joins(:groups).where(groups: {code: code})
   end
 
-  def self.find_asuntos_profesorales_members
-    User.joins(:groups).where(groups: {code: "D20"})
-  end
-
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup #copia con el metodo .dup a conditions
     if login = conditions.delete(:login) #se elimina del hash conditions el login y se asigna el valor a login

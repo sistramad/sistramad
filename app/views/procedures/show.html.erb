@@ -6,30 +6,26 @@
       </div>
     </div>
     <div class="row">
-      <%= render 'basic_info'%>
-      <% if @procedure.in_draft? %>
-        <div class="col-md-6">
-          <br>
-          <ul>
-            <h4>
-              <p> <li> Debe cargar todos los recaudos.</li> </p>
-              <p> <li> La solicitud tienes que hacerse en los primeros 3 meses del año en curso. </li></p>
-              <p> <li> Recibirá un correo electronico con las instrucciones a seguir una vez su solicitud haya sido evaludada.</li> </p>
-            </h4>
-          </ul>
-        </div>
+      <%= render 'basic_info' %>
+
+      <% if @procedure.in_draft? and @procedure.code == 'T-AS100' %>
+        <%= render 'sabbatical_year_tips'%>
       <% end %>
-      <% if @procedure.state != 'in_draft' and @procedure.name == 'Año Sabatico'%>
+
+      <% if !@procedure.in_draft? and @procedure.code == 'T-AS100'%>
         <%= render 'sabbatical_year_control_panel' %>  
       <% end %>
-      
+
+      <% if @procedure.code == 'T-AS101'%>
+        <%= render 'modify_workplan_control_panel' %>  
+      <% end %>
+
     </div>
     <div class="row">
         <% if @procedure.approved? %>
           <%= render 'extra_requests'%>  
         <% end %>
     </div>
-
     <br>
   </div>
   <div class="text-center">

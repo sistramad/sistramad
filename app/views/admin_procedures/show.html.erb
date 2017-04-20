@@ -6,16 +6,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-6">
-        <h3> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h3>      
-        <h3> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h3> 
-        <h3> <strong> Usuario: </strong> <%= @procedure.user.username %> </h3>  
-        <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 
-        <h3> <strong> Estado: </strong> <%= @procedure.state %>  </h3>
-      </div>
-
-      <% if @procedure.in_progress? and @procedure.name == 'Año Sabatico'%>
-        <%= render 'sabbatical_year_admin_panel' %>  
+      <%= render 'procedures/basic_info'%>
+      <% if @procedure.in_progress? and @procedure.code == 'T-AS100' %>
+        <%= render 'sabbatical_year_admin_panel'%>
+      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS101'%>
+        <%= render 'modify_workplan_admin_panel'%>
       <% end %>
 
     </div>

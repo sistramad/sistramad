@@ -1,9 +1,10 @@
-class ModifyWorkplan < SystemProcedure
+class ModifyWorkplan
   include EmailService
+  
   attr_accessor :name
   attr_accessor :code
-  
   attr_accessor :procedure
+
   @required_documents
 
   def initialize     

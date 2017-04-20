@@ -1,7 +1,10 @@
-class SabbaticalYear < SystemProcedure
+class SabbaticalYear
+  include EmailService
+
   attr_accessor :name
   attr_accessor :code
-  @procedure
+  attr_accessor :procedure
+
   @required_documents
 
   def initialize     
@@ -39,23 +42,43 @@ class SabbaticalYear < SystemProcedure
     step.save
   end
 
-  def requirements_valid?(procedure)   
-    @procedure = procedure 
-    all_required_documents_has_attachment? and request_day_allowed?
-    true #TODO delete this line is just for testing
+  def initial_requirements_valid?() 
+
+    if all_required_documents_has_attachment? and request_day_allowed?
+      update_procedure_elements()
+      send_email(self.procedure.user, 'initial_validation_success')
+      users = User.find_group_members('D20')
+      send_emails(users,'need_to_approve')
+      return true
+    else
+      return false 
+    end
   end
 
   def all_required_documents_has_attachment?
+    return true #TODO CHANGE TO FALSE THIS IS JUST FOR TESTING
     @procedure.documents.each do |doc|
       if !doc.attachment.present? and @required_documents.has_value?(doc.name)
         return false
       end 
     end
-    true
   end
 
   def request_day_allowed?
-    @procedure.created_at.between?(Date.new(Date.today.year,01,01) , Date.new(Date.today.year,03,31)) #Primeros 3 meses del año. 
+    #Primeros 3 meses del año: 
+    @procedure.created_at.between?(Date.new(Date.today.year,01,01) , Date.new(Date.today.year,03,31)) 
+    return true #TODO CHANGE TO FALSE THIS IS JUST FOR TESTING
   end
+
+  def update_procedure_elements()
+    self.procedure.start! 
+    start_step('#1')
+  end
+
+  def start_step(name)
+    step = self.procedure.workflows.first.steps.where(name: name).first
+    step.start!
+    step.update(approved_at: Time.now)
+  end 
   
 end
