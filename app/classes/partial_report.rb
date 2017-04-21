@@ -1,6 +1,6 @@
-class ModifyWorkplan
+class PartialReport
   include EmailService
-  
+
   attr_accessor :name
   attr_accessor :code
   attr_accessor :procedure
@@ -8,15 +8,14 @@ class ModifyWorkplan
   @required_documents
 
   def initialize     
-    @name = "Modificación de Plan de Trabajo"
-    @code = "T-AS101"
-    @required_documents = { PDTM: "Plan de Trabajo Modificado", DPDM: "Documento Probatorio de Modificación"}
+    @name = "Aprobación de Informe Parcial de Actividades"
+    @code = "T-AS102"
   end
   
   def generate_workflow(procedure)
     workflow = Workflow.new()
-    workflow.name = "Modificación de Plan de Trabajo"
-    workflow.description = "Flujo principal del trámite Modificación de Plan de Trabajo"
+    workflow.name = "Aprobación de Informe Parcial de Actividades"
+    workflow.description = "Flujo principal del trámite Aprobación de Informe Parcial de Actividades"
     workflow.is_active = true
     workflow.procedure = procedure
     if workflow.save
@@ -27,9 +26,8 @@ class ModifyWorkplan
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Evaluación del plan de trabajo modificado.","Consejo de departamento")
-    create_step(workflow, "#2", "Evaluación del pocumento probatorio de modificación.","Consejo de departamento")
-    create_step(workflow, "#3", "Generar documento de aprobación de la modificación.","Consejo de departamento")
+    create_step(workflow, "#1", "Evaluación del Informe Parcial.","Consejo de departamento")
+    create_step(workflow, "#2", "Generar constacia de aprobación del Informe Parcial.","Consejo de departamento")
   end
 
   def create_step(workflow, name, description, group_name)
@@ -62,7 +60,6 @@ class ModifyWorkplan
   def update_procedure_elements()
     self.procedure.start! 
     start_step('#1')
-    start_step('#2')
   end
 
   def start_step(name)
@@ -79,7 +76,6 @@ class ModifyWorkplan
   end
 
   def approve_initial_requirements?
-    approve_step?('#1') and approve_step?('#2')
+    approve_step?('#1')
   end
-  
 end

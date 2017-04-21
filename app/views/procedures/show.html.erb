@@ -20,6 +20,15 @@
         <%= render 'modify_workplan_control_panel' %>  
       <% end %>
 
+      <% if @procedure.code == 'T-AS102'%>
+        <%= render 'modify_workplan_control_panel' %>  
+      <% end %>
+
+      <% if @procedure.code == 'T-AS103'%>
+        <%= render 'modify_workplan_control_panel' %>  
+      <% end %>
+
+
     </div>
     <div class="row">
         <% if @procedure.approved? and @procedure.code == 'T-AS100' %>

@@ -257,6 +257,14 @@ DocumentMaster.new(name: "Plan de Trabajo Modificado", code: "PDTM", procedure: 
 DocumentMaster.new(name: "Documento Probatorio de Modificación", code: "DPDM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
 DocumentMaster.new(name: "Aprobación de Modificación del Plan de Trabajo", code: "AMPDT", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: false).save
 
+#Informe Parcial de Actividades
+DocumentMaster.new(name: "Informe Parcial", code: "IP", procedure: "Aprobación de Informe Parcial de Actividades", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación del Informe Parcial", code: "AIP", procedure: "Aprobación de Informe Parcial de Actividades", active: true , initially_required: false).save
+
+#Informe Final de Actividades
+DocumentMaster.new(name: "Informe Final", code: "IF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación del Informe Final", code: "AIP", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: false).save
+
 #Carga grupos de usuarios
 Group.new(name: "Direción de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
