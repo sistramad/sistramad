@@ -5,5 +5,35 @@
       class="panel-heading">Acciones disponibles:
     </div>
 
+    <div class="panel-body">
+      <ul>
+        <h4>
+          <% step = @procedure.steps.find_by(name: "#1")%>
+          <% if step.in_progress?%>
+            <p> <li> <%= link_to "Aprobar de recaudos", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <% end %>
+      
+          <% @document = find_document_by_code(@procedure, "AMPDT")%>
+          <% if @document.nil? %>
+            <p><li> <%= link_to "Cargar documento de aprobación de la modificación.", new_document_path(name: 'Aprobación de Modificación del Plan de Trabajo', code: 'AMPDT', procedure: @procedure, step: '#3') %> </li></p>
+          <% else %>
+            <p><li> <%= link_to "Editar documento de aprobación de la modificación.", edit_document_path(@document) %> </li></p>
+          <% end %>
+
+          <% @document = find_document_by_code(@procedure, "AMPDT")%>
+            <% step = @procedure.steps.find_by(name: "#3")%>
+            <% unless @document.nil? or step.state != 'in_progress'%>
+              <p><li> <%= link_to "Aprobar documento de aprobación.", show_document_admin_procedure_path(document_code: 'AMPDT', step: '#3') %> </li></p>
+          <% end %>
+
+          <% if @procedure.in_progress? %>
+            <p><li> <%= link_to "Aprobar solicitud.", complete_admin_procedure_path(@procedure) %> </li></p>
+          <% end %>
+
+        </h4>
+      </ul>
+    </div>
+
+
   </div>
 </div>

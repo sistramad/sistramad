@@ -27,8 +27,9 @@ class ModifyWorkplan
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Carga y evaluación de Plan de Trabajo Modificado.","Consejo de departamento")
-    create_step(workflow, "#2", "Carga y evaluación del Documento Probatorio de Modificación.","Consejo de departamento")
+    create_step(workflow, "#1", "Evaluación del plan de trabajo modificado.","Consejo de departamento")
+    create_step(workflow, "#2", "Evaluación del pocumento probatorio de modificación.","Consejo de departamento")
+    create_step(workflow, "#3", "Generar documento de aprobación de la modificación.","Consejo de departamento")
   end
 
   def create_step(workflow, name, description, group_name)
@@ -65,9 +66,21 @@ class ModifyWorkplan
   end
 
   def start_step(name)
+    puts ' clase start_step '
     step = self.procedure.workflows.first.steps.where(name: name).first
     step.start!
     step.update(approved_at: Time.now)
-  end 
+  end
+
+  def approve_step(name)
+    step = self.procedure.workflows.first.steps.where(name: name).first
+    step.approve!
+    step.update(approved_at: Time.now)
+    step.approved?
+  end
+
+  def approve_initial_requirements?
+    approve_step('#1') and approve_step('#2')
+  end
   
 end

@@ -15,15 +15,14 @@ class AdminProceduresController < ApplicationController
   end
 
   def approve_initial_requirements
-    procedure = params[:id]
-    @procedure = Procedure.find(procedure)
-    step = @procedure.steps.find_by(name: params[:step])
-    if step.in_progress?
-      step.approve!
+    @procedure = Procedure.find(params[:id])
+    procedure_instance = get_procedure_intance(@procedure)
+    
+    if procedure_instance.approve_initial_requirements? 
       flash[:success] = 'Los documentos han sido aprobados con exito.'
       render 'show'
     else
-      flash[:error] = 'Imposible realizar ésta acción, los documentos ya fueron aprobados.'
+      flash[:error] = 'Imposible realizar ésta acción, error en el estado del paso.'
       render 'show_initial_requirements'
     end
   end
@@ -74,6 +73,17 @@ class AdminProceduresController < ApplicationController
 
     def set_procedure
       @procedure = Procedure.find(params[:id])
+    end
+
+    def get_procedure_intance(procedure)
+      procedure_instance = get_procedure_from_factory(procedure.code)
+      procedure_instance.procedure = procedure
+      return procedure_instance
+    end
+
+    def get_procedure_from_factory(procedure_code)
+      factory = ProcedureFactory.new
+      factory.build(procedure_code)
     end
   
 end

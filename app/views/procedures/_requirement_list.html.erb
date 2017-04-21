@@ -12,6 +12,7 @@
           <tr>
             <th>Nombre:</th>
             <th>Código:</th>
+            <th>Fecha de creación:</th>
             <th>Archivo adjunto:</th>         
           </tr>
         </thead>
@@ -23,6 +24,9 @@
             </td>
             <td>
               <%= document.code %>
+            </td>
+            <td>
+              <%= document.created_at.strftime("%Y-%m-%d") %>
             </td>
             <% if document.attachment_url %>
               <td> 

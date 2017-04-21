@@ -65,14 +65,21 @@ private
 
   def update_step()
     step_name = params[:step]
-    unless @procedure.nil?
-      step = @procedure.workflows.first.steps.where(name: step_name).first
-      unless step.nil?
-        step.start!
-        step.update(approved_at: Time.now)
-      end
+    unless @procedure.nil? or step_name.nil?
+      concrete_procedure = get_procedure_intance(@procedure)
+      concrete_procedure.start_step(step_name)
     end
   end
- 
+
+  def get_procedure_intance(procedure_obj)
+    procedure_instance = get_procedure_from_factory(procedure_obj.code)
+    procedure_instance.procedure = procedure_obj
+    return procedure_instance
+  end
+
+  def get_procedure_from_factory(procedure_code)
+    factory = ProcedureFactory.new
+    factory.build(procedure_code)
+  end
 
 end

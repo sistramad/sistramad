@@ -238,7 +238,8 @@ faculty.save!
 faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
 
-#Carga el Maestro de Documentos.
+#Carga el Maestro de Documentos:
+#Año Sabatico
 DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Año Sabatico", active: true , initially_required: true ).save
 DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Año Sabatico", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Carta de Aceptación", code: "CAC", procedure: "Año Sabatico", active: true, initially_required: true ).save
@@ -250,10 +251,13 @@ DocumentMaster.new(name: "Certificado de idioma", code: "CID", procedure: "Año 
 DocumentMaster.new(name: "Plan de Trabajo", code: "PDT", procedure: "Año Sabatico", active: true , initially_required: false).save
 DocumentMaster.new(name: "Constancia de antiguedad", code: "CDA", procedure: "Año Sabatico", active: true , initially_required: false).save
 DocumentMaster.new(name: "Constancia de aprobación", code: "CDAP", procedure: "Año Sabatico", active: true , initially_required: false).save
+
+#Modificación de Plan de Trabajo
 DocumentMaster.new(name: "Plan de Trabajo Modificado", code: "PDTM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
 DocumentMaster.new(name: "Documento Probatorio de Modificación", code: "DPDM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación de Modificación del Plan de Trabajo", code: "AMPDT", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: false).save
 
-
+#Carga grupos de usuarios
 Group.new(name: "Direción de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
 

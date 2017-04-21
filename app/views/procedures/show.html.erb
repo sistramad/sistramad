@@ -22,7 +22,7 @@
 
     </div>
     <div class="row">
-        <% if @procedure.approved? %>
+        <% if @procedure.approved? and @procedure.code == 'T-AS100' %>
           <%= render 'extra_requests'%>  
         <% end %>
     </div>

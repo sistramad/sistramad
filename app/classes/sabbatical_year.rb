@@ -75,8 +75,8 @@ class SabbaticalYear
     start_step('#1')
   end
 
-  def start_step(name)
-    step = self.procedure.workflows.first.steps.where(name: name).first
+  def start_step(step_name)
+    step = self.procedure.workflows.first.steps.where(name: step_name).first
     step.start!
     step.update(approved_at: Time.now)
   end 

@@ -118,15 +118,15 @@ class ProceduresController < ApplicationController
       @procedure = Procedure.find(params[:id])
     end
 
-    def get_procedure_from_factory(code)
+    def get_procedure_from_factory(procedure_code)
       factory = ProcedureFactory.new
-      factory.build(code)
+      factory.build(procedure_code)
     end
 
     def documents_required
       procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true, initially_required: true)
       procedure_documents.each do |doc|
-        @documents << Document.new(name: doc.name, code: doc.code)      
+        @documents << Document.new(name: doc.name, code: doc.code)
       end
       return procedure_documents
     end  
