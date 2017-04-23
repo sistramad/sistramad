@@ -263,7 +263,7 @@ DocumentMaster.new(name: "Aprobación del Informe Parcial", code: "AIP", procedu
 
 #Informe Final de Actividades
 DocumentMaster.new(name: "Informe Final", code: "IF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: true).save
-DocumentMaster.new(name: "Aprobación del Informe Final", code: "AIP", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: false).save
+DocumentMaster.new(name: "Aprobación del Informe Final", code: "AIF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: false).save
 
 #Carga grupos de usuarios
 Group.new(name: "Direción de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save

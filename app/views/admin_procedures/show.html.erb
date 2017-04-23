@@ -10,12 +10,15 @@
       <% if @procedure.in_progress? and @procedure.code == 'T-AS100' %>
         <%= render 'sabbatical_year_admin_panel'%>
       <% elsif @procedure.in_progress? and @procedure.code == 'T-AS101'%>
-        <%= render 'modify_workplan_admin_panel'%>
+        <%= render 'modify_admin_panel'%>
+      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS102'%>
+        <%= render 'partial_report_admin_panel'%>
+      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS103'%>
+        <%= render 'final_report_admin_panel'%>
+      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS104'%>
+        <%= render 'delay_sabbatical_year_admin_panel'%>
       <% end %>
-
     </div>
-
- 
     <br>
   </div>
 </div>
