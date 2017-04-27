@@ -265,7 +265,12 @@ DocumentMaster.new(name: "Aprobación del Informe Parcial", code: "AIP", procedu
 DocumentMaster.new(name: "Informe Final", code: "IF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: true).save
 DocumentMaster.new(name: "Aprobación del Informe Final", code: "AIF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: false).save
 
+#Diferimiento de Año Sabatico
+DocumentMaster.new(name: "Oficio de solicitud de diferimiento", code: "OSD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobacion de Solicitud de Diferimiento", code: "ASD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: false).save
+
 #Carga grupos de usuarios
-Group.new(name: "Direción de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
+Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
+Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del consejo de facultad", active: true).save
 

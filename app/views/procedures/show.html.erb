@@ -6,28 +6,32 @@
       </div>
     </div>
     <div class="row">
+
       <%= render 'basic_info' %>
 
-      <% if @procedure.in_draft? and @procedure.code == 'T-AS100' %>
+      <% if @procedure.code == 'T-AS100' and @procedure.in_draft? %>
         <%= render 'sabbatical_year_tips'%>
       <% end %>
 
-      <% if !@procedure.in_draft? and @procedure.code == 'T-AS100'%>
+      <% if @procedure.code == 'T-AS100' and !@procedure.in_draft? %>
         <%= render 'sabbatical_year_control_panel' %>  
       <% end %>
 
-      <% if @procedure.code == 'T-AS101'%>
+      <% if @procedure.code == 'T-AS101' %>
         <%= render 'modify_workplan_control_panel' %>  
       <% end %>
 
-      <% if @procedure.code == 'T-AS102'%>
-        <%= render 'modify_workplan_control_panel' %>  
+      <% if @procedure.code == 'T-AS102' %>
+        <%= render 'partial_report_control_panel' %>  
       <% end %>
 
       <% if @procedure.code == 'T-AS103'%>
-        <%= render 'modify_workplan_control_panel' %>  
+        <%= render 'final_report_control_panel' %>  
       <% end %>
 
+      <% if @procedure.code == 'T-AS104'%>
+        <%= render 'delay_sabbatical_year_control_panel' %>  
+      <% end %>
 
     </div>
     <div class="row">
@@ -45,8 +49,6 @@
     <% end %>
   </div>
 </div>
-
-
 
 <% if @procedure.in_draft? %>
   <%= render 'requirement_list' %>

@@ -1,4 +1,4 @@
-class ModifyWorkplan
+class DelaySabbaticalYear
   include EmailService
   
   attr_accessor :name
@@ -8,15 +8,14 @@ class ModifyWorkplan
   @required_documents
 
   def initialize     
-    @name = "Modificación de Plan de Trabajo"
-    @code = "T-AS101"
-    @required_documents = { PDTM: "Plan de Trabajo Modificado", DPDM: "Documento Probatorio de Modificación"}
+    @name = "Diferimiento de Año Sabatico"
+    @code = "T-AS104"
   end
   
   def generate_workflow(procedure)
     workflow = Workflow.new()
-    workflow.name = "Modificación de Plan de Trabajo"
-    workflow.description = "Flujo principal del trámite Modificación de Plan de Trabajo"
+    workflow.name = "Diferimiento de Año Sabatico"
+    workflow.description = "Flujo principal del trámite Diferimiento de Año Sabatico"
     workflow.is_active = true
     workflow.procedure = procedure
     if workflow.save
@@ -27,9 +26,8 @@ class ModifyWorkplan
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Evaluación del plan de trabajo modificado.","Consejo de departamento")
-    create_step(workflow, "#2", "Evaluación del pocumento probatorio de modificación.","Consejo de departamento")
-    create_step(workflow, "#3", "Generar documento de aprobación de la modificación.","Consejo de departamento")
+    create_step(workflow, "#1", "Evaluación del oficio de la solicitud de diferimiento.","Consejo de facultad")
+    create_step(workflow, "#2", "Generar y Aprobar oficio de Aprobación del Diferimiento.","Consejo de departamento")
   end
 
   def create_step(workflow, name, description, group_name)
@@ -43,7 +41,7 @@ class ModifyWorkplan
     if all_required_documents_has_attachment?
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('C10')
+      users = User.find_group_members('C20')
       send_emails(users,'need_to_approve')
       return true
     else
@@ -62,7 +60,6 @@ class ModifyWorkplan
   def update_procedure_elements()
     self.procedure.start! 
     start_step('#1')
-    start_step('#2')
   end
 
   def start_step(name)

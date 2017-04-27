@@ -20,7 +20,7 @@
         <% @procedure.documents.order(:name).each do |document|%>
           <tr>
             <td>
-            <%= link_to document.name, edit_document_path(document)%>
+              <%= document.name%>
             </td>
             <td>
               <%= document.code %>
