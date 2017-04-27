@@ -239,7 +239,7 @@ faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
 
 #Carga el Maestro de Documentos:
-#Año Sabatico
+#Año Sabatico:
 DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Año Sabatico", active: true , initially_required: true ).save
 DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Año Sabatico", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Carta de Aceptación", code: "CAC", procedure: "Año Sabatico", active: true, initially_required: true ).save
@@ -252,22 +252,27 @@ DocumentMaster.new(name: "Plan de Trabajo", code: "PDT", procedure: "Año Sabati
 DocumentMaster.new(name: "Constancia de antiguedad", code: "CDA", procedure: "Año Sabatico", active: true , initially_required: false).save
 DocumentMaster.new(name: "Constancia de aprobación", code: "CDAP", procedure: "Año Sabatico", active: true , initially_required: false).save
 
-#Modificación de Plan de Trabajo
+#Modificación de Plan de Trabajo:
 DocumentMaster.new(name: "Plan de Trabajo Modificado", code: "PDTM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
 DocumentMaster.new(name: "Documento Probatorio de Modificación", code: "DPDM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
 DocumentMaster.new(name: "Aprobación de Modificación del Plan de Trabajo", code: "AMPDT", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: false).save
 
-#Informe Parcial de Actividades
+#Informe Parcial de Actividades:
 DocumentMaster.new(name: "Informe Parcial", code: "IP", procedure: "Aprobación de Informe Parcial de Actividades", active: true , initially_required: true).save
 DocumentMaster.new(name: "Aprobación del Informe Parcial", code: "AIP", procedure: "Aprobación de Informe Parcial de Actividades", active: true , initially_required: false).save
 
-#Informe Final de Actividades
+#Informe Final de Actividades:
 DocumentMaster.new(name: "Informe Final", code: "IF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: true).save
 DocumentMaster.new(name: "Aprobación del Informe Final", code: "AIF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: false).save
 
-#Diferimiento de Año Sabatico
+#Diferimiento de Año Sabatico:
 DocumentMaster.new(name: "Oficio de solicitud de diferimiento", code: "OSD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: true).save
-DocumentMaster.new(name: "Aprobacion de Solicitud de Diferimiento", code: "ASD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: false).save
+DocumentMaster.new(name: "Aprobación de solicitud de diferimiento", code: "ASD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: false).save
+
+#Reincorporación luego de disfrute de Año Sabatico:
+DocumentMaster.new(name: "Oficio de solicitud de reincorporación", code: "OSR", procedure: "Reincorporación luego del disfrute del Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación de solicitud de reincorporación", code: "ASR", procedure: "Reincorporación luego del disfrute del Año Sabatico", active: true , initially_required: false).save
+
 
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save

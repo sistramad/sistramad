@@ -18,6 +18,8 @@
         <%= render 'final_report_admin_panel'%>
       <% elsif @procedure.in_progress? and @procedure.code == 'T-AS104'%>
         <%= render 'delay_sabbatical_year_admin_panel'%>
+      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS105'%>
+        <%= render 'sabbatical_year_reincorporation_admin_panel'%>
       <% end %>
       
     </div>

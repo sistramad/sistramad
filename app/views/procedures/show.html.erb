@@ -33,6 +33,10 @@
         <%= render 'delay_sabbatical_year_control_panel' %>  
       <% end %>
 
+      <% if @procedure.code == 'T-AS105'%>
+        <%= render 'sabbatical_year_reincorporation_control_panel' %>  
+      <% end %>
+
     </div>
     <div class="row">
         <% if @procedure.approved? and @procedure.code == 'T-AS100' %>
