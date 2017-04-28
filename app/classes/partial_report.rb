@@ -1,15 +1,9 @@
-class PartialReport
+class PartialReport < SystemProcedure
   include EmailService
 
-  attr_accessor :name
-  attr_accessor :code
-  attr_accessor :procedure
-
-  @required_documents
-
   def initialize     
-    @name = "Aprobación de Informe Parcial de Actividades"
-    @code = "T-AS102"
+    self.name = "Aprobación de Informe Parcial de Actividades"
+    self.code = "T-AS102"
   end
   
   def generate_workflow(procedure)
@@ -30,13 +24,6 @@ class PartialReport
     create_step(workflow, "#2", "Generar constacia de aprobación del Informe Parcial.","Consejo de departamento")
   end
 
-  def create_step(workflow, name, description, group_name)
-    step = Step.new(name: name, description: description, is_active: true)
-    step.group = Group.find_by(name: group_name)
-    step.workflow = workflow
-    step.save
-  end
-
   def initial_requirements_valid?()
     if all_required_documents_has_attachment?
       update_procedure_elements()
@@ -49,30 +36,9 @@ class PartialReport
     end
   end
 
-  def all_required_documents_has_attachment?
-    self.procedure.documents.each do |doc|
-      if !doc.attachment.present? and @required_documents.has_value?(doc.name)
-        return false
-      end 
-    end
-  end
-
   def update_procedure_elements()
     self.procedure.start! 
     start_step('#1')
-  end
-
-  def start_step(name)
-    step = self.procedure.workflows.first.steps.where(name: name).first
-    step.start!
-    step.update(approved_at: Time.now)
-  end
-
-  def approve_step?(name)
-    step = self.procedure.workflows.first.steps.where(name: name).first
-    step.approve!
-    step.update(approved_at: Time.now)
-    step.approved?
   end
 
   def approve_initial_requirements?
