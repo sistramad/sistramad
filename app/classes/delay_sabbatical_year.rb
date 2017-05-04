@@ -41,11 +41,5 @@ class DelaySabbaticalYear < SystemProcedure
     start_step('#1')
   end
 
-  def approve_step?(step_name)
-    step = self.procedure.workflows.first.steps.where(name: step_name).first
-    step.approve!
-    step.update(approved_at: Time.now)
-    step.approved?
-  end
   
 end

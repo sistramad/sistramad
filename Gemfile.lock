@@ -55,7 +55,7 @@ GEM
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.0.6)
-    cancan (1.6.10)
+    cancancan (1.16.0)
     carrierwave (1.0.0)
       activemodel (>= 4.0.0)
       activesupport (>= 4.0.0)
@@ -249,7 +249,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.3, >= 3.3.6)
   breadcrumbs_on_rails
   byebug
-  cancan (~> 1.6, >= 1.6.10)
+  cancancan (~> 1.10)
   carrierwave
   coffee-rails
   database_cleaner
