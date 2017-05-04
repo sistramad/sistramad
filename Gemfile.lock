@@ -270,7 +270,7 @@ DEPENDENCIES
   rails (~> 5.0, >= 5.0.2)
   rails_12factor
   rest-client (~> 2.0.0.rc3)
-  rolify (~> 5.1)
+  rolify
   route_translator
   sass (~> 3.4, >= 3.4.22)
   sass-rails

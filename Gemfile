@@ -58,7 +58,7 @@ gem 'rest-client', '~> 2.0.0.rc3'
 gem 'cancancan', '~> 1.10'
 
 
-gem 'rolify', '~> 5.1' #usar >rails g rolify Role User y agregar al controller load_and_authorize_resource :only => [:new, :edit, :destroy]
+gem 'rolify' #usar >rails g rolify Role User y agregar al controller load_and_authorize_resource :only => [:new, :edit, :destroy]
 
 # para usar migas de pan
 gem 'breadcrumbs_on_rails'
