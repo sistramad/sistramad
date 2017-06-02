@@ -50,7 +50,7 @@ class ProceduresController < ApplicationController
         set_documents_to_user()
         procedure_concrete.generate_workflow(@procedure)
         
-        format.html { redirect_to @procedure, notice: 'La solicitud del trámite se ha creado exitosamente.' }
+        format.html { redirect_to @procedure, notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages

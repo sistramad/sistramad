@@ -25,8 +25,11 @@ class DocumentsController < ApplicationController
 
     if @document.save
       update_step()
-      #TODO redireccionar al path de admin_procedure si el usuario es Administrador!
-      redirect_to procedure_path(@procedure), notice: "El documento #{@document.name} ha sido cargado con exito."
+      if current_user.has_role? :admin
+        redirect_to admin_procedure_path(@procedure), notice: "El documento #{@document.name} ha sido cargado con exito."
+      else
+        redirect_to procedure_path(@procedure), notice: "El documento #{@document.name} ha sido cargado con exito."
+      end
     else
       render "new"
     end

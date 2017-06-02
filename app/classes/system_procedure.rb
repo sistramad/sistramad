@@ -16,6 +16,7 @@ class SystemProcedure
   end
 
   def all_required_documents_has_attachment?
+    return true
     self.procedure.documents.each do |doc|
       unless doc.attachment.present?
         return false

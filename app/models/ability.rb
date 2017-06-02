@@ -33,16 +33,25 @@ class Ability
 
     if user.has_role? :admin
       can :manage, :all
+    else
+      can :read, Procedure do |procedure|
+        procedure.user == user
+      end
+
+      can :update, Procedure do |procedure|
+        procedure.user == user
+      end
+
+      can :destroy, Procedure do |procedure|
+        procedure.user == user
+      end
+
+
     end
 
     if user.has_role? :test
       can :create, Reference
-      can :update, Reference
-
-      # can :update, Reference do |reference|
-      #   binding.pry
-      #   reference.try(:user) == user
-      # end
+      can :update, Reference  
     end
 
   end
