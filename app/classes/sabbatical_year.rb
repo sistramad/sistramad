@@ -2,14 +2,14 @@ class SabbaticalYear < SystemProcedure
   include EmailService
 
   def initialize     
-    self.name = "Año Sabatico"
+    self.name = "Año Sabático"
     self.code = "T-AS100"
   end
   
   def generate_workflow(procedure)
     workflow = Workflow.new()
-    workflow.name = "Workflow Año Sabatico"
-    workflow.description = "Flujo principal del trámite Año Sabatico"
+    workflow.name = "Workflow Año Sabático"
+    workflow.description = "Flujo principal del trámite Año Sabático"
     workflow.is_active = true
     workflow.procedure = procedure
     if workflow.save
@@ -20,7 +20,7 @@ class SabbaticalYear < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Carga y evaluación de recaudos.","Dirección de asuntos profesorales")
+    create_step(workflow, "#1", "Carga y evaluación de recaudos iniciales.","Dirección de asuntos profesorales")
     create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
     create_step(workflow, "#3", "Cargar constacia de antiguedad.","Consejo de departamento")
     create_step(workflow, "#4", "Generar constacia de aprobacion.","Consejo de departamento")
