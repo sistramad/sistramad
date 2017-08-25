@@ -5,7 +5,7 @@ class ProceduresController < ApplicationController
   before_action :set_user
 
   # GET /procedures
-  #Testing GIT
+ 
   def index
     @procedures = @user.procedures.sort_by &:created_at  
   end
