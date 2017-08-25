@@ -103,13 +103,6 @@ ActiveRecord::Schema.define(version: 20170420140255) do
     t.datetime "updated_at",  null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.string   "title"
-    t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "procedures", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at",          null: false
@@ -139,8 +132,8 @@ ActiveRecord::Schema.define(version: 20170420140255) do
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",          null: false
-    t.integer  "resource_id"
     t.string   "resource_type"
+    t.integer  "resource_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
@@ -217,8 +210,8 @@ ActiveRecord::Schema.define(version: 20170420140255) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
     t.string   "invited_by_type"
+    t.integer  "invited_by_id"
     t.integer  "invitations_count",                 default: 0
     t.string   "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
