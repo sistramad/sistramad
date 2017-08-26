@@ -70,14 +70,16 @@ class AdminProceduresController < ApplicationController
   end
 
   def generate_pdf
-    @procedure = Procedure.find(params[:procedure])    
-    puts 'Hola PDF'
-    
+    @procedure = Procedure.find(params[:procedure])     
     respond_to do |format|
       format.html
-      format.pdf {render template: 'admin_procedures/acta', pdf:'Acta'}
-    end 
+      format.pdf do
+        render pdf: 'Acta', template: 'admin_procedures/acta'
+      end
+    end
   end
+
+  
 
   private
 

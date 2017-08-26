@@ -32,7 +32,7 @@
             <p> <li> <%= link_to "Aprobar constancia de aprobación.", show_document_admin_procedure_path(document_code: 'CDAP', step: '#4')%> </li> </p>
           <% end %>
 
-          <p> <li> <%= link_to "Generate PDF", generate_pdf_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <p> <li> <%= link_to "Generate PDF", generate_pdf_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li> </p>
 
           <br>
           <div class='text-center'>
