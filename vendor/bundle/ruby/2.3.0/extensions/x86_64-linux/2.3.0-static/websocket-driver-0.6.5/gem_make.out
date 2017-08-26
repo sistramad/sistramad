@@ -1,0 +1,15 @@
+current directory: /home/alexghoro/Sites/sistramad/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+/home/alexghoro/.rbenv/versions/2.3.1/bin/ruby -r ./siteconf20170825-1124-1m61qzu.rb extconf.rb
+creating Makefile
+
+current directory: /home/alexghoro/Sites/sistramad/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /home/alexghoro/Sites/sistramad/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/alexghoro/Sites/sistramad/vendor/bundle/ruby/2.3.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20170825-1124-1lhfsf3

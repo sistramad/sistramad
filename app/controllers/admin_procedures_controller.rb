@@ -18,8 +18,8 @@ class AdminProceduresController < ApplicationController
     @procedure = Procedure.find(params[:id])
     procedure_instance = get_procedure_intance(@procedure)
     
-    if procedure_instance.approve_initial_requirements? 
-      flash[:success] = 'Los documentos han sido aprobados con exito.'
+    if procedure_instance.approve_initial_requirements?
+      flash[:success] = 'Los documentos han sido aprobados con éxito.'
       render 'show'
     else
       flash[:error] = 'Imposible realizar ésta acción, error en el estado del paso.'
@@ -66,6 +66,16 @@ class AdminProceduresController < ApplicationController
     else
       flash[:error] = 'Imposible completar la solicitud, todos los pasos deben estar aprobados.'
       redirect_to  admin_procedure_path(@procedure) 
+    end 
+  end
+
+  def generate_pdf
+    @procedure = Procedure.find(params[:procedure])    
+    puts 'Hola PDF'
+    
+    respond_to do |format|
+      format.html
+      format.pdf {render template: 'admin_procedures/acta', pdf:'Acta'}
     end 
   end
 
