@@ -23,17 +23,16 @@
           <% end %>
           <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Generar constancia de aprobación.", new_document_path(name: 'Constancia de aprobación', code: 'CDAP', procedure: @procedure, step: '#4' ) %> </li></p>
+            <p><li> <%= link_to "Generar constancia de aprobación.", generate_pdf_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
           <% else %>
+            <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
             <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
           <% end %>
           <% step = @procedure.steps.find_by(name: "#4")%>
           <% unless step.state != 'in_progress'%>
             <p> <li> <%= link_to "Aprobar constancia de aprobación.", show_document_admin_procedure_path(document_code: 'CDAP', step: '#4')%> </li> </p>
           <% end %>
-
-          <p> <li> <%= link_to "Generate PDF", generate_pdf_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li> </p>
-
+         
           <br>
           <div class='text-center'>
             <% if @procedure.in_progress? %>
