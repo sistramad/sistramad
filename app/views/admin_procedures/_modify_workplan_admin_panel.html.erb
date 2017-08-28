@@ -15,9 +15,9 @@
       
           <% @document = find_document_by_code(@procedure, "AMPDT")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Cargar documento de aprobación de la modificación.", new_document_path(name: 'Aprobación de Modificación del Plan de Trabajo', code: 'AMPDT', procedure: @procedure, step: '#3') %> </li></p>
+            <p><li> <%= link_to "Generar constancia de aprobación", generate_pdf_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
           <% else %>
-            <p><li> <%= link_to "Editar documento de aprobación de la modificación.", edit_document_path(@document) %> </li></p>
+            <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
           <% end %>
 
           <% @document = find_document_by_code(@procedure, "AMPDT")%>
