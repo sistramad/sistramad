@@ -16,19 +16,24 @@
                 show_document_admin_procedure_path(document_code: 'OSR', step: '#1') %> </li></p>
           <% end %>
            
-          <% @document = find_document_by_code(@procedure, "ASD")%>
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Cargar oficio de aprobación de la reincorporación.", 
+          <!--
+            <p><li> <%= link_to "Generar constancia de aprobación de la reincorporación.", 
                 new_document_path(name: 'Aprobación de solicitud de reincorporación', code: 'ASR', procedure: @procedure, step: '#2') %> </li></p>
+          -->
+          <p><li> <%= link_to "Generar constancia de aprobación de la reincorporación", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>                    
           <% else %>
-            <p><li> <%= link_to "Editar documento de aprobación del diferimiento.", edit_document_path(@document) %> </li></p>
+            <p><li> <%= link_to "Editar constancia de aprobación de la reincorporación", edit_document_path(@document) %> </li></p>
           <% end %>
 
-          <% @document = find_document_by_code(@procedure, "ASD")%>
+          <!--
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% step = @procedure.steps.find_by(name: "#2")%>
           <% unless @document.nil? or !step.in_progress? %>
             <p><li> <%= link_to "Aprobar oficio de aprobación del diferimiento.", show_document_admin_procedure_path(document_code: 'ASD', step: '#2') %> </li></p>
           <% end %>
+          -->
 
           <div class='text-center'>
             <% if @procedure.in_progress? %>

@@ -24,7 +24,7 @@
       en el Estatuto Docente para completar la Solicitud: 
         <strong><span style="text-decoration: underline;"> <%= @procedure.name%> </span></strong>
         , la cual fue es aprobada por el: &nbsp;<strong> <%= %></strong>
-        el d&iacute;a: <strong>26-08-2017.</strong></p> 
+        el d&iacute;a: <strong><%= DateTime.now.strftime("%d-%m-%Y") %>.</strong></p> 
     </p>
     
     <p style="text-align: center;">&nbsp;</p>

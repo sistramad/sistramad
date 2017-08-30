@@ -21,7 +21,7 @@ class DelaySabbaticalYear < SystemProcedure
 
   def generate_steps(workflow)
     create_step(workflow, "#1", "Evaluación del oficio de la solicitud de diferimiento.","Consejo de facultad")
-    create_step(workflow, "#2", "Generar y Aprobar oficio de Aprobación del Diferimiento.","Consejo de departamento")
+    create_step(workflow, "#2", "Generar oficio de aprobación del diferimiento.","Consejo de departamento")
   end
 
   def initial_requirements_valid?()
@@ -39,6 +39,11 @@ class DelaySabbaticalYear < SystemProcedure
   def update_procedure_elements()
     self.procedure.start! 
     start_step('#1')
+  end
+
+  def approve_generate_approval_document_step
+    start_step('#2')
+    approve_step?('#2')
   end
 
   
