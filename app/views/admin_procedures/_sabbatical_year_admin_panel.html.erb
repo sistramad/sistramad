@@ -23,7 +23,7 @@
           <% end %>
           <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Generar constancia de aprobación.", generate_pdf_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+            <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
           <% else %>
             <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
             <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>

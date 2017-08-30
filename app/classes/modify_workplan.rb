@@ -21,7 +21,7 @@ class ModifyWorkplan < SystemProcedure
 
   def generate_steps(workflow)
     create_step(workflow, "#1", "Evaluación del plan de trabajo modificado.","Consejo de departamento")
-    create_step(workflow, "#2", "Evaluación del pocumento probatorio de modificación.","Consejo de departamento")
+    create_step(workflow, "#2", "Evaluación del documento probatorio de la modificación.","Consejo de departamento")
     create_step(workflow, "#3", "Generar documento de aprobación de la modificación.","Consejo de departamento")
   end
 
@@ -45,6 +45,11 @@ class ModifyWorkplan < SystemProcedure
 
   def approve_initial_requirements?
     approve_step?('#1') and approve_step?('#2')
+  end
+
+  def approve_generate_approval_document_step
+    start_step('#3')
+    approve_step?('#3')
   end
   
 end

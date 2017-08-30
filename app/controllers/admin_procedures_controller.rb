@@ -44,7 +44,7 @@ class AdminProceduresController < ApplicationController
     if step.in_progress?
       step.approve!
       send_email(@procedure.user, 'step_approved')
-      flash[:success] = 'Paso aprobado con exito!.'
+      flash[:success] = 'Paso aprobado con éxito!.'
     else
       flash[:error] = 'Imposible realizar ésta acción.'
     end
@@ -69,11 +69,13 @@ class AdminProceduresController < ApplicationController
     end
   end
 
-  def generate_pdf
+  def generate_approval_document
     @procedure = Procedure.find(params[:procedure])
     @user = User.find(@procedure.user)
 
-    if create_approval_document?(@procedure, @user)
+    if generate_pdf?(@procedure, @user)
+      procedure = get_procedure_intance(@procedure)
+      procedure.approve_generate_approval_document_step()
       flash[:success] = 'Constacia generada con éxito.'       
     else
       flash[:error] = 'Error al generar constacia de aprobación.'
@@ -98,10 +100,10 @@ class AdminProceduresController < ApplicationController
       factory.build(procedure_code)
     end
 
-    def create_approval_document?(procedure, user)
+    def generate_pdf?(procedure, user)
       document = Document.new(name: 'Constancia de Aprobación', code: 'CDAP')
-      document.procedure = @procedure
-      document.user = @user    
+      document.procedure = procedure
+      document.user = user    
     
       pdf = render_to_string pdf: "oficio", template: 'admin_procedures/oficio', encoding: "UTF-8"
 

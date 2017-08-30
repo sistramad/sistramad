@@ -21,8 +21,8 @@
 
     <p style="text-align: center;">Se hace constar que el usuario: <strong><%= @user.first_name%> <%= @user.last_name %></strong>, 
     <strong><%= @user.identification_document %></strong>,ha completado todos los requsitos necesarios &nbsp;de acuerdo con lo establecido
-      en el Estatuto Docente para completar la: 
-        <strong><span style="text-decoration: underline;">Solicitud de A&ntilde;o Sabatico</span></strong>
+      en el Estatuto Docente para completar la Solicitud: 
+        <strong><span style="text-decoration: underline;"> <%= @procedure.name%> </span></strong>
         , la cual fue es aprobada por el: &nbsp;<strong> <%= %></strong>
         el d&iacute;a: <strong>26-08-2017.</strong></p> 
     </p>
