@@ -69,6 +69,8 @@ gem 'route_translator'
 gem "letter_opener", :group => :production
 # para el procesamiento de archivos varios
 gem 'carrierwave'
+# pare recortar imagenes
+gem 'carrierwave-crop'
 # para transformar imagenes
 # gem 'rmagick', '~> 2.15', '>= 2.15.4'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
