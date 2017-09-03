@@ -5,13 +5,12 @@ class ProceduresController < ApplicationController
   before_action :set_user
 
   # GET /procedures
-  # GET /procedures.json
+ 
   def index
     @procedures = @user.procedures.sort_by &:created_at  
   end
 
-  # GET /procedures/1
-  # GET /procedures/1.json
+  # GET /procedures/1  
   def show
   end
 

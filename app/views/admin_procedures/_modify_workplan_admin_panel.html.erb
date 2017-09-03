@@ -13,11 +13,11 @@
             <p> <li> <%= link_to "Aprobar de recaudos", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
           <% end %>
       
-          <% @document = find_document_by_code(@procedure, "AMPDT")%>
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Cargar documento de aprobación de la modificación.", new_document_path(name: 'Aprobación de Modificación del Plan de Trabajo', code: 'AMPDT', procedure: @procedure, step: '#3') %> </li></p>
+            <p><li> <%= link_to "Generar constancia de aprobación", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
           <% else %>
-            <p><li> <%= link_to "Editar documento de aprobación de la modificación.", edit_document_path(@document) %> </li></p>
+            <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
           <% end %>
 
           <% @document = find_document_by_code(@procedure, "AMPDT")%>

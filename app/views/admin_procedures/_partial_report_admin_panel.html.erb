@@ -13,20 +13,24 @@
             <p> <li> <%= link_to "Aprobar Informe Parcial", show_document_admin_procedure_path(document_code: 'IP', step: '#1') %></li> </p>
           <% end %>
       
-          <% @document = find_document_by_code(@procedure, "AIP")%>
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Cargar constancia de aprobacón del informe parcial.", 
-                          new_document_path(name: 'Aprobación del Informe Parcial', code: 'AIP', procedure: @procedure, step: '#2')%></li></p>
+            <!--<p><li> <%= link_to "Generar constancia de aprobacón del informe parcial.", 
+                          new_document_path(name: 'Aprobación del Informe Parcial', code: 'CDAP', procedure: @procedure, step: '#2')%></li></p>
+            <-->
+            <p><li> <%= link_to "Generar constancia de aprobación", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
           <% else %>
             <p><li> <%= link_to "Editar constancia de aprobacón del informe parcial.", edit_document_path(@document) %> </li></p>
           <% end %>
 
-          <% @document = find_document_by_code(@procedure, "AIP")%>
+          <!--> 
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
             <% step = @procedure.steps.find_by(name: "#2")%>
             <% unless @document.nil? or !step.in_progress? %>
               <p><li> <%= link_to "Aprobar constancia de aprobación del informe parcial.", 
-                show_document_admin_procedure_path(document_code: 'AIP', step: '#2') %> </li></p>
+                show_document_admin_procedure_path(document_code: 'CDAP', step: '#2') %> </li></p>
           <% end %>
+          <-->
         </h4>
       </ul>
       <br>

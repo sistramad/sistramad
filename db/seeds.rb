@@ -7,6 +7,7 @@
 #  Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+
 user = User.new(:username => 'test',
                 :email => 'test@test.com',
                 :password => '123456', #Devise.friendly_token[0,20]
@@ -78,6 +79,7 @@ reference_region.save!
 
 reference_sub_region = Reference.new(:name => 'sub_region') #2
 reference_sub_region.save!
+
 
 region = ReferenceList.new(:name => 'without region', :reference_id => ReferenceConstant::REGION) #1
 region.save!
@@ -216,6 +218,8 @@ type_employee.save!
 
 type_employee = ReferenceList.new(:name => 'aux de investigacion', :reference_id => ReferenceConstant::TYPE_EMPLOYEE) #43
 type_employee.save!
+
+
 
 faculty = Faculty.new(:name => 'facultad de ciencias y tecnología', :acronym => 'FaCyT')
 faculty.save!

@@ -44,4 +44,9 @@ class PartialReport < SystemProcedure
   def approve_initial_requirements?
     approve_step?('#1')
   end
+
+  def approve_generate_approval_document_step
+    start_step('#2')
+    approve_step?('#2')
+  end
 end
