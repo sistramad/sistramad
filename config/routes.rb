@@ -30,6 +30,10 @@ Rails.application.routes.draw do
       collection do
         post :download
         get :status
+        get 'get_selections', to: "professors_transfers#get_selections"
+        get 'get_froms', to: "professors_transfers#get_froms"
+        get 'get_to', to: "professors_transfers#get_to"
+        #get :edit
       end
     end
 
@@ -43,11 +47,11 @@ Rails.application.routes.draw do
     end
 
     devise_for :users
-    scope "/" do
-      resources :users do
-
-      end
-    end
+    #scope "/" do
+    #  resources :users do
+    # 
+    #  end
+    #end
 
     localized do
       resources :users

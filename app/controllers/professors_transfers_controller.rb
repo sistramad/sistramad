@@ -3,6 +3,11 @@ class ProfessorsTransfersController < ApplicationController
   before_action :set_professors_transfer, only: [:show, :edit, :update, :destroy]
   before_action :set_user
   before_action :set_faculties, only: [:new,:edit]
+  before_action :set_references, only: [:new,:edit]
+  before_action :set_reference_lists, only: [:new,:edit]
+  before_action :get_selections, only: [:new,:edit,:get_selections,:get_froms,:get_to]
+  before_action :get_froms, only: [:edit,:get_selections,:get_froms,:get_to]
+  before_action :get_to, only: [:edit,:get_selections,:get_froms,:get_to]
   before_filter :authenticate_user!
   require 'rubygems'
   require 'zip'
@@ -29,6 +34,7 @@ class ProfessorsTransfersController < ApplicationController
 
   # GET /professors_transfers/1/edit
   def edit
+    
   end
 
   # POST /professors_transfers
@@ -117,8 +123,39 @@ class ProfessorsTransfersController < ApplicationController
        @faculties = current_user.employee.faculties
     end
 
+    def set_references
+      @reference = Reference.last(3)
+    end
+
+    def set_reference_lists
+      @reference_lists = ReferenceList.all
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def professors_transfer_params
-      params.require(:professors_transfer).permit(:faculty_from_id , :faculty_to_id )
+      params.require(:professors_transfer).permit(:faculty_from_id , :faculty_to_id, :type_of_translate )
     end
+
+    def get_selections
+      if (params[:type_of_translate].present?) 
+        @references = Reference.find(params[:type_of_translate])
+        @reference_lists = @references.reference_lists
+      else
+        @references = Reference.find(9)
+        @reference_lists = @references.reference_lists
+      end
+    end
+
+    def get_froms
+      if ((params[:faculty_to_id].present?)&&(params[:type_of_translate].present?)) 
+        @reference_lists = ReferenceList.where("value NOT IN (?) AND reference_id =?", params[:faculty_to_id],params[:type_of_translate])
+      end
+    end
+
+    def get_to 
+      if ((params[:faculty_from_id].present?)&&(params[:type_of_translate].present?)) 
+        @reference_lists = ReferenceList.where("value NOT IN (?) AND reference_id =?", params[:faculty_from_id],params[:type_of_translate])
+      end
+    end
+
 end

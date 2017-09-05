@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   load_and_authorize_resource :only => [:new, :edit, :destroy]
 
   add_breadcrumb "home", :authenticated_root_path, :title => "Back to the home"
@@ -21,8 +20,8 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @attachment = Attachment.new
 
+    #@attachment = Attachment.new
   end
 
   # GET /users/1/edit
@@ -32,8 +31,9 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    @role = Role.find(params.require(:user).permit(:roles).require(:roles))
     @user = User.new(user_params)
-
+    @user.add_role(@role.name)
     respond_to do |format|
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }

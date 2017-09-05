@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login, :avatar, :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h
+  after_create :assign_default_role
 
   rolify #se pueden agregar opciones a la gema
 
@@ -34,4 +35,9 @@ class User < ActiveRecord::Base
       where(conditions.to_h).first
     end
   end
+
+  def assign_default_role
+    self.add_role(:test) if self.roles.blank?
+  end
+
 end

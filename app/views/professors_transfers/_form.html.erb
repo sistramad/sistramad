@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'professors_transfers' %>
 <div class="row">
   <div class="col-md-8 col-md-offset-2">
     <div class="panel panel-info">
@@ -21,12 +22,16 @@
                   </ul>
                 </div>
             <% end %>
-
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-9">
-              <%= pf.input :faculty_from_id, collection: @faculties ,:label => t("faculty_from") %>
-              <%= pf.input :faculty_to_id , collection: Faculty.where.not(id: @faculties.map(&:id)),:label => t("faculty_to")  %>
-          </div>
+                <%= pf.label :type_of_translate, "Tipo de Traslado:  " %></br>
+                <%= collection_select(:professors_transfer,:type_of_translate,@reference,:id,:name,{ :prompt => "Seleccione Tipo de Traslado"},{ :class => "type_selection"}) %></br></br>
+                <%= pf.label :faculty_from_id , "Origen:  " %></br>
+                <%= pf.collection_select :faculty_from_id, @reference_lists, :id, :name, {:prompt => "Seleccione Origen"}, {:class=>"from_selection"}  %></br></br>
+                <%= pf.label :faculty_to_id , "Destino:  " %></br>
+                <%= pf.collection_select :faculty_to_id, @reference_lists, :id, :name, {:prompt => "Seleccione Destino"}, {:class=>"to_selection"}  %>
+              </div>
+            </div>            
           <center>
               <div class="col-md-12">
                 <%= pf.button :submit, value: "Guardar", class: ' btn btn-info' %>

@@ -35,23 +35,66 @@ class AttachmentsController < ApplicationController
   def create
     inform = false
     uploads = params[:tramite][:docs_uploaded].to_i
+    docsToUpload= params[:tramite][:docs].to_i
     a = params[:attachments]
-    a.each do |attachment|
-      if attachment[1] != nil
-        doc = attachment[1]
-        if doc[:file] != nil
-            uploads += 1
-            @attachment = current_user.attachments.new(attachment_params(doc))
-            @attachment.save
-          if doc[:document_id] == '16' || doc[:document_id] == '17'
-            inform = true
+    if (docsToUpload != uploads )
+      a.each do |attachment|
+        if attachment[1] != nil
+          doc = attachment[1]
+          if doc[:file] != nil
+              uploads += 1
+              @attachment = current_user.attachments.new(attachment_params(doc))
+              @attachment.save
+            if doc[:document_id] == '16' || doc[:document_id] == '17'
+              inform = true
+            end
           end
         end
-
       end
-    end
+    end  
 
-    if @attachment.save && !inform
+    if (docsToUpload != uploads)
+      if @attachment.save && !inform
+        instance =FormalitiesMaster.find_by_name(params[:tramite][:name]).table_manager.classify.constantize
+        if (!instance.exists?(user_id: current_user.id))
+          @instance =  instance.new(user_id: current_user.id,name: params[:tramite][:name])
+          if (params[:tramite][:name]== "Traslados")
+            if (params[:tramite][:docs].to_i == uploads) 
+              @instance.procesar
+            end
+            respond_to do |format|
+              if @instance.save
+                  format.html { redirect_to edit_professors_transfer_path (@instance), 
+                    notice: 'Para terminar de Solicitar indique Facultad de Origen y Destino.' }
+                  format.json { render :show, status: :created, location: @instance }
+              else
+                format.html { render :new }
+                format.json { render json: @instance.errors, status: :unprocessable_entity }
+              end
+            end
+          else
+            respond_to do |format|
+                if @instance.save
+                    format.html { redirect_to @instance, notice: 'El Trámite se Solicito Correctamente.' }
+                    format.json { render :show, status: :created, location: @instance }
+                else
+                  format.html { render :new }
+                  format.json { render json: @instance.errors, status: :unprocessable_entity }
+                end
+            end
+          end  
+        else
+          @instance = instance.find_by(user_id: current_user.id)
+          if ((params[:tramite][:docs].to_i == uploads) && (params[:tramite][:name]== "Traslados"))
+            @instance.procesar
+            @instance.save
+          end
+          redirect_to @instance , notice: "Se Actualizo estado de Trámite"
+        end      
+      else
+        redirect_to informs_joint_plans_path , notice: "Informe subido exitosamente"
+      end
+    elsif (docsToUpload == uploads)
       instance =FormalitiesMaster.find_by_name(params[:tramite][:name]).table_manager.classify.constantize
       if (!instance.exists?(user_id: current_user.id))
         @instance =  instance.new(user_id: current_user.id,name: params[:tramite][:name])
@@ -65,8 +108,8 @@ class AttachmentsController < ApplicationController
                   notice: 'Para terminar de Solicitar indique Facultad de Origen y Destino.' }
                 format.json { render :show, status: :created, location: @instance }
             else
-               format.html { render :new }
-               format.json { render json: @instance.errors, status: :unprocessable_entity }
+              format.html { render :new }
+              format.json { render json: @instance.errors, status: :unprocessable_entity }
             end
           end
         else
@@ -75,8 +118,8 @@ class AttachmentsController < ApplicationController
                   format.html { redirect_to @instance, notice: 'El Trámite se Solicito Correctamente.' }
                   format.json { render :show, status: :created, location: @instance }
               else
-                 format.html { render :new }
-                 format.json { render json: @instance.errors, status: :unprocessable_entity }
+                format.html { render :new }
+                format.json { render json: @instance.errors, status: :unprocessable_entity }
               end
           end
         end  
@@ -87,10 +130,8 @@ class AttachmentsController < ApplicationController
           @instance.save
         end
         redirect_to @instance , notice: "Se Actualizo estado de Trámite"
-      end      
-    else
-      redirect_to informs_joint_plans_path , notice: "Informe subido exitosamente"
-    end
+      end 
+    end  
   end
 
   def update

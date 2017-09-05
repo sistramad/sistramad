@@ -21,14 +21,19 @@
                   <p class="form-control-static"><%= @professors_transfer.status %></p>
                 </div>
 
-                <label for="status" class="control-label col-sm-5 col-md-4"><%= t("faculty_from") %>:</label>
+                <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Traslado" %>:</label>
                 <div class="col-sm-7 col-md-8">
-                  <p class="form-control-static"><%= @professors_transfer.faculty_from.name %></p>
+                  <p class="form-control-static"><%= @professors_transfer.type.name %></p>
                 </div>
 
-                <label for="status" class="control-label col-sm-5 col-md-4"><%= t("faculty_to") %>:</label>
+                <label for="faculty_from" class="control-label col-sm-5 col-md-4"><%= "Origen" %>:</label>
                 <div class="col-sm-7 col-md-8">
-                  <p class="form-control-static"><%= @professors_transfer.faculty_to.name %></p>
+                  <p class="form-control-static"><%= @professors_transfer.from.name %></p>
+                </div>
+
+                <label for="faculty_to" class="control-label col-sm-5 col-md-4"><%= "Destino" %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @professors_transfer.to.name %></p>
                 </div>
 
               </div>

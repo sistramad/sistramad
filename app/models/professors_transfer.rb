@@ -5,6 +5,9 @@ class ProfessorsTransfer < ActiveRecord::Base
   #belongs_to :faculty, :foreign_key => 'faculty_to_id'
   belongs_to :faculty_from, :class_name => 'Faculty', :foreign_key => 'faculty_from_id'
   belongs_to :faculty_to, :class_name => 'Faculty', :foreign_key => 'faculty_to_id'
+  belongs_to :from, :class_name => 'ReferenceList', :foreign_key => 'faculty_from_id'
+  belongs_to :to, :class_name => 'ReferenceList', :foreign_key => 'faculty_to_id'
+  belongs_to :type, :class_name => 'Reference', :foreign_key => 'type_of_translate'
   accepts_nested_attributes_for :user
   has_many :attachments
 

@@ -83,7 +83,7 @@
                 <% if (ProfessorsTransfer.where(user_id: current_user.id).empty? && (current_user.has_role? :docente)) %>
                       <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
                             <i class="fa fa-circle"></i>
-                            Solicitar Nuevo Traslado
+                            Solicitar Traslado
                       <% end %>
                       </li>
                 <% else %>

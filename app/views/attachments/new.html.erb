@@ -1,3 +1,6 @@
+<a>Debe subir al sistema cada documento que se indica a continuacion en los formatos permitidos, el peso maximo de cada archivo no puede ser superior a 1MB.
+
+Los formatos permitidos son: .pdf, .doc, .jpeg, .jpj, .png, .docx, .odt</a>
 <ul class="nav nav-tabs" role="tablist">
  <li class="active"><%= link_to t('list_attachment'), "#" %></li>
 </ul>
@@ -14,7 +17,7 @@
         </tr>
         </thead>
          <% docs = 0 %>
-         <% docs_uploaded = 0%> 
+         <% docs_uploaded = 0 %> 
         <tbody>
         <% @documents.each do |document| %>
             <tr>
@@ -56,10 +59,10 @@
 
         <% end %>
           <%= fields_for 'tramite', @formalities_masters do |tramite| %>
-          <%= tramite.hidden_field :name, :value => @formalities_masters.name %>
-          <%= tramite.hidden_field :docs, :value => docs %>
-          <%= tramite.hidden_field :docs_uploaded, :value => docs_uploaded %>
-        <% end %>
+            <%= tramite.hidden_field :name, :value => @formalities_masters.name %>
+            <%= tramite.hidden_field :docs, :value => docs %>
+            <%= tramite.hidden_field :docs_uploaded, :value => docs_uploaded %>
+          <% end %>
         </tbody>
       </table>
       <div class="field">
