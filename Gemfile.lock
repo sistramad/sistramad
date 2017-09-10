@@ -286,6 +286,7 @@ DEPENDENCIES
   rest-client (~> 2.0.0.rc3)
   rolify
   route_translator
+  rubyzip
   sass (~> 3.4, >= 3.4.22)
   sass-rails
   sdoc (~> 0.4.0)
