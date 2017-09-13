@@ -60,13 +60,17 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Formación Especial</span></a></li>
+
+            <li>
+              <%= link_to special_formation_path(code: "T-SPF200") do %>
+                <i class="fa fa-circle-o"></i>
+                  Formación Especial
+                <% end %>
+            <li>
+            
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
             <li><a href="/procedures"><i class="fa fa-circle-o"></i> <span>Año Sabatico</span></a></li>
-            
-            
-            
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>
             <span class="pull-right-container">
@@ -124,7 +128,7 @@
         <section class="content">
           <!-- Your Page Content Here -->
           <%= yield %>
-          <!-- <%= debug(params) if Rails.env.development? %> -->
+          <%= debug(params) if Rails.env.development? %>
         </section>
       </div>
 

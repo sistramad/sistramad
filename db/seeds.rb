@@ -243,6 +243,7 @@ faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
 
 #Carga el Maestro de Documentos:
+
 #Año Sabatico:
 DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Año Sabatico", active: true , initially_required: true ).save
 DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Año Sabatico", active: true, initially_required: true ).save
@@ -278,8 +279,14 @@ DocumentMaster.new(name: "Oficio de solicitud de reincorporación", code: "OSR",
 DocumentMaster.new(name: "Aprobación de solicitud de reincorporación", code: "ASR", procedure: "Reincorporación luego del disfrute del Año Sabatico", active: true , initially_required: false).save
 
 
+#Plan de Formacion Especial:
+DocumentMaster.new(name: "Programa de Formación Especial", code: "D-PFE", procedure: "Programa de Formación Especial", active: true , initially_required: true ).save
+
+
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
 Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del consejo de facultad", active: true).save
+
+Group.new(name: "Representante de Facultad", code: "R10", description: "Representantes de Facultad", active: true).save
 

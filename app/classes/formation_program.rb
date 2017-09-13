@@ -3,13 +3,13 @@ class FormationProgram < SystemProcedure
 
   def initialize     
     self.name = "Programa de Formación Especial"
-    self.code = "T-AS100"
+    self.code = "T-SPF200"
   end
   
   def generate_workflow(procedure)
     workflow = Workflow.new()
-    workflow.name = "Workflow Año Sabático"
-    workflow.description = "Flujo principal del trámite Año Sabático"
+    workflow.name = "Workflow Formación Especial"
+    workflow.description = "Flujo principal Formación Especial"
     workflow.is_active = true
     workflow.procedure = procedure
     if workflow.save
@@ -20,14 +20,15 @@ class FormationProgram < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Carga y evaluación de recaudos iniciales.","Dirección de asuntos profesorales")
-    create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
-    create_step(workflow, "#3", "Cargar constacia de antigüedad.","Consejo de departamento")
+    create_step(workflow, "#1", "Cargar el documento con el plan de formación especial.", "Representante de Facultad")
+    create_step(workflow, "#2", "Incluir profesores al plan de formación especial", "Representante de Facultad")
+    create_step(workflow, "#3", "Evaluacón del plan de formación.","Consejo de Facultad")
     create_step(workflow, "#4", "Generar constacia de aprobación.","Consejo de departamento")
+    create_step(workflow, "#5", "Completar solicitud","Consejo Universitario")
   end
 
   def initial_requirements_valid?()
-    if all_required_documents_has_attachment? and request_day_allowed?
+    if all_required_documents_has_attachment?
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
       users = User.find_group_members('D20')
@@ -36,13 +37,7 @@ class FormationProgram < SystemProcedure
     else
       return false
     end
-  end
-
-  def request_day_allowed?
-    #Primeros 3 meses del año: 
-    self.procedure.created_at.between?(Date.new(Date.today.year,01,01) , Date.new(Date.today.year,03,31)) 
-    return true #TODO CHANGE TO FALSE THIS IS JUST FOR TESTING
-  end
+  end 
 
   def update_procedure_elements()
     self.procedure.start! 

@@ -1,13 +1,18 @@
 
 class ProceduresController < ApplicationController
   include EmailService
+  include FactoryHelper
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
   before_action :set_user
 
   # GET /procedures
  
   def index
-    @procedures = @user.procedures.sort_by &:created_at  
+    @procedures = @user.procedures.sort_by &:created_at
+  end
+
+  def special_formation
+    @procedures = Procedure.where code: params[:code]
   end
 
   # GET /procedures/1  
@@ -115,11 +120,6 @@ class ProceduresController < ApplicationController
 
     def set_procedure
       @procedure = Procedure.find(params[:id])
-    end
-
-    def get_procedure_from_factory(procedure_code)
-      factory = ProcedureFactory.new
-      factory.build(procedure_code)
     end
 
     def documents_required

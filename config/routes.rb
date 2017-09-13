@@ -3,12 +3,15 @@ Rails.application.routes.draw do
   resources :groups
   resources :user_groups, except: [:show, :edit, :update]
   resources :documents
+
   resources :procedures do
     member do
       get :validate
       get :show_requirements
     end
   end
+  
+  get 'special_formation', to: 'procedures#special_formation'
 
   resources :admin_procedures do
     member do

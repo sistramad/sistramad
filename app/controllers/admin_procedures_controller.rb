@@ -1,5 +1,6 @@
 class AdminProceduresController < ApplicationController
   include EmailService
+  include FactoryHelper
   before_action :set_procedure, only: [:show, :complete]
 
   def index
@@ -113,12 +114,7 @@ class AdminProceduresController < ApplicationController
       procedure_instance = get_procedure_from_factory(procedure.code)
       procedure_instance.procedure = procedure
       return procedure_instance
-    end
-
-    def get_procedure_from_factory(procedure_code)
-      factory = ProcedureFactory.new
-      factory.build(procedure_code)
-    end
+    end  
 
     def generate_pdf?(procedure, user)
       document = Document.new(name: 'Constancia de Aprobación', code: 'CDAP')

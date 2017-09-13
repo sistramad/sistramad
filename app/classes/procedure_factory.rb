@@ -7,6 +7,8 @@ class ProcedureFactory
       when 'T-AS103'  then FinalReport.new
       when 'T-AS104'  then DelaySabbaticalYear.new
       when 'T-AS105'  then SabbaticalYearReincorporation.new
+        
+      when 'T-SPF200' then FormationProgram.new
     end
   end 
 end

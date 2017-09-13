@@ -1,4 +1,5 @@
 class DocumentsController < ApplicationController
+  include FactoryHelper
   before_action :set_document, only: [:edit, :update, :destroy, :show]
 
  def index
@@ -78,11 +79,6 @@ private
     procedure_instance = get_procedure_from_factory(procedure_obj.code)
     procedure_instance.procedure = procedure_obj
     return procedure_instance
-  end
-
-  def get_procedure_from_factory(procedure_code)
-    factory = ProcedureFactory.new
-    factory.build(procedure_code)
   end
 
 end
