@@ -1,0 +1,51 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Solicitudes Adicionales:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+          <p>
+            <li>
+            <%= link_to new_procedure_path(code: 'T-AS101', parent_id: @procedure), class: 'btn btn-primary btn-md list' do %>
+              <i class="glyphicon glyphicon-plus"></i> Solicitud de modificación del Plan de Trabajo
+            <% end %>
+            </li>
+          </p>
+          <p>
+            <li> 
+             <%= link_to new_procedure_path(code: 'T-AS102', parent_id: @procedure), class: 'btn btn-info btn-md list' do %>
+              <i class="glyphicon glyphicon-plus"></i> Solicitud de aprobación de informe Parcial de Actividades
+             <% end %>
+            </li>
+          </p>
+          <p>
+            <li> 
+              <%= link_to new_procedure_path(code: 'T-AS103', parent_id: @procedure) , class: 'btn btn-info btn-md list' do %>
+              <i class="glyphicon glyphicon-plus"></i> Solicitud de aprobación de informe Final de Actividades
+              <% end %>
+            </li>
+          </p>
+          <p>
+            <li> 
+              <%= link_to new_procedure_path(code: 'T-AS104', parent_id: @procedure) , class: 'btn btn-warning btn-md list' do %>
+              <i class="glyphicon glyphicon-plus"></i> Solicitud de diferimiento del Año Sabatico
+              <% end %>
+            </li>
+          </p>
+          <p>
+            <li> 
+              <%= link_to new_procedure_path(code: 'T-AS105', parent_id: @procedure) , class: 'btn btn-primary btn-md list' do %>
+              <i class="glyphicon glyphicon-plus"></i> Solicitud de Reincorporación del Año Sabatico
+              <% end %>
+            </li>
+          </p>
+
+        </h4>
+      </ul>
+    </div>
+  </div>
+</div>
+

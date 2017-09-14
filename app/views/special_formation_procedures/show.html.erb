@@ -1,0 +1,64 @@
+<div class="well">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2> <strong> Información de la solicitud: <strong></h1>
+      </div>
+    </div>
+    <div class="row">
+
+      <%= render 'basic_info' %>
+
+      <% if @procedure.code == 'T-AS100' and @procedure.in_draft? %>
+        <%= render 'sabbatical_year_tips'%>
+      <% end %>
+
+      <% if @procedure.code == 'T-AS100' and !@procedure.in_draft? %>
+        <%= render 'sabbatical_year_control_panel' %>  
+      <% end %>
+
+      <% if @procedure.code == 'T-AS101' %>
+        <%= render 'modify_workplan_control_panel' %>  
+      <% end %>
+
+      <% if @procedure.code == 'T-AS102' %>
+        <%= render 'partial_report_control_panel' %>  
+      <% end %>
+
+      <% if @procedure.code == 'T-AS103'%>
+        <%= render 'final_report_control_panel' %>  
+      <% end %>
+
+      <% if @procedure.code == 'T-AS104'%>
+        <%= render 'delay_sabbatical_year_control_panel' %>  
+      <% end %>
+
+      <% if @procedure.code == 'T-AS105'%>
+        <%= render 'sabbatical_year_reincorporation_control_panel' %>  
+      <% end %>
+
+    </div>
+    <div class="row">
+        <% if @procedure.approved? and @procedure.code == 'T-AS100' %>
+          <%= render 'extra_requests'%>  
+        <% end %>
+    </div>
+    <br>
+  </div>
+  <div class="text-center">
+    <% if @procedure.in_draft? %>
+      <%= link_to validate_procedure_path(@procedure), class: 'btn btn-success btn-lg list' do %>
+        <i class="glyphicon glyphicon-cog"></i> Solicitar evaluacion de recaudos
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% if @procedure.in_draft? %>
+  <%= render 'requirement_list' %>
+<% else %>
+  <%= render 'steps_list' %>
+<% end %>
+
+
+  

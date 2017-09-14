@@ -1,0 +1,26 @@
+<div class="text-center">
+  <h1> <strong> Consulta de solicitud </strong> </h2>
+</div>
+
+<div class="well">  
+  <h3> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h3>      
+  <h3> 
+    <strong>Código de la solicitud:</strong> 
+    <%= @procedure.code %>  
+  </h3>
+  <h3>
+   <strong>Fecha de creacion: </strong> 
+    <%= @procedure.created_at.strftime("%d-%m-%Y") %>  
+  </h3>
+  <h3> <strong> Usuario: </strong> <%= @procedure.user.username %> </h3>  
+  <h3> <strong> Correo: </strong> <%= @procedure.user.email %>  </h3> 
+</div>
+
+<%= render 'steps_list'%>
+
+<div class="text-center">
+  <%= link_to validate_procedure_path(@procedure), class: 'btn btn-success btn-lg list' do %>
+    <i class="glyphicon glyphicon-cog"></i> En Proceso
+  <% end %>
+</div>
+

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
     end
   end
   
-  get 'special_formation', to: 'procedures#special_formation'
+  #get 'special_formation', to: 'procedures#special_formation'
 
   resources :admin_procedures do
     member do
@@ -24,6 +24,13 @@ Rails.application.routes.draw do
       get :complete
       get :generate_approval_document
       get :download_all_documents
+    end
+  end
+
+  resources :special_formation_procedures do
+    member do
+      get :validate
+      get :show_requirements
     end
   end
 
