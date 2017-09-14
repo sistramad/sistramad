@@ -11,6 +11,7 @@ class Procedure < ApplicationRecord
   belongs_to :parent, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
   has_many :sub_procedures, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
 
+  has_many :registered_users, dependent: :destroy
 
   aasm column: 'state' do
     state :in_draft, :initial => true
