@@ -1,53 +1,50 @@
-<div class="well">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <h2> <strong> Información de la solicitud: <strong></h1>
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2> Información de la solicitud: </h2>
+        </div>
       </div>
-    </div>
-    <div class="row">
 
-      <%= render 'basic_info' %>
+      <div class="row">
+        <%= render 'basic_info' %>
+        
+        <% if @procedure.in_draft? %>
+          <%= render 'tips'%>
+        <% end %>
+        <% if @procedure.code == 'T-AS100' and !@procedure.in_draft? %>
+          <%= render 'sabbatical_year_control_panel' %>  
+        <% end %>
+        <% if @procedure.code == 'T-AS101' %>
+          <%= render 'modify_workplan_control_panel' %>  
+        <% end %>
+        <% if @procedure.code == 'T-AS102' %>
+          <%= render 'partial_report_control_panel' %>  
+        <% end %>
+        <% if @procedure.code == 'T-AS103'%>
+          <%= render 'final_report_control_panel' %>  
+        <% end %>
+        <% if @procedure.code == 'T-AS104'%>
+          <%= render 'delay_sabbatical_year_control_panel' %>  
+        <% end %>
+        <% if @procedure.code == 'T-AS105'%>
+          <%= render 'sabbatical_year_reincorporation_control_panel' %>  
+        <% end %>
+      </div>
 
-      <% if @procedure.in_draft? %>
-        <%= render 'tips'%>
-      <% end %>
-
-      <% if @procedure.code == 'T-AS100' and !@procedure.in_draft? %>
-        <%= render 'sabbatical_year_control_panel' %>  
-      <% end %>
-
-      <% if @procedure.code == 'T-AS101' %>
-        <%= render 'modify_workplan_control_panel' %>  
-      <% end %>
-
-      <% if @procedure.code == 'T-AS102' %>
-        <%= render 'partial_report_control_panel' %>  
-      <% end %>
-
-      <% if @procedure.code == 'T-AS103'%>
-        <%= render 'final_report_control_panel' %>  
-      <% end %>
-
-      <% if @procedure.code == 'T-AS104'%>
-        <%= render 'delay_sabbatical_year_control_panel' %>  
-      <% end %>
-
-      <% if @procedure.code == 'T-AS105'%>
-        <%= render 'sabbatical_year_reincorporation_control_panel' %>  
-      <% end %>
-
-    </div>
-    <div class="row">
+      <div class="row">
         <% if @procedure.approved? and @procedure.code == 'T-AS100' %>
           <%= render 'extra_requests'%>  
         <% end %>
-    </div>
-    <br>
-  </div>
-  
-</div>
+      </div>
+      
+      <br>
+      
+      <% if @procedure.in_draft? %>
+        <%= render 'registered_users' %>
+      <% end %>
 
-<% if @procedure.in_draft? %>
-  <%= render 'registered_users' %>
-<% end %>
+    </div>
+  </div>    
+</div>
