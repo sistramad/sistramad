@@ -20,13 +20,14 @@
             </p>
           </div>
         
-          <%= simple_form_for @procedure, :url =>  special_formation_procedures_path, :method => :post, :html => {:multipart => true, :class => "form-horizontal"} do |f| %> 
+          <%= simple_form_for @procedure, :url =>  special_formation_procedures_path, :method => :post, 
+                                          :html => {:multipart => true, :class => "form-horizontal"} do |f| %> 
             <%= f.input :name, label: "Nombre del Trámite:", wrapper_html: { class: 'hidden'} %>
             <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>
             <%= f.input :parent_procedure_id, label: "Parent:", wrapper_html: { class: 'hidden'} %>
 
             <% @documents.each do |document| %>
-              <div class = "well well-sm col-md-6">
+              <div class = "well well-sm col-md-12">
                 <%= simple_fields_for 'documents[]', document do |ff| %>
                   <dl>
                     <dt> <h3> <%=document.name %> </h3> </dt>
@@ -39,6 +40,23 @@
                 <% end %>
               </div>
             <% end %>
+
+            <br>
+            
+            <div class = "well well-sm col-md-16 ">
+              <%= add_child_button "Agregar Usuario",:registered_users,"#users" %>
+              <%= new_fields_template f, :registered_users %>
+            </div>
+
+            <div id="users" class = "well well-sm col-md-16">
+              <%= f.fields_for :registered_users do |builder| %>
+                <div>
+                <%= render "registered_user_fields", :f => builder %>
+              </div>
+              <% end %>
+            </div>
+
+            <br>
 
             <div class = "col-md-12 col-md-offset-5">
               <%= f.button :submit , "Cargar Documentos" , class: 'btn btn-success btn-md list'%>

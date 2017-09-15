@@ -9,8 +9,8 @@
 
       <%= render 'basic_info' %>
 
-      <% if @procedure.code == 'T-AS100' and @procedure.in_draft? %>
-        <%= render 'sabbatical_year_tips'%>
+      <% if @procedure.in_draft? %>
+        <%= render 'tips'%>
       <% end %>
 
       <% if @procedure.code == 'T-AS100' and !@procedure.in_draft? %>
@@ -45,20 +45,9 @@
     </div>
     <br>
   </div>
-  <div class="text-center">
-    <% if @procedure.in_draft? %>
-      <%= link_to validate_procedure_path(@procedure), class: 'btn btn-success btn-lg list' do %>
-        <i class="glyphicon glyphicon-cog"></i> Solicitar evaluacion de recaudos
-      <% end %>
-    <% end %>
-  </div>
+  
 </div>
 
 <% if @procedure.in_draft? %>
-  <%= render 'requirement_list' %>
-<% else %>
-  <%= render 'steps_list' %>
+  <%= render 'registered_users' %>
 <% end %>
-
-
-  

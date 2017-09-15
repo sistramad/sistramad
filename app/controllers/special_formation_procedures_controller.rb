@@ -8,8 +8,7 @@ class SpecialFormationProceduresController < ApplicationController
   # GET /procedures
  
   def index
-    p 'My new controller!'
-    @procedures = Procedure.where code: params[:code]
+    @procedures = Procedure.where code: 'T-SPF200'
   end
 
   # GET /procedures/1  
@@ -92,10 +91,9 @@ class SpecialFormationProceduresController < ApplicationController
     render 'requirements'
   end
 
-
-
   #GET /procedures/1
   def validate
+
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
     
@@ -114,7 +112,9 @@ class SpecialFormationProceduresController < ApplicationController
     end
 
     def procedure_params
-      params.require(:procedure).permit(:name, :code, :parent_procedure_id, documents_attributes: [:id,:name,:code, :attachment])
+      params.require(:procedure).permit(:name, :code, :parent_procedure_id, 
+      documents_attributes: [:id,:name,:code, :attachment],
+      registered_users_attributes: [:id, :first_name, :last_name, :identification_number, :_destroy])
     end
 
     def set_procedure
