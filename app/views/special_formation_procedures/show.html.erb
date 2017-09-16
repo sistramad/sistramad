@@ -9,28 +9,7 @@
 
       <div class="row">
         <%= render 'basic_info' %>
-        
-        <% if @procedure.in_draft? %>
-          <%= render 'tips'%>
-        <% end %>
-        <% if @procedure.code == 'T-AS100' and !@procedure.in_draft? %>
-          <%= render 'sabbatical_year_control_panel' %>  
-        <% end %>
-        <% if @procedure.code == 'T-AS101' %>
-          <%= render 'modify_workplan_control_panel' %>  
-        <% end %>
-        <% if @procedure.code == 'T-AS102' %>
-          <%= render 'partial_report_control_panel' %>  
-        <% end %>
-        <% if @procedure.code == 'T-AS103'%>
-          <%= render 'final_report_control_panel' %>  
-        <% end %>
-        <% if @procedure.code == 'T-AS104'%>
-          <%= render 'delay_sabbatical_year_control_panel' %>  
-        <% end %>
-        <% if @procedure.code == 'T-AS105'%>
-          <%= render 'sabbatical_year_reincorporation_control_panel' %>  
-        <% end %>
+        <%= render 'tips'%>
       </div>
 
       <div class="row">
@@ -43,6 +22,8 @@
       
       <% if @procedure.in_draft? %>
         <%= render 'registered_users' %>
+      <% elsif @procedure.in_progress? %>
+        <%= render 'steps_list'%>
       <% end %>
 
     </div>

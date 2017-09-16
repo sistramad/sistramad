@@ -11,7 +11,11 @@
         </div>
         <br>    
       </div>
-      <%= render 'procedures_list'%>
+      
+      <% if @procedures.present? %>
+        <%= render 'procedures_list'%>
+      <% end %>
+      
     </div>
   </div>    
 </div>

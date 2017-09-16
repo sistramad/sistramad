@@ -16,7 +16,7 @@ module ProceduresHelper
   def add_child_button(name, association,target)
     content_tag(:spam,"<span>#{name}</span>".html_safe,
       :class => "add_child",
-      :style => "cursor:pointer; display: inline-block; width: 16;",
+      :style => "cursor:pointer; display: inline-block;  width: 16;",
       :"data-association" => association,
       :target => target)
   end

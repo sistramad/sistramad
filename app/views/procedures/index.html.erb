@@ -16,6 +16,10 @@
       </div>
     </div>
   </div>    
-  <%= render 'procedure' %>
+  
+  <% if @procedures.lenght > 0 %>
+    <%= render 'procedure' %>
+  <% end %>
+  
 </div>
 

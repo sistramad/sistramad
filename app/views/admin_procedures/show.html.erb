@@ -2,26 +2,27 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <h2> <strong> Información de la solicitud: <strong></h1>
+        <h2> <strong> Información de la solicitud: </strong></h2>
       </div>
     </div>
     <div class="row">
-      <%= render 'procedures/basic_info'%>
-      
-      <% if @procedure.in_progress? and @procedure.code == 'T-AS100' %>
-        <%= render 'sabbatical_year_admin_panel'%>
-      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS101'%>
+
+      <%= render "#{basic_info_view(@procedure.code)}" %> <!-- Selecciona el panel de informacion basica correcto dependiendo del tramite -->    
+   
+      <% case(@procedure.code)%>
+        <% when 'T-AS100'  then %>
+        <%= render 'sabbatical_year_admin_panel' %>
+        <% when 'T-AS101'  then %>
         <%= render 'modify_workplan_admin_panel'%>
-      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS102'%>
+        <% when 'T-AS102'  then %>
         <%= render 'partial_report_admin_panel'%>
-      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS103'%>
+        <% when 'T-AS103'  then %>
         <%= render 'final_report_admin_panel'%>
-      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS104'%>
+        <% when 'T-AS104'  then %>
         <%= render 'delay_sabbatical_year_admin_panel'%>
-      <% elsif @procedure.in_progress? and @procedure.code == 'T-AS105'%>
+        <% when 'T-AS105'  then %>
         <%= render 'sabbatical_year_reincorporation_admin_panel'%>
-      <% end %>
-      
+      <% end%>
     </div>
     <br>
   </div>

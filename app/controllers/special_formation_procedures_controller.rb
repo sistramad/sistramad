@@ -5,18 +5,14 @@ class SpecialFormationProceduresController < ApplicationController
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
   before_action :set_user
 
-  # GET /procedures
- 
   def index
     @procedures = Procedure.where code: 'T-SPF200'
   end
 
-  # GET /procedures/1  
   def show
   end
 
   def new
-    p 'My NEW!'
     code = params[:code]
     procedure_concrete = get_procedure_from_factory(code)
     
@@ -32,13 +28,11 @@ class SpecialFormationProceduresController < ApplicationController
     @documents = documents_required()
   end
 
-  # GET /procedures/1/edit
   def edit
 
   end
 
   def create
-    p 'My new Created!'
     @procedure = Procedure.new(procedure_params)
     @procedure.user = @user
     procedure_concrete = get_procedure_from_factory(@procedure.code)
@@ -49,7 +43,7 @@ class SpecialFormationProceduresController < ApplicationController
     respond_to do |format|
       if @procedure.save
         set_documents_to_procedure()
-        set_documents_to_user()
+        set_documents_to_user() # Eliminar ???????????????????????????????????????????????
         procedure_concrete.generate_workflow(@procedure)
         
         format.html { redirect_to special_formation_procedure_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
@@ -62,8 +56,6 @@ class SpecialFormationProceduresController < ApplicationController
     end
   end 
 
-  # PATCH/PUT /procedures/1
-  # PATCH/PUT /procedures/1.json
   def update
     respond_to do |format|
       if @procedure.update(procedure_params)
@@ -76,8 +68,6 @@ class SpecialFormationProceduresController < ApplicationController
     end
   end
 
-  # DELETE /procedures/1
-  # DELETE /procedures/1.json
   def destroy
     @procedure.destroy
       respond_to do |format|
@@ -91,14 +81,11 @@ class SpecialFormationProceduresController < ApplicationController
     render 'requirements'
   end
 
-  #GET /procedures/1
   def validate
-
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
-    
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to special_formation_procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to special_formation_procedure_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
       render :show 

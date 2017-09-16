@@ -289,4 +289,5 @@ Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros d
 Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del consejo de facultad", active: true).save
 
 Group.new(name: "Representante de Facultad", code: "R10", description: "Representantes de Facultad", active: true).save
+Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Universitario", active: true).save
 
