@@ -22,7 +22,7 @@
       
       <% if @procedure.in_draft? %>
         <%= render 'registered_users' %>
-      <% elsif @procedure.in_progress? %>
+      <% elsif @procedure.in_progress? || @procedure.approved? %>
         <%= render 'steps_list'%>
       <% end %>
 

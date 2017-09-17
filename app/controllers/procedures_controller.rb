@@ -8,7 +8,7 @@ class ProceduresController < ApplicationController
   # GET /procedures
  
   def index
-    @procedures = @user.procedures.sort_by &:created_at
+    @procedures = @user.procedures.where({code: ["T-AS100", "T-AS101", "T-AS102", "T-AS103", "T-AS104", "T-AS105" ]}).sort_by &:created_at
   end
 
   def special_formation

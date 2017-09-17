@@ -71,8 +71,8 @@ class AdminProceduresController < ApplicationController
   end
 
   def generate_approval_document
-    @procedure = Procedure.find(params[:procedure])
-    @user = User.find(@procedure.user)
+    @procedure = Procedure.find(params[:procedure]) # creo que no hace falta buscarlo en la BD
+    @user = User.find(@procedure.user.id)
 
     if generate_pdf?(@procedure, @user)
       procedure = get_procedure_intance(@procedure)
