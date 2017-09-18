@@ -21,7 +21,7 @@ module ProceduresHelper
       :target => target)
   end
   def remove_child_button(name)
-    content_tag(:div,"<span>Eliminar</span>".html_safe,
+    content_tag(:div,"<span> Eliminar </span>".html_safe,
       :style => "cursor:pointer; border:1px solid #777; display:inline-block; width: 60px;",
       :class => "remove_child")
   end

@@ -23,9 +23,11 @@ class SpecialFormationProceduresController < ApplicationController
     if params.has_key?(:parent_id)
       @procedure.parent = Procedure.find(params[:parent_id])
     end
-
+   
     @documents = Array.new 
     @documents = documents_required()
+
+    @procedure.registered_users.build
   end
 
   def edit
@@ -42,14 +44,15 @@ class SpecialFormationProceduresController < ApplicationController
 
     respond_to do |format|
       if @procedure.save
-        set_documents_to_procedure()
-        # set_documents_to_user() # Eliminar ???????????????????????????????????????????????
+        set_documents_to_procedure()       
         procedure_concrete.generate_workflow(@procedure)
         
         format.html { redirect_to special_formation_procedure_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages
+        flash[:error] = 'Error. Asegurese de llenar todos los campos.'
+        @documents = documents_required()
         format.html { render :new }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end

@@ -25,7 +25,7 @@
             <%= f.input :name, label: "Nombre del Trámite:", wrapper_html: { class: 'hidden'} %>
             <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>
             <%= f.input :parent_procedure_id, label: "Parent:", wrapper_html: { class: 'hidden'} %>
-
+           
             <% @documents.each do |document| %>
               <div class = "well well-sm col-md-12">
                 <%= simple_fields_for 'documents[]', document do |ff| %>
@@ -44,13 +44,13 @@
             <br>
             
             <div class = "well well-sm col-md-12 center">
-              <%= add_child_button "Agregar Usuario",:registered_users,"#users" %>
+            <h4> <%= add_child_button "Haga click para agregar docente",:registered_users,"#users" %></h4>
               <%= new_fields_template f, :registered_users %>
             </div>
 
             <div id="users" class = "well well-sm col-md-16">
               <%= f.fields_for :registered_users do |builder| %>
-                <div>
+                <div>                
                 <%= render "registered_user_fields", :f => builder %>
               </div>
               <% end %>
@@ -59,7 +59,7 @@
             <br>
 
             <div class = "col-md-12 col-md-offset-5">
-              <%= f.button :submit , "Cargar Documentos" , class: 'btn btn-success btn-md list'%>
+              <%= f.button :submit , "Completar" , class: 'btn btn-success btn-md list'%>
             </div>
           <% end %>
       

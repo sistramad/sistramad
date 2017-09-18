@@ -12,7 +12,9 @@ class Procedure < ApplicationRecord
   has_many :sub_procedures, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
   
   has_many :registered_users, dependent: :destroy
-  accepts_nested_attributes_for :registered_users, :allow_destroy => true, :reject_if => :all_blank
+
+  accepts_nested_attributes_for :registered_users, allow_destroy: :true
+
 
   aasm column: 'state' do
     state :in_draft, :initial => true
