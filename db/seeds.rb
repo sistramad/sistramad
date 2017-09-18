@@ -98,6 +98,73 @@
 #user.add_role(:docente)
 #user.add_role(:asuntos)
 
+=begin
+user = User.new(:username => 'consejodepartamento',
+                :email => 'consejoDepartamental@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Departamental',
+                :genre => 'm',
+                :identification_document => '1001',
+                :birthday => "06/10/1965".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:Consejo_Departamento)
+user.save!
+=end
+
+user = User.new(:username => 'consejouniversitario',
+:email => 'consejoUniversitario@test.com',
+:first_name => 'Consejo',
+:middle_name => 'x',
+:last_name => 'Universitario',
+:genre => 'm',
+:identification_document => '1001',
+:birthday => "06/10/1970".to_date,
+:password => '123456', #Devise.friendly_token[0,20]
+:password_confirmation => '123456')
+user.add_role(:Consejo_Universitario)
+user.save!
+
+user = User.new(:username => 'departamento',
+                :email => 'Departamento@test.com',
+                :first_name => 'Departamento',
+                :middle_name => 'x',
+                :last_name => 'Departamento',
+                :genre => 'm',
+                :identification_document => '1002',
+                :birthday => "06/10/1966".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+                user.add_role(:departamento)
+user.save!                 
+                
+user = User.new(:username => 'consejoescuela',
+                :email => 'consejoEscuela@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Escuela',
+                :genre => 'm',
+                :identification_document => '1003',
+                :birthday => "06/10/1967".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456') 
+user.add_role(:Consejo_Escuela)
+user.save!                
+                
+user = User.new(:username => 'consejofacultad',
+                :email => 'consejoFacultad@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Facultad',
+                :genre => 'm',
+                :identification_document => '1004',
+                :birthday => "06/10/1968".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:Consejo_Facultad)                  
+user.save!
+
 #reference_region = Reference.new(:name => 'region') #1
 #reference_region.save!
 
@@ -320,19 +387,19 @@
 #joint_plan.save!
 
 #Documentos indispensables para el traslado
-document = Document.new(:name => 'Copia Certificada Titulo Universitario')
-document.save!
+#document = Document.new(:name => 'Copia Certificada Titulo Universitario')
+#document.save!
 #Sintesis Curricular id->12
-document = Document.new(:name => 'Motivación Razonada para el Traslado')
-document.save!
-document = Document.new(:name => 'Certificación Expedida de Secretario Universidad de Origen')
-document.save!
+#document = Document.new(:name => 'Motivación Razonada para el Traslado')
+#document.save!
+#document = Document.new(:name => 'Certificación Expedida de Secretario Universidad de Origen')
+#document.save!
 #Fotocopia del ultimo ascenso id->4
-document = Document.new(:name => 'Copia de Oficio de Designación como Docente')
-document.save!
+#document = Document.new(:name => 'Copia de Oficio de Designación como Docente')
+#document.save!
 
 #Para Heroku
-formalities_master = FormalitiesMaster.new(:name => 'Traslados',:description =>'Se entiende por traslado al procedimiento académico administrativo mediante el cual un miembro del personal Docente y de Investigación puede ser transferido, en forma Parcial o Total, transitoria o permanentemente, a otra Unidad Académica de Adscripción en',:table_manager => 'ProfessorsTransfer',:isactive => true)
-formalities_master.save!
-formalities_master = FormalitiesMaster.new(:name => 'Plan Conjunto',:description =>'Se entiende por Plan Conjunto a la combinación secuencial de un año sabático y una beca sueldo en la que el componente de Año Sabático queda incluido como parte del plan de formación al grado académico correspondiente y goza de todos los beneficios y sopor',:table_manager =>'JointPlan',:isactive => true)
-formalities_master.save!
+#formalities_master = FormalitiesMaster.new(:name => 'Traslados',:description =>'Se entiende por traslado al procedimiento académico administrativo mediante el cual un miembro del personal Docente y de Investigación puede ser transferido, en forma Parcial o Total, transitoria o permanentemente, a otra Unidad Académica de Adscripción en',:table_manager => 'ProfessorsTransfer',:isactive => true)
+#formalities_master.save!
+#formalities_master = FormalitiesMaster.new(:name => 'Plan Conjunto',:description =>'Se entiende por Plan Conjunto a la combinación secuencial de un año sabático y una beca sueldo en la que el componente de Año Sabático queda incluido como parte del plan de formación al grado académico correspondiente y goza de todos los beneficios y sopor',:table_manager =>'JointPlan',:isactive => true)
+#formalities_master.save!

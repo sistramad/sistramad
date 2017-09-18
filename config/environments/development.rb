@@ -44,4 +44,17 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   config.assets.quiet = true
+
+  # Configuracion para mandar correos con Gmail en development
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV['gmail_username'],
+    :password             => ENV['gmail_password'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
+  # Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
+  config.active_job.queue_adapter = :delayed_job # para ejecutar el job: $ bundle exec rake jobs:work
 end

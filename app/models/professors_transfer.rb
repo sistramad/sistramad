@@ -3,6 +3,8 @@ class ProfessorsTransfer < ActiveRecord::Base
   belongs_to :user
   #belongs_to :faculty, :foreign_key => 'faculty_from_id'
   #belongs_to :faculty, :foreign_key => 'faculty_to_id'
+  has_one :request_workflow, dependent: :destroy
+  has_many :workflow_steps, through: :request_workflows
   belongs_to :faculty_from, :class_name => 'Faculty', :foreign_key => 'faculty_from_id'
   belongs_to :faculty_to, :class_name => 'Faculty', :foreign_key => 'faculty_to_id'
   belongs_to :from, :class_name => 'ReferenceList', :foreign_key => 'faculty_from_id'

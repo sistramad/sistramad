@@ -102,11 +102,11 @@
                     </li> 
                   <% end %> 
                 <% end %>  
-                <% if current_user.has_role? :decano %>
+                <% if ((current_user.has_role? :decano) || (current_user.has_role? :Consejo_Departamento)|| (current_user.has_role? :Consejo_Escuela) || (current_user.has_role? :Consejo_Facultad) || (current_user.has_role? :departamento) || (current_user.has_role? :Consejo_Universitario))%>
                     <li><%= link_to professors_transfers_path do%>
                         <i class="fa fa-circle-o"></i>
                         Ver Solicitudes de Traslados
-                  <% end %></li>
+                    <% end %></li>
                 <% end %>
               </ul>
             </li>

@@ -1,5 +1,7 @@
 class ProfessorsTransfersController < ApplicationController
-  
+
+  include EmailService
+
   before_action :set_professors_transfer, only: [:show, :edit, :update, :destroy]
   before_action :set_user
   before_action :set_faculties, only: [:new,:edit]
@@ -58,6 +60,16 @@ class ProfessorsTransfersController < ApplicationController
   def update
     respond_to do |format|
       if @professors_transfer.update(professors_transfer_params)
+        #@departmentUser= Role.find_by_name('Consejo_Departamento').users
+        #NotificationMailer.initial_validation_success_email_translate(@user).deliver_now
+        #@departmentUser.each do |departmentUser|
+        #  NotificationMailer.need_to_approve_email(departmentUser).deliver_now
+        #end
+        type = Reference.find(@professors_transfer.type_of_translate).name
+        actual_request = get_request_from_factory(type)
+        actual_request.generate_workflow(@professors_transfer)
+        actual_request.professors_transfer = @professors_transfer
+        actual_request.initial_requirements_valid?  
         format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
         format.json { render :show, status: :ok, location: @professors_transfer }
       else
@@ -148,14 +160,19 @@ class ProfessorsTransfersController < ApplicationController
 
     def get_froms
       if ((params[:faculty_to_id].present?)&&(params[:type_of_translate].present?)) 
-        @reference_lists = ReferenceList.where("value NOT IN (?) AND reference_id =?", params[:faculty_to_id],params[:type_of_translate])
+        @reference_lists = ReferenceList.where("id NOT IN (?) AND reference_id =?", params[:faculty_to_id],params[:type_of_translate])
       end
     end
 
     def get_to 
       if ((params[:faculty_from_id].present?)&&(params[:type_of_translate].present?)) 
-        @reference_lists = ReferenceList.where("value NOT IN (?) AND reference_id =?", params[:faculty_from_id],params[:type_of_translate])
+        @reference_lists = ReferenceList.where("id NOT IN (?) AND reference_id =?", params[:faculty_from_id],params[:type_of_translate])
       end
     end
 
-end
+    def get_request_from_factory(type)
+      factory = WorkflowFactory.new
+      factory.build(type)
+    end
+
+end 

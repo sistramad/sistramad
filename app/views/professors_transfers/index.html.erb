@@ -24,8 +24,8 @@
           <%= professors_transfer.user.middle_name.capitalize %>
           <%= professors_transfer.user.last_name.capitalize %>
           (<%= professors_transfer.user.username %>)</li></td>
-          <td><li><%= professors_transfer.faculty_from.name %></li></td>
-          <td><li><%= professors_transfer.faculty_to.name %></li></td>
+          <td><li><%= professors_transfer.from.name %></li></td>
+          <td><li><%= professors_transfer.to.name %></li></td>
           <td>
             <li>
               <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <%= link_to "Descargar", download_professors_transfers_path(user_id: professors_transfer.user.id), {method: "download"} %>

@@ -40,4 +40,9 @@ class User < ActiveRecord::Base
     self.add_role(:test) if self.roles.blank?
   end
 
+  def self.with_role(role)
+    my_role = Role.find_by_name(role)
+    where(:role => my_role)
+ end
+
 end

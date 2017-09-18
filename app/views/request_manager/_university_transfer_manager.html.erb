@@ -1,0 +1,47 @@
+<div class="col-md-6">
+<br>
+<div class="panel panel-primary">
+  <div 
+    class="panel-heading">Acciones disponibles:
+  </div>
+  <div class="panel-body">
+    <ul>
+      <h4>
+        <% step = @professors_transfer.steps.find_by(step_number: 1)%>
+        <% unless step.state != 'in_progress'%>
+          <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @professors_transfer) %> </li> </p>
+        <% end %>
+        <% @document = find_document_by_code(@professors_transfer, "PDT")%>
+        <% step = @professors_transfer.steps.find_by(step_number: 2)%>
+        <% unless @document.nil? or step.state != 'in_progress'%>
+          <p><li> <%= link_to "Aprobar plan de trabajo.", show_document_admin_procedure_path(document_code: 'PDT', step: '#2') %> </li></p>
+        <% end %>
+        <% @document = find_document_by_code(@professors_transfer, "CDA")%>
+        <% step = @professors_transfer.steps.find_by(step_number: 3)%>
+        <% unless @document.nil? or step.state != 'in_progress'%>
+          <p><li> <%= link_to "Aprobar constancia de antiguedad.", show_document_admin_procedure_path(document_code: 'CDA', step: '#3') %> </li></p>
+        <% end %>
+        <% @document = find_document_by_code(@professors_transfer, "CDAP")%>
+        <% if @document.nil? %>
+          <p><li> <%= link_to "Generar constancia de aprobación.", new_document_path(step_number: 'Constancia de aprobación', code: 'CDAP', procedure: @professors_transfer, step: '#4' ) %> </li></p>
+        <% else %>
+          <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+        <% end %>
+        <% step = @professors_transfer.steps.find_by(step_number:4)%>
+        <% unless step.state != 'in_progress'%>
+          <p> <li> <%= link_to "Aprobar constancia de aprobación.", show_document_admin_procedure_path(document_code: 'CDAP', step: '#4')%> </li> </p>
+        <% end %>
+        <br>
+        <div class='text-center'>
+          <% if @professors_transfer.IP? %>
+            <%= link_to complete_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
+              <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
+            <% end %>
+          <% end %>
+        </div>
+
+      </h4>
+    </ul>
+  </div>
+</div>
+</div>

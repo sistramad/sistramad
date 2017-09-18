@@ -121,3 +121,6 @@ gem 'aasm'
 
 # se reemplazo el servidor de web-brick a puma 
 gem "puma"
+
+# Backend para procesos en background
+gem 'delayed_job_active_record'

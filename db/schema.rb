@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830055657) do
+ActiveRecord::Schema.define(version: 20170917185358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,22 @@ ActiveRecord::Schema.define(version: 20170830055657) do
 
   add_index "countries", ["alpha2code"], name: "index_countries_on_alpha2code", unique: true, using: :btree
   add_index "countries", ["alpha3code"], name: "index_countries_on_alpha3code", unique: true, using: :btree
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer  "priority",   default: 0, null: false
+    t.integer  "attempts",   default: 0, null: false
+    t.text     "handler",                null: false
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "documents", force: :cascade do |t|
     t.string   "name"
@@ -170,6 +186,18 @@ ActiveRecord::Schema.define(version: 20170830055657) do
     t.datetime "file_updated_at"
   end
 
+  create_table "request_workflows", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "professors_transfer_id"
+    t.boolean  "is_active",              default: true
+    t.boolean  "is_completed",           default: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "request_workflows", ["professors_transfer_id"], name: "index_request_workflows_on_professors_transfer_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name",          null: false
     t.integer  "resource_id"
@@ -250,6 +278,24 @@ ActiveRecord::Schema.define(version: 20170830055657) do
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true, using: :btree
 
+  create_table "workflow_steps", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "request_workflow_id"
+    t.date     "approval_date"
+    t.integer  "role_id"
+    t.text     "info"
+    t.integer  "step_number"
+    t.boolean  "is_active"
+    t.boolean  "is_completed"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "status"
+  end
+
+  add_index "workflow_steps", ["request_workflow_id"], name: "index_workflow_steps_on_request_workflow_id", using: :btree
+  add_index "workflow_steps", ["role_id"], name: "index_workflow_steps_on_role_id", using: :btree
+
   add_foreign_key "employees", "users"
   add_foreign_key "formalities_documents", "documents"
   add_foreign_key "formalities_documents", "formalities_masters"
@@ -257,6 +303,9 @@ ActiveRecord::Schema.define(version: 20170830055657) do
   add_foreign_key "notifications", "users"
   add_foreign_key "professors_transfers", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
+  add_foreign_key "request_workflows", "professors_transfers"
   add_foreign_key "universities", "countries"
   add_foreign_key "university_degrees", "universities"
+  add_foreign_key "workflow_steps", "request_workflows"
+  add_foreign_key "workflow_steps", "roles"
 end
