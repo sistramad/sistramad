@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       get :approve_step
       get :complete
       get :generate_approval_document
+      get :download_all_documents
     end
   end
 

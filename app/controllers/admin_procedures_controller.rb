@@ -1,5 +1,6 @@
 class AdminProceduresController < ApplicationController
   include EmailService
+  require 'zip'
   before_action :set_procedure, only: [:show, :complete]
 
   def index
@@ -81,6 +82,26 @@ class AdminProceduresController < ApplicationController
       flash[:error] = 'Error al generar constacia de aprobación.'
     end
     redirect_to  admin_procedure_path(@procedure)
+  end
+
+  def download_all_documents
+    procedure = Procedure.find(params[:id])    
+    temp_file = Tempfile.new('all_documents.zip')
+    begin
+      Zip::OutputStream.open(temp_file) { |zos| }
+      #Add files to the zip file as usual
+      Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
+        procedure.documents.order(:name).each do |document|
+          zipfile.add(document.attachment_identifier, document.attachment.current_path)
+        end
+      end
+      #Read the binary data from the file
+      zip_data = File.read(temp_file.path)
+      send_data(zip_data, :type => 'application/zip', :filename => "AllDocuments-#{Time.now.to_date}")
+    ensure
+      temp_file.close
+      temp_file.unlink
+    end
   end
 
   private
