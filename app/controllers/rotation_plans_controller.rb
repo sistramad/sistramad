@@ -3,7 +3,7 @@ class RotationPlansController < ApplicationController
   include EmailService
   include FactoryHelper
   include ProceduresHelper
-  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
+  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult, :show_participants]
   before_action :set_user
 
   def index
@@ -11,6 +11,7 @@ class RotationPlansController < ApplicationController
   end
 
   def show
+    @participants = @procedure.users
   end
 
   def new
@@ -47,7 +48,7 @@ class RotationPlansController < ApplicationController
         set_documents_to_procedure()       
         procedure_concrete.generate_workflow(@procedure)
         
-        format.html { redirect_to rotation_plans_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
+        format.html { redirect_to rotation_plan_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages
@@ -93,6 +94,15 @@ class RotationPlansController < ApplicationController
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
       render :show 
     end
+  end
+
+  def show_participants
+    @participants = @procedure.users
+    render :show_participants
+  end
+
+  def add_participants
+    render :add_partipants
   end
 
   private

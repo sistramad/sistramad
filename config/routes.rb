@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     member do
       get :validate
       get :show_requirements
+      get :show_participants
+      get :add_participants
     end
   end
 

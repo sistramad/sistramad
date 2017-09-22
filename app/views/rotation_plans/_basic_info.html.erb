@@ -13,7 +13,6 @@
       <h4> <strong> Estado: </strong>
         <% if @procedure.in_draft? %>
           <span class="label label-default"><%= state_translate(@procedure.state) %> </span>
-            <br>           
         <% elsif @procedure.in_progress? %>
             <span class="label label-primary"><%= state_translate(@procedure.state) %> </span>
         <% elsif @procedure.approved? %>
@@ -24,19 +23,9 @@
             <span class="label label-danger"><%= state_translate(@procedure.state) %> </span>
         <% end %>
       </h4>
-
-     
       <br>
-      
-      <% if @procedure.in_draft? %>
-        <h4>
-          <div class="text-center">
-            <%= link_to validate_special_formation_procedure_path(@procedure), class: 'btn btn-success btn-md list' do %>
-              <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la Solicitud
-            <% end %>
-          </div>
-        </h4>
-      <% end %>
+
+      <%= link_to 'Agregar usuarios a este plan', add_participants_rotation_plan_path(@procedure) %>
       
     </div>
   </div>

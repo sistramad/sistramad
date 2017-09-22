@@ -10,6 +10,9 @@ class Procedure < ApplicationRecord
   
   belongs_to :parent, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
   has_many :sub_procedures, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
+
+  has_many :participants
+  has_many :users, through: :participants
   
   has_many :registered_users, dependent: :destroy
 
