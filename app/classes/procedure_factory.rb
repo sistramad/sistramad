@@ -9,6 +9,7 @@ class ProcedureFactory
       when 'T-AS105'  then SabbaticalYearReincorporation.new
         
       when 'T-SPF200' then FormationProgram.new
+      when 'T-SPR201' then RotationPlan.new 
     end
   end 
 end

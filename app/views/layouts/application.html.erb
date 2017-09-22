@@ -60,16 +60,19 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
-
             <li>
               <%= link_to special_formation_procedures_path(code: "T-SPF200") do %>
                 <i class="fa fa-circle-o"></i>
                   Formación Especial
                 <% end %>
             <li>
-            
+            <li>
+              <%= link_to rotation_plans_path(code: "T-SPR201") do %>
+                <i class="fa fa-circle-o"></i>
+                  Plan de Rotación
+                <% end %>
+            <li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
             <li><a href="/procedures"><i class="fa fa-circle-o"></i> <span>Año Sabatico</span></a></li>
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>

@@ -282,6 +282,15 @@ DocumentMaster.new(name: "Aprobación de solicitud de reincorporación", code: "
 #Plan de Formacion Especial:
 DocumentMaster.new(name: "Programa de Formación Especial", code: "D-PFE", procedure: "Programa de Formación Especial", active: true , initially_required: true ).save
 
+#Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Carta de Propósito", code: "D-MPC", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Asunción Compartida", code: "D-MAC", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación de Condiciones", code: "D-CAC", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación de Cumplir Plan", code: "D-ACP", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación del Departamento", code: "D-ADP", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+
 
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save

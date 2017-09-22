@@ -34,6 +34,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :rotation_plans do
+    member do
+      get :validate
+      get :show_requirements
+    end
+  end
+
   resources :university_degrees
   resources :universities
   resources :faculties

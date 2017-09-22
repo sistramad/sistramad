@@ -2,6 +2,7 @@
 class SpecialFormationProceduresController < ApplicationController
   include EmailService
   include FactoryHelper
+  include ProceduresHelper
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
   before_action :set_user
 
@@ -25,7 +26,7 @@ class SpecialFormationProceduresController < ApplicationController
     end
    
     @documents = Array.new 
-    @documents = documents_required()
+    @documents = documents_required(@user, @procedure)
 
     @procedure.registered_users.build
   end
@@ -52,7 +53,7 @@ class SpecialFormationProceduresController < ApplicationController
       else
         @procedure.errors.full_messages
         flash[:error] = 'Error. Asegurese de llenar todos los campos.'
-        @documents = documents_required()
+        @documents = documents_required(@user, @procedure)
         format.html { render :new }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end
@@ -110,14 +111,6 @@ class SpecialFormationProceduresController < ApplicationController
     def set_procedure
       @procedure = Procedure.find(params[:id])
     end
-
-    def documents_required
-      procedure_documents = DocumentMaster.where(procedure: @procedure.name, active: true, initially_required: true)
-      procedure_documents.each do |doc|
-        @documents << Document.new(name: doc.name, code: doc.code)
-      end
-      return procedure_documents
-    end  
 
     def create_documents
       documents_param = params.permit(documents: [:name, :code, :attachment])

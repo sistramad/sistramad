@@ -13,6 +13,7 @@ module ProceduresHelper
     tmpl = tmpl.gsub /(?<!\n)\n(?!\n)/, ' '
     return "<script> var #{options[:template]} = '#{tmpl.to_s}' </script>".html_safe
   end
+
   def add_child_button(name, association,target)
     content_tag(:spam,"<span>#{name}</span>".html_safe,
       :class => "add_child",
@@ -20,9 +21,22 @@ module ProceduresHelper
       :"data-association" => association,
       :target => target)
   end
+
   def remove_child_button(name)
     content_tag(:div,"<span> Eliminar </span>".html_safe,
       :style => "cursor:pointer; border:1px solid #777; display:inline-block; width: 60px;",
       :class => "remove_child")
   end
+
+  def documents_required(user, procedure)
+    excluded = []
+    user_docs = user.documents.where(code: %w[CI RIF]) #Estos son los documentos que se son comunes para todos los trámites.
+    user_docs.each do |doc|
+      excluded << doc.code    
+    end
+    procedure_documents = DocumentMaster.where(procedure: procedure.name, active: true, initially_required: true)
+                          .where.not(code: excluded)
+    return procedure_documents
+  end  
+
 end

@@ -1,22 +1,15 @@
 
-class ProceduresController < ApplicationController
+class RotationPlansController < ApplicationController
   include EmailService
   include FactoryHelper
   include ProceduresHelper
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult]
   before_action :set_user
 
-  # GET /procedures
- 
   def index
-    @procedures = @user.procedures.where({code: ["T-AS100", "T-AS101", "T-AS102", "T-AS103", "T-AS104", "T-AS105" ]}).sort_by &:created_at
+    @procedures = @user.procedures.where(code: 'T-SPR201').sort_by &:created_at
   end
 
-  def special_formation
-    @procedures = Procedure.where code: params[:code]
-  end
-
-  # GET /procedures/1  
   def show
   end
 
@@ -31,11 +24,12 @@ class ProceduresController < ApplicationController
     if params.has_key?(:parent_id)
       @procedure.parent = Procedure.find(params[:parent_id])
     end
-
+   
+    @documents = Array.new 
     @documents = documents_required(@user, @procedure)
+
   end
 
-  # GET /procedures/1/edit
   def edit
 
   end
@@ -50,22 +44,21 @@ class ProceduresController < ApplicationController
 
     respond_to do |format|
       if @procedure.save
-        set_documents_to_procedure()
-        set_documents_to_user()
+        set_documents_to_procedure()       
         procedure_concrete.generate_workflow(@procedure)
         
-        format.html { redirect_to @procedure, notice: 'La solicitud del trámite se ha creado exitosamente.'}
+        format.html { redirect_to rotation_plans_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages
+        flash[:error] = 'Error. Asegurese de llenar todos los campos.'
+        @documents = documents_required(@user, @procedure)
         format.html { render :new }
         format.json { render json: @procedure.errors, status: :unprocessable_entity }
       end
     end
   end 
 
-  # PATCH/PUT /procedures/1
-  # PATCH/PUT /procedures/1.json
   def update
     respond_to do |format|
       if @procedure.update(procedure_params)
@@ -78,12 +71,10 @@ class ProceduresController < ApplicationController
     end
   end
 
-  # DELETE /procedures/1
-  # DELETE /procedures/1.json
   def destroy
     @procedure.destroy
       respond_to do |format|
-      format.html { redirect_to procedures_path, notice: 'La solicitud fue cancelada con éxito.' }
+      format.html { redirect_to rotation_plans_path, notice: 'La solicitud fue cancelada con éxito.' }
       format.json { head :no_content }
     end
   end
@@ -93,15 +84,11 @@ class ProceduresController < ApplicationController
     render 'requirements'
   end
 
-
-
-  #GET /procedures/1
   def validate
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
-    
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
       render :show 
@@ -115,7 +102,9 @@ class ProceduresController < ApplicationController
     end
 
     def procedure_params
-      params.require(:procedure).permit(:name, :code, :parent_procedure_id, documents_attributes: [:id,:name,:code, :attachment])
+      params.require(:procedure).permit(:name, :code, :parent_procedure_id, 
+      documents_attributes: [:id,:name,:code, :attachment],
+      registered_users_attributes: [:id, :first_name, :last_name, :identification_number, :_destroy])
     end
 
     def set_procedure
