@@ -1,1 +1,21 @@
-<h1> Hola que hace </h1>
+<div class="container"> 
+  <div class="panel panel-primary">
+    <div class="panel-heading">Busqueda de usuarios: </div>
+      <div class="panel-body">
+        <div class="row col-md-12">
+          <%= render 'lookup'%>
+          <br>
+          <br>
+          <br>
+          <br>
+          <% if @participants.size > 0 %>
+            <%= render 'participants'%>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+

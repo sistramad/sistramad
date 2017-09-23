@@ -3,7 +3,7 @@ class RotationPlansController < ApplicationController
   include EmailService
   include FactoryHelper
   include ProceduresHelper
-  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult, :show_participants]
+  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult, :show_participants, :add_participants, :add_user]
   before_action :set_user
 
   def index
@@ -102,7 +102,33 @@ class RotationPlansController < ApplicationController
   end
 
   def add_participants
-    render :add_partipants
+    @participants = @procedure.users
+  end
+
+  def search_users
+    @users = User.search(params[:search_param])
+    if @users
+      @users = current_user.except_current_user(@users)
+      @users.each do |u|
+        p u.first_name
+        p u.last_name
+      end
+      render partial: 'lookup'
+      
+    else
+      render status: :not_found, nothing: true
+    end
+  end
+
+  def add_user
+    @user = User.find(params[:user])
+    @procedure.participants.build(user_id: @user.id)
+    if @procedure.save
+      redirect_to add_participants_plan_path(@procedure), notice: "El usuario fue agregado al plan."
+    else
+      redirect_to add_participants_plan_path(@procedure), flash[:error] = "Ha ocurrido un error, el usuario no pudo agregarse a este plan."
+    end
+    
   end
 
   private

@@ -15,15 +15,14 @@
           </tr>
         </thead>
         <tbody>
-
-        <% @participants.each do |user|%>
-          <tr>
-            <td> <%= user.first_name%></td>
-            <td> <%= user.last_name %></td>
-            <td> <%= user.identification_document %></td>
-            <td> <%= user.email %></td>
-          </tr>
-        <% end %>
+          <% @participants.each do |user|%>
+            <tr>
+              <td> <%= user.first_name%></td>
+              <td> <%= user.last_name %></td>
+              <td> <%= user.identification_document %></td>
+              <td> <%= user.email %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
