@@ -16,8 +16,7 @@ gem 'coffee-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -74,8 +73,7 @@ gem 'carrierwave-crop'
 # para transformar imagenes
 # gem 'rmagick', '~> 2.15', '>= 2.15.4'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
-# para que puedan coexistir jquery y turbolinks sin problemas
-gem 'jquery-turbolinks'
+
 # se reemplazo el servidor de web-brick a puma 
 gem "puma"
 # para generar pdf

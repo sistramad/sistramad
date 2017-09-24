@@ -1,5 +1,5 @@
 <div id="user-lookup">
-  <%= form_tag search_users_rotation_plan_path, remote: true, method: :get, id: 'user-lookup-form' do %>
+  <%= form_tag search_users_rotation_plan_path,  method: :get, id: 'user-lookup-form' do %>
     <div class="form-group row no-padding text-center col-md-12">
       <div class="col-md-10">
         <%= text_field_tag :search_param, params[:search_param],
@@ -15,20 +15,20 @@
     </div>
   <% end %>
   <%= render 'common/spinner' %>
-  <h1> TENGO 0!!!</h1>
   <% if @users %>
-    <h1> TENGO USUARIOS!!!</h1>
     <% if @users.size > 0 %>
-      <div id="user-lookup-results" class="well results-block col-md-10">
-        <table class="search-results-table col-md-12">
+      <div id="user-lookup-results" class="well col-md-12">
+        <table class="table table-striped table-hover col-md-12 ">
           <tbody>
             <% @users.each do |user| %>
-              <% p user.identification_document%>
               <tr>
                 <td><strong>Nombre:</strong> <%= user.first_name %></td>
                 <td><strong>Apellido:</strong> <%= user.last_name %></td>
                 <td><strong>Cédula:</strong> <%= user.identification_document %></td>
                 <td><strong>Correo:</strong> <%= user.email %></td>
+                <td><%= link_to "Agregar", add_user_rotation_plan_path(user: user), 
+                                class: "btn btn-xs btn-success", method: :post %>
+                </td>
               </tr>
             <% end %>
           </tbody>

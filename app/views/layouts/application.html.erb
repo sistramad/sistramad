@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>Sistramad</title>
-  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <%= stylesheet_link_tag 'application', :media => "all"%>
+  <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -145,6 +145,5 @@
       </footer>
   <% end %>
 </div>
-<%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>

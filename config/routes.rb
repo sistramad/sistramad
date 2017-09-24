@@ -45,6 +45,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :participants
+
   resources :university_degrees
   resources :universities
   resources :faculties
