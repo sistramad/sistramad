@@ -88,7 +88,9 @@ class AdminProceduresController < ApplicationController
       #Add files to the zip file as usual
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
         procedure.documents.order(:name).each do |document|
-          zipfile.add(document.attachment_identifier, document.attachment.current_path)
+          if document.attachment_url
+            zipfile.add(document.attachment_identifier, document.attachment.current_path)
+          end
         end
       end
       #Read the binary data from the file
