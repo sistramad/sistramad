@@ -11,7 +11,7 @@ class RotationPlansController < ApplicationController
   end
 
   def show
-    @participants = @procedure.users
+    
   end
 
   def new
@@ -91,7 +91,7 @@ class RotationPlansController < ApplicationController
     if concrete_procedure.initial_requirements_valid?  
       redirect_to rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
-      flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
+      flash[:error] = 'La solicitud No ha podido completarse, asegurese cumplir todos los requerimientos necesarios.'
       render :show 
     end
   end
@@ -117,15 +117,20 @@ class RotationPlansController < ApplicationController
   end
 
   def add_user
-    @user = User.find(params[:user])
-    @procedure.participants.build(user_id: @user.id)
-    if @procedure.save
-      redirect_to add_participants_rotation_plan_path(@procedure), notice: "El usuario fue agregado al plan."
+    if @procedure.participants.size < 2
+      @user = User.find(params[:user])
+      @procedure.participants.build(user_id: @user.id)
+      if @procedure.save
+        redirect_to add_participants_rotation_plan_path(@procedure), notice: "El usuario fue agregado al plan."
+      else
+        redirect_to add_participants_rotation_plan_path(@procedure)
+        flash[:error] = 'Error, ya el usuario ha sido agregado.'
+      end
     else
       redirect_to add_participants_rotation_plan_path(@procedure)
-      flash[:error] = 'Error, ya el usuario ha sido agregado.'
+      flash[:error] = 'No se pudo agregar usuario, el número máximo de usuarios asociados por plan es dos (2),
+                       elimine uno de la lista para poder agregar otro usuario.'
     end
-    
   end
 
   private

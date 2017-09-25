@@ -49,4 +49,14 @@ class PartialReport < SystemProcedure
     start_step('#2')
     approve_step?('#2')
   end
+
+  def can_complete?
+    steps_approved = true
+    self.procedure.steps.each do |step|
+      unless step.approved?
+        steps_approved = false
+      end
+    end
+    return steps_approved
+  end
 end

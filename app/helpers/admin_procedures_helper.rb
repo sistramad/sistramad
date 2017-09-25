@@ -4,6 +4,8 @@ module AdminProceduresHelper
       return 'procedures/basic_info'
     elsif (code == 'T-SPF200')
       return 'special_formation_procedures/basic_info'
+    elsif (code == 'T-SPR201')
+      return 'rotation_plans/basic_info'
     end
   end
 end

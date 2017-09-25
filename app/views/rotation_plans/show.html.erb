@@ -29,18 +29,19 @@
             <%= link_to validate_rotation_plan_path(@procedure), class: 'btn btn-success btn-lg list' do %>
               <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la solicitud
             <% end %>
-
          </div>
 
-            <br>
-            <p class="center"> (Nota: Une vez solicitada la evaluación no podrá modificar los recaudos.)</p>
+          <br>
+          <p class="center"> (Nota: Une vez solicitada la evaluación no podrá modificar los recaudos.)</p>
         </h4>
       <% end %>
       <br>
+      
+      <% if @procedure.participants.size > 0 %>
+        <%= render 'participants_list' %>
+      <% end %>
+      
       <% if @procedure.in_draft?  %>
-          <% if @participants.size > 0 %>
-            <%= render 'participants' %>
-          <% end %>
         <%= render 'requirement_list' %>
       <% elsif @procedure.in_progress? || @procedure.approved? %>
         <%= render 'steps_list'%>

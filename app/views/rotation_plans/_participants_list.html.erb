@@ -12,10 +12,7 @@
               <th>Nombre:</th>
               <th>Apellido:</th>
               <th>Cédula:</th>
-              <th>Correo:</th> 
-              <% if @procedure.in_draft? %>
-              <th>Acciones</th>  
-              <% end %>      
+              <th>Correo:</th>            
             </tr>
           </thead>
           <tbody>
@@ -25,14 +22,6 @@
                 <td> <%= user.last_name %></td>
                 <td> <%= user.identification_document %></td>
                 <td> <%= user.email %></td>         
-                <% if @procedure.in_draft? %>
-                  <td>
-                    <%= link_to 'Eliminar', participant_path(user, procedure: @procedure.id),
-                    :method => :delete,
-                    :data => { :confirm => '¿Está seguro?' },
-                    :class => 'btn btn-xs btn-danger' %>
-                  <td>
-                <% end %>
               </tr>
             <% end %>
           </tbody>

@@ -1,6 +1,7 @@
 class AdminProceduresController < ApplicationController
   include EmailService
   include FactoryHelper
+  require 'zip'
   before_action :set_procedure, only: [:show, :complete]
 
   def index
@@ -53,14 +54,9 @@ class AdminProceduresController < ApplicationController
   end
 
   def complete
-    steps_approved = true
-    @procedure.steps.each do |step|
-      unless step.approved?
-        steps_approved = false
-      end
-    end
+    procedure_instance = get_procedure_intance(@procedure)
 
-    if @procedure.in_progress? and steps_approved
+    if @procedure.in_progress? and procedure_instance.can_complete?
       @procedure.approve!
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)

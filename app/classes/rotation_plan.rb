@@ -20,19 +20,20 @@ class RotationPlan < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Usuario")
-    create_step(workflow, "#2", "Incluir los docentes al plan de rotación", "Usuario")
-    create_step(workflow, "#3", "Evaluacón de los recaudos del del plan de rotación","Consejo de facultad")
-    create_step(workflow, "#4", "Aprobación del plan de rotación","Consejo Universitario")
-    create_step(workflow, "#5", "Generar constacia de aprobacón","Consejo Universitario")
+    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Consejo de facultad")
+    create_step(workflow, "#2", "Incluir los docentes al plan de rotación", "Consejo de facultad")
+    create_step(workflow, "#3", "Evaluacón de los recaudos del plan de rotación","Consejo de facultad")
+    create_step(workflow, "#4", "Generar constacia de aprobacón","Consejo Universitario")
+    create_step(workflow, "#5", "Aprobar solicitud","Consejo Universitario")
   end
 
-  #Cambiar 
+  #Al momento de solicitar la evaluación de la solicitud
   def initial_requirements_valid?()
-    if all_required_documents_has_attachment?
+    if all_required_documents_has_attachment? and has_correct_number_of_participants?
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('R20')
+      send_emails(self.procedure.users, 'initial_validation_success')
+      users = User.find_group_members('C20')
       send_emails(users,'need_to_approve')
       return true
     else
@@ -58,5 +59,17 @@ class RotationPlan < SystemProcedure
     start_step('#4')
     approve_step?('#4')
   end
+
+  def has_correct_number_of_participants?
+    return self.procedure.participants.size == 2
+  end
+
+  def can_complete?
+    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4')
+  end
+
+  def step_approved?(step_name)
+    self.procedure.steps.find_by(name: "#{step_name}").approved?
+  end  
   
 end
