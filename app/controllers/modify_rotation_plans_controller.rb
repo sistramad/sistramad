@@ -5,6 +5,7 @@ class ModifyRotationPlansController < ApplicationController
   include ProceduresHelper
   before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult, :show_participants, :add_participants, :add_user, :search_users]
   before_action :set_user
+  before_action :can_be_modified_validation, only: [:new]
 
   def index
     @procedures = @user.procedures.where(code: 'T-MPR202').sort_by &:created_at
@@ -164,6 +165,22 @@ class ModifyRotationPlansController < ApplicationController
     
     def set_documents_to_user
       @user.documents << @procedure.documents
+    end
+    
+    def can_be_modified_validation
+      p "can be modified"
+      @procedure = Procedure.find(params[:parent_id])
+      
+      if @procedure
+        concrete_procedure = get_procedure_from_factory(@procedure.code)
+        concrete_procedure.procedure = @procedure
+      end
+
+      unless concrete_procedure.can_be_modified?
+        redirect_to rotation_plan_path(@procedure)
+        flash[:error] = 'El plan no puede ser modificado, solo puede modificarse con 3 meses de anticipacion a la fecha de inicio'
+      end
+
     end
 
 end

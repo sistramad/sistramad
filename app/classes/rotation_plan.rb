@@ -85,5 +85,9 @@ class RotationPlan < SystemProcedure
     start_date.present? && (Date.parse(start_date) >= Date.today)
   end
 
+  def can_be_modified?
+    Date.today < (self.procedure.start_date - 90.days) #si la fecha de la solicitud de modificacion esta 3 meses antes de la fecha del comienzo del plan
+  end
+
   
 end
