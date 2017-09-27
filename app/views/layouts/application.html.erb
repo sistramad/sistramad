@@ -75,7 +75,11 @@
                       Subir Informe
                   <% end %>
                 </li>
-
+                <li><%= link_to extension_joint_plans_path,method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Solicitar Extensión de Plazo
+                  <% end %>
+                </li>
               </ul>
             </li>
             <% if current_user.has_role? :asuntos %>

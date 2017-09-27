@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.6'
+ruby '2.2.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails','~>5'
@@ -123,3 +123,4 @@ gem 'puma'
 gem 'rails_semantic_logger'
 gem 'mini_magick'
 gem 'chronic'
+gem 'whenever', require: false
