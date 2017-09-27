@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-datepicker
 //= require jquery.Jcrop
 //= require app
 //= require bootstrap-sprockets
@@ -49,3 +50,9 @@ var hide_spinner = function(){
 var show_spinner = function(){
   $('#spinner').show();
 }
+
+$(document).ready(function() {
+  $('#sandbox-container input').datepicker({
+    language: 'es'
+  });
+});

@@ -10,6 +10,8 @@ class ProcedureFactory
         
       when 'T-SPF200' then FormationProgram.new
       when 'T-SPR201' then RotationPlan.new 
+      when 'T-MPR202' then ModifyRotationPlan.new 
+      when 'T-PPR203' then DelayRotationPlan.new 
     end
   end 
 end

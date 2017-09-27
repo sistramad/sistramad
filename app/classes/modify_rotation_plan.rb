@@ -1,15 +1,15 @@
-class RotationPlan < SystemProcedure
+class ModifyRotationPlan < SystemProcedure
   include EmailService
 
   def initialize     
-    self.name = "Plan de Rotación"
-    self.code = "T-SPR201"
+    self.name = "Modificación del Plan de Rotación"
+    self.code = "T-MPR202"
   end
   
   def generate_workflow(procedure)
     workflow = Workflow.new()
-    workflow.name = "Workflow Plan de Rotación"
-    workflow.description = "Flujo principal Plan de Rotación"
+    workflow.name = "Workflow Modificación Plan de Rotación"
+    workflow.description = "Flujo principal Modificación Plan de Rotación"
     workflow.is_active = true
     workflow.procedure = procedure
     if workflow.save

@@ -31,13 +31,15 @@ class Procedure < ApplicationRecord
       transitions :from => :in_progress, :to => :approved
     end
 
-    event :complete do
-      transitions :from => :approved, :to => :completed
-    end
-
     event :close do
       transitions :from => :completed, :to => :closed
     end
+
+    #for testing:
+    event :restart do 
+      transitions :from => [:approved , :complete, :close], :to => :in_progress
+    end
+
 
   end
 

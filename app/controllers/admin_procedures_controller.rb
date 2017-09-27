@@ -2,7 +2,7 @@ class AdminProceduresController < ApplicationController
   include EmailService
   include FactoryHelper
   require 'zip'
-  before_action :set_procedure, only: [:show, :complete]
+  before_action :set_procedure, only: [:show, :complete, :approve_procedure]
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -53,15 +53,34 @@ class AdminProceduresController < ApplicationController
     redirect_to  admin_procedure_path(@procedure)
   end
 
-  def complete
+  def approve_procedure
+    start_date = params[:start_date]
     procedure_instance = get_procedure_intance(@procedure)
-
-    if @procedure.in_progress? and procedure_instance.can_complete?
-      @procedure.approve!
+   
+    if procedure_instance.complete?(start_date)
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)
     else
-      flash[:error] = 'Imposible completar la solicitud, todos los pasos deben estar aprobados.'
+      flash[:error] = 'Error al aprobar solicitud, pasos incompletos o datos faltantes.'
+      redirect_to  admin_procedure_path(@procedure)
+    end
+   
+  end
+
+  def complete
+    start_date = params[:start_date]
+    procedure_instance = get_procedure_intance(@procedure)
+
+    if @procedure.in_progress? and procedure_instance.can_complete?(start_date)
+      #@procedure.approve!
+      if start_date.present? 
+        @procedure.start_date = start_date
+        @procedure.save
+      end
+      flash[:success] = 'Solicitud aprobada con exito!'
+      redirect_to  admin_procedure_path(@procedure)
+    else
+      flash[:error] = 'Error al aprobar solicitud, pasos incompletos o datos faltantes.'
       redirect_to  admin_procedure_path(@procedure)
     end
   end

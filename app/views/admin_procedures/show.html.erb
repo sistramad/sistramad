@@ -11,7 +11,7 @@
    
       <% case(@procedure.code)%>
         <% when 'T-AS100'  then %>
-        <%= render 'sabbatical_year_admin_panel' %>
+        <%= render 'sabbatical_year_admin_panel'%>
         <% when 'T-AS101'  then %>
         <%= render 'modify_workplan_admin_panel'%>
         <% when 'T-AS102'  then %>
@@ -26,6 +26,10 @@
         <%= render 'special_formation_admin_panel'%>
         <% when 'T-SPR201'  then %>
         <%= render 'rotation_plan_admin_panel'%>
+         <% when 'T-SPR202'  then %>
+        <%= render 'modify_rotation_plan_admin_panel'%>
+         <% when 'T-SPR203'  then %>
+        <%= render 'delay_rotation_plan_admin_panel'%>
       <% end%>
     </div>
     <br>

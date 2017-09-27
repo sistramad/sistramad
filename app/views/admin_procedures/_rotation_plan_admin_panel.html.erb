@@ -27,14 +27,17 @@
           <% end %>       
                   
           <br>
-          <div class='text-center'>
             <% if @procedure.in_progress? %>
-              <%= link_to complete_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
-                <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
+              <%= form_tag approve_procedure_admin_procedure_path(@procedure) do %>
+                <div class="field", id="sandbox-container">
+                  <label for="star_date">Fecha de Inicio</label>
+                  <%= text_field_tag :start_date %>
+                </div>
+                <div class='text-center'>
+                  <%= submit_tag "Aprobar", class: "btn btn-success btn-lg list" %>
+                </div>
               <% end %>
-            <% end %>
-          </div>
-
+            <% end %>       
         </h4>
       </ul>
     </div>

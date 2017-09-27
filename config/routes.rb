@@ -21,7 +21,9 @@ Rails.application.routes.draw do
       get :approve_document
       get :show_document
       get :approve_step
+      post :approve_procedure
       get :complete
+      post :complete
       get :generate_approval_document
       get :download_all_documents
     end
@@ -35,6 +37,16 @@ Rails.application.routes.draw do
   end
   
   resources :rotation_plans do
+    member do
+      get :validate
+      get :show_requirements
+      get :show_participants
+      get :add_participants
+      get :search_users
+      post :add_user
+    end
+  end
+  resources :modify_rotation_plans do
     member do
       get :validate
       get :show_requirements
