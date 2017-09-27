@@ -2,7 +2,7 @@ class WorkflowStep < ActiveRecord::Base
   include AASM
   belongs_to :request_workflow
   belongs_to :role
-  #has_one :role
+  has_one :review ,dependent: :destroy
 
   aasm column: "status" do    
   	

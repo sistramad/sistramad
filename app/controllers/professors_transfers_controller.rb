@@ -60,11 +60,6 @@ class ProfessorsTransfersController < ApplicationController
   def update
     respond_to do |format|
       if @professors_transfer.update(professors_transfer_params)
-        #@departmentUser= Role.find_by_name('Consejo_Departamento').users
-        #NotificationMailer.initial_validation_success_email_translate(@user).deliver_now
-        #@departmentUser.each do |departmentUser|
-        #  NotificationMailer.need_to_approve_email(departmentUser).deliver_now
-        #end
         type = Reference.find(@professors_transfer.type_of_translate).name
         actual_request = get_request_from_factory(type)
         actual_request.generate_workflow(@professors_transfer)

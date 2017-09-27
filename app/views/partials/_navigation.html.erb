@@ -19,6 +19,9 @@
     <div id="menu" class="navbar-custom-menu">
       <ul class="nav navbar-nav">
       <% if !current_user.nil?  %>
+        <%  if ((current_user.has_role? :admin) || (current_user.has_role? :decano) || (current_user.has_role? :Consejo_Departamento)|| (current_user.has_role? :Consejo_Escuela) || (current_user.has_role? :Consejo_Facultad) || (current_user.has_role? :departamento) || (current_user.has_role? :Consejo_Universitario) || (current_user.has_role? :asuntos))%>
+            <li><%= link_to 'Administrar Trámites', request_manager_index_path %></li>
+        <% end %>
         <% if current_user.has_role? :admin %>
             <li><%= link_to t(:formalities_document), formalities_documents_path %></li>
             <li><%= link_to t(:reference), references_path %></li>

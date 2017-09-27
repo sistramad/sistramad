@@ -1,24 +1,26 @@
 class RequestManagerController < ApplicationController
     include EmailService
-    before_action :set_ProfessorsTransfer, only: [:show, :complete]
+    before_action :set_professors_transfer, only: [:initial_requirements,:complete]
     
       def index
-        @professorstransfers = ProfessorsTransfer.where(state: 'in_progress').page(params[:page]).per(10)
+        @professors_transfers = ProfessorsTransfer.where(status: 'IP').page(params[:page]).per(15)
       end
     
       def show
-        
+        @professors_transfer = ProfessorsTransfer.find(params[:id])
       end
     
-      def show_initial_requirements
-        @professorstransfer = ProfessorsTransfer.find(params[:ProfessorsTransfer])
+      def initial_requirements
+        docs = FormalitiesMaster.find_by(name: 'Traslados').documents
+        u_id = @professors_transfer.user_id
+        @attachments = User.find_by(id: u_id).attachments.where(:document_id => docs)
       end
 
       def approve_initial_requirements
-        @professorstransfer = ProfessorsTransfer.find(params[:id])
-        ProfessorsTransfer_instance = get_ProfessorsTransfer_intance(@professorstransfer)
+        @professors_transfer = ProfessorsTransfer.find(params[:id])
+        professors_transfer_instance = get_professors_transfer_instance(@professors_transfer)
         
-        if ProfessorsTransfer_instance.approve_initial_requirements? 
+        if professors_transfer_instance.approve_initial_requirements? 
           flash[:success] = 'Los documentos han sido aprobados con exito.'
           render 'show'
         else
@@ -41,7 +43,7 @@ class RequestManagerController < ApplicationController
       def approve_step
         @professorstransfer = ProfessorsTransfer.find(params[:id])
         step = Step.find(params[:step])
-        if step.in_progress?
+        if step.IP?
           step.approve!
           send_email(@professorstransfer.user, 'step_approved')
           flash[:success] = 'Paso aprobado con exito!.'
@@ -75,8 +77,9 @@ class RequestManagerController < ApplicationController
             @professors_transfer = ProfessorsTransfer.find(params[:id])
         end
     
-        def get_professors_transfer_intance(professors_transfer)
-          instance = get_request_from_factory(professors_transfer.type_of_translate)
+        def get_professors_transfer_instance(professors_transfer)
+          type = Reference.find(@professors_transfer.type_of_translate).name
+          instance = get_request_from_factory(type)
           instance.professors_transfer = professors_transfer
           return instance
         end
@@ -85,5 +88,5 @@ class RequestManagerController < ApplicationController
             factory = WorkflowFactory.new
             factory.build(type)
         end
+
       end
-end

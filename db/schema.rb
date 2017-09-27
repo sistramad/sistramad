@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170917185358) do
+ActiveRecord::Schema.define(version: 20170922033657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -198,6 +198,20 @@ ActiveRecord::Schema.define(version: 20170917185358) do
 
   add_index "request_workflows", ["professors_transfer_id"], name: "index_request_workflows_on_professors_transfer_id", using: :btree
 
+  create_table "reviews", force: :cascade do |t|
+    t.string   "name"
+    t.text     "comment"
+    t.boolean  "files_reviewed"
+    t.boolean  "approval"
+    t.integer  "workflow_step_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "user_id"
+  end
+
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
+  add_index "reviews", ["workflow_step_id"], name: "index_reviews_on_workflow_step_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name",          null: false
     t.integer  "resource_id"
@@ -304,6 +318,8 @@ ActiveRecord::Schema.define(version: 20170917185358) do
   add_foreign_key "professors_transfers", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
   add_foreign_key "request_workflows", "professors_transfers"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "reviews", "workflow_steps"
   add_foreign_key "universities", "countries"
   add_foreign_key "university_degrees", "universities"
   add_foreign_key "workflow_steps", "request_workflows"

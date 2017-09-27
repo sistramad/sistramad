@@ -1,18 +1,32 @@
 Rails.application.routes.draw do
   
-  resources :formalities_documents
-  resources :formalities_masters
-  #resources :professors_transfers
-  resources :documents
-  #resources :reports
+    resources :reviews
+    resources :formalities_documents
+    resources :formalities_masters
+    #resources :professors_transfers
+    resources :documents
+    #resources :reports
     resources :university_degrees
     resources :universities
     resources :faculties
     resources :roles
     resources :employees
+    resources :request_manager
     resources :countries do
       collection do
         get :insert_records
+      end
+    end
+
+    resources :request_manager do
+     member do
+        get :show
+        get :initial_requirements
+        get :approve_initial_requirements
+        #get :approve_document
+        #get :show_document
+        #get :approve_step
+        #get :complete
       end
     end
 
@@ -42,6 +56,7 @@ Rails.application.routes.draw do
 
     resources :attachments do
       collection do
+        post :download
         post :create_inform
       end
     end

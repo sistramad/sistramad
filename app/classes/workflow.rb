@@ -16,14 +16,15 @@ class Workflow
       end
     
       def approve_step?(step_number)
-        step = self.professors_transfers.request_workflows.workflow_steps.where(step_number: step_number).first
+        step = self.professors_transfer.request_workflow.workflow_step.where(step_number: step_number).first
         step.aprobar!
         step.update(approval_date: Time.now)
-        step.aprobar?
+        start_step(step_number+1)
+        step.AP?
       end
     
       def start_step(step_number)
-        step = self.professors_transfers.request_workflows.workflow_steps.where(step_number: step_number).first
+        step = self.professors_transfer.request_workflow.workflow_step.where(step_number: step_number).first
         step.procesar!
         step.update(approval_date: Time.now)
       end 

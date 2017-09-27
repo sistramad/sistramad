@@ -4925,4 +4925,10 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+  .comment-text-area {
+    float: left;
+    width:100%;
+    height: auto;
+    background-color: red;
+  }
 }

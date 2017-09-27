@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+<div class="container"> 
+<div class="well"> 
+  <div>
+    <p><strong> <h3 class="text-center background-image: asset-url('work.jpg') background-size: cover"> Revisiones Previas: </h3> </strong></p>
+  </div>
+  <br>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">          
+        <thead>
+          <tr>
+            <th> Revision </th>
+            <th> Hecha por: </th>
+            <th> Veredicto </th>
+            <th> Observaciones </th>
+            <th>Fecha creacion</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr>
+              <td><%= @review.name %></td>
+              <td><%= @review.user.username %></td>
+              <% if @review.approval? %>
+                  <td> <h4> <span class="label label-success"> Aprobado </span> </h4> </td>
+              <% else  %>
+                <td> <h4> <span class="label label-danger"> Desaprobado </span> </h4> </td>
+              <% end %>
+              <td>
+              <td><%= @review.comment %></td>
+              <td><%= @review.created_at.strftime("%Y-%m-%d") %></td>    
+            </tr>
+        </tbody>
+    </table>
+  </div>
+</div>  
+</div>
+
+<%= link_to 'Edit', edit_review_path(@review) %> |
+<%= link_to 'Back', reviews_path %>

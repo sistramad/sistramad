@@ -1,6 +1,6 @@
 class AttachmentsController < ApplicationController
   before_action :set_user
-  before_action :set_attachment, only: [:edit,:update]
+  before_action :set_attachment, only: [:edit,:update,:download]
   before_action :set_formalities_master, only: [:edit]
   before_filter :authenticate_user!
 
@@ -152,6 +152,33 @@ class AttachmentsController < ApplicationController
     end        
   end
   
+  def download
+    
+        file_origin = Rails.root.to_s+'/public'
+        @user = User.find(params[:user_id])
+        filename = @attachment.document.name+'_'+@user.first_name.capitalize+'_'+
+        @user.middle_name.capitalize+'_'+@user.last_name.capitalize+'.zip'
+        file = Tempfile.new(filename)
+    
+        begin
+          Zip::OutputStream.open(file) { |zos| }
+    
+          #Añadiendo archivos al Zip
+          Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
+              zipfile.add(@attachment.file_file_name, file_origin + @attachment.file.url(:original, false))
+          end
+    
+          zip_data = File.read(file.path)
+    
+          send_data(zip_data, :type => 'application/zip', :filename => filename)
+        ensure
+          #Close and delete the temp file
+          file.close
+          file.unlink
+        end
+    
+      end
+
   private
     def set_user
       @user = current_user

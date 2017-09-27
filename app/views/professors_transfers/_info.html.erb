@@ -1,0 +1,29 @@
+<div class="col-md-6">
+<br>
+<div class="panel panel-primary">
+  <div 
+    class="panel-heading">Datos básicos:
+  </div>
+  <div class="panel-body">
+    <h4> <strong> Nombre de la solicitud: </strong> <%= @professors_transfer.name %> </h4>      
+    <h4> <strong> Usuario: </strong> <%= @professors_transfer.user.username %> </h4>  
+    <h4> <strong> Nombre: </strong> <%= @professors_transfer.user.first_name  %> <%= @professors_transfer.user.last_name%> </h4>  
+    <h4> <strong> Correo: </strong> <%= @professors_transfer.user.email %>  </h4> 
+    <h4> <strong> Estado: 
+      <% if @professors_transfer.DR? %>
+          <span class="label label-default"> Solicitado </span>
+      <% elsif @professors_transfer.IP? %>
+          <span class="label label-primary"> En Progreso </span>
+      <% elsif @professors_transfer.AP? %>
+          <span class="label label-success"> Aprobado </span>
+      <% elsif @professors_transfer.RE? %>
+          <span class="label label-success">Negado </span>
+      <% elsif @professors_transfer.CL? %>
+          <span class="label label-danger"> Cerrado </span>
+      <% end %>
+    </h4>
+
+
+  </div>
+</div>
+</div>
