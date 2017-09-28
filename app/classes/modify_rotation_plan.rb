@@ -21,15 +21,14 @@ class ModifyRotationPlan < SystemProcedure
 
   def generate_steps(workflow)
     create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Consejo de facultad")
-    create_step(workflow, "#2", "Incluir a los docentes en el plan de rotación", "Consejo de facultad")
-    create_step(workflow, "#3", "Evaluacón de los recaudos del plan de rotación","Consejo de facultad")
-    create_step(workflow, "#4", "Generar constacia de aprobacón","Consejo Universitario")
-    create_step(workflow, "#5", "Aprobar solicitud","Consejo Universitario")
+    create_step(workflow, "#2", "Evaluacón de los recaudos para la modificación.","Consejo de facultad")
+    create_step(workflow, "#3", "Generar constacia de aprobacón","Consejo Universitario")
+    create_step(workflow, "#4", "Aprobar solicitud","Consejo Universitario")
   end
 
   #Al momento de solicitar la evaluación de la solicitud
   def initial_requirements_valid?()
-    if all_required_documents_has_attachment? and has_correct_number_of_participants?
+    if all_required_documents_has_attachment?
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
       send_emails(self.procedure.users, 'initial_validation_success')
@@ -44,24 +43,37 @@ class ModifyRotationPlan < SystemProcedure
   def update_procedure_elements()
     self.procedure.start! 
     start_step('#1')
-    approve_step?('#1')
+    approve_step?('#1') 
     start_step('#2')
-    approve_step?('#2')
-    start_step('#3')
   end
 
   #Cuando lo aprueba un administrador
   def approve_initial_requirements?
-    approve_step?('#3')
+    approve_step?('#2')
   end
 
   def approve_generate_approval_document_step
-    start_step('#4')
-    approve_step?('#4')
+    start_step('#3')
+    approve_step?('#3')
+  end 
+
+  def approve(start_date)
+    if can_be_approved?(start_date)
+      approve_procedure(start_date)
+    end       
   end
 
-  def has_correct_number_of_participants?
-    return self.procedure.participants.size == 2
+  def can_be_approved?(start_date)
+    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && start_date_valid(start_date)
+  end
+
+  def approve_procedure(start_date)
+    self.procedure.start_date = Date.parse(start_date)
+    if self.procedure.start_date.present?
+      start_step('#4')
+      approve_step?('#4')
+      self.procedure.approve! 
+    end
   end
 
   def complete?(start_date)
@@ -82,7 +94,7 @@ class ModifyRotationPlan < SystemProcedure
   end  
 
   def start_date_valid(start_date)
-    start_date.present? && (Date.parse(start_date) >= Date.today)
+    start_date.present? && (Date.parse(start_date) >= Date.today) #Si viene la fecha bien y es mayor a la fecha actual
   end
 
   

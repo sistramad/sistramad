@@ -8,7 +8,6 @@
     <div class="row">
 
       <%= render "#{basic_info_view(@procedure.code)}" %> <!-- Selecciona el panel de informacion basica correcto dependiendo del tramite -->    
-   
       <% case(@procedure.code)%>
         <% when 'T-AS100'  then %>
         <%= render 'sabbatical_year_admin_panel'%>
@@ -26,9 +25,9 @@
         <%= render 'special_formation_admin_panel'%>
         <% when 'T-SPR201'  then %>
         <%= render 'rotation_plan_admin_panel'%>
-         <% when 'T-SPR202'  then %>
+        <% when 'T-MPR202'  then %>
         <%= render 'modify_rotation_plan_admin_panel'%>
-         <% when 'T-SPR203'  then %>
+        <% when 'T-SPR203'  then %>
         <%= render 'delay_rotation_plan_admin_panel'%>
       <% end%>
     </div>

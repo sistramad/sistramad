@@ -23,7 +23,7 @@
       <% if @procedure.in_draft? %>
         <h4>
          <div class="row text-center">
-            <%= link_to validate_rotation_plan_path(@procedure), class: 'btn btn-success btn-lg list' do %>
+            <%= link_to validate_modify_rotation_plan_path(@procedure), class: 'btn btn-success btn-lg list' do %>
               <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la solicitud
             <% end %>
          </div>

@@ -65,14 +65,12 @@ class RotationPlan < SystemProcedure
   end
 
   def approve(start_date)
-    p "approve"
     if can_be_approved?(start_date)
       approve_procedure(start_date)
     end       
   end
 
   def can_be_approved?(start_date)
-    p "can be approvd"
     step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && start_date_valid(start_date)
   end
 
@@ -85,7 +83,6 @@ class RotationPlan < SystemProcedure
   end
 
   def approve_procedure(start_date)
-    p "approve_procedure"
     self.procedure.start_date = Date.parse(start_date)
     if self.procedure.start_date.present?
       start_step('#5')
