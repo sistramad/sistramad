@@ -35,6 +35,7 @@ class SystemProcedure
     step = self.procedure.workflows.first.steps.where(name: step_name).first
     step.start!
     step.update(approved_at: Time.now)
+    step.in_progress?
   end 
 
 end

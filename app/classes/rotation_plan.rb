@@ -64,16 +64,15 @@ class RotationPlan < SystemProcedure
     return self.procedure.participants.size == 2
   end
 
-  def complete?(start_date)
-    if can_complete?(start_date)
-      self.procedure.approve!
-      return self.procedure.approved? && start_step('#5') && approve_step?('#5')
-    else
-      return false
-    end
+  def approve(start_date)
+    p "approve"
+    if can_be_approved?(start_date)
+      approve_procedure(start_date)
+    end       
   end
 
-  def can_complete?(start_date)
+  def can_be_approved?(start_date)
+    p "can be approvd"
     step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && start_date_valid(start_date)
   end
 
@@ -85,9 +84,20 @@ class RotationPlan < SystemProcedure
     start_date.present? && (Date.parse(start_date) >= Date.today)
   end
 
+  def approve_procedure(start_date)
+    p "approve_procedure"
+    self.procedure.start_date = Date.parse(start_date)
+    if self.procedure.start_date.present?
+      start_step('#5')
+      approve_step?('#5')
+      self.procedure.approve! 
+    end
+  end
+
   def can_be_modified?
     Date.today < (self.procedure.start_date - 90.days) #si la fecha de la solicitud de modificacion esta 3 meses antes de la fecha del comienzo del plan
   end
+
 
   
 end

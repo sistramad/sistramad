@@ -26,7 +26,7 @@ class Step < ApplicationRecord
 
      #for testing:
      event :restart do 
-      transitions :from => [:approved], :to => :in_progress
+      transitions :from => [:approved, :in_progress], :to => :in_draft
     end
    
   end

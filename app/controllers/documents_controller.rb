@@ -45,8 +45,9 @@ class DocumentsController < ApplicationController
   end
 
   def update
+    procedure = Procedure.find(@document.procedure_id)
     if @document.update(document_params)
-      redirect_to procedure_path(@document.procedure_id), notice: "El documento ha sido actualizado."
+      redirect_to_procedure_show(procedure.code, @document)
     else
       render "new"
     end
@@ -79,6 +80,17 @@ private
     procedure_instance = get_procedure_from_factory(procedure_obj.code)
     procedure_instance.procedure = procedure_obj
     return procedure_instance
+  end
+
+  def redirect_to_procedure_show(code, document)
+    case code
+      when 'T-AS100' || 'T-AS101' || 'T-AS102' || 'T-AS103' || 'T-AS104' || 'T-AS105' then 
+        redirect_to procedure_path(@document.procedure_id), notice: "El documento ha sido actualizado."       
+      when 'T-SPF200' then redirect_to special_formation_procedure_plan_path(@document.procedure_id), notice: "El documento ha sido actualizado."
+      when 'T-SPR201' then  redirect_to rotation_plan_path(@document.procedure_id), notice: "El documento ha sido actualizado."
+      when 'T-MPR202' then  redirect_to modify_rotation_plan_path(@document.procedure_id), notice: "El documento ha sido actualizado."
+      when 'T-PPR203' then  redirect_to delay_rotation_plan_path(@document.procedure_id), notice: "El documento ha sido actualizado."
+    end
   end
 
 end

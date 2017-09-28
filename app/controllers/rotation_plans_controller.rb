@@ -7,7 +7,7 @@ class RotationPlansController < ApplicationController
   before_action :set_user
 
   def index
-    @procedures = @user.procedures.where(code: 'T-SPR201').sort_by &:created_at
+    @procedures = @user.procedures.where(code: %w[T-SPR201 T-MPR202 T-PPR203]).sort_by &:created_at
   end
 
   def show

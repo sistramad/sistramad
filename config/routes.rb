@@ -51,9 +51,6 @@ Rails.application.routes.draw do
       get :validate
       get :show_requirements
       get :show_participants
-      get :add_participants
-      get :search_users
-      post :add_user
     end
   end
 

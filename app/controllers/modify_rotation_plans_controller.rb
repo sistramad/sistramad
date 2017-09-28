@@ -49,7 +49,7 @@ class ModifyRotationPlansController < ApplicationController
         set_documents_to_procedure()       
         procedure_concrete.generate_workflow(@procedure)
         
-        format.html { redirect_to rotation_plan_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
+        format.html { redirect_to modify_rotation_plan_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages
@@ -90,7 +90,7 @@ class ModifyRotationPlansController < ApplicationController
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to modify_rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cumplir todos los requerimientos necesarios.'
       render :show 
@@ -100,38 +100,6 @@ class ModifyRotationPlansController < ApplicationController
   def show_participants
     @participants = @procedure.users
     render :show_participants
-  end
-
-  def add_participants
-    @participants = @procedure.users
-  end
-
-  def search_users
-    @users = User.search(params[:search_param])
-    @participants = @procedure.users
-    if @users
-      @users = current_user.except_current_user(@users)
-      render :add_participants
-    else
-      render status: :not_found, nothing: true
-    end
-  end
-
-  def add_user
-    if @procedure.participants.size < 2
-      @user = User.find(params[:user])
-      @procedure.participants.build(user_id: @user.id)
-      if @procedure.save
-        redirect_to add_participants_rotation_plan_path(@procedure), notice: "El usuario fue agregado al plan."
-      else
-        redirect_to add_participants_rotation_plan_path(@procedure)
-        flash[:error] = 'Error, ya el usuario ha sido agregado.'
-      end
-    else
-      redirect_to add_participants_rotation_plan_path(@procedure)
-      flash[:error] = 'No se pudo agregar usuario, el número máximo de usuarios asociados por plan es dos (2),
-                       elimine uno de la lista para poder agregar otro usuario.'
-    end
   end
 
   private
@@ -168,9 +136,15 @@ class ModifyRotationPlansController < ApplicationController
     end
     
     def can_be_modified_validation
-      p "can be modified"
       @procedure = Procedure.find(params[:parent_id])
       
+      sub_procedures = @procedure.sub_procedures.where(code: "T-MPR202", state: ["in_draft","in_progress"]) #Busca los tramites de modificacion hijos en progreso
+      
+      if sub_procedures.size > 0 
+        redirect_to rotation_plan_path(@procedure)
+        flash[:error] = "Imposible realizar solicitud, el plan ya está siendo modificado."
+      end
+
       if @procedure
         concrete_procedure = get_procedure_from_factory(@procedure.code)
         concrete_procedure.procedure = @procedure

@@ -36,7 +36,7 @@
             </td>
           <% else %>
             <td> 
-              <%= link_to edit_document_path(document) , class: 'btn btn-warning btn-xs list' do %>
+              <%= link_to edit_document_path(document, my_path: "modify_rotation_plan") , class: 'btn btn-warning btn-xs list' do %>
                 <%= document.name %> 
                 <i class="glyphicon glyphicon-open-file"></i> 
               <% end %>

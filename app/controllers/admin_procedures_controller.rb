@@ -56,8 +56,10 @@ class AdminProceduresController < ApplicationController
   def approve_procedure
     start_date = params[:start_date]
     procedure_instance = get_procedure_intance(@procedure)
-   
-    if procedure_instance.complete?(start_date)
+    
+    procedure_instance.approve(start_date)
+
+    if @procedure.approved?
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)
     else
