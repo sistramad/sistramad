@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :faculties
     resources :roles
     resources :employees
+    resources :extensions
     resources :countries do
       collection do
         get :insert_records
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
         post :view
         get :inform
         get :inform_list
+        get :extension
       end
     end
     resources :notifications
