@@ -70,6 +70,7 @@ class ModifyRotationPlan < SystemProcedure
   def approve_procedure(start_date)
     self.procedure.start_date = Date.parse(start_date)
     if self.procedure.start_date.present?
+      update_parent_start_date()
       start_step('#4')
       approve_step?('#4')
       self.procedure.approve! 
@@ -95,6 +96,12 @@ class ModifyRotationPlan < SystemProcedure
 
   def start_date_valid(start_date)
     start_date.present? && (Date.parse(start_date) >= Date.today) #Si viene la fecha bien y es mayor a la fecha actual
+  end
+
+  def update_parent_start_date
+    parent = Procedure.find(self.procedure.parent.id)
+    parent.start_date = self.procedure.start_date if parent.present?
+    parent.save
   end
 
   
