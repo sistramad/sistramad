@@ -46,7 +46,16 @@ Rails.application.routes.draw do
       post :add_user
     end
   end
+
   resources :modify_rotation_plans do
+    member do
+      get :validate
+      get :show_requirements
+      get :show_participants
+    end
+  end
+
+  resources :delay_rotation_plans do
     member do
       get :validate
       get :show_requirements

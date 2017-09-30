@@ -9,9 +9,14 @@
         <h4>
           <p>
             <li>
-            <%= link_to new_modify_rotation_plan_path(code: 'T-MPR202', parent_id: @procedure), class: 'btn btn-primary btn-md list' do %>
-              <i class="glyphicon glyphicon-plus"></i> Solicitud de modificación del Plan de Rotación
-            <% end %>
+              <%= link_to new_modify_rotation_plan_path(code: 'T-MPR202', parent_id: @procedure), class: 'btn btn-primary btn-md list' do %>
+                <i class="glyphicon glyphicon-plus"></i> Solicitud de modificación del Plan de Rotación
+              <% end %>
+            </li>
+            <li>
+              <%= link_to new_delay_rotation_plan_path(code: 'T-PPR203 ', parent_id: @procedure), class: 'btn btn-primary btn-md list' do %>
+                <i class="glyphicon glyphicon-plus"></i> Solicitud prorroga del Plan de Rotación
+              <% end %>
             </li>
           </p>
         </h4>
