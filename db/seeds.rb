@@ -292,13 +292,24 @@ DocumentMaster.new(name: "Carta de Aceptación de Cumplir Plan", code: "D-ACP", 
 DocumentMaster.new(name: "Carta de Aceptación del Departamento", code: "D-ADP", procedure: "Plan de Rotación", active: true , initially_required: true ).save
 
 #Modificacion del Plan de Rotacion
-
 DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Modificación del Plan de Rotación", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "Modificación del Plan de Actividades", code: "D-MP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "Documentos probatorios", code: "D-PMP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 
+#Modificacion del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Modificación del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Modificación del Plan de Actividades", code: "D-MP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PMP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+
+#Prorroga del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PPP", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
 
 
 #Carga grupos de usuarios
