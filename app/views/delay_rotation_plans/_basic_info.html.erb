@@ -22,11 +22,7 @@
         <% elsif @procedure.closed? %>
             <span class="label label-danger"><%= state_translate(@procedure.state) %> </span>
         <% end %>
-      </h4>
-      
-      <% if @procedure.approved? %>
-        <h4> <strong> Fecha de inicio: </strong> <%= @procedure.start_date.strftime("%d-%m-%Y")%></h4>
-      <% end %>
+      </h4>   
       
       <br>
       

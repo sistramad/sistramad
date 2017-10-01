@@ -20,7 +20,7 @@ class DelayRotationPlan < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Consejo de facultad")
+    create_step(workflow, "#1", "Cargar los documentos requeridos.", "Consejo de facultad")
     create_step(workflow, "#2", "Evaluacón de los recaudos para la modificación.","Consejo de facultad")
     create_step(workflow, "#3", "Generar constacia de aprobacón","Consejo Universitario")
     create_step(workflow, "#4", "Aprobar solicitud","Consejo Universitario")
@@ -57,52 +57,24 @@ class DelayRotationPlan < SystemProcedure
     approve_step?('#3')
   end 
 
-  def approve(start_date)
-    if can_be_approved?(start_date)
-      approve_procedure(start_date)
+  def approve
+    if can_be_approved?
+      approve_procedure
     end       
   end
 
-  def can_be_approved?(start_date)
-    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && start_date_valid(start_date)
+  def can_be_approved?
+    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3')
   end
-
-  def approve_procedure(start_date)
-    self.procedure.start_date = Date.parse(start_date)
-    if self.procedure.start_date.present?
-      update_parent_start_date()
-      start_step('#4')
-      approve_step?('#4')
-      self.procedure.approve! 
-    end
-  end
-
-  def complete?(start_date)
-    if can_complete?(start_date)
-      self.procedure.approve!
-      return self.procedure.approved? && start_step('#5') && approve_step?('#5')
-    else
-      return false
-    end
-  end
-
-  def can_complete?(start_date)
-    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && start_date_valid(start_date)
-  end
-
+  
   def step_approved?(step_name)
     self.procedure.steps.find_by(name: "#{step_name}").approved?
   end  
 
-  def start_date_valid(start_date)
-    start_date.present? && (Date.parse(start_date) >= Date.today) #Si viene la fecha bien y es mayor a la fecha actual
+  def approve_procedure
+      start_step('#4')
+      approve_step?('#4')
+      self.procedure.approve!
   end
 
-  def update_parent_start_date
-    parent = Procedure.find(self.procedure.parent.id)
-    parent.start_date = self.procedure.start_date if parent.present?
-    parent.save
-  end
-
-  
 end

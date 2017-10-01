@@ -1,0 +1,41 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Acciones disponibles:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+ 
+          <% step = @procedure.steps.find_by(name: "#2")%>
+          <% unless step.state != 'in_progress'%>
+            <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <% end %>
+
+          
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
+          <% if @document.nil? %>
+            <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+          <% else %>
+            <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
+            <% if @procedure.in_progress? %>
+              <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+            <% end %>
+          <% end %>
+
+          <br>
+
+          <div class='text-center'>
+            <% if @procedure.in_progress? %>
+              <%= link_to approve_procedure_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
+                <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
+              <% end %>
+            <% end %>
+          </div>      
+                  
+        </h4>
+      </ul>
+    </div>
+  </div>
+</div>

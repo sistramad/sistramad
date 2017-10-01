@@ -49,7 +49,7 @@ class DelayRotationPlansController < ApplicationController
         set_documents_to_procedure()       
         procedure_concrete.generate_workflow(@procedure)
         
-        format.html { redirect_to modify_rotation_plan_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
+        format.html { redirect_to delay_rotation_plan_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages
@@ -90,7 +90,7 @@ class DelayRotationPlansController < ApplicationController
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to modify_rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to delay_rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cumplir todos los requerimientos necesarios.'
       render :show 
@@ -142,7 +142,7 @@ class DelayRotationPlansController < ApplicationController
       
       if sub_procedures.size > 0 
         redirect_to rotation_plan_path(@procedure)
-        flash[:error] = "Imposible realizar solicitud, ya existe una solicitud de prórroga para está solicitud"
+        flash[:error] = "Imposible realizar solicitud, ya existe una prórroga para este plan."
       end
 
       if @procedure
