@@ -64,6 +64,14 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :licenses do
+    member do
+      get :validate
+      get :show_requirements
+      get :show_participants
+    end
+  end
+
   resources :participants
 
   resources :university_degrees

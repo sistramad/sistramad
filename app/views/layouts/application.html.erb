@@ -64,15 +64,22 @@
               <%= link_to special_formation_procedures_path(code: "T-SPF200") do %>
                 <i class="fa fa-circle-o"></i>
                   Formación Especial
-                <% end %>
+              <% end %>
             <li>
             <li>
               <%= link_to rotation_plans_path(code: "T-SPR201") do %>
                 <i class="fa fa-circle-o"></i>
                   Plan de Rotación
-                <% end %>
+              <% end %>
             <li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
+
+            <li>
+              <%= link_to licenses_path(code: "T-SLR204") do %>
+                <i class="fa fa-circle-o"></i>
+                  Licencias
+              <% end %>
+            <li>
+
             <li><a href="/procedures"><i class="fa fa-circle-o"></i> <span>Año Sabatico</span></a></li>
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>

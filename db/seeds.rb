@@ -311,6 +311,11 @@ DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga del Plan de R
 DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "Documentos probatorios", code: "D-PPP", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
 
+#Licencias
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Licencia", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solicitud del Beneficiario", code: "D-SOL", procedure: "Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Justificación de la Licencia", code: "D-JL", procedure: "Licencia", active: true, initially_required: true ).save
 
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
@@ -319,4 +324,7 @@ Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del c
 
 Group.new(name: "Representante de Facultad", code: "R10", description: "Representantes de Facultad", active: true).save
 Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Universitario", active: true).save
+
+Group.new(name: "Jefe de Departamento", code: "J10", description: "Jefe de Departamento", active: true).save
+Group.new(name: "Director de Departamento", code: "D30", description: "Director del Departamento", active: true).save
 

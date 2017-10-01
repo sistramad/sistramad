@@ -2,14 +2,14 @@ class License < SystemProcedure
   include EmailService
 
   def initialize     
-    self.name = "Plan de Rotación"
-    self.code = "T-SPR201"
+    self.name = "Licencia"
+    self.code = "T-SLR204"
   end
   
   def generate_workflow(procedure)
     workflow = Workflow.new()
-    workflow.name = "Workflow Plan de Rotación"
-    workflow.description = "Flujo principal Plan de Rotación"
+    workflow.name = "Workflow Licencia"
+    workflow.description = "Flujo principal Licencia"
     workflow.is_active = true
     workflow.procedure = procedure
     if workflow.save
@@ -20,11 +20,12 @@ class License < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Consejo de facultad")
-    create_step(workflow, "#2", "Incluir a los docentes en el plan de rotación", "Consejo de facultad")
-    create_step(workflow, "#3", "Evaluacón de los recaudos del plan de rotación","Consejo de facultad")
-    create_step(workflow, "#4", "Generar constacia de aprobacón","Consejo Universitario")
-    create_step(workflow, "#5", "Aprobar solicitud","Consejo Universitario")
+    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Director de Departamento")
+    create_step(workflow, "#2", "Seleccionar el tipo de licencia.", "Director de Departamento")
+    create_step(workflow, "#3", "Ingresar el tiempo de duración de la licencia.", "Director de Departamento")
+    create_step(workflow, "#4", "Evaluacón de los recaudos del plan de rotación","Director de Departamento")
+    create_step(workflow, "#4", "Generar constacia de aprobacón","-")
+    create_step(workflow, "#5", "Aprobar solicitud","-")
   end
 
   #Al momento de solicitar la evaluación de la solicitud
@@ -33,7 +34,7 @@ class License < SystemProcedure
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
       send_emails(self.procedure.users, 'initial_validation_success')
-      users = User.find_group_members('C20')
+      users = User.find_group_members('D30')
       send_emails(users,'need_to_approve')
       return true
     else

@@ -9,9 +9,11 @@ class ProcedureFactory
       when 'T-AS105'  then SabbaticalYearReincorporation.new
         
       when 'T-SPF200' then FormationProgram.new
+        
       when 'T-SPR201' then RotationPlan.new 
       when 'T-MPR202' then ModifyRotationPlan.new 
       when 'T-PPR203' then DelayRotationPlan.new
+
       when 'T-SLR204' then License.new
       when 'T-SPL205' then DelayLicense.new
       when 'T-SRL206' then LicenseReincorporation.new
