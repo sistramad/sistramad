@@ -12,26 +12,26 @@
         <%= render 'tips'%>
       </div>
 
-
       <div class="row">
         <% if @procedure.approved? and @procedure.code == 'T-SPR201' %>
           <%= render 'extra_requests'%>  
         <% end %>
       </div>
-
+      
       <% if @procedure.in_draft?  %>
         <% if @procedure.license_type.nil? or @procedure.license_period.nil? %>
           <%= render 'type_time_form' %>
+        <% else %>
+          <h4>
+            <div class="row text-center">
+                <%= link_to validate_rotation_plan_path(@procedure), class: 'btn btn-success btn-lg list' do %>
+                  <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la solicitud
+                <% end %>
+            </div>
+            <br>
+            <p class="center"> (Nota: Une vez solicitada la evaluación no podrá modificar los recaudos, el tipo ni la duración de licencia.)</p>
+          </h4>
         <% end %>
-         <h4>
-          <div class="row text-center">
-              <%= link_to validate_rotation_plan_path(@procedure), class: 'btn btn-success btn-lg list' do %>
-                <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la solicitud
-              <% end %>
-          </div>
-          <br>
-          <p class="center"> (Nota: Une vez solicitada la evaluación no podrá modificar los recaudos.)</p>
-        </h4>
       <% end %>
       
       <% if @procedure.in_draft?  %>

@@ -73,6 +73,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :license_infos, only: [:edit, :update]
+
   resources :participants
 
   resources :university_degrees

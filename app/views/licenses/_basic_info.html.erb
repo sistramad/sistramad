@@ -11,12 +11,15 @@
       <h4> <strong> Nombre: </strong> <%= @procedure.user.first_name  %> <%= @procedure.user.last_name%> </h4>  
       <h4> <strong> Correo: </strong> <%= @procedure.user.email %>  </h4>
       
-      <% if @procedure.license_type %>
-        <h4> <strong> Tipo de Licencia: </strong> <%= @procedure.license_type.name%> </h4>
-      <% end %>
-      
-      <% if @procedure.license_period %>
-        <h4> <strong> Tiempo de duración: </strong> <%= @procedure.license_period.name%>  </h4>
+      <% if @procedure.license_type and @procedure.license_period %>
+        <% if @procedure.in_draft? %>
+          <h4> <strong> Tipo de Licencia: </strong> <%= link_to @procedure.license_type.name, edit_license_info_path(@procedure.license_info)%>  </h4>
+          <h4> <strong> Tiempo de duración: </strong> <%= link_to @procedure.license_period.name, edit_license_info_path(@procedure.license_info)%> </h4>
+        <% else %>
+          <h4> <strong> Tipo de Licencia: </strong> <%= link_to @procedure.license_type.name %>  </h4>
+          <h4> <strong> Tiempo de duración: </strong> <%= link_to @procedure.license_period.name %> </h4>
+        <% end %>
+        
       <% end %>
 
       <h4> <strong> Estado: </strong>

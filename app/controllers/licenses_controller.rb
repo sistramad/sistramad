@@ -1,4 +1,3 @@
-
 class LicensesController < ApplicationController
   include EmailService
   include FactoryHelper
