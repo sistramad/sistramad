@@ -3,7 +3,7 @@ class LicensesController < ApplicationController
   include EmailService
   include FactoryHelper
   include ProceduresHelper
-  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult, :show_participants, :add_participants, :add_user, :search_users]
+  before_action :set_procedure, only: [:show, :edit, :update, :destroy, :validate, :consult, :show_participants, :fill_info]
   before_action :set_user
 
   def index
@@ -96,24 +96,19 @@ class LicensesController < ApplicationController
     end
   end
 
-  def show_participants
-    @participants = @procedure.users
-    render :show_participants
-  end
-
-  def add_participants
-    @participants = @procedure.users
-  end
-
-  def search_users
-    @users = User.search(params[:search_param])
-    @participants = @procedure.users
-    if @users
-      @users = current_user.except_current_user(@users)
-      render :add_participants
+  def fill_info
+    #type = LicenseType.find(params[:license_info][:license_type_id])
+    type = params[:license_info][:license_type_id]
+    period = params[:license_info][:license_period_id]
+    #period = LicensePeriod.find(params[:license_info][:license_period_id])
+    @procedure.build_license_info(license_type_id: type, license_period_id: period)
+    if @procedure.save 
+      redirect_to license_path(@procedure), notice: "La información fue agregada."
     else
-      render status: :not_found, nothing: true
+      render license_path(@procedure)
+      flash[:error] = 'Error, no se puedo agregar información'
     end
+    
   end
 
   def add_user

@@ -328,3 +328,21 @@ Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Univ
 Group.new(name: "Jefe de Departamento", code: "J10", description: "Jefe de Departamento", active: true).save
 Group.new(name: "Director de Departamento", code: "D30", description: "Director del Departamento", active: true).save
 
+#Maestro de tipos de licencias
+LicenseType.new(code: "1", name: "Enfermedad", description:"Licencia otorgada por enfermedad", active: true).save
+LicenseType.new(code: "2", name: "Estudios", description:"Licencia otorgada para estudios", active: true).save
+LicenseType.new(code: "3", name: "Misiones y comisiones de la Universidad", description:"Licencia otorgada para misiones y comisiones de la Universidad", active: true).save
+LicenseType.new(code: "4", name: "Ejercer funciones en los Subsistemas de Educación", description:"Licencia otorgada para ejercer funciones en los Subsistemas de Educación", active: true).save
+LicenseType.new(code: "5", name: "Ocupar cargos relevantes en la administración pública", description:"Licencia otorgada para ocupar cargos relevantes en la administración pública ", active: true).save
+LicenseType.new(code: "6", name: "Cualquier otro fin", description:"Licencia otorgada para cualquier otro fin", active: true).save
+
+#Maestro de periodos de licencias
+LicensePeriod.new(code: "1", name: "Hasta 15 días", description: "De 1 a 15 días", days: 15, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "2", name: "Hasta 30 días", description: "De 1 a 30 días", days: 30, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "3", name: "Hasta 90 días", description: "De 1 a 90 días", days: 90, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "4", name: "Mayor a 90 días", description: "Mas de 90 días", days: 90, months: 0, years: 0, active: true).save
+
+
+
+
+

@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       get :validate
       get :show_requirements
       get :show_participants
+      post :fill_info
     end
   end
 

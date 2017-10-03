@@ -24,13 +24,13 @@
         <% end %>
       </h4>
 
-      <%= render 'type_time_form' %>
-      
       <% if @procedure.approved? %>
         <h4> <strong> Fecha de inicio: </strong> <%= @procedure.start_date.strftime("%d-%m-%Y")%></h4>
       <% end %>
       
       <br>
+
+      
       
     </div>
   </div>
