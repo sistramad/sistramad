@@ -18,7 +18,7 @@ class Procedure < ApplicationRecord
 
   accepts_nested_attributes_for :registered_users, allow_destroy: :true
 
-  has_one :license_info
+  has_one :license_info, dependent: :destroy
   has_one :license_type, through: :license_info
   has_one :license_period, through: :license_info
 
