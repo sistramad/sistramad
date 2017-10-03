@@ -20,22 +20,20 @@ class License < SystemProcedure
   end
 
   def generate_steps(workflow)
-    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Director de Departamento")
-    create_step(workflow, "#2", "Seleccionar el tipo de licencia.", "Director de Departamento")
-    create_step(workflow, "#3", "Ingresar el tiempo de duración de la licencia.", "Director de Departamento")
-    create_step(workflow, "#4", "Evaluacón de los recaudos del plan de rotación","Director de Departamento")
-    create_step(workflow, "#4", "Generar constacia de aprobacón","-")
-    create_step(workflow, "#5", "Aprobar solicitud","-")
+    create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Jefe de Departamento")
+    create_step(workflow, "#2", "Seleccionar el tipo y duración de la licencia.", "Jefe de Departamento")
+    create_step(workflow, "#3", "Evaluación de los recaudos del plan de rotación","Director de Departamento")
+    create_step(workflow, "#4", "Generar constacia de aprobacón","")
+    create_step(workflow, "#5", "Aprobar solicitud","")
   end
 
   #Al momento de solicitar la evaluación de la solicitud
   def initial_requirements_valid?()
-    if all_required_documents_has_attachment? and has_correct_number_of_participants?
+    if all_required_documents_has_attachment? and self.procedure.license_info.present?
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
-      send_emails(self.procedure.users, 'initial_validation_success')
       users = User.find_group_members('D30')
-      send_emails(users,'need_to_approve')
+      send_emails(users,'need_to_approve')#REVISAR FORMATO
       return true
     else
       return false

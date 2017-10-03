@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def index
     add_breadcrumb "users", users_path
 
-    @users = User.all.page(params[:page]).per(15)
+    @users = User.all.page(params[:page]).per(10)
   end
 
   # GET /users/1
