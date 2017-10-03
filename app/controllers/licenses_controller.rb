@@ -88,7 +88,7 @@ class LicensesController < ApplicationController
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to rotation_plan_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to license_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cumplir todos los requerimientos necesarios.'
       render :show 
@@ -108,24 +108,7 @@ class LicensesController < ApplicationController
       flash[:error] = 'Error, no se puedo agregar información'
     end
     
-  end
-
-  def add_user
-    if @procedure.participants.size < 2
-      @user = User.find(params[:user])
-      @procedure.participants.build(user_id: @user.id)
-      if @procedure.save
-        redirect_to add_participants_rotation_plan_path(@procedure), notice: "El usuario fue agregado al plan."
-      else
-        redirect_to add_participants_rotation_plan_path(@procedure)
-        flash[:error] = 'Error, ya el usuario ha sido agregado.'
-      end
-    else
-      redirect_to add_participants_rotation_plan_path(@procedure)
-      flash[:error] = 'No se pudo agregar usuario, el número máximo de usuarios asociados por plan es dos (2),
-                       elimine uno de la lista para poder agregar otro usuario.'
-    end
-  end
+  end  
 
   private
 

@@ -16,8 +16,8 @@
           <h4> <strong> Tipo de Licencia: </strong> <%= link_to @procedure.license_type.name, edit_license_info_path(@procedure.license_info)%>  </h4>
           <h4> <strong> Tiempo de duración: </strong> <%= link_to @procedure.license_period.name, edit_license_info_path(@procedure.license_info)%> </h4>
         <% else %>
-          <h4> <strong> Tipo de Licencia: </strong> <%= link_to @procedure.license_type.name %>  </h4>
-          <h4> <strong> Tiempo de duración: </strong> <%= link_to @procedure.license_period.name %> </h4>
+          <h4> <strong> Tipo de Licencia: </strong> <%= @procedure.license_type.name %>  </h4>
+          <h4> <strong> Tiempo de duración: </strong> <%= @procedure.license_period.name %> </h4>
         <% end %>
         
       <% end %>

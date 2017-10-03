@@ -327,6 +327,8 @@ Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Univ
 
 Group.new(name: "Jefe de Departamento", code: "J10", description: "Jefe de Departamento", active: true).save
 Group.new(name: "Director de Departamento", code: "D30", description: "Director del Departamento", active: true).save
+Group.new(name: "Decano", code: "D40", description: "Decano", active: true).save
+Group.new(name: "Director de Escuela", code: "D50", description: "Director del Departamento", active: true).save
 
 #Maestro de tipos de licencias
 LicenseType.new(code: "1", name: "Enfermedad", description:"Licencia otorgada por enfermedad", active: true).save

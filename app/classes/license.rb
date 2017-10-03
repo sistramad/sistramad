@@ -47,6 +47,8 @@ class License < SystemProcedure
     start_step('#2')
     approve_step?('#2')
     start_step('#3')
+    set_group_resposible_for_step("#4")
+    set_group_resposible_for_step("#5")
   end
 
   #Cuando lo aprueba un administrador
@@ -97,6 +99,25 @@ class License < SystemProcedure
   def can_be_delayed?
     #implement this
     return true
+  end
+
+  def set_group_resposible_for_step(step_name)
+    step = self.procedure.steps.find_by(name: "#{step_name}")
+    step.group_id = find_group_by_license_period()
+    step.save
+  end
+  
+  def find_group_by_license_period()
+    case self.procedure.license_period.code
+      when "1" then 
+        return  Group.find_by(code: "D50").id
+      when "2" then 
+        return  Group.find_by(code: "D40").id
+      when "3" then
+        return  Group.find_by(code: "C20").id
+      when "4" then
+        return  Group.find_by(code: "C30").id
+    end
   end
 
 end
