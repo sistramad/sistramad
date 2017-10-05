@@ -7,9 +7,13 @@
     <div class="panel-body">
       <ul>
         <h4>
+
+
  
           <% step = @procedure.steps.find_by(name: "#3")%>
-          <% unless step.state != 'in_progress'%>
+          <% if step.in_draft? %>
+            <p> <li> <%= link_to "Evaluar recaudos iniciales.", check_initial_requirements_admin_procedure_path(procedure: @procedure, step_id: step.id) %> </li> </p>
+          <% elsif step.in_progress?%>
             <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
           <% end %>
 

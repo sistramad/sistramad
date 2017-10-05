@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       post :complete
       get :generate_approval_document
       get :download_all_documents
+      get :check_initial_requirements
     end
   end
 

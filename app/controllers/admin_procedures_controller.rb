@@ -16,6 +16,11 @@ class AdminProceduresController < ApplicationController
     @procedure = Procedure.find(params[:procedure])
   end
 
+  def check_initial_requirements
+    @procedure = Procedure.find(params[:procedure])
+    @step = Step.find(params[:step_id])
+  end
+
   def approve_initial_requirements
     @procedure = Procedure.find(params[:id])
     procedure_instance = get_procedure_intance(@procedure)

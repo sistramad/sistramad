@@ -46,7 +46,6 @@ class License < SystemProcedure
     approve_step?('#1')
     start_step('#2')
     approve_step?('#2')
-    start_step('#3')
     set_group_resposible_for_step("#4")
     set_group_resposible_for_step("#5")
   end
