@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       get :generate_approval_document
       get :download_all_documents
       get :check_initial_requirements
+      post :save_opinion
     end
   end
 

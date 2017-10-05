@@ -64,19 +64,24 @@ class License < SystemProcedure
     return self.procedure.participants.size == 2
   end
 
-  def approve(start_date)
-    if can_be_approved?(start_date)
-      approve_procedure(start_date)
+  def approve(end_date)
+    
+    if can_be_approved?(end_date)
+      approve_procedure(end_date)
     end       
   end
 
-  def can_be_approved?(start_date)
-    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && start_date_valid(start_date)
+  def can_be_approved?(end_date)
+    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && end_date_valid(end_date)
   end
 
   def step_approved?(step_name)
     self.procedure.steps.find_by(name: "#{step_name}").approved?
-  end  
+  end 
+
+  def end_date_valid(end_date)
+    end_date.present? && (Date.parse(end_date) >= Date.today)
+  end
 
   def start_date_valid(start_date)
     start_date.present? && (Date.parse(start_date) >= Date.today)

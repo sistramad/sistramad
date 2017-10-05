@@ -21,6 +21,23 @@ class AdminProceduresController < ApplicationController
     @step = Step.find(params[:step_id])
   end
 
+  def save_opinion
+    @procedure = Procedure.find(params[:procedure])
+    @step = Step.find(params[:step_id])
+    @step.info = params[:info]
+    @step.save
+
+    if @step.in_draft?
+      @step.start!
+      users = Group.find(@step.group.id).users
+      send_emails(users,'check_comments_and_approve') if users.present?
+      redirect_to admin_procedure_path(@procedure), notice: 'Comentarios guardados con exito. Notificación enviada.'
+    else
+      flash[:error] = 'Imposible realizar ésta acción.'
+      redirect_to admin_procedure_path(@procedure)
+    end
+  end
+
   def approve_initial_requirements
     @procedure = Procedure.find(params[:id])
     procedure_instance = get_procedure_intance(@procedure)
@@ -59,10 +76,10 @@ class AdminProceduresController < ApplicationController
   end
 
   def approve_procedure
-    start_date = params[:start_date]
+    end_date = params[:end_date]
     procedure_instance = get_procedure_intance(@procedure)
-    
-    procedure_instance.approve
+    byebug
+    procedure_instance.approve(end_date)
 
     if @procedure.approved?
       flash[:success] = 'Solicitud aprobada con exito!'

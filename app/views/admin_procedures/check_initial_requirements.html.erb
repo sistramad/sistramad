@@ -5,7 +5,7 @@
   <br>
   <div class="container">
     <div class="row">
-      <div class="col-md-7">
+      <div class="col-md-12">
         <div class="table-responsive">
         <table class="table table-striped table-hover">
           <thead>
@@ -43,8 +43,9 @@
         </table>
       </div>
     </div>
+
     <div class="row">
-      <div class="col-md-5">
+      <div class="col-md-8 col-md-offset-2">
       <br>
         <div class="panel panel-primary">
           <div 
@@ -52,7 +53,7 @@
           </div>
           <div class="panel-body">
             <p>
-              <div>
+              <div class="text-center">
                 <%= link_to download_all_documents_admin_procedure_path(@procedure), class: 'btn btn-info btn-md list' do %> 
                   Descargar todos los documentos <i class="glyphicon glyphicon-download-alt"></i> 
                 <% end %>
