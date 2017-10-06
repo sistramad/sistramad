@@ -78,7 +78,6 @@ class AdminProceduresController < ApplicationController
   def approve_procedure
     end_date = params[:end_date]
     procedure_instance = get_procedure_intance(@procedure)
-    byebug
     procedure_instance.approve(end_date)
 
     if @procedure.approved?

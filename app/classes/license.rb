@@ -32,7 +32,7 @@ class License < SystemProcedure
     if all_required_documents_has_attachment? and self.procedure.license_info.present?
       update_procedure_elements()
       send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('D30')
+      users = User.find_group_members('J10')
       send_emails(users,'need_to_approve')#REVISAR FORMATO
       return true
     else
@@ -101,8 +101,8 @@ class License < SystemProcedure
   end
 
   def can_be_delayed?
-    #implement this
-    return true
+    sub_procedures = self.procedure.sub_procedures.where(code: "T-SPL205", state: ["in_draft","in_progress"]) #Busca los tramites de prorroga hijos
+    return sub_procedures.size > 0 ? false : true
   end
 
   def set_group_resposible_for_step(step_name)
