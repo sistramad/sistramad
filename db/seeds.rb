@@ -304,14 +304,30 @@ DocumentMaster.new(name: "Carta de Aceptación de Cumplir Plan", code: "D-ACP", 
 DocumentMaster.new(name: "Carta de Aceptación del Departamento", code: "D-ADP", procedure: "Plan de Rotación", active: true , initially_required: true ).save
 
 #Modificacion del Plan de Rotacion
-
 DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Modificación del Plan de Rotación", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "Modificación del Plan de Actividades", code: "D-MP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 DocumentMaster.new(name: "Documentos probatorios", code: "D-PMP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 
+#Modificacion del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Modificación del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Modificación del Plan de Actividades", code: "D-MP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PMP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
 
+#Prorroga del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PPP", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+
+#Licencias
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Licencia", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solicitud del Beneficiario", code: "D-SOL", procedure: "Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Justificación de la Licencia", code: "D-JL", procedure: "Licencia", active: true, initially_required: true ).save
 
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
@@ -320,4 +336,27 @@ Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del c
 
 Group.new(name: "Representante de Facultad", code: "R10", description: "Representantes de Facultad", active: true).save
 Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Universitario", active: true).save
+
+Group.new(name: "Jefe de Departamento", code: "J10", description: "Jefe de Departamento", active: true).save
+Group.new(name: "Director de Departamento", code: "D30", description: "Director del Departamento", active: true).save
+Group.new(name: "Decano", code: "D40", description: "Decano", active: true).save
+Group.new(name: "Director de Escuela", code: "D50", description: "Director del Departamento", active: true).save
+
+#Maestro de tipos de licencias
+LicenseType.new(code: "1", name: "Enfermedad", description:"Licencia otorgada por enfermedad", active: true).save
+LicenseType.new(code: "2", name: "Estudios", description:"Licencia otorgada para estudios", active: true).save
+LicenseType.new(code: "3", name: "Misiones y comisiones de la Universidad", description:"Licencia otorgada para misiones y comisiones de la Universidad", active: true).save
+LicenseType.new(code: "4", name: "Ejercer funciones en los Subsistemas de Educación", description:"Licencia otorgada para ejercer funciones en los Subsistemas de Educación", active: true).save
+LicenseType.new(code: "5", name: "Ocupar cargos relevantes en la administración pública", description:"Licencia otorgada para ocupar cargos relevantes en la administración pública ", active: true).save
+LicenseType.new(code: "6", name: "Cualquier otro fin", description:"Licencia otorgada para cualquier otro fin", active: true).save
+
+#Maestro de periodos de licencias
+LicensePeriod.new(code: "1", name: "Hasta 15 días", description: "De 1 a 15 días", days: 15, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "2", name: "Hasta 30 días", description: "De 1 a 30 días", days: 30, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "3", name: "Hasta 90 días", description: "De 1 a 90 días", days: 90, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "4", name: "Mayor a 90 días", description: "Mas de 90 días", days: 90, months: 0, years: 0, active: true).save
+
+
+
+
 

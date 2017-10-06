@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926000520) do
+ActiveRecord::Schema.define(version: 20171002004037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -99,6 +99,36 @@ ActiveRecord::Schema.define(version: 20170926000520) do
   create_table "groups", force: :cascade do |t|
     t.string "name"
     t.string "code"
+    t.string "description"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "license_infos", force: :cascade do |t|
+    t.bigint "procedure_id"
+    t.bigint "license_type_id"
+    t.bigint "license_period_id"
+    t.index ["license_period_id"], name: "index_license_infos_on_license_period_id"
+    t.index ["license_type_id"], name: "index_license_infos_on_license_type_id"
+    t.index ["procedure_id"], name: "index_license_infos_on_procedure_id"
+  end
+
+  create_table "license_periods", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
+    t.string "description"
+    t.integer "days"
+    t.integer "months"
+    t.integer "years"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "license_types", force: :cascade do |t|
+    t.string "code"
+    t.string "name"
     t.string "description"
     t.boolean "active"
     t.datetime "created_at", null: false

@@ -95,6 +95,9 @@ class RotationPlan < SystemProcedure
     Date.today < (self.procedure.start_date - 90.days) #si la fecha de la solicitud de modificacion esta 3 meses antes de la fecha del comienzo del plan
   end
 
+  def can_be_delayed?
+    #implement this
+    return true
+  end
 
-  
 end

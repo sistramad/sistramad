@@ -32,7 +32,11 @@
               <td> <h4> <span class="label label-danger"><%= state_translate(step.state) %> </span> </h4> </td>
             <% end %>
             
-            <h4> <td><%= step.group.name %> </td></h4>
+            <% if step.group %>
+              <h4> <td><%= step.group.name %> </td></h4>
+            <% else %>
+              <h4> <td>Por decidirse</td></h4>
+            <% end %>
             
             <% if step.approved_at.nil? %>
               <td>--  /  --  /  ----</td>

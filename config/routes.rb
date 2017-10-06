@@ -21,11 +21,14 @@ Rails.application.routes.draw do
       get :approve_document
       get :show_document
       get :approve_step
+      get :approve_procedure
       post :approve_procedure
       get :complete
       post :complete
       get :generate_approval_document
       get :download_all_documents
+      get :check_initial_requirements
+      post :save_opinion
     end
   end
 
@@ -62,6 +65,17 @@ Rails.application.routes.draw do
       get :show_participants
     end
   end
+
+  resources :licenses do
+    member do
+      get :validate
+      get :show_requirements
+      get :show_participants
+      post :fill_info
+    end
+  end
+
+  resources :license_infos, only: [:edit, :update]
 
   resources :participants
 
