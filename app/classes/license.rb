@@ -101,8 +101,18 @@ class License < SystemProcedure
   end
 
   def can_be_delayed?
-    sub_procedures = self.procedure.sub_procedures.where(code: "T-SPL205", state: ["in_draft","in_progress"]) #Busca los tramites de prorroga hijos
+    sub_procedures = self.procedure.sub_procedures.where(code: "T-SPL205", state: ["in_draft","in_progress"]) #tramites de prorroga hijos
     return sub_procedures.size > 0 ? false : true
+  end
+
+  def can_be_reincorporated?
+    sub_procedures = self.procedure.sub_procedures.where(code: "T-SRL206", state: ["in_draft","in_progress"]) #tramites de reincorporacion hijos
+    if self.procedure.end_date.present?
+      return sub_procedures.size > 0 || (self.procedure.end_date + 30.days <= Date.today) ? false : true
+    else
+      return false
+    end
+
   end
 
   def set_group_resposible_for_step(step_name)

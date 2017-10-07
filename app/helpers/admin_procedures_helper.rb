@@ -16,7 +16,7 @@ module AdminProceduresHelper
       when 'T-SPL205' then 
         return 'delay_licenses/basic_info'
       when 'T-SRL206' then 
-        return 'license_reincorporation/basic_info'
+        return 'license_reincorporations/basic_info'
     end
   end
 end

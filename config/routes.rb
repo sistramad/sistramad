@@ -82,11 +82,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :license_reincorporation do
+  resources :license_reincorporations do
     member do
       get :validate
       get :show_requirements
-      post :fill_info
     end
   end
 

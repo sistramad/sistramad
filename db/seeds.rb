@@ -318,12 +318,18 @@ DocumentMaster.new(name: "Solicitud del Beneficiario", code: "D-SOL", procedure:
 DocumentMaster.new(name: "Justificación de la Licencia", code: "D-JL", procedure: "Licencia", active: true, initially_required: true ).save
 
 #Prorroga de Licencia
-DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga de Licencia ", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga de Licencia", active: true , initially_required: true ).save
 DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Justificacón de la Pŕorroga", code: "D-JL", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Solicitud del beneficiario", code: "D-SB", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Documento probatorio", code: "D-DP", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Plan de trabajo o actividades", code: "D-PDT", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+
+#Reincorporacion luego de licencia
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Reincorporación luego de Licencia", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Reincorporación luego de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Reincorporación luego de Licencia", active: true , initially_required: true ).save
+
 
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
