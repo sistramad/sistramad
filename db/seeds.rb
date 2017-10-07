@@ -329,6 +329,14 @@ DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Licencia", active: true
 DocumentMaster.new(name: "Solicitud del Beneficiario", code: "D-SOL", procedure: "Licencia", active: true, initially_required: true ).save
 DocumentMaster.new(name: "Justificación de la Licencia", code: "D-JL", procedure: "Licencia", active: true, initially_required: true ).save
 
+#Prorroga de Licencia
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga de Licencia ", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Justificacón de la Pŕorroga", code: "D-JL", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solicitud del beneficiario", code: "D-SB", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Documento probatorio", code: "D-DP", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Plan de trabajo o actividades", code: "D-PDT", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save

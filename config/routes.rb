@@ -70,7 +70,22 @@ Rails.application.routes.draw do
     member do
       get :validate
       get :show_requirements
-      get :show_participants
+      post :fill_info
+    end
+  end
+
+  resources :delay_licenses do
+    member do
+      get :validate
+      get :show_requirements
+      post :fill_info
+    end
+  end
+
+  resources :license_reincorporation do
+    member do
+      get :validate
+      get :show_requirements
       post :fill_info
     end
   end

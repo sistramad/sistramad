@@ -3,7 +3,9 @@ class LicenseInfosController < ApplicationController
   before_action :set_procedure, only: [:edit, :update]
 
   def edit
-
+    if params[:period].present?
+      @form = "period_form"
+    end
   end
 
   def update

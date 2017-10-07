@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info panel-user">
+      <div class="panel-heading center">Docentes registrados en el programa:</div>
+           <div class="table-responsive">
+            <table class="table table-striped table-hover"> 
+              <thead>
+                <tr>
+                  <th>Nombre:</th>
+                  <th>Apellido:</th>
+                  <th>Cédula de Identidad:</th>             
+                </tr>
+              </thead>
+              <tbody>
+                <% @procedure.registered_users.order(:first_name).each do |user|%>
+                  <tr>
+                    <td><%= user.first_name%> </td>
+                    <td><%= user.last_name%> </td>
+                    <td><%= user.identification_number%></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+  </div>
+</div> 

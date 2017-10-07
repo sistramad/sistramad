@@ -29,11 +29,13 @@ module ProceduresHelper
   end
 
   def documents_required(user, procedure)
-    excluded = []
-    user_docs = user.documents.where(code: %w[CI RIF]) #Estos son los documentos que se son comunes para todos los trámites.
+    excluded = [] #Array con los documetos que excluira 
+    user_docs = user.documents.where(code: %w[CI RIF]) #Excluye estos documentos si ya el usuario los tiene cargados
+    
     user_docs.each do |doc|
       excluded << doc.code    
     end
+    
     procedure_documents = DocumentMaster.where(procedure: procedure.name, active: true, initially_required: true)
                           .where.not(code: excluded)
     return procedure_documents
