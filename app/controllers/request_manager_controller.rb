@@ -29,6 +29,19 @@ class RequestManagerController < ApplicationController
         end
       end
 
+      def generate_approval_document
+        @professors_transfer = ProfessorsTransfer.find(params[:professors_transfer])
+        @user = User.find(@professors_transfer.user.id)
+        if generate_pdf?(@professors_transfer, @user)
+          professors_transfer = get_professors_transfer_instance(@professors_transfer)
+          professors_transfer.approve_final_step()
+          flash[:success] = 'Constancia generada con éxito.'       
+        else
+          flash[:error] = 'Error al generar constancia de aprobación.'
+        end
+        redirect_to  request_manager_path(@professors_transfer)
+      end
+
       def show_document
         @professorstransfer = ProfessorsTransfer.find(params[:id])
         @document = @professorstransfer.documents.find_by(code: params[:document_code])
@@ -87,6 +100,30 @@ class RequestManagerController < ApplicationController
         def get_request_from_factory(type)
             factory = WorkflowFactory.new
             factory.build(type)
+        end
+
+        def generate_pdf?(professors_transfer, user)
+          attachment = Attachment.new
+          type = FormalitiesMaster.find_by(id: 1)
+          if ( professors_transfer.process_type == type)
+            attachment.document = Document.find_by(name: 'Copia de Oficio de Aprobación de Traslado')
+            attachment.process_id = professors_transfer
+          else
+            attachment.document = Document.find_by(name: 'Copia de Oficio de Aprobacion de Cambio en Dedicacion')
+            attachment.process_id = professors_transfer
+          end  
+          attachment.user = user    
+        
+          pdf = render_to_string pdf: "traslado_aprobacion", template: 'request_manager/traslado_aprobacion', encoding: "UTF-8"
+    
+          tempfile = Tempfile.new(["#{'traslado_aprobacion_temp'}", ".pdf"], Rails.root.join('tmp'))
+          tempfile.binmode
+          tempfile.write pdf
+          
+    
+          attachment.file = tempfile
+          tempfile.close
+          attachment.save     
         end
 
       end

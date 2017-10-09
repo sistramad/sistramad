@@ -12,40 +12,42 @@
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
           <p> <li> <%= link_to "Aprobar recaudos iniciales.", initial_requirements_request_manager_path %> </li> </p>
           <% end %>
-          
-          <% step = @professors_transfer.workflow_steps.find_by(step_number: 2)%>
-          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:2).role.name %>
-          <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
-            <p><li><%= link_to "Analisis y Remisión de juicio a Consejo de Departamento.", new_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
-          <% end %>
-          
-          <% step = @professors_transfer.workflow_steps.find_by(step_number: 3) %>
-          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:3).role.name%>
+             
+          <% step = @professors_transfer.workflow_steps.find_by(step_number: 2) %>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:2).role.name%>
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
           <p><li><%= link_to "Analisis y Remisión de juicio a Decano.", new_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
           <% end %>
           
-          <% step = @professors_transfer.workflow_steps.find_by(step_number:4) %>
-          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:4).role.name%>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:3) %>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:3).role.name%>
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
           <p><li><%= link_to "Analisis y Remisión de juicio a Asuntos Profesorales.", new_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
           <% end %>
 
-          <% step = @professors_transfer.workflow_steps.find_by(step_number:5) %>
-          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:5).role.name%>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:4) %>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:4).role.name%>
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
-            <p> <li> <%= link_to "Aprobar constancia de aprobación.", show_document_admin_procedure_path(document_code: 'CDAP', step:5)%> </li> </p>
+            <p> <li> <%= link_to "Verificar Aval Academico y Presupuestario", new_aval_and_budget_revision_review_path(workflow_step_id: step.id,id:@professors_transfer.id)%> </li> </p>
           <% end %>
 
-          <% step = @professors_transfer.workflow_steps.find_by(step_number:6)%>
-          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:6).role.name%>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:5)%>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:5).role.name%>
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
             <p> <li> <%= link_to "Analisis y Remisión de juicio a Consejo de Facultad", new_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
           <% end %>
 
+          <% @doc = Document.find_by(name:  'Copia de Oficio de Aprobación de Traslado')%>
+          <% @document = Attachment.find_by_process_id_and_document_id(@professors_transfer,@doc)%>
+          <% if @document.nil? %>
+          <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_request_manager_path(professors_transfer: @professors_transfer, format: :pdf) %> </li></p>
+          <% else %>
+            <p><li> <%= link_to "Ver constancia de aprobación.", @document.file.url %> </li></p>
+          <% end %>
+
           <br>
-          <% step = @professors_transfer.workflow_steps.find_by(step_number:7)%>
-          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:7).role.name%>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:6)%>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:6).role.name%>
           <div class='text-center'>
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
             <%= link_to complete_request_manager_path(@professors_transfer) , class: 'btn btn-success btn-lg list' do %>

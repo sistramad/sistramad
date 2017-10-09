@@ -8,6 +8,7 @@ class ProfessorsTransfersController < ApplicationController
   before_action :set_references, only: [:new,:edit]
   before_action :set_reference_lists, only: [:new,:edit]
   before_action :get_selections, only: [:new,:edit,:get_selections,:get_froms,:get_to]
+  before_action :get_selections_dedication, only: [:new,:edit]
   before_action :get_froms, only: [:edit,:get_selections,:get_froms,:get_to]
   before_action :get_to, only: [:edit,:get_selections,:get_froms,:get_to]
   before_filter :authenticate_user!
@@ -59,14 +60,30 @@ class ProfessorsTransfersController < ApplicationController
   # PATCH/PUT /professors_transfers/1.json
   def update
     respond_to do |format|
+      date = @professors_transfer.user.employee.dedication_start_date
       if @professors_transfer.update(professors_transfer_params)
-        type = Reference.find(@professors_transfer.type_of_translate).name
-        actual_request = get_request_from_factory(type)
-        actual_request.generate_workflow(@professors_transfer)
-        actual_request.professors_transfer = @professors_transfer
-        actual_request.initial_requirements_valid?  
-        format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
-        format.json { render :show, status: :ok, location: @professors_transfer }
+        if (@professors_transfer.process_type)==1
+          type = Reference.find(@professors_transfer.type_of_translate).name
+          actual_request = get_request_from_factory(type)
+          actual_request.generate_workflow(@professors_transfer)
+          actual_request.professors_transfer = @professors_transfer
+          actual_request.initial_requirements_valid?  
+          format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
+          format.json { render :show, status: :ok, location: @professors_transfer }
+        else
+          if (validates_dedication_date(date))
+            type = ReferenceList.find(@professors_transfer.type_of_translate).name
+            actual_request = get_request_from_factory(type)
+            actual_request.generate_workflow(@professors_transfer)
+            actual_request.professors_transfer = @professors_transfer
+            actual_request.initial_requirements_valid?  
+            format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
+            format.json { render :show, status: :ok, location: @professors_transfer }
+          else
+            format.html { render :show, notice: 'El tiempo en la Dedicación debe ser mayor a un Año' }
+            format.json { render json: @professors_transfer.errors, status: :unprocessable_entity }
+          end
+        end
       else
         format.html { render :edit }
         format.json { render json: @professors_transfer.errors, status: :unprocessable_entity }
@@ -79,7 +96,7 @@ class ProfessorsTransfersController < ApplicationController
   def destroy
     @professors_transfer.destroy
     respond_to do |format|
-      format.html { redirect_to professors_transfers_url, notice: 'Professors transfer was successfully destroyed.' }
+      format.html { redirect_to professors_transfers_url, notice: 'El Tramite fue eliminado correctamente.' }
       format.json { head :no_content }
     end
   end
@@ -126,12 +143,25 @@ class ProfessorsTransfersController < ApplicationController
        @user = current_user
     end
 
+    def validates_dedication_date(date)
+      if( date < 1.year.ago   )
+        true
+      else 
+        false
+      end
+    end
+      
     def set_faculties
        @faculties = current_user.employee.faculties
     end
 
     def set_references
-      @reference = Reference.last(3)
+      if (@professors_transfer.process_type==1)
+          @reference = Reference.last(3)
+      end
+      if (@professors_transfer.process_type==3)
+        @reference = Reference.find_by(name: 'Tipo de Cambio')
+      end
     end
 
     def set_reference_lists
@@ -150,6 +180,19 @@ class ProfessorsTransfersController < ApplicationController
       else
         @references = Reference.find(9)
         @reference_lists = @references.reference_lists
+      end
+    end
+
+    def get_selections_dedication
+      if (params[:type_of_translate].present?) 
+        @references = Reference.find(params[:type_of_translate])
+        @reference_lists = @references.reference_lists
+      else
+        @references = Reference.find_by(name: 'Tipo de Cambio')
+        @reference_lists = @references.reference_lists
+        @reference_lists2 = current_user.employee.dedication_classification
+        @references = Reference.find_by(name: 'Dedicacion')
+        @reference_lists3 = @references.reference_lists
       end
     end
 

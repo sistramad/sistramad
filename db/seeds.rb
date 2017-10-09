@@ -111,7 +111,7 @@ user = User.new(:username => 'consejodepartamento',
                 :password_confirmation => '123456')
 user.add_role(:Consejo_Departamento)
 user.save!
-=end
+
 
 user = User.new(:username => 'consejouniversitario',
 :email => 'consejoUniversitario@test.com',
@@ -164,6 +164,7 @@ user = User.new(:username => 'consejofacultad',
                 :password_confirmation => '123456')
 user.add_role(:Consejo_Facultad)                  
 user.save!
+=end
 
 #reference_region = Reference.new(:name => 'region') #1
 #reference_region.save!
@@ -398,8 +399,16 @@ user.save!
 #document = Document.new(:name => 'Copia de Oficio de Designación como Docente')
 #document.save!
 
+#Documento de Aprobación de Traslado y Cambio de dedicacion
+#document = Document.new(:name => 'Copia de Oficio de Aprobación de Traslado')
+#document.save!
+#document = Document.new(:name => 'Copia de Oficio de Aprobacion de Cambio en Dedicacion')
+#document.save!
+
 #Para Heroku
 #formalities_master = FormalitiesMaster.new(:name => 'Traslados',:description =>'Se entiende por traslado al procedimiento académico administrativo mediante el cual un miembro del personal Docente y de Investigación puede ser transferido, en forma Parcial o Total, transitoria o permanentemente, a otra Unidad Académica de Adscripción en',:table_manager => 'ProfessorsTransfer',:isactive => true)
 #formalities_master.save!
 #formalities_master = FormalitiesMaster.new(:name => 'Plan Conjunto',:description =>'Se entiende por Plan Conjunto a la combinación secuencial de un año sabático y una beca sueldo en la que el componente de Año Sabático queda incluido como parte del plan de formación al grado académico correspondiente y goza de todos los beneficios y sopor',:table_manager =>'JointPlan',:isactive => true)
+#formalities_master.save!
+#formalities_master = FormalitiesMaster.new(:name => 'Cambio de Dedicacion',:description =>'Se entiende por Cambio de Dedicación Temporal, al proceso mediante el cual, los miembros del personal Docente y de Investigación, por razones justificadas, a juicio del Consejo de Facultad, solicitan ante su Unidad Académica de adscripción ser clasificados en una dedicación distinta a la que poseen de manera Temporal, las cuales podrán ser solicitadas por',:table_manager =>'ProfessorsTransfer',:isactive => true)
 #formalities_master.save!

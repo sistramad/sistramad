@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_user
-  before_action :set_professors_transfer, only: [:new]
+  before_action :set_professors_transfer, only: [:new,:new_aval_and_budget_revision]
 
   # GET /reviews
   # GET /reviews.json
@@ -21,6 +21,16 @@ class ReviewsController < ApplicationController
     docs = FormalitiesMaster.find_by(name: 'Traslados').documents
     u_id = @professors_transfer.user_id
     @attachments = User.find_by(id: u_id).attachments.where(:document_id => docs)
+    @step = WorkflowStep.find(params[:workflow_step_id])
+    steps = @professors_transfer.workflow_steps
+    @preview = Review.all.where(:workflow_step_id => steps)
+    @review = Review.new
+  end
+
+   # GET /reviews/new
+   def new_aval_and_budget_revision
+    docs = FormalitiesMaster.find_by(name: 'Traslados').documents
+    u_id = @professors_transfer.user_id
     @step = WorkflowStep.find(params[:workflow_step_id])
     steps = @professors_transfer.workflow_steps
     @preview = Review.all.where(:workflow_step_id => steps)
@@ -45,7 +55,7 @@ class ReviewsController < ApplicationController
     professors_transfer_instance.approve_step?(@step.step_number)
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
+        format.html { redirect_to @review, notice: 'La revision se completo con Exito' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }

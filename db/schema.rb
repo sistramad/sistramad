@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170922033657) do
+ActiveRecord::Schema.define(version: 20171007213808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20170922033657) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.integer  "process_id"
   end
 
   create_table "countries", force: :cascade do |t|
@@ -69,12 +70,14 @@ ActiveRecord::Schema.define(version: 20170922033657) do
   end
 
   create_table "employees", force: :cascade do |t|
-    t.integer  "user_id",                 null: false
-    t.integer  "type_employee_id",        null: false
-    t.integer  "scale_classification_id", null: false
-    t.integer  "scale_category_id",       null: false
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.integer  "user_id",                      null: false
+    t.integer  "type_employee_id",             null: false
+    t.integer  "scale_classification_id",      null: false
+    t.integer  "scale_category_id",            null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "dedication_classification_id"
+    t.date     "dedication_start_date"
   end
 
   add_index "employees", ["user_id"], name: "index_employees_on_user_id", unique: true, using: :btree
@@ -151,6 +154,7 @@ ActiveRecord::Schema.define(version: 20170922033657) do
     t.integer  "faculty_from_id"
     t.integer  "faculty_to_id"
     t.integer  "type_of_translate"
+    t.integer  "process_type"
   end
 
   add_index "professors_transfers", ["user_id"], name: "index_professors_transfers_on_user_id", using: :btree

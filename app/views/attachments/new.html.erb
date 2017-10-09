@@ -59,7 +59,7 @@ Los formatos permitidos son: .pdf, .doc, .jpeg, .jpj, .png, .docx, .odt</a>
 
         <% end %>
           <%= fields_for 'tramite', @formalities_masters do |tramite| %>
-            <%= tramite.hidden_field :name, :value => @formalities_masters.name %>
+            <%= tramite.hidden_field :id, :value => @formalities_master.id %>
             <%= tramite.hidden_field :docs, :value => docs %>
             <%= tramite.hidden_field :docs_uploaded, :value => docs_uploaded %>
           <% end %>

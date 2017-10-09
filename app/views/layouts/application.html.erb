@@ -80,28 +80,62 @@
             </span>
               </a>
               <ul class="treeview-menu">
-                <% if (ProfessorsTransfer.where(user_id: current_user.id).empty? && (current_user.has_role? :docente)) %>
-                      <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
+                <% if (ProfessorsTransfer.where(user_id: current_user.id,process_type: 1).empty? && (current_user.has_role? :docente)) %>
+                      <li><%= link_to new_attachment_path(:tramite => 1),method: :get do%>
                             <i class="fa fa-circle"></i>
                             Solicitar Traslado
                       <% end %>
                       </li>
                 <% else %>
-                  <% if ProfessorsTransfer.exists?(user_id: current_user.id) %>
-                    <% if ProfessorsTransfer.find_by_user_id(current_user.id).DR? %>
-                        <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(1).name),method: :get do%>
+                  <% if ProfessorsTransfer.exists?(user_id: current_user.id,process_type: 1) %>
+                    <% if ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 1).DR? %>
+                        <li><%= link_to new_attachment_path(:tramite => 1 ),method: :get do%>
                                 <i class="fa fa-circle"></i>
                                 Enviar Recaudos Faltantes
+                        <% end %>
+                          </li>
+                    <% elsif ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 1).CL? %>
+                        <li><%= link_to new_attachment_path(:tramite => 1 ),method: :get do%>
+                                <i class="fa fa-circle"></i>
+                                Solicitar Traslado
                         <% end %>
                           </li>
                     <% end %>
                     <li><%= link_to status_professors_transfers_path ,method: :get do%>
                         <i class="fa fa-circle"></i>
                         Estatus de Traslado
-                    <% end %>
+                  <% end %>
                     </li> 
                   <% end %> 
-                <% end %>  
+                <% end %>
+                <% if (ProfessorsTransfer.where(user_id: current_user.id,process_type: 3).empty? && (current_user.has_role? :docente))%>
+                <li><%= link_to new_attachment_path(:tramite => 3),method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Solicitar Cambio de Dedicación
+                <% end %>
+                </li>
+                <% else %>
+                  <% if ProfessorsTransfer.exists?(user_id: current_user.id,process_type: 3) %>
+                    <% if ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 3).DR? %>
+                      <li><%= link_to new_attachment_path(:tramite => 3 ),method: :get do%>
+                              <i class="fa fa-circle"></i>
+                              Enviar Recaudos Faltantes
+                      <% end %>
+                        </li>
+                    <% elsif ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 3).CL? %>
+                        <li><%= link_to new_attachment_path(:tramite => 3 ),method: :get do%>
+                                <i class="fa fa-circle"></i>
+                                Solicitar Traslado
+                        <% end %>
+                          </li>
+                    <% end %>
+                      <li><%= link_to status_professors_transfers_path ,method: :get do%>
+                        <i class="fa fa-circle"></i>
+                        Estatus de Cambio de Dedicación
+                      <% end %>
+                    </li> 
+                <% end %> 
+                <% end %>   
                 <% if ((current_user.has_role? :decano) || (current_user.has_role? :Consejo_Departamento)|| (current_user.has_role? :Consejo_Escuela) || (current_user.has_role? :Consejo_Facultad) || (current_user.has_role? :departamento) || (current_user.has_role? :Consejo_Universitario))%>
                     <li><%= link_to professors_transfers_path do%>
                         <i class="fa fa-circle-o"></i>

@@ -4,6 +4,7 @@ class Employee < ActiveRecord::Base
   belongs_to :type_employee, :class_name => 'ReferenceList'
   belongs_to :scale_category, :class_name => 'ReferenceList'
   belongs_to :scale_classification, :class_name => 'ReferenceList'
+  belongs_to :dedication_classification, :class_name => 'ReferenceList'
 
   has_and_belongs_to_many :faculties
 end

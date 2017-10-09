@@ -124,3 +124,7 @@ gem "puma"
 
 # Backend para procesos en background
 gem 'delayed_job_active_record'
+
+# para generar pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

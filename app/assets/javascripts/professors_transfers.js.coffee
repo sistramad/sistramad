@@ -41,4 +41,13 @@ $(document).ready ->
         type_of_translate: $('.type_selection option:selected').val()
         faculty_to_id: $('.to_selection option:selected').val()
 
+$(document).ready ->
+  $(".type_selection_dedication").on "change", ->
+    $.ajax
+      url: "/professors_transfers/get_selections_dedication"
+      type: "GET"
+      dataType: "script"
+      data:
+        type_of_translate: $('.type_selection_dedication option:selected').val()
+
       

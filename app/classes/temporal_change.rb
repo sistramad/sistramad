@@ -1,13 +1,13 @@
-class UniversityTransfer < Workflow
+class TemporalChange < Workflow
   include EmailService
     def initialize     
-      self.name = "Traslado entre Universidades"
+      self.name = "Cambio de Dedicación Temporal"
     end
     
     def generate_workflow(professors_transfer)
       request_workflow = RequestWorkflow.new()
-      request_workflow.name = "Workflow Traslado entre Universidades"
-      request_workflow.description = "Flujo principal del trámite de Traslado entre Universidades"
+      request_workflow.name = "Workflow Cambio de Dedicación Temporal"
+      request_workflow.description = "Flujo principal del trámite de Cambio de Dedicación Temporal"
       request_workflow.is_active = true
       request_workflow.professors_transfer = professors_transfer
       if request_workflow.save
@@ -21,12 +21,10 @@ class UniversityTransfer < Workflow
     def generate_steps(request_workflow)
       #buscar los roles responsables en cda paso
       create_step(request_workflow, 1, "Evaluación de Recaudos iniciales","asuntos")
-      create_step(request_workflow, 2, "Analisis y Remisión de juicio a Consejo de Departamento.","Consejo_Universitario")
-      create_step(request_workflow, 3, "Analisis y Remisión de juicio a Decano.","Consejo_Departamento")
-      create_step(request_workflow, 4, "Analisis y Remisión de juicio a Asuntos Profesorales.","decano")
-      create_step(request_workflow, 5, "Verificar Aval Academico y Presupuestario","asuntos")
-      create_step(request_workflow, 6, "Analisis y Remisión de juicio a Consejo de Facultad","asuntos")
-      create_step(request_workflow, 7, "Analisis Final de Traslado","Consejo_Facultad")
+      create_step(request_workflow, 2, "Aprobacion de Jefe de Departamento y Remisión de juicio a Decano.","Consejo_Departamento")
+      create_step(request_workflow, 3, "Verificar Aval Academico y Presupuestario","decano")
+      create_step(request_workflow, 4, "Analisis y Remisión de juicio a Consejo de Facultad","decano")
+      create_step(request_workflow, 5, "Analisis Final de Traslado","Consejo_Facultad")
     end
   
     def initial_requirements_valid?()
@@ -50,9 +48,10 @@ class UniversityTransfer < Workflow
       self.professors_transfer.procesar! 
       start_step(1)
     end
-  
+
     def approve_final_step
-      approve_final?(7)
+      approve_final?(5)
     end
+  
     
   end
