@@ -76,9 +76,9 @@ class AdminProceduresController < ApplicationController
   end
 
   def approve_procedure
-    end_date = params[:end_date]
+    date = params[:date]
     procedure_instance = get_procedure_intance(@procedure)
-    procedure_instance.approve(end_date)
+    procedure_instance.approve(date)
 
     if @procedure.approved?
       flash[:success] = 'Solicitud aprobada con exito!'
