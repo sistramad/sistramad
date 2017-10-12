@@ -1,4 +1,4 @@
-class ReferenceList < ActiveRecord::Base
+class ReferenceList < ApplicationRecord
   belongs_to :reference, inverse_of: :reference_lists
 
   has_many   :countries_region, :class_name => 'Country', :foreign_key => 'region_id'

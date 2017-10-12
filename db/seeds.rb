@@ -6,13 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #  Mayor.create(name: 'Emanuel', city: cities.first)
 
-user = User.new(:username => 'admin',
-                :email => 'admin@admin.com',
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!(:validate => false)/
 
-user.add_role(:admin)
 
 user = User.new(:username => 'test',
                 :email => 'test@test.com',
@@ -47,11 +41,34 @@ user = User.new(:username => 'jesusdeabreu',
                 :password => 'jmdam182', #Devise.friendly_token[0,20]
                 :password_confirmation => 'jmdam182')
 user.save!
+user.add_role(:admin)
+user.add_role(:test)
 
+user = User.new(:username => 'amatute',
+                :email => 'alexghoro@outlook.com',
+                :first_name => 'Alejandro',
+                :middle_name => '',
+                :last_name => 'Matute',
+                :genre => 'm',
+                :identification_document => '18347734',
+                :birthday => "15/08/1988".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
 
-
-
-
+user = User.new(:username => 'jceballos',
+:email => 'jonnyceballos@gmail.com',
+:first_name => 'Jonny',
+:middle_name => '',
+:last_name => 'Ceballos',
+:genre => 'm',
+:identification_document => '17755525',
+:birthday => "02/06/1986".to_date,
+:password => '123456', #Devise.friendly_token[0,20]
+:password_confirmation => '123456')
+user.save!
 user.add_role(:admin)
 user.add_role(:test)
 
@@ -74,6 +91,7 @@ reference_region.save!
 
 reference_sub_region = Reference.new(:name => 'sub_region') #2
 reference_sub_region.save!
+
 
 region = ReferenceList.new(:name => 'without region', :reference_id => ReferenceConstant::REGION) #1
 region.save!
@@ -213,6 +231,8 @@ type_employee.save!
 type_employee = ReferenceList.new(:name => 'aux de investigacion', :reference_id => ReferenceConstant::TYPE_EMPLOYEE) #43
 type_employee.save!
 
+
+
 faculty = Faculty.new(:name => 'facultad de ciencias y tecnología', :acronym => 'FaCyT')
 faculty.save!
 
@@ -233,4 +253,118 @@ faculty.save!
 
 faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
+
+#Carga el Maestro de Documentos:
+
+#Año Sabatico:
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Año Sabatico", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Año Sabatico", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación", code: "CAC", procedure: "Año Sabatico", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Utimo ascenso", code: "UAS", procedure: "Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Sintesis curricular", code: "SCU", procedure: "Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Solvencia Biblioteca", code: "SBI", procedure: "Año Sabatico", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solvencia DAE", code: "SDAE", procedure: "Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Certificado de idioma", code: "CID", procedure: "Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Plan de Trabajo", code: "PDT", procedure: "Año Sabatico", active: true , initially_required: false).save
+DocumentMaster.new(name: "Constancia de antiguedad", code: "CDA", procedure: "Año Sabatico", active: true , initially_required: false).save
+DocumentMaster.new(name: "Constancia de aprobación", code: "CDAP", procedure: "Año Sabatico", active: true , initially_required: false).save
+
+#Modificación de Plan de Trabajo:
+DocumentMaster.new(name: "Plan de Trabajo Modificado", code: "PDTM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
+DocumentMaster.new(name: "Documento Probatorio de Modificación", code: "DPDM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación de Modificación del Plan de Trabajo", code: "AMPDT", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: false).save
+
+#Informe Parcial de Actividades:
+DocumentMaster.new(name: "Informe Parcial", code: "IP", procedure: "Aprobación de Informe Parcial de Actividades", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación del Informe Parcial", code: "AIP", procedure: "Aprobación de Informe Parcial de Actividades", active: true , initially_required: false).save
+
+#Informe Final de Actividades:
+DocumentMaster.new(name: "Informe Final", code: "IF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación del Informe Final", code: "AIF", procedure: "Aprobación de Informe Final de Actividades", active: true , initially_required: false).save
+
+#Diferimiento de Año Sabatico:
+DocumentMaster.new(name: "Oficio de solicitud de diferimiento", code: "OSD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación de solicitud de diferimiento", code: "ASD", procedure: "Diferimiento de Año Sabatico", active: true , initially_required: false).save
+
+#Reincorporación luego de disfrute de Año Sabatico:
+DocumentMaster.new(name: "Oficio de solicitud de reincorporación", code: "OSR", procedure: "Reincorporación luego del disfrute del Año Sabatico", active: true , initially_required: true).save
+DocumentMaster.new(name: "Aprobación de solicitud de reincorporación", code: "ASR", procedure: "Reincorporación luego del disfrute del Año Sabatico", active: true , initially_required: false).save
+
+
+#Plan de Formacion Especial:
+DocumentMaster.new(name: "Programa de Formación Especial", code: "D-PFE", procedure: "Programa de Formación Especial", active: true , initially_required: true ).save
+
+#Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Carta de Propósito", code: "D-MPC", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Asunción Compartida", code: "D-MAC", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación de Condiciones", code: "D-CAC", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación de Cumplir Plan", code: "D-ACP", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación del Departamento", code: "D-ADP", procedure: "Plan de Rotación", active: true , initially_required: true ).save
+
+#Modificacion del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Modificación del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Modificación del Plan de Actividades", code: "D-MP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PMP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+
+#Modificacion del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Modificación del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Modificación del Plan de Actividades", code: "D-MP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PMP", procedure: "Modificación del Plan de Rotación", active: true , initially_required: true ).save
+
+#Prorroga del Plan de Rotacion
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga del Plan de Rotación", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+DocumentMaster.new(name: "Documentos probatorios", code: "D-PPP", procedure: "Prórroga del Plan de Rotación", active: true , initially_required: true ).save
+
+#Licencias
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Licencia", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solicitud del Beneficiario", code: "D-SOL", procedure: "Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Justificación de la Licencia", code: "D-JL", procedure: "Licencia", active: true, initially_required: true ).save
+
+#Prorroga de Licencia
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Prórroga de Licencia ", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Justificacón de la Pŕorroga", code: "D-JL", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solicitud del beneficiario", code: "D-SB", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Documento probatorio", code: "D-DP", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Plan de trabajo o actividades", code: "D-PDT", procedure: "Prórroga de Licencia", active: true, initially_required: true ).save
+
+#Carga grupos de usuarios
+Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
+Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
+Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del consejo de facultad", active: true).save
+
+Group.new(name: "Representante de Facultad", code: "R10", description: "Representantes de Facultad", active: true).save
+Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Universitario", active: true).save
+
+Group.new(name: "Jefe de Departamento", code: "J10", description: "Jefe de Departamento", active: true).save
+Group.new(name: "Director de Departamento", code: "D30", description: "Director del Departamento", active: true).save
+Group.new(name: "Decano", code: "D40", description: "Decano", active: true).save
+Group.new(name: "Director de Escuela", code: "D50", description: "Director del Departamento", active: true).save
+
+#Maestro de tipos de licencias
+LicenseType.new(code: "1", name: "Enfermedad", description:"Licencia otorgada por enfermedad", active: true).save
+LicenseType.new(code: "2", name: "Estudios", description:"Licencia otorgada para estudios", active: true).save
+LicenseType.new(code: "3", name: "Misiones y comisiones de la Universidad", description:"Licencia otorgada para misiones y comisiones de la Universidad", active: true).save
+LicenseType.new(code: "4", name: "Ejercer funciones en los Subsistemas de Educación", description:"Licencia otorgada para ejercer funciones en los Subsistemas de Educación", active: true).save
+LicenseType.new(code: "5", name: "Ocupar cargos relevantes en la administración pública", description:"Licencia otorgada para ocupar cargos relevantes en la administración pública ", active: true).save
+LicenseType.new(code: "6", name: "Cualquier otro fin", description:"Licencia otorgada para cualquier otro fin", active: true).save
+
+#Maestro de periodos de licencias
+LicensePeriod.new(code: "1", name: "Hasta 15 días", description: "De 1 a 15 días", days: 15, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "2", name: "Hasta 30 días", description: "De 1 a 30 días", days: 30, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "3", name: "Hasta 90 días", description: "De 1 a 90 días", days: 90, months: 0, years: 0, active: true).save
+LicensePeriod.new(code: "4", name: "Mayor a 90 días", description: "Mas de 90 días", days: 90, months: 0, years: 0, active: true).save
+
+
+
+
 

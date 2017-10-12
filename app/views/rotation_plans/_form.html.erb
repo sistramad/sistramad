@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <div class="panel panel-info panel-user">
+        <div class="panel-heading center">
+          <h3>Requisitos para iniciar trámite: <%= @procedure.name%> </h1>
+        </div>
+        <div class="panel-body">
+          <div>
+            <p> 
+              <h4>  
+                Debe subir al sistema cada documento que se indica a continuación en los formatos permitidos,
+                el peso máximo de cada archivo no puede ser superior a 1MB.
+              </h4>
+            </p>
+            <p> 
+              <h4>  
+                Los formatos permitidos son: <strong> .Pdf, .Doc, .Jpeg, .Jpj, .Png, .Docx, .Odt</strong>
+              <h4>
+            </p>
+          </div>
+        
+          <%= simple_form_for @procedure, :url =>  rotation_plans_path, :method => :post, 
+                                          :html => {:multipart => true, :class => "form-horizontal"} do |f| %> 
+            <%= f.input :name, label: "Nombre del Trámite:", wrapper_html: { class: 'hidden'} %>
+            <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>
+            <%= f.input :parent_procedure_id, label: "Parent:", wrapper_html: { class: 'hidden'} %>          
+           
+            <% @documents.each do |document| %>
+              <div class = "well well-sm col-md-12">
+                <%= simple_fields_for 'documents[]', document do |ff| %>
+                  <dl>
+                    <dt> <h3> <%=document.name %> </h3> </dt>
+                    <dd>  
+                      <%= ff.input :name, label: document.name, wrapper_html: { class: 'hidden'}%>
+                      <%= ff.input :code, label: document.code, wrapper_html: { class: 'hidden'}%>
+                      <%= ff.file_field :attachment %>
+                    </dd>
+                  </dl>
+                <% end %>
+              </div>
+            <% end %>
+
+            <br>
+
+            <%= f.fields_for :registered_users do |builder| %>
+              <div class = "well well-sm col-md-16 center">                
+                <%= render "registered_user_fields", :f => builder %>
+              </div>
+            <% end %>  
+       
+
+            <br>
+
+            <div class = "col-md-12 col-md-offset-5">
+              <%= f.button :submit , "Cargar" , class: 'btn btn-success btn-md list'%>
+            </div>
+          <% end %>
+      
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

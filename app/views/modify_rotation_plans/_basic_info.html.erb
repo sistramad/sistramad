@@ -1,0 +1,37 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Datos básicos:
+    </div>
+    <div class="panel-body">
+      <h4> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h4>      
+      <h4> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h4> 
+      <h4> <strong> Usuario: </strong> <%= @procedure.user.username %> </h4>  
+      <h4> <strong> Nombre: </strong> <%= @procedure.user.first_name  %> <%= @procedure.user.last_name%> </h4>  
+      <h4> <strong> Correo: </strong> <%= @procedure.user.email %>  </h4>
+      <h4> <strong> Estado: </strong>
+        <% if @procedure.in_draft? %>
+          <span class="label label-default"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.in_progress? %>
+            <span class="label label-primary"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.approved? %>
+            <span class="label label-success"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.completed? %>
+            <span class="label label-success"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.closed? %>
+            <span class="label label-danger"><%= state_translate(@procedure.state) %> </span>
+        <% end %>
+      </h4>
+      
+      <% if @procedure.approved? %>
+        <h4> <strong> Fecha de inicio: </strong> <%= @procedure.start_date.strftime("%d-%m-%Y")%></h4>
+      <% end %>
+      
+      <br>
+      
+    </div>
+  </div>
+</div>
+
+
