@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20171002004037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "countries", id: :serial, force: :cascade do |t|
+  create_table "countries", force: :cascade do |t|
     t.string "name", null: false
     t.string "capital", null: false
     t.integer "region_id", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.index ["alpha3code"], name: "index_countries_on_alpha3code", unique: true
   end
 
-  create_table "delayed_jobs", id: :serial, force: :cascade do |t|
+  create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
     t.text "handler", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.index ["priority", "run_at"], name: "delayed_jobs_priority"
   end
 
-  create_table "document_masters", id: :serial, force: :cascade do |t|
+  create_table "document_masters", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.string "procedure"
@@ -56,20 +56,20 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.boolean "initially_required"
   end
 
-  create_table "documents", id: :serial, force: :cascade do |t|
+  create_table "documents", force: :cascade do |t|
     t.string "name"
     t.string "attachment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.integer "procedure_id"
+    t.bigint "user_id"
+    t.bigint "procedure_id"
     t.string "code"
     t.index ["procedure_id"], name: "index_documents_on_procedure_id"
     t.index ["user_id"], name: "index_documents_on_user_id"
   end
 
-  create_table "employees", id: :serial, force: :cascade do |t|
-    t.integer "user_id", null: false
+  create_table "employees", force: :cascade do |t|
+    t.bigint "user_id", null: false
     t.integer "type_employee_id", null: false
     t.integer "scale_classification_id", null: false
     t.integer "scale_category_id", null: false
@@ -79,12 +79,14 @@ ActiveRecord::Schema.define(version: 20171002004037) do
   end
 
   create_table "employees_faculties", id: false, force: :cascade do |t|
-    t.integer "employee_id", null: false
-    t.integer "faculty_id", null: false
+    t.bigint "employee_id", null: false
+    t.bigint "faculty_id", null: false
     t.index ["employee_id", "faculty_id"], name: "index_employees_faculties_on_employee_id_and_faculty_id", unique: true
+    t.index ["employee_id"], name: "index_employees_faculties_on_employee_id"
+    t.index ["faculty_id"], name: "index_employees_faculties_on_faculty_id"
   end
 
-  create_table "faculties", id: :serial, force: :cascade do |t|
+  create_table "faculties", force: :cascade do |t|
     t.string "name", null: false
     t.string "acronym", null: false
     t.boolean "active", default: true, null: false
@@ -94,7 +96,7 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.index ["name"], name: "index_faculties_on_name", unique: true
   end
 
-  create_table "groups", id: :serial, force: :cascade do |t|
+  create_table "groups", force: :cascade do |t|
     t.string "name"
     t.string "code"
     t.string "description"
@@ -142,14 +144,7 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.index ["user_id"], name: "index_participants_on_user_id"
   end
 
-  create_table "posts", id: :serial, force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "procedures", id: :serial, force: :cascade do |t|
+  create_table "procedures", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -161,17 +156,17 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.datetime "end_date"
   end
 
-  create_table "reference_lists", id: :serial, force: :cascade do |t|
+  create_table "reference_lists", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.string "value"
-    t.integer "reference_id", null: false
+    t.bigint "reference_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["reference_id"], name: "index_reference_lists_on_reference_id"
   end
 
-  create_table "references", id: :serial, force: :cascade do |t|
+  create_table "references", force: :cascade do |t|
     t.string "name", null: false
     t.text "description"
     t.datetime "created_at", null: false
@@ -189,59 +184,60 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.integer "procedure_id"
   end
 
-  create_table "roles", id: :serial, force: :cascade do |t|
+  create_table "roles", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "resource_id"
     t.string "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.bigint "resource_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
     t.index ["name"], name: "index_roles_on_name", unique: true
+    t.index ["resource_type", "resource_id"], name: "index_roles_on_resource_type_and_resource_id"
   end
 
-  create_table "steps", id: :serial, force: :cascade do |t|
+  create_table "steps", force: :cascade do |t|
     t.string "name"
     t.string "description"
     t.string "state"
     t.boolean "is_active"
-    t.integer "workflow_id"
+    t.bigint "workflow_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "group_id"
+    t.bigint "group_id"
     t.datetime "approved_at"
     t.text "info"
     t.index ["group_id"], name: "index_steps_on_group_id"
     t.index ["workflow_id"], name: "index_steps_on_workflow_id"
   end
 
-  create_table "universities", id: :serial, force: :cascade do |t|
+  create_table "universities", force: :cascade do |t|
     t.string "name", null: false
     t.string "acronym"
-    t.integer "country_id", null: false
+    t.bigint "country_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_universities_on_country_id"
   end
 
-  create_table "university_degrees", id: :serial, force: :cascade do |t|
+  create_table "university_degrees", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "university_id", null: false
+    t.bigint "university_id", null: false
     t.integer "academic_degree_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["university_id"], name: "index_university_degrees_on_university_id"
   end
 
-  create_table "user_groups", id: :serial, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "group_id"
+  create_table "user_groups", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["group_id"], name: "index_user_groups_on_group_id"
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
-  create_table "users", id: :serial, force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "first_name", default: "", null: false
     t.string "middle_name", default: "", null: false
@@ -269,26 +265,29 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.datetime "invitation_sent_at"
     t.datetime "invitation_accepted_at"
     t.integer "invitation_limit"
-    t.integer "invited_by_id"
     t.string "invited_by_type"
+    t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
     t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
     t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   create_table "users_roles", id: false, force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.bigint "user_id"
+    t.bigint "role_id"
+    t.index ["role_id"], name: "index_users_roles_on_role_id"
     t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", unique: true
+    t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  create_table "workflows", id: :serial, force: :cascade do |t|
+  create_table "workflows", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.boolean "is_active"
