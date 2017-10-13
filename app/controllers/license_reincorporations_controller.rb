@@ -45,7 +45,7 @@ class LicenseReincorporationsController < ApplicationController
         set_documents_to_procedure()       
         procedure_concrete.generate_workflow(@procedure)
         
-        format.html { redirect_to delay_license_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
+        format.html { redirect_to license_reincorporation_path(@procedure), notice: 'La solicitud del trámite se ha creado exitosamente.'}
         format.json { render :show, status: :created, location: @procedure }
       else
         @procedure.errors.full_messages
@@ -86,26 +86,12 @@ class LicenseReincorporationsController < ApplicationController
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to delay_license_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to license_reincorporation_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cumplir todos los requerimientos necesarios.'
       render :show 
     end
   end
-
-  def fill_info
-    type = @procedure.parent.license_type.id
-    period = params[:license_info][:license_period_id]
-    @procedure.build_license_info(license_type_id: type, license_period_id: period)
-    
-    if @procedure.save 
-      redirect_to delay_license_path(@procedure), notice: "La duración de la prórroga agregada."
-    else
-      render delay_license_path(@procedure)
-      flash[:error] = 'Error, no se puedo agregar información'
-    end
-    
-  end  
 
   private
 

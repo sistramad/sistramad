@@ -20,7 +20,7 @@
             </p>
           </div>
         
-          <%= simple_form_for @procedure, :url =>  delay_licenses_path, :method => :post, 
+          <%= simple_form_for @procedure, :url =>  license_reincorporations_path, :method => :post, 
                                           :html => {:multipart => true, :class => "form-horizontal"} do |f| %> 
             <%= f.input :name, label: "Nombre del Trámite:", wrapper_html: { class: 'hidden'} %>
             <%= f.input :code, label: "Código:", wrapper_html: { class: 'hidden'} %>

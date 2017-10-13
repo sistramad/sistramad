@@ -62,7 +62,6 @@ class License < SystemProcedure
 
   def approve(start_date)
     if can_be_approved?(start_date)
-      byebug
       approve_procedure(start_date)
     end       
   end
