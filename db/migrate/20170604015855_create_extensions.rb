@@ -1,4 +1,4 @@
-class CreateExtensions < ActiveRecord::Migration[5.0]
+class CreateExtensions < ActiveRecord::Migration[5.1][5.0]
   def change
     create_table :extensions do |t|
       t.references :user, foreign_key: true

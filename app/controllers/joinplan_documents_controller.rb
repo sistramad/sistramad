@@ -1,4 +1,4 @@
-class DocumentsController < ApplicationController
+class JoinplanDocumentsController < ApplicationController
 
   def new
     @document = Document.new

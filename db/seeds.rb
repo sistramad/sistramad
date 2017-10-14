@@ -256,41 +256,41 @@ employee = Employee.new(:user_id => 4,:type_employee_id => 2,:scale_classificati
 employee.faculties << Faculty.find(1)
 employee.save!
 
-document = Document.new(:name => 'Solicitud del Beneficiario', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Solicitud del Beneficiario', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Fotocopia de la Cedula de identidad', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Fotocopia de la Cedula de identidad', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Fotocopia del RIF',:typedoc =>1)
+document = JoinplanDocument.new(:name => 'Fotocopia del RIF',:typedoc =>1)
 document.save!
-document = Document.new(:name => 'Fotocopia del ultimo ascenso', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Fotocopia del ultimo ascenso', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Plan de Trabajo', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Plan de Trabajo', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Justificacion de la escogencia del Plan', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Justificacion de la escogencia del Plan', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Razones de la escogencia del pais', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Razones de la escogencia del pais', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Carta de aceptacion de cumplir con lo estipulado', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Carta de aceptacion de cumplir con lo estipulado', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Constancia de aceptacion por parte de la Universidad en la que desea realizar los estudios', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Constancia de aceptacion por parte de la Universidad en la que desea realizar los estudios', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Certificacion academica', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Certificacion academica', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Solvencias', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Solvencias', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Sintesis curricular', :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Sintesis curricular', :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Constancia de manejo de idioma foraneo', :typedoc =>2)
+document = JoinplanDocument.new(:name => 'Constancia de manejo de idioma foraneo', :typedoc =>2)
 document.save!
-document = Document.new(:name => 'Carta de Recomendacion de Aprobacion', :typedoc =>0)
+document = JoinplanDocument.new(:name => 'Carta de Recomendacion de Aprobacion', :typedoc =>0)
 document.save!
-document = Document.new(:name => 'Carta de desaprobacion' , :typedoc =>0)
+document = JoinplanDocument.new(:name => 'Carta de desaprobacion' , :typedoc =>0)
 document.save!
-document = Document.new(:name => 'Informe Parcial', :typedoc =>3)
+document = JoinplanDocument.new(:name => 'Informe Parcial', :typedoc =>3)
 document.save!
-document = Document.new(:name => 'Informe Final' , :typedoc =>1)
+document = JoinplanDocument.new(:name => 'Informe Final' , :typedoc =>1)
 document.save!
-document = Document.new(:name => 'Carta de Aceptación', :typedoc =>0)
+document = JoinplanDocument.new(:name => 'Carta de Aceptación', :typedoc =>0)
 document.save!
 joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1)
 joint_plan.save!

@@ -1,4 +1,4 @@
-class Document < ActiveRecord::Base
+class JoinplanDocument < ActiveRecord::Base
 
   has_many :attachments
   accepts_nested_attributes_for :attachments

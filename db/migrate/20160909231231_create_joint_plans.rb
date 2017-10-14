@@ -1,4 +1,4 @@
-class CreateJointPlans < ActiveRecord::Migration
+class CreateJointPlans < ActiveRecord::Migration[5.1]
   def change
     create_table :joint_plans do |t|
       t.string :name
