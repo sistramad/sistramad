@@ -21,3 +21,77 @@
 
 en:
   hello: "Hello world"
+<<<<<<< HEAD
+=======
+  home:      'Sistramad'
+  password: 'Password'
+  name: 'Name'
+  reference_list: 'Reference list'
+  description: 'Description'
+  value: 'Value'
+  roles: 'Roles'
+  role: 'Rol'
+  employees: 'Empleados'
+  employee: 'Empleado'
+  edit: 'Edit'
+  back: 'Back'
+  first_name: 'First name'
+  faculties: 'Faculties'
+  faculty: 'Faculty'
+  acronym: 'acronym'
+  active: 'Active'
+  type_employee:
+    short: 'Type'
+    long: 'Type employee'
+  scale_classification:
+    short: 'Classification'
+    long: 'Scale classification'
+  scale_category:
+    short: 'Category'
+    long: 'Scale category'
+  form_reference_list:
+    hint_name: 'Type the name of the reference list.'
+  password_confirmation:
+    short: 'Confirmation'
+    long: 'Password confirmation'
+  show:
+    new_user: 'New user'
+    listing_users: 'Listing users'
+  index:
+    show: 'Show'
+    edit: 'Edit'
+    destroy: 'Destroy'
+    listing_users: 'Listing users'
+    listing_references: 'Listing references'
+    listing_reference_lists: 'Listing reference lists'
+    listing_roles: 'Listing roles'
+    listing_employees: 'Listing employees'
+    listing_faculties: 'Listing faculties'
+    new_user: 'New user'
+    new_faculty: 'New faculty'
+    new_reference: 'new reference'
+    new_reference_list: 'New reference list'
+    new_role: 'New rol'
+    new_employee: 'New employee'
+    references_list: 'References list'
+  sign_in:
+    log_in:     'Log in'
+    sign_in:    'Sign in'
+    login_input: 'user@domain.com or username'
+    password: 'Password'
+    forgot_your_password: 'Forgot your password?'
+    did_not_receive_unlock_instructions: "Didn't receive unlock instructions?"
+  hello:
+    short:    'welcome'
+    long:     'Welcome to our website'
+    too_long: 'Hi, welcome to our amazing website :-)'
+  views:
+    pagination:
+      previous: "&lt; Previous"
+      next: "Next &gt;"
+      truncate: "..."
+  routes:
+      users: 'users'
+      references: 'references'
+      reference_lists: 'reference_lists'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54

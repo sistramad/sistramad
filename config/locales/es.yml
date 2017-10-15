@@ -222,11 +222,11 @@ es:
     page_entries_info:
       one_page:
         display_entries:
-          zero: "No se encontró %{entry_name}"
-          one: "Mostrando <b>1</b> %{entry_name}"
-          other: "Mostrando <b>%{count}</b> %{entry_name}"
+          zero: "No se encontró"
+          one: "Mostrando <b>1</b>"
+          other: "Mostrando <b>%{count}</b>"
       more_pages:
-        display_entries: "Mostrando %{entry_name} <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
+        display_entries: "Mostrando <b>%{first}&nbsp;-&nbsp;%{last}</b> de <b>%{total}</b> en total"
   routes:
       users: 'usuarios'
       references: 'referencias'

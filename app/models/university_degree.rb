@@ -1,3 +1,3 @@
-class UniversityDegree < ActiveRecord::Base
+class UniversityDegree < ApplicationRecord
   belongs_to :university
 end

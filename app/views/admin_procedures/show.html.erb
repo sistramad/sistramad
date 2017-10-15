@@ -1,0 +1,44 @@
+<div class="well">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 text-center">
+        <h2> <strong> Información de la solicitud: </strong></h2>
+      </div>
+    </div>
+    <div class="row">
+
+      <%= render "#{basic_info_view(@procedure.code)}" %> <!-- Selecciona el panel de informacion basica correcto dependiendo del tramite -->    
+      <% case(@procedure.code)%>
+        <% when 'T-AS100'  then %>
+        <%= render 'sabbatical_year_admin_panel'%>
+        <% when 'T-AS101'  then %>
+        <%= render 'modify_workplan_admin_panel'%>
+        <% when 'T-AS102'  then %>
+        <%= render 'partial_report_admin_panel'%>
+        <% when 'T-AS103'  then %>
+        <%= render 'final_report_admin_panel'%>
+        <% when 'T-AS104'  then %>
+        <%= render 'delay_sabbatical_year_admin_panel'%>
+        <% when 'T-AS105'  then %>
+        <%= render 'sabbatical_year_reincorporation_admin_panel'%>
+        <% when 'T-SPF200'  then %>
+        <%= render 'special_formation_admin_panel'%>
+        <% when 'T-SPR201'  then %>
+        <%= render 'rotation_plan_admin_panel'%>
+        <% when 'T-MPR202'  then %>
+        <%= render 'modify_rotation_plan_admin_panel'%>
+        <% when 'T-PPR203'  then %>
+        <%= render 'delay_rotation_plan_admin_panel'%>
+        <% when 'T-SLR204'  then %>
+        <%= render 'license_admin_panel'%>
+        <% when 'T-SPL205'  then %>
+        <%= render 'delay_license_admin_panel'%>
+        <% when 'T-SLR206'  then %>
+        <%= render 'license_reincorporation_admin_panel'%>
+      <% end%>
+    </div>
+    <br>
+  </div>
+</div>
+
+<%= render 'steps' %>

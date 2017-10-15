@@ -3,10 +3,14 @@ class UsersController < ApplicationController
 
   load_and_authorize_resource :only => [:new, :edit, :destroy]
 
+  add_breadcrumb "home", :authenticated_root_path, :title => "Back to the home"
+
   # GET /users
   # GET /users.json
   def index
-    @users = User.all.page(params[:page]).per(15)
+    add_breadcrumb "users", users_path
+
+    @users = User.all.page(params[:page]).per(10)
   end
 
   # GET /users/1
@@ -75,7 +79,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to references_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_path, notice: 'El usuario fue eliminado exitosamente.' }
       format.json { head :no_content }
     end
   end

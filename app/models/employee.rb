@@ -1,4 +1,4 @@
-class Employee < ActiveRecord::Base
+class Employee < ApplicationRecord
   belongs_to :user, inverse_of: :employee
 
   belongs_to :type_employee, :class_name => 'ReferenceList'

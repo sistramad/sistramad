@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"> Documento </div>
+      <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                <h4> <strong> Nombre del documento: </strong> <%= @document.name %> </h4>      
+                <h4> <strong> Código: </strong> <%= @document.code %> </h4> 
+                <h4> <strong> Fecha de creación: </strong> <%= @document.created_at.strftime("%d-%m-%Y") %> </h4> 
+                <h4> <strong> Descargar documento: </strong> </h4>  
+                  <p>
+                    <%= link_to @document.attachment_url , class: 'btn btn-info btn-md list' do %>
+                      <%= @document.name %> 
+                      <i class="glyphicon glyphicon-save-file"></i> 
+                    <% end %>
+                  </p>
+                   <br>
+                   <p>
+                    <%= link_to approve_step_admin_procedure_path(step: @step), class: 'btn btn-success btn-md list' do %>
+                      Aprobar <%= @document.name %> 
+                      <i class="glyphicon glyphicon-ok"></i> 
+                    <% end %>
+                  </p>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
+<<<<<<< HEAD
+=======
+//= require bootstrap-datepicker
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 //= require jquery.Jcrop
 //= require app
 //= require bootstrap-sprockets
@@ -56,3 +60,39 @@ $(function () {
     });
 });
 
+<<<<<<< HEAD
+=======
+$(function () {
+    
+         $('.add_child').click(function() {
+            var association = $(this).attr('data-association');
+            var target = $(this).attr('target');
+            var regexp = new RegExp('new_' + association, 'g');
+            var new_id = new Date().getTime();
+            var Dest = (target == '') ? $(this).parent() : $(target);
+            Dest.append(window[association+'_fields'].replace(regexp, new_id));
+            return false;
+          });
+    
+          $(document).delegate('.remove_child','click', function() {
+            $(this).parent()
+            $(this).parent().children('.removable')[0].value = 1;
+            $(this).parent().hide();
+            return false;
+          });
+    });
+
+var hide_spinner = function(){
+  $('#spinner').hide();
+}
+
+var show_spinner = function(){
+  $('#spinner').show();
+}
+
+$(document).ready(function() {
+  $('#sandbox-container input').datepicker({
+    language: 'es'
+  });
+});
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54

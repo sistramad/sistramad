@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'/>
+      <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+      <div id="header">        
+        <h2 style="text-align: center;"><img src="http://www.uc.edu.ve/imagenes/universidad/logo-uc.png" alt="logoUC" width="77" height="99" />&nbsp;</h2>
+        <h2 style="text-align: center;">UNIVERSIDAD DE CARABOBO</h2>
+        <h4 style="text-align: center;">SISTEMA DE TR&Aacute;MITES ADMINISTRATIVOS DOCENTES&nbsp;&nbsp;</h3> 
+      </div>          
+  </head>
+  <body>    
+    <p>&nbsp;</p>    
+    <h4><span style="text-decoration: underline;"><strong>Solicitud:</strong></span> &nbsp;<%= @procedure.name%> </h3>
+    <h4><span style="text-decoration: underline;"><strong>Codigo:</strong></span>&nbsp;<%= @procedure.code%></h3>
+    <h4><span style="text-decoration: underline;"><strong>Fecha de la solicitud:</strong></span> <%= @procedure.created_at %></h3>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <h1 style="text-align: center;"><span style="text-decoration: underline;">CONSTANCIA DE APROBACI&Oacute;N</span></h1>
+    <p>&nbsp;</p>
+
+    <p style="text-align: center;">Se hace constar que el usuario: <strong><%= @user.first_name%> <%= @user.last_name %></strong>, 
+    <strong><%= @user.identification_document %></strong>,ha completado todos los requsitos necesarios &nbsp;de acuerdo con lo establecido
+      en el Estatuto Docente para completar la Solicitud: 
+        <strong><span style="text-decoration: underline;"> <%= @procedure.name%> </span></strong>
+        , la cual fue es aprobada por el: &nbsp;<strong> <%= %></strong>
+        el d&iacute;a: <strong><%= DateTime.now.strftime("%d-%m-%Y") %>.</strong></p> 
+    </p>
+    
+    <p style="text-align: center;">&nbsp;</p>
+    <p style="text-align: center;">&nbsp;</p>
+    <p style="text-align: left;"><strong>Universidad de Carabobo</strong></p>
+    <p style="text-align: left;"><em><strong>Sistema de Tr&aacute;mites Administrativos Docentes (SISTRAMAD)</strong></em></p>
+    <p style="text-align: left;"><a href="http://www.sistramad.uc.edu.ve">www.sistramad.uc.edu.ve</a></p>
+    <p style="text-align: left;"><a href="mailto:sistramad.uc@gmail.com">sistramad.uc@gmail.com</a></p>
+    <p style="text-align: left;">&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+  </body>
+</html>

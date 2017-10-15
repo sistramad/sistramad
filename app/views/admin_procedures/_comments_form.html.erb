@@ -1,0 +1,11 @@
+<%= form_tag save_opinion_admin_procedure_path(procedure: @procedure, step_id: @step.id) do %>
+  <%= label_tag "Comentarios" %>
+  </br>
+  <div>
+    <%= text_area_tag :info, nil, class: 'form-control', rows: 8, cols: 70 %>
+  </div>
+  </br>
+  <div class='text-center'>
+    <%= submit_tag "Guardar", class: "btn btn-success btn-md list" %>
+  </div>
+<% end %>

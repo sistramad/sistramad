@@ -29,11 +29,15 @@ development:
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
   # the same name as the operating system user that initialized the database.
-  username: postgres
+  username: rails_dev
 
   # The password associated with the postgres role (username).
+<<<<<<< HEAD
   password: luis23989
   #password: Alpha
+=======
+  password: Alpha
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 #  password: Admin
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -57,9 +61,13 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-#test:
-#  <<: *default
-#  database: sistramad_test
+test: &test
+  <<: *default
+  database: sistramad_test
+  host: localhost
+  port: 5432
+  username: rails_dev
+  password: Alpha
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -69,6 +77,7 @@ development:
 # the app. Read http://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full rundown on how to provide these environment variables in a
 # production deployment.
+
 #
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
@@ -85,3 +94,6 @@ development:
 #  database: sistramad_production
 #  username: sistramad
 #  password: <%= ENV['SISTRAMAD_DATABASE_PASSWORD'] %>
+
+cucumber:
+  <<: *test

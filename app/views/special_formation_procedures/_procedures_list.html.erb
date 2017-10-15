@@ -1,0 +1,37 @@
+<div class="well"> 
+  <div>
+    <p><strong> <h3 class="text-center">Programas de Formación: </h3> </strong></p>
+  </div>
+  <br>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Solicitud </th>
+          <th>Código</th>
+          <th>Fecha creación</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @procedures.each do |procedure| %>
+          <tr>
+            <td><%= link_to procedure.name, special_formation_procedure_path(procedure) %> </td>
+            <td><%= procedure.code %></td>
+            <td><%= procedure.created_at.strftime("%Y-%m-%d") %></td>
+            <td>
+              <div class="btn-toolbar">
+                <div class="btn-group btn-group-xs">
+                  <%= link_to 'Consultar' ,special_formation_procedure_path(procedure), class: 'btn btn-primary list' %>
+                  <%= link_to 'Cancelar', special_formation_procedure_path(procedure), method: :delete, data: {confirm: '¿Está seguro de eliminar solicitud?'}, class: 'btn btn-danger list' %>
+                </div>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
+
+
+

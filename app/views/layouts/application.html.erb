@@ -2,11 +2,17 @@
 <html>
 <head>
   <title>Sistramad</title>
+<<<<<<< HEAD
   <%= csrf_meta_tags %>
   <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
 
+=======
+  <%= stylesheet_link_tag 'application', :media => "all"%>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -35,12 +41,19 @@
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel">
             <div class="pull-left image">
-              <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
+              <%= image_tag "user_avatar.jpg" , :class=>"img-circle", :alt=>"User Image"%>
             </div>
             <div class="pull-left info">
+<<<<<<< HEAD
               <p><%= current_user.first_name %> <%= current_user.last_name %></p>
+=======
+            <% if user_signed_in? %>
+              <div><%= current_user.username %></div>
+            <% end %>
+              <!-- @user.current.username -->
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i> En Linea</a>
             </div>
           </div>
 
@@ -50,8 +63,48 @@
             <!-- Optionally, you can add icons to the links -->
             <li class="active"><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
+<<<<<<< HEAD
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Formación Especial</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
+=======
+            <li>
+              <%= link_to special_formation_procedures_path(code: "T-SPF200") do %>
+                <i class="fa fa-circle-o"></i>
+                  Formación Especial
+              <% end %>
+            <li>
+            <li>
+              <%= link_to rotation_plans_path(code: "T-SPR201") do %>
+                <i class="fa fa-circle-o"></i>
+                  Plan de Rotación
+              <% end %>
+            <li>
+
+            <li>
+              <%= link_to licenses_path(code: "T-SLR204") do %>
+                <i class="fa fa-circle-o"></i>
+                  Licencias
+              <% end %>
+            <li>
+
+            <li><a href="/procedures"><i class="fa fa-circle-o"></i> <span>Año Sabatico</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                <li><a href="#"><i class="fa fa-circle"></i>Solicitar Nuevo Traslado</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Chequear estado del Traslado solicitado</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Traslado</a></li>
+              </ul>
+            </li>
+
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
+
+
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
                 <span class="pull-right-container">
@@ -119,28 +172,43 @@
               </div>
             </div>
         <% end -%>
+<<<<<<< HEAD
+=======
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+          <!--
+          <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+            <li class="active">Here</li>
+          </ol>
+          -->
+        </section>
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
         <!-- Main content -->
         <section class="content">
-
           <!-- Your Page Content Here -->
           <%= yield %>
-
+          <%= debug(params) if Rails.env.development? %>
         </section>
       </div>
 
       <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-          Anything you want
+          Sistema Automatizado de Trámites Docentes
         </div>
         <!-- Default to the left -->
+<<<<<<< HEAD
         <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
       </footer>
         <!-- /.content -->
 
+=======
+        <strong>Universidad de Carabobo &copy; 2017 </strong> 
+      </footer>
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
   <% end %>
 </div>
-<%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
