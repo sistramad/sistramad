@@ -1,6 +1,5 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-<<<<<<< HEAD
   #resources :reports
     resources :university_degrees
     resources :universities
@@ -12,7 +11,6 @@ Rails.application.routes.draw do
       collection do
         get :insert_records
       end
-=======
 
   resources :groups
   resources :user_groups, except: [:show, :edit, :update]
@@ -77,11 +75,9 @@ Rails.application.routes.draw do
       get :validate
       get :show_requirements
       get :show_participants
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
     end
   end
 
-<<<<<<< HEAD
     resources :joint_plans do
       collection do
         post :download
@@ -107,7 +103,6 @@ Rails.application.routes.draw do
 
       end
     end
-=======
   resources :licenses do
     member do
       get :validate
@@ -123,7 +118,6 @@ Rails.application.routes.draw do
       post :fill_info
     end
   end
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
   resources :license_reincorporation do
     member do
@@ -173,11 +167,8 @@ Rails.application.routes.draw do
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
-<<<<<<< HEAD
 
     mount ActionCable.server => '/cable'
     mount Sidekiq::Web => '/sidekiq'
-=======
   end
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 end
