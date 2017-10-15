@@ -66,28 +66,7 @@
         <!-- /.messages-menu -->
 
         <!-- Notifications Menu -->
-        <li class="dropdown notifications-menu">
-          <!-- Menu toggle button -->
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <i class="fa fa-bell-o"></i>
-            <span class="label label-warning">10</span>
-          </a>
-          <ul class="dropdown-menu">
-            <li class="header">You have 10 notifications</li>
-            <li>
-              <!-- Inner Menu: contains the notifications -->
-              <ul class="menu">
-                <li><!-- start notification -->
-                  <a href="#">
-                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                  </a>
-                </li>
-                <!-- end notification -->
-              </ul>
-            </li>
-            <li class="footer"><a href="#">View all</a></li>
-          </ul>
-        </li>
+        <%= render 'notifications/notifications' %>
         <!-- User Account Menu -->
         <li class="dropdown user user-menu">
           <!-- Menu Toggle Button -->
@@ -95,12 +74,16 @@
             <!-- The user image in the navbar-->
             <%= image_tag "user2-160x160.jpg" , :class=>"user-image", :alt=>"User Image"%>
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
+<<<<<<< HEAD
+            <span class="hidden-xs"><%= current_user.first_name %> <%= current_user.last_name %></span>
+=======
             <% if current_user.first_name.empty? %>
             <span class="hidden-xs"><%= current_user.username%></span>
             <% else %>
             <span class="hidden-xs"><%= current_user.first_name.camelize(:upper) %></span>
             <span class="hidden-xs"><%= current_user.last_name.camelize(:upper) %></span>
             <% end%>
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
           </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
@@ -108,8 +91,13 @@
               <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
 
               <p>
+<<<<<<< HEAD
+                <%= current_user.first_name %> <%= current_user.last_name %>
+                <small>Member since Nov. 2012</small>
+=======
                 Alexander Pierce - Web Developer
                 <small>Miembro desde <%= current_user.remember_created_at %></small> 
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
               </p>
             </li>
             <!-- Menu Body -->

@@ -21,6 +21,8 @@
 
 en:
   hello: "Hello world"
+<<<<<<< HEAD
+=======
   home:      'Sistramad'
   password: 'Password'
   name: 'Name'
@@ -92,3 +94,4 @@ en:
       users: 'users'
       references: 'references'
       reference_lists: 'reference_lists'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54

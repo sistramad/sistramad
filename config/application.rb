@@ -1,6 +1,24 @@
+<<<<<<< HEAD
+#require File.expand_path('../boot', __FILE__)
+
+require_relative 'boot'
+
+require "rails/all"
+# Pick the frameworks you want:
+#require "active_model/railtie"
+#require "active_job/railtie"
+#require "active_record/railtie"
+#require "action_controller/railtie"
+#require "action_mailer/railtie"
+#require "action_view/railtie"
+#require "sprockets/railtie"
+#require "action_cable"
+# require "rails/test_unit/railtie"
+=======
 require_relative 'boot'
 
 require 'rails/all'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -25,7 +43,11 @@ module Sistramad
 
     #predefinir sass
     config.sass.preferred_syntax = :sass
+<<<<<<< HEAD
+    config.active_job.queue_adapter = :sidekiq
+=======
 
 
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
   end
 end

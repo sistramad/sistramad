@@ -1,8 +1,14 @@
 source 'https://rubygems.org'
 ruby '2.4.2'
+<<<<<<< HEAD
+#Comentario
+# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'rails','~>5'
+=======
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0', '>= 5.0.2'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use SCSS for stylesheets
@@ -41,17 +47,51 @@ gem 'delayed_job_active_record'
 # para la autenticación de usuarios
 gem 'devise'
 # para porder mandar invitaciones por correo electronico
+<<<<<<< HEAD
+gem 'devise_invitable'
+
+=======
 gem 'devise_invitable', '~> 1.6'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 gem 'awesome_print', :group => :development
 gem 'pry', :group => :development
 # gem 'rest-client', '~> 1.8'
+<<<<<<< HEAD
+gem 'rest-client'
+
+=======
 gem 'rest-client', '~> 2.0.0.rc3'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 # para el manejo de roles
 gem 'cancancan', '~> 1.10'
 
 gem 'rolify' #usar >rails g rolify Role User y agregar al controller load_and_authorize_resource :only => [:new, :edit, :destroy]
 # para usar migas de pan
 gem 'breadcrumbs_on_rails'
+<<<<<<< HEAD
+
+# para simplificar los formularios
+gem 'simple_form'
+
+# para la paginacion
+gem 'kaminari'
+
+# para instalar el compilador css sass
+gem 'sass'
+
+# para integrar bootstrap
+gem 'bootstrap-sass'
+
+# para cuando se compile se agregan los prefijos automaticamente de acuerdo al proveedor
+gem 'autoprefixer-rails'
+
+# para mostrar las rutas con show-routes y ls modelos con show-models
+gem 'pry-rails', :group => :development
+
+# para traducir las rutas
+gem 'route_translator'
+
+=======
 # para simplificar los formularios
 gem 'simple_form'
 # para la paginacion
@@ -66,6 +106,7 @@ gem 'autoprefixer-rails', '~> 6.4', '>= 6.4.0'
 gem 'pry-rails', '~> 0.3.4', :group => :development
 # para traducir las rutas
 gem 'route_translator'
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 # para abrir correos desde local
 gem "letter_opener", :group => :production
 # para el procesamiento de archivos varios
@@ -76,6 +117,39 @@ gem 'carrierwave-crop'
 # gem 'rmagick', '~> 2.15', '>= 2.15.4'
 gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 
+<<<<<<< HEAD
+
+# para el procesamiento de archivos varios
+gem 'carrierwave'
+
+
+# para transformar imagenes
+#gem 'rmagick'
+
+# para que puedan coexistir jquery y turbolinks sin problemas
+gem 'jquery-turbolinks'
+
+# para adjuntar archivos
+gem 'paperclip'
+# Para creat archivos zip
+gem 'rubyzip'
+# Creat ventanas modales (pop-ups)
+gem 'magnific-popup-rails', '~> 1.1.0'
+
+#Amazon WS
+gem 'aws-sdk', '~> 2.3'
+
+gem 'jcrop-rails-v2'
+
+gem 'redis'
+gem 'sidekiq'
+gem 'sinatra', github:"sinatra/sinatra"
+gem 'puma'
+gem 'rails_semantic_logger'
+gem 'mini_magick'
+gem 'chronic'
+gem 'whenever', require: false
+=======
 # se reemplazo el servidor de web-brick a puma 
 gem "puma"
 # para generar pdf
@@ -107,3 +181,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'rails_12factor'
 end
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54

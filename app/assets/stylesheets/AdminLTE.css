@@ -69,6 +69,12 @@ body {
 .layout-top-nav .main-footer {
   margin-left: 0;
 }
+
+#dates{
+
+    width: 37.4%;
+    margin-right: 5px;
+}
 @media (max-width: 767px) {
   .content-wrapper,
   .right-side,
@@ -95,7 +101,7 @@ body {
 }
 .content-wrapper,
 .right-side {
-  min-height: 100%;
+  /*min-height: 100%;*/
   background-color: #ecf0f5;
   z-index: 800;
 }
@@ -147,9 +153,14 @@ body.hold-transition .main-header .logo {
   padding: 15px;
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
+  width: 100%;
 }
+
+.not-active > a {
+    pointer-events: none;
+    color: darkgray;
+}
+
 /* H1 - H6 font */
 h1,
 h2,
@@ -1000,7 +1011,7 @@ a:focus {
   list-style: none;
   overflow-x: hidden;
 }
-.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a,
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li #message> li > a,
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a,
 .navbar-nav > .tasks-menu > .dropdown-menu > li .menu > li > a {
   display: block;
@@ -1014,15 +1025,15 @@ a:focus {
   background: #f4f4f4;
   text-decoration: none;
 }
-.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a {
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li #message> li > a {
   color: #444444;
   overflow: hidden;
   text-overflow: ellipsis;
   padding: 10px;
 }
-.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .glyphicon,
-.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .fa,
-.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li > a > .ion {
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li #message> li a > .glyphicon,
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li #message> li a > .fa,
+.navbar-nav > .notifications-menu > .dropdown-menu > li .menu > li #message> li a > .ion {
   width: 20px;
 }
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a {
@@ -2518,6 +2529,15 @@ a:focus {
   border-left-color: #f4f4f4;
   border-right-color: #f4f4f4;
 }
+
+#message > li > a:hover {
+
+    background-color: #f4f4f4;
+    text-decoration: none;
+
+}
+
+
 .nav-tabs-custom > .nav-tabs > li:first-of-type {
   margin-left: 0;
 }

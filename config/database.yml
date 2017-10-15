@@ -32,7 +32,12 @@ development:
   username: rails_dev
 
   # The password associated with the postgres role (username).
+<<<<<<< HEAD
+  password: luis23989
+  #password: Alpha
+=======
   password: Alpha
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 #  password: Admin
 
   # Connect on a TCP socket. Omitted by default since the client uses a

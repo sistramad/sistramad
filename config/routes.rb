@@ -1,4 +1,18 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
+<<<<<<< HEAD
+  #resources :reports
+    resources :university_degrees
+    resources :universities
+    resources :faculties
+    resources :roles
+    resources :employees
+    resources :extensions
+    resources :countries do
+      collection do
+        get :insert_records
+      end
+=======
 
   resources :groups
   resources :user_groups, except: [:show, :edit, :update]
@@ -63,9 +77,37 @@ Rails.application.routes.draw do
       get :validate
       get :show_requirements
       get :show_participants
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
     end
   end
 
+<<<<<<< HEAD
+    resources :joint_plans do
+      collection do
+        post :download
+        get :status
+        post :decline
+        post :accept
+        post :view
+        get :inform
+        get :inform_list
+        get :extension
+      end
+    end
+    resources :notifications
+    resources :reports
+    resources :attachments do
+      collection do
+        post :create_inform
+      end
+    end
+    devise_for :users
+    scope "/" do
+      resources :users do
+
+      end
+    end
+=======
   resources :licenses do
     member do
       get :validate
@@ -81,6 +123,7 @@ Rails.application.routes.draw do
       post :fill_info
     end
   end
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
   resources :license_reincorporation do
     member do
@@ -130,5 +173,11 @@ Rails.application.routes.draw do
     unauthenticated do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
+<<<<<<< HEAD
+
+    mount ActionCable.server => '/cable'
+    mount Sidekiq::Web => '/sidekiq'
+=======
   end
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 end

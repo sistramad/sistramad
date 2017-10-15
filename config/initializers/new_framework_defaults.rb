@@ -4,7 +4,11 @@
 #
 # Once upgraded flip defaults one by one to migrate to the new default.
 #
+<<<<<<< HEAD
+# Read the Guide for Upgrading Ruby on Rails for more info on each option.
+=======
 # Read the Rails 5.0 release notes for more info on each option.
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
 # Enable per-form CSRF tokens. Previous versions had false.
 Rails.application.config.action_controller.per_form_csrf_tokens = false

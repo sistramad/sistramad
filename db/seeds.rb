@@ -14,7 +14,7 @@ user = User.new(:username => 'test',
                 :password_confirmation => '123456')
 user.save!(:validate => false)
 
-user.add_role(:test)
+user.add_role(:docente)
 
 user = User.new(:username => 'joalbert',
                 :email => 'joalbertgonzalez@gmail.com',
@@ -70,7 +70,7 @@ user = User.new(:username => 'jceballos',
 :password_confirmation => '123456')
 user.save!
 user.add_role(:admin)
-user.add_role(:test)
+user.add_role(:docente)
 
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',
@@ -84,7 +84,35 @@ user = User.new(:username => 'lisset',
                 :password_confirmation => '123456')
 user.save!
 
-user.add_role(:test)
+user.add_role(:docente)
+
+user = User.new(:username => 'marcano',
+                :email => 'marcano@test.com',
+                :first_name => 'jose',
+                :middle_name => 'x',
+                :last_name => 'marcano',
+                :genre => 'm',
+                :identification_document => '1000',
+                :birthday => "06/10/1960".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.save!
+user.add_role(:docente)
+user.add_role(:decano)
+
+user = User.new(:username => 'asuntos',
+                :email => 'asuntos@test.com',
+                :first_name => 'Asuntos',
+                :middle_name => 'x',
+                :last_name => 'Profesorales',
+                :genre => 'm',
+                :identification_document => '1000',
+                :birthday => "06/10/1960".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.save!
+user.add_role(:docente)
+user.add_role(:asuntos)
 
 reference_region = Reference.new(:name => 'region') #1
 reference_region.save!
@@ -254,6 +282,62 @@ faculty.save!
 faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
 
+<<<<<<< HEAD
+employee = Employee.new(:user_id => 5,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+
+employee = Employee.new(:user_id => 3,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+employee = Employee.new(:user_id => 4,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+document = JoinplanDocument.new(:name => 'Solicitud del Beneficiario', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Fotocopia de la Cedula de identidad', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Fotocopia del RIF',:typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Fotocopia del ultimo ascenso', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Plan de Trabajo', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Justificacion de la escogencia del Plan', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Razones de la escogencia del pais', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Carta de aceptacion de cumplir con lo estipulado', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Constancia de aceptacion por parte de la Universidad en la que desea realizar los estudios', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Certificacion academica', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Solvencias', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Sintesis curricular', :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Constancia de manejo de idioma foraneo', :typedoc =>2)
+document.save!
+document = JoinplanDocument.new(:name => 'Carta de Recomendacion de Aprobacion', :typedoc =>0)
+document.save!
+document = JoinplanDocument.new(:name => 'Carta de desaprobacion' , :typedoc =>0)
+document.save!
+document = JoinplanDocument.new(:name => 'Informe Parcial', :typedoc =>3)
+document.save!
+document = JoinplanDocument.new(:name => 'Informe Final' , :typedoc =>1)
+document.save!
+document = JoinplanDocument.new(:name => 'Carta de Aceptación', :typedoc =>0)
+document.save!
+joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1)
+joint_plan.save!
+
+joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1)
+joint_plan.save!
+=======
 #Carga el Maestro de Documentos:
 
 #Año Sabatico:
@@ -368,3 +452,4 @@ LicensePeriod.new(code: "4", name: "Mayor a 90 días", description: "Mas de 90 d
 
 
 
+>>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54

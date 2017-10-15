@@ -1,0 +1,38 @@
+<h2>Estado de Solicitud de Plan Conjunto</h2>
+<div class="jumbotron" style="border-radius: 15px; background-color: #dae4f1">
+  <div class="container">
+    <% status1 = JointPlan.select(:status).find_by_user_id(current_user.id)  %>
+    <% id = JointPlan.find_by_user_id(current_user.id).id %>
+    <% if status1.status  == 1%>
+        <p>Su Solicitud esta en proceso</p>
+    <%end%>
+
+    <% if status1.status == 2 %>
+        <p>Su Solicitud ha sido preaprobada</p>
+    <%end%>
+    <% if status1.status  == 3%>
+        <p>Su Solicitud Fue Denegada</p>
+    <%end%>
+    <% if status1.status  == 4%>
+        <p>Su Solicitud ha sido aprobada
+          ¿Desea aceptarla?</p>
+        <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+        <div class="field" style="display: flex;margin-top: 35px">
+          <%= button_to 'Aceptar', accept_joint_plans_path(id: id),:action => :'accept',:method => :post,:class => 'btn btn-success btn-lg'%>
+          <%= button_to 'Declinar', decline_joint_plans_path(id: id),:action => :'decline',:method => :post,:class => 'btn btn-danger btn-lg',:style =>'margin-left:5px'%>
+          <%= button_to view_joint_plans_path,:formtarget => "_blank",:action => :'view',:method => :post,:class => 'btn btn-primary btn-lg',:style =>'margin-left:5px' do%>
+              <i class="glyphicon glyphicon-paperclip"></i>
+              Ver Oficio
+          <%end%>
+
+
+        </div>
+    <%end%>
+    <% if status1.status  == 5%>
+        <p>Su Solicitud ha sido aprobada y Aceptada</p>
+    <%end%>
+    <% if status1.status  == 6%>
+        <p>Has declinado el Plan</p>
+    <%end%>
+  </div>
+</div>
