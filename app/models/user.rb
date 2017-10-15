@@ -11,18 +11,15 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
-<<<<<<< HEAD
   has_one :joint_plan, inverse_of: :user
   has_many :attachments
   accepts_nested_attributes_for :attachments
-=======
   has_many :procedures, dependent: :destroy
   has_many :workflows, through: :procedures
   has_many :steps, through: :workflows
   has_many :documents
   has_many :user_groups
   has_many :groups, through: :user_groups
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
   mount_uploader :avatar, AvatarUploader
 
@@ -47,7 +44,6 @@ class User < ApplicationRecord
     end
   end
 
-<<<<<<< HEAD
   def notification_count
     Notification.for_user(self.id)
   end
@@ -59,7 +55,6 @@ class User < ApplicationRecord
   def crop_avatar
     avatar.recreate_versions! if avatar_crop_x.present?
   end
-=======
   def except_current_user(users)
     users.reject {|user| user.id == self.id}
   end
@@ -87,5 +82,4 @@ class User < ApplicationRecord
     where("lower(#{field_name}) like ?", "%#{param}%")
   end
 
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 end

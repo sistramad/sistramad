@@ -12,10 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-<<<<<<< HEAD
-=======
 //= require bootstrap-datepicker
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 //= require jquery.Jcrop
 //= require app
 //= require bootstrap-sprockets
@@ -60,8 +57,6 @@ $(function () {
     });
 });
 
-<<<<<<< HEAD
-=======
 $(function () {
     
          $('.add_child').click(function() {
@@ -95,4 +90,3 @@ $(document).ready(function() {
     language: 'es'
   });
 });
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54

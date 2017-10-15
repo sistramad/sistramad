@@ -42,7 +42,6 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-<<<<<<< HEAD
   # Asset digests allow you to set far-future HTTP expiration dates on all assets,
   # yet still be able to expire them through the digest params.
   config.assets.digest = true
@@ -50,21 +49,16 @@ Rails.application.configure do
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.cn
   config.assets.raise_runtime_errors = true
-=======
   # Suppress logger output for asset requests.
   config.assets.quiet = true
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-<<<<<<< HEAD
   config.action_mailer.default_url_options = { host: 'localhost', port: 3001}
-=======
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
 
   # Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
   # para ejecutar el job: $ bundle exec rake jobs:work
@@ -79,7 +73,8 @@ Rails.application.configure do
 
   # config.active_job.queue_adapter = :delayed_job 
 
-<<<<<<< HEAD
+  #Datos Mail Luis
+=begin
   config.assets.quiet = true
 
   config.action_cable.url = "ws://localhost:3000/cable"
@@ -95,6 +90,5 @@ Rails.application.configure do
       :enable_starttls_auto => true
   }
 
-=======
->>>>>>> 4e88aef078acde0ac5820730e48df84848eb7a54
+=end
 end
