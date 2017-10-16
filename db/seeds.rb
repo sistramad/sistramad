@@ -4,13 +4,13 @@
 # Examples:
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#  Mayor.create(name: 'Emanuel', city: cities.first)
 
 user = User.new(:username => 'admin',
                 :email => 'admin@admin.com',
                 :password => '123456', #Devise.friendly_token[0,20]
                 :password_confirmation => '123456')
-user.save!(:validate => false)
+user.save!(:validate => false)/
 
 user.add_role(:admin)
 
@@ -30,11 +30,30 @@ user = User.new(:username => 'joalbert',
                 :identification_document => '18468784',
                 :birthday => "24/11/1988".to_date,
                 :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
+               :password_confirmation => '123456')
 user.save!
 
 user.add_role(:admin)
 user.add_role(:docente)
+
+user = User.new(:username => 'jesusdeabreu',
+                :email => 'jmanueldeabreum@gmail.com',
+                :first_name => 'jesus',
+                :middle_name => 'manuel',
+                :last_name => 'de abreu',
+                :genre => 'm',
+                :identification_document => '18241890',
+                :birthday => "21/12/1988".to_date,
+                :password => 'jmdam182', #Devise.friendly_token[0,20]
+                :password_confirmation => 'jmdam182')
+user.save!
+
+
+
+
+
+user.add_role(:admin)
+user.add_role(:test)
 
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',
@@ -243,6 +262,7 @@ faculty.save!
 faculty = Faculty.new(:name => 'facultad de odontología', :acronym => 'FAO')
 faculty.save!
 
+#Luis_Pull_Test
 employee = Employee.new(:user_id => 5,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
 employee.faculties << Faculty.find(1)
 employee.save!
@@ -297,3 +317,4 @@ joint_plan.save!
 
 joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1)
 joint_plan.save!
+

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails','~>5'
@@ -101,6 +101,7 @@ gem 'carrierwave'
 # para transformar imagenes
 gem 'rmagick'
 
+
 # para que puedan coexistir jquery y turbolinks sin problemas
 gem 'jquery-turbolinks'
 
@@ -119,8 +120,11 @@ gem 'jcrop-rails-v2'
 gem 'redis'
 gem 'sidekiq'
 gem 'sinatra', github:"sinatra/sinatra"
-gem 'puma'
 gem 'rails_semantic_logger'
 gem 'mini_magick'
 gem 'chronic'
 gem 'whenever', require: false
+=======
+# se reemplazo el servidor de web-brick a puma 
+gem "puma"
+
