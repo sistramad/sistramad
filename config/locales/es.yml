@@ -266,8 +266,6 @@ es:
   reference: 'Referencia'
   reference_list: 'Lista de Referencia'
   name: 'Nombre'
-  list_attachment: 'Lista de Recaudos'
-  list_request: 'Lista de Solicitudes'
   description: 'Descripcion'
   value: 'Valor'
   edit: 'Editar'

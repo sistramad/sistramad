@@ -11,11 +11,9 @@ class User < ActiveRecord::Base
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
-  has_one :joint_plan, inverse_of: :user
-  has_many :attachments
-  accepts_nested_attributes_for :attachments
 
   mount_uploader :avatar, AvatarUploader
+  crop_uploaded :avatar
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :identification_document, :numericality => { only_integer: true, allow_nil: true }
@@ -31,17 +29,5 @@ class User < ActiveRecord::Base
     elsif conditions.has_key?(:username) || conditions.has_key?(:email)
       where(conditions.to_h).first
     end
-  end
-
-  def notification_count
-    Notification.for_user(self.id)
-  end
-
-  def user_id
-    current_user.id
-  end
-
-  def crop_avatar
-    avatar.recreate_versions! if avatar_crop_x.present?
   end
 end

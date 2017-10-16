@@ -32,29 +32,16 @@ Rails.application.configure do
   config.assets.digest = true
 
   # Adds additional error checking when serving assets at runtime.
-  # Checks for improperly declared sprockets dependencies.cn
+  # Checks for improperly declared sprockets dependencies.
+  # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3001}
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.action_mailer.delivery_method = :letter_opener
 
   config.assets.quiet = true
-
-  config.action_cable.url = "ws://localhost:3000/cable"
-
-  config.action_mailer.delivery_method = :smtp
-  # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => 'tgh.lfagundez@gmail.com',
-      :password             => 'luis23989',
-      :authentication       => "plain",
-      :enable_starttls_auto => true
-  }
-
 end
