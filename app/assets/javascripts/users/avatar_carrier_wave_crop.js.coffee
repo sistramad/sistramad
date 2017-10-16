@@ -21,4 +21,4 @@ class CarrierWaveCropper
       width: Math.round(100/coords.w * $('#user_avatar_cropbox').width()) + 'px'
       height: Math.round(100/coords.h * $('#user_avatar_cropbox').height()) + 'px'
       marginLeft: '-' + Math.round(100/coords.w * coords.x) + 'px'
-      marginTop: '-' + Math.round(100/coords.h * coords.y) + 'px'
+      marginTop: '-' + Math.round(100/coords.h * coords.y) + 'px'###

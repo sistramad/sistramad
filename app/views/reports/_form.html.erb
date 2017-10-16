@@ -1,0 +1,13 @@
+<%= form_for ([@joint_plan,@report]) do |f| %>
+    <div id="test-modal" class="white-popup-block mfp-hide">
+      <h1>Adjuntar Documento</h1>
+      <p>Adjunte el documento de recomendación de aprobación</p>
+      <%= fields_for :attachment do |x| %>
+          <%= x.file_field :file,class: "filestyle", "data-buttonName"=>"btn-primary",
+                           "data-buttonText"=>"Seleccionar Archivo",
+                           "data-iconName"=>"glyphicon glyphicon-paperclip",
+                           "data-buttonBefore"=>"true"%>
+      <% end %>
+      <p style="margin-top: 5px"><%= f.submit "Guardar", class:'btn btn-info btn-sm list'%></a> <a class="popup-modal-dismiss" href="#"><button type="button" class="btn btn-default">Cerrar</button></a></p>
+    </div>
+<% end %>

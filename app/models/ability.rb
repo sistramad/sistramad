@@ -35,7 +35,7 @@ class Ability
       can :manage, :all
     end
 
-    if user.has_role? :test
+    if user.has_role? :docente
       can :create, Reference
       can :update, Reference
 

@@ -1,0 +1,21 @@
+<li class="dropdown notifications-menu">
+  <!-- Menu toggle button -->
+  <!--<a href="" class="dropdown-toggle" data-toggle="dropdown">-->
+    <%= link_to notifications_path, :id => "notifications", :class => "dropdown-toggle fa fa-bell-o", "data-toggle"=>"dropdown", :remote => true, :data=>{type: 'script'} do%>
+      <span id = "notification" class="label label-warning" style="font-family: sans-serif"><%= current_user.notification_count %></span>
+    <% end %>
+  <ul class="dropdown-menu">
+    <li class="header">Tienes <%= current_user.notification_count %> notificaiones</li>
+    <li>
+      <!-- Inner Menu: contains the notifications -->
+      <ul class="menu">
+        <i id = "spinner" class="fa fa-spinner fa-pulse fa-3x fa-fw" style="margin-left: 42%;margin-top: 10px;"></i>
+        <li><!-- start notification -->
+            <div id = "message"></div>
+        </li>
+        <!-- end notification -->
+      </ul>
+    </li>
+    <li class="footer"><a href="#">View all</a></li>
+  </ul>
+</li>

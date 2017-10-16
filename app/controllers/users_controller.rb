@@ -21,6 +21,8 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @attachment = Attachment.new
+
   end
 
   # GET /users/1/edit
@@ -56,7 +58,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
+      if @user.update(params.slice(user_params))
         format.html {
           if user_params[:avatar].present?
             render :crop  ## Render the view for cropping
@@ -101,10 +103,7 @@ class UsersController < ApplicationController
         :genre,
         :identification_document,
         :birthday,
-        :avatar,
-        :avatar_crop_x,
-        :avatar_crop_y,
-        :avatar_crop_w,
-        :avatar_crop_h)
+        :avatar)
   end
+
 end
