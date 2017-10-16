@@ -1,43 +1,16 @@
-require 'sidekiq/web'
 Rails.application.routes.draw do
-  #resources :reports
     resources :university_degrees
     resources :universities
     resources :faculties
     resources :roles
     resources :employees
-    resources :extensions
     resources :countries do
       collection do
         get :insert_records
       end
     end
 
-    resources :joint_plans do
-      collection do
-        post :download
-        get :status
-        post :decline
-        post :accept
-        post :view
-        get :inform
-        get :inform_list
-        get :extension
-      end
-    end
-    resources :notifications
-    resources :reports
-    resources :attachments do
-      collection do
-        post :create_inform
-      end
-    end
     devise_for :users
-    scope "/" do
-      resources :users do
-
-      end
-    end
 
     localized do
       resources :users
@@ -62,7 +35,4 @@ Rails.application.routes.draw do
         root 'devise/sessions#new', as: :unauthenticated_root
       end
     end
-
-    mount ActionCable.server => '/cable'
-    mount Sidekiq::Web => '/sidekiq'
 end

@@ -2,20 +2,15 @@
 <html>
 <head>
   <title>Sistramad</title>
-  <%= csrf_meta_tags %>
-  <%= action_cable_meta_tag %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => false %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
-
+  <%= csrf_meta_tags %>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"> </script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-        rel="stylesheet">
 </head>
-<body class="hold-transition skin-blue sidebar-mini" style="font-family: Source Sans Pro">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 <%= render "partials/navigation" %>
 
@@ -38,18 +33,26 @@
               <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
             </div>
             <div class="pull-left info">
-              #Luis_Pull_Test
-              #<p><%= current_user.first_name %> <%= current_user.last_name %></p>
-
             <% if user_signed_in? %>
               <div>Registrado como <%= current_user.username %></div>
             <% end %>
               <!-- @user.current.username -->
-
               <!-- Status -->
               <a href="#"><i class="fa fa-circle text-success"></i> En Linea</a>
             </div>
           </div>
+
+          <!-- search form (Optional) -->
+          <form action="#" method="get" class="sidebar-form">
+            <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Search...">
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+            </div>
+          </form>
+          <!-- /.search form -->
 
           <!-- Sidebar Menu -->
           <ul class="sidebar-menu">
@@ -74,57 +77,19 @@
             </li>
 
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
+
+
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
-                <span class="pull-right-container">
+            <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
               </a>
               <ul class="treeview-menu">
-                <% if JointPlan.where(user_id: current_user.id).empty? %>
-                    <li><%= link_to new_attachment_path,method: :get do%>
-                          <i class="fa fa-circle"></i>
-                          Nuevo Plan Conjunto
-                      <% end %></li>
-                <% end %>
-                <li><%= link_to status_joint_plans_path,method: :get do%>
-                    <i class="fa fa-circle"></i>
-                    Estatus de Plan Conjunto
-                <% end %>
-                </li>
-                <li><%= link_to inform_joint_plans_path,method: :get do%>
-                      <i class="fa fa-circle"></i>
-                      Subir Informe
-                  <% end %>
-                </li>
-                <li><%= link_to extension_joint_plans_path,method: :get do%>
-                      <i class="fa fa-circle"></i>
-                      Solicitar Extensión de Plazo
-                  <% end %>
-                </li>
+                <li><a href="#"><i class="fa fa-circle"></i>Nuevo Plan Conjunto</a></li>
+                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
               </ul>
             </li>
-            <% if current_user.has_role? :asuntos %>
-                <li><%= link_to joint_plans_path do%>
-                      <i class="fa fa-circle-o"></i>
-                      Ver Solicitudes
-                  <% end %></li>
-                <li><%= link_to inform_list_joint_plans_path do%>
-                      <i class="fa fa-circle-o"></i>
-                      Informes
-                  <% end %></li>
-            <% end %>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
-            <% if current_user.has_role? :decano %>
-                <li><%= link_to joint_plans_path do%>
-                    <i class="fa fa-circle-o"></i>
-                    Ver Solicitudes
-                <% end %></li>
-            <% end %>
-
-
           </ul>
           <!-- /.sidebar-menu -->
         </section>
@@ -168,9 +133,8 @@
           Anything you want
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2017 <a href="#">Universidad de Carabobo</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
       </footer>
-        <!-- /.content -->
   <% end %>
 </div>
 <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
