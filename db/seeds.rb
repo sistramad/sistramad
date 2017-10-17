@@ -59,18 +59,19 @@ user.add_role(:admin)
 user.add_role(:test)
 
 user = User.new(:username => 'jceballos',
-:email => 'jonnyceballos@gmail.com',
-:first_name => 'Jonny',
-:middle_name => '',
-:last_name => 'Ceballos',
-:genre => 'm',
-:identification_document => '17755525',
-:birthday => "02/06/1986".to_date,
-:password => '123456', #Devise.friendly_token[0,20]
-:password_confirmation => '123456')
+                :email => 'jonnyceballos@gmail.com',
+                :first_name => 'Jonny',
+                :middle_name => '',
+                :last_name => 'Ceballos',
+                :genre => 'm',
+                :identification_document => '17755525',
+                :birthday => "02/06/1986".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
 user.save!
 user.add_role(:admin)
 user.add_role(:docente)
+ser.add_role(:decano)
 
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',

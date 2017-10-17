@@ -1,11 +1,11 @@
-class JoinplanDocumentsController < ApplicationController
+class JointplanDocumentsController < ApplicationController
 
   def new
-    @document = Document.new
+    @document = JointplanDocument.new
   end
 
   def index
-    @documents = Document.all
+    @documents = JointplanDocument.all
   end
 
 end

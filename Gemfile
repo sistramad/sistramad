@@ -105,9 +105,11 @@ gem 'jcrop-rails-v2'
 
 gem 'redis'
 gem 'sidekiq'
-#gem 'sinatra', github:"sinatra/sinatra"
+gem 'sinatra', github:"sinatra/sinatra"
 gem 'puma'
 gem 'rails_semantic_logger'
 gem 'mini_magick'
 gem 'chronic'
 gem 'whenever', require: false
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
