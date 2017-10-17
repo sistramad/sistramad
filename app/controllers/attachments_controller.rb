@@ -26,9 +26,9 @@ class AttachmentsController < ApplicationController
           if doc[1][:file] != nil
             @attachment = current_user.attachments.new(attachment_params(doc[1]))
             @attachment.save
-            if doc[1][:document_id] == '16' || doc[1][:document_id] == '17'
-              inform = true
-            end
+            #if doc[1][:document_id] == '16' || doc[1][:document_id] == '17'
+            #  inform = true
+            #end
           end
         end
       end
