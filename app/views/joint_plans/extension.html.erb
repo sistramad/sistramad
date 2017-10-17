@@ -1,0 +1,38 @@
+<h2>Solicitar Extensión del Plan Conjunto</h2>
+<div class="jumbotron" style="border-radius: 15px; background-color: #dae4f1">
+  <div class="container">
+    <% status1 = JointPlan.select(:status).find_by_user_id(current_user.id)  %>
+    <% id = JointPlan.find_by_user_id(current_user.id).id %>
+
+    <%= simple_form_for (@extension), :html => {:multipart => true},
+                        wrapper: :horizontal_file_input_sistramad,
+                        wrapper_mappings: {
+                            file: :horizontal_file_input_sistramad
+                        } do |f| %>
+    <p>Ingrese la Fecha de extensión del plan</p>
+        <div class = "field" style="margin-top: 10px; display: flex">
+
+          <div class="input-group" id="dates">
+            <div class="input-group-addon">
+              <span class="glyphicon glyphicon-calendar"></span></button>
+            </div>
+            <%= f.text_field :new_date,:id => 'date-es1',:class => 'form-control',:style => 'margin-right: -10px', :placeholder=>'Fecha de Fin' %>
+          </div>
+
+
+        </div>
+    <div class="attachment">
+    <p>Adjunte un documento para justificar su solicitud</p>
+        <%= f.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                         "data-buttonText" => "Seleccionar Archivo",
+                         "data-iconName" => "glyphicon glyphicon-paperclip",
+                         "data-buttonBefore" => "true" %>
+        <%= f.hidden_field :document_id, :value => 16 %>
+        <%= f.hidden_field :joint_plan_id, :value => @plan_id %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+
+  </div>
+        <%= f.submit 'Aceptar',class: 'btn btn-success'%>
+  </div>
+    <% end %>
+</div>

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.2.5'
+ruby '2.2.6'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails','~>5'
@@ -80,6 +80,7 @@ gem 'sass'
 
 # para integrar bootstrap
 gem 'bootstrap-sass'
+
 
 # para cuando se compile se agregan los prefijos automaticamente de acuerdo al proveedor
 gem 'autoprefixer-rails'

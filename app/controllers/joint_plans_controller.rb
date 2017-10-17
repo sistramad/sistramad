@@ -1,6 +1,6 @@
 class JointPlansController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   require 'rubygems'
   require 'zip'
   require 'tempfile'
@@ -33,15 +33,19 @@ class JointPlansController < ApplicationController
     is_windows = (RbConfig::CONFIG['host_os'] =~ /mswin|mingw|cygwin/)
     if is_windows
 
-      path = 'C:/tem'
+      path = 'C:/tmps1'
       FileUtils.mkdir_p(path)
+      FileUtils.chmod 'a+x', %w(C:/tmps1)
+      #dir = Dir.mktmpdir
+      #file = File.new("#{dir}/test.zip", 'w+')
+      #file.chmod(0666)
       file = Tempfile.new(filename,path)
     else
       file = Tempfile.new(filename)
     end
 
     begin
-      Zip::OutputStream.open(file) { |zos| }
+     Zip::OutputStream.open(file) { |zos| }
 
       #Añadiendo archivos al Zip
       Zip::File.open(file.path, Zip::File::CREATE) do |zipfile|
@@ -49,10 +53,8 @@ class JointPlansController < ApplicationController
           zipfile.add(filename.file_file_name, file_origin + filename.file.url(:original, false))
           end
       end
-
-      zip_data = File.read(file.path)
-
-      send_data(zip_data, :type => 'application/zip', :filename => filename)
+     zip_data = File.binread(file.path)
+     send_data(zip_data, :type => 'application/zip', :filename => filename)
 
     ensure
       #Close and delete the temp file
@@ -111,12 +113,13 @@ class JointPlansController < ApplicationController
   end
 
   def extension
+    @extension = Extension.new
     @document = Document.find(16)
     @plan_id = JointPlan.where(:user_id => current_user.id).pluck(:id)
 
   end
 
-  def informs
+  def inform
     @joint_plan = JointPlan.new
     @document = Document.find(16)
     @attachment = Attachment.new

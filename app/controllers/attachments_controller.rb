@@ -1,6 +1,6 @@
 class AttachmentsController < ApplicationController
   before_action :set_user
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   def new
     @attachment = Attachment.new
     @documents = Document.where(typedoc: 1)
@@ -37,7 +37,7 @@ class AttachmentsController < ApplicationController
     if @attachment.save && !inform
       jointPlan = JointPlan.new(:name => 'Plan Conjunto',:user_id=>current_user.id,:status=>1,:begin_plan => joint_plan_params[:joint_plan][:begin_plan],:end_plan=>joint_plan_params[:joint_plan][:end_plan])
       jointPlan.save
-      redirect_to request.referrer, notice: "Archivo subido exitosamente"
+      redirect_to status_joint_plans_path, notice: "Archivo subido exitosamente"
     else
       redirect_to inform_joint_plans_path , notice: "Informe subido exitosamente"
     end

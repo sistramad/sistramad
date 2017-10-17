@@ -49,7 +49,8 @@
                   <% else %>
                       <% if document.status == 2 %>
                           <span class="label label-success" style="font-size: 110%;margin-left: 5px;">Preaprobado</span>
-                      <% else %>
+                      <% end %>
+                      <%  if document.status == 3 %>
                           <span class="label label-danger" style="font-size: 110%;margin-left: 5px;">Negado</span>
                       <% end %>
                   <% end %>
