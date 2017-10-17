@@ -43,7 +43,6 @@ gem 'devise'
 # para porder mandar invitaciones por correo electronico
 gem 'devise_invitable'
 
-gem 'devise_invitable', '~> 1.6'
 gem 'awesome_print', :group => :development
 gem 'pry', :group => :development
 # gem 'rest-client', '~> 1.8'
@@ -85,12 +84,6 @@ gem 'carrierwave'
 gem 'carrierwave-crop'
 # para transformar imagenes
 # gem 'rmagick', '~> 2.15', '>= 2.15.4'
-gem 'mini_magick', '~> 4.5', '>= 4.5.1'
-
-
-# para el procesamiento de archivos varios
-gem 'carrierwave'
-
 
 # para transformar imagenes
 #gem 'rmagick'
@@ -106,13 +99,13 @@ gem 'rubyzip'
 gem 'magnific-popup-rails', '~> 1.1.0'
 
 #Amazon WS
-gem 'aws-sdk', '~> 2.3'
+#gem 'aws-sdk', '~> 2.3'
 
 gem 'jcrop-rails-v2'
 
 gem 'redis'
 gem 'sidekiq'
-gem 'sinatra', github:"sinatra/sinatra"
+#gem 'sinatra', github:"sinatra/sinatra"
 gem 'puma'
 gem 'rails_semantic_logger'
 gem 'mini_magick'

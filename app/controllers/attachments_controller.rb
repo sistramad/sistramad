@@ -3,8 +3,8 @@ class AttachmentsController < ApplicationController
   before_filter :authenticate_user!
   def new
     @attachment = Attachment.new
-    @documents = Document.where(typedoc: 1)
-    @document = Document.new
+    @documents = JointplanDocument.where(typedoc: 1)
+    @document = JointplanDocument.new
     @joint_plan = JointPlan.new
   end
 

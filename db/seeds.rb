@@ -392,6 +392,62 @@ LicensePeriod.new(code: "2", name: "Hasta 30 días", description: "De 1 a 30 dí
 LicensePeriod.new(code: "3", name: "Hasta 90 días", description: "De 1 a 90 días", days: 90, months: 0, years: 0, active: true).save
 LicensePeriod.new(code: "4", name: "Mayor a 90 días", description: "Mas de 90 días", days: 90, months: 0, years: 0, active: true).save
 
+#Seeds de Luis
+
+employee = Employee.new(:user_id => 5,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+
+employee = Employee.new(:user_id => 3,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+employee = Employee.new(:user_id => 4,:type_employee_id => 2,:scale_classification_id => 1,:scale_category_id => 2)
+employee.faculties << Faculty.find(1)
+employee.save!
+
+document = JointplanDocument.new(:name => 'Solicitud del Beneficiario', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Fotocopia de la Cedula de identidad', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Fotocopia del RIF',:typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Fotocopia del ultimo ascenso', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Plan de Trabajo', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Justificacion de la escogencia del Plan', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Razones de la escogencia del pais', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Carta de aceptacion de cumplir con lo estipulado', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Constancia de aceptacion por parte de la Universidad en la que desea realizar los estudios', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Certificacion academica', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Solvencias', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Sintesis curricular', :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Constancia de manejo de idioma foraneo', :typedoc =>2)
+document.save!
+document = JointplanDocument.new(:name => 'Carta de Recomendacion de Aprobacion', :typedoc =>0)
+document.save!
+document = JointplanDocument.new(:name => 'Carta de desaprobacion' , :typedoc =>0)
+document.save!
+document = JointplanDocument.new(:name => 'Informe Parcial', :typedoc =>3)
+document.save!
+document = JointplanDocument.new(:name => 'Informe Final' , :typedoc =>1)
+document.save!
+document = JointplanDocument.new(:name => 'Carta de Aceptación', :typedoc =>0)
+document.save!
+joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1)
+joint_plan.save!
+
+joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1)
+joint_plan.save!
 
 
 

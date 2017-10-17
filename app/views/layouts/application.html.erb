@@ -134,17 +134,12 @@
                       Informes
                   <% end %></li>
             <% end %>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
             <% if current_user.has_role? :decano %>
                 <li><%= link_to joint_plans_path do%>
                     <i class="fa fa-circle-o"></i>
                     Ver Solicitudes
                 <% end %></li>
             <% end %>
-
-
           </ul>
           <!-- /.sidebar-menu -->
         </section>
