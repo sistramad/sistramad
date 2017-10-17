@@ -74,7 +74,6 @@
             <!-- The user image in the navbar-->
             <%= image_tag "user2-160x160.jpg" , :class=>"user-image", :alt=>"User Image"%>
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs"><%= current_user.first_name %> <%= current_user.last_name %></span>
             <% if current_user.first_name.empty? %>
             <span class="hidden-xs"><%= current_user.username%></span>
             <% else %>

@@ -1,13 +1,13 @@
 class ExtensionsController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   require 'rubygems'
   require 'zip'
   require 'tempfile'
 
   def new
     @joint_plan = JointPlan.new
-    @documents = Document.all
+    @documents = JointplanDocument.all
     @user =  @joint_plan.user
     @attachment = Attachment.new
     @extension = Extension.new

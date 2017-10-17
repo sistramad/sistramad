@@ -95,7 +95,7 @@ class AdminProceduresController < ApplicationController
     procedure_instance = get_procedure_intance(@procedure)
 
     if @procedure.in_progress? and procedure_instance.can_complete?(start_date)
-      #@procedure.approve!
+      @procedure.approve!
       if start_date.present? 
         @procedure.start_date = start_date
         @procedure.save
