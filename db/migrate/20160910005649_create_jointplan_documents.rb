@@ -1,6 +1,6 @@
-class CreateJoinplanDocuments < ActiveRecord::Migration[5.1]
+class CreateJointplanDocuments < ActiveRecord::Migration[5.1]
   def change
-    create_table :joinplan_documents do |t|
+    create_table :jointplan_documents do |t|
       t.string :name
       t.integer :status
 
