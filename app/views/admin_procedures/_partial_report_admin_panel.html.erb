@@ -20,6 +20,7 @@
             <-->
             <p><li> <%= link_to "Generar constancia de aprobación", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
           <% else %>
+            <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
             <p><li> <%= link_to "Editar constancia de aprobacón del informe parcial.", edit_document_path(@document) %> </li></p>
           <% end %>
 
