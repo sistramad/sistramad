@@ -1,0 +1,21 @@
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12"> 
+      <div class="jumbotron text-center">
+        <p><strong> <h1 class="text-center">Programa de Formación Especial  </h1> </strong></p>
+        <br>
+        <div>
+          <%= link_to new_special_formation_procedure_path(code: 'T-SPF200'), class: 'btn btn-info btn-lg list' do %>
+            <i class="glyphicon glyphicon-plus"></i> Nuevo Programa de Formación Especial
+          <% end %>            
+        </div>
+        <br>    
+      </div>
+      
+      <% if @procedures.present? %>
+        <%= render 'procedures_list'%>
+      <% end %>
+      
+    </div>
+  </div>    
+</div>

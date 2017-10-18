@@ -7,9 +7,20 @@ class Procedure < ApplicationRecord
   has_many :steps, through: :workflows
   has_many :documents , dependent: :destroy
   accepts_nested_attributes_for :documents, :allow_destroy => true, :reject_if => :all_blank
-
+  
   belongs_to :parent, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
   has_many :sub_procedures, :class_name => "Procedure", :foreign_key => "parent_procedure_id"
+
+  has_many :participants
+  has_many :users, through: :participants
+  
+  has_many :registered_users, dependent: :destroy
+
+  accepts_nested_attributes_for :registered_users, allow_destroy: :true
+
+  has_one :license_info, dependent: :destroy
+  has_one :license_type, through: :license_info
+  has_one :license_period, through: :license_info
 
 
   aasm column: 'state' do
@@ -24,13 +35,15 @@ class Procedure < ApplicationRecord
       transitions :from => :in_progress, :to => :approved
     end
 
-    event :complete do
-      transitions :from => :approved, :to => :completed
-    end
-
     event :close do
       transitions :from => :completed, :to => :closed
     end
+
+    #for testing:
+    event :restart do 
+      transitions :from => [:approved , :complete, :close], :to => :in_progress
+    end
+
 
   end
 

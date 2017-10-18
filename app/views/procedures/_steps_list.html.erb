@@ -9,39 +9,34 @@
         <thead>
           <tr>
             <th>Paso:</th>
-            <th>Descripcion:</th>
+            <th>Descripción:</th>
             <th>Estado:</th>
             <th>Responsable de aprobación:</th>
             <th>Fecha de Aprobacion:</th>  
           </tr>
         </thead>
         <tbody>
-        <% @procedure.steps.order(:name).each do |step|%>
-          <tr>
-            <h4> <td><%= step.name%> </td> </h4>
-            <h4> <td><%=step.description%> </td></h4>
-
-            
-            <% if step.in_draft? %>
-              <td> <h4> <span class="label label-default"><%= state_translate(step.state) %> </span> </h4> </td>
-            <% elsif step.in_progress? %>
-            <td> <h4> <span class="label label-primary"><%= state_translate(step.state) %> </span> </h4> </td>
-            <% elsif step.approved? %>
-              <td> <h4> <span class="label label-success"><%= state_translate(step.state) %> </span> </h4> </td>
-            <% elsif step.disapproved? %>
-              <td> <h4> <span class="label label-danger"><%= state_translate(step.state) %> </span> </h4> </td>
-            <% end %>
-            
-            <h4> <td><%= step.group.name %> </td></h4>
-            
-            <% if step.approved_at.nil? %>
-              <td>--  /  --  /  ----</td>
-            <%else%>
-              <td> <%= step.approved_at.strftime("%d-%m-%Y") %> </td>
-            <%end%>
-
-          </tr>
-        <% end %>
+          <% @procedure.steps.order(:name).each do |step|%>
+            <tr>
+              <h4> <td><%= step.name%> </td> </h4>
+              <h4> <td><%=step.description%> </td></h4>
+              <% if step.in_draft? %>
+                <td> <h4> <span class="label label-default"><%= state_translate(step.state) %> </span> </h4> </td>
+              <% elsif step.in_progress? %>
+              <td> <h4> <span class="label label-primary"><%= state_translate(step.state) %> </span> </h4> </td>
+              <% elsif step.approved? %>
+                <td> <h4> <span class="label label-success"><%= state_translate(step.state) %> </span> </h4> </td>
+              <% elsif step.disapproved? %>
+                <td> <h4> <span class="label label-danger"><%= state_translate(step.state) %> </span> </h4> </td>
+              <% end %>
+              <h4> <td><%= step.group.name %> </td></h4>
+              <% if step.approved_at.nil? %>
+                <td>--  /  --  /  ----</td>
+              <%else%>
+                <td> <%= step.approved_at.strftime("%d-%m-%Y") %> </td>
+              <%end%>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

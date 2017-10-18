@@ -1,4 +1,4 @@
-class AddProcedureIdAndUserIdToDocument < ActiveRecord::Migration
+class AddProcedureIdAndUserIdToDocument < ActiveRecord::Migration[5.1]
   def change
     add_reference :documents, :user, index: true
     add_foreign_key :documents, :users

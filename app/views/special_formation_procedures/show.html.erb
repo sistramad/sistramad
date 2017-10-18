@@ -1,0 +1,31 @@
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2> Información de la solicitud: </h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <%= render 'basic_info' %>
+        <%= render 'tips'%>
+      </div>
+
+      <div class="row">
+        <% if @procedure.approved? and @procedure.code == 'T-AS100' %>
+          <%= render 'extra_requests'%>  
+        <% end %>
+      </div>
+      
+      <br>
+      
+      <% if @procedure.in_draft? %>
+        <%= render 'registered_users' %>
+      <% elsif @procedure.in_progress? || @procedure.approved? %>
+        <%= render 'steps_list'%>
+      <% end %>
+
+    </div>
+  </div>    
+</div>

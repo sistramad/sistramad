@@ -1,0 +1,26 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Acciones disponibles:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+          <% step = @procedure.steps.find_by(name: "#2")%>
+          <% if step.in_progress? %>
+            <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <% end %>
+          <br>
+          <div class='text-center'>
+            <% if @procedure.in_progress? %>
+              <%= link_to approve_procedure_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
+                <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
+              <% end %>
+            <% end %>
+          </div>
+        </h4>
+      </ul>
+    </div>
+  </div>
+</div>

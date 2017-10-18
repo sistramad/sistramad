@@ -1,0 +1,60 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Datos básicos:
+    </div>
+    <div class="panel-body">
+      <h4> <strong> Nombre de la solicitud: </strong> <%= @procedure.name %> </h4>      
+      <h4> <strong> Código de la solicitud: </strong> <%= @procedure.code %> </h4> 
+      <h4> <strong> Usuario: </strong> <%= @procedure.user.username %> </h4>  
+      <h4> <strong> Nombre: </strong> <%= @procedure.user.first_name  %> <%= @procedure.user.last_name%> </h4>  
+      <h4> <strong> Correo: </strong> <%= @procedure.user.email %>  </h4>
+      <h4> <strong> Estado: </strong>
+        <% if @procedure.in_draft? %>
+          <span class="label label-default"><%= state_translate(@procedure.state) %> </span>
+            <br>           
+        <% elsif @procedure.in_progress? %>
+            <span class="label label-primary"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.approved? %>
+            <span class="label label-success"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.completed? %>
+            <span class="label label-success"><%= state_translate(@procedure.state) %> </span>
+        <% elsif @procedure.closed? %>
+            <span class="label label-danger"><%= state_translate(@procedure.state) %> </span>
+        <% end %>
+      </h4>
+
+      <h4><strong>Documento:</strong>
+        <% document = @procedure.documents.find_by(code: 'D-PFE') %>
+        <% if document.attachment_url %>
+            <%= link_to document.attachment_url, class: 'btn btn-info btn-xs list' do %>
+              <%= document.name %> 
+              <i class="glyphicon glyphicon-save-file"></i> 
+            <% end %>
+        <% end %>
+
+        <% if @procedure.in_draft? and document %>
+          <%= link_to edit_document_path(document), class: 'btn btn-warning btn-xs list' do %>
+              Editar 
+              <i class="glyphicon glyphicon-save-file"></i> 
+          <% end %>
+        <% end %>
+      </h4>  
+      <br>
+      
+      <% if @procedure.in_draft? %>
+        <h4>
+          <div class="text-center">
+            <%= link_to validate_special_formation_procedure_path(@procedure), class: 'btn btn-success btn-md list' do %>
+              <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la Solicitud
+            <% end %>
+          </div>
+        </h4>
+      <% end %>
+      
+    </div>
+  </div>
+</div>
+
+

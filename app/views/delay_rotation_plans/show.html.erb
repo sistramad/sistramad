@@ -1,0 +1,50 @@
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2> Información de la solicitud: </h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <%= render 'basic_info' %>
+        <%= render 'tips'%>
+      </div>
+
+      <div class="row">
+        <% if @procedure.approved? and @procedure.code == 'T-SPR201' %>
+          <%= render 'extra_requests'%>  
+        <% end %>
+      </div>
+      
+      <br>
+
+      <% if @procedure.in_draft? %>
+        <h4>
+         <div class="row text-center">
+            <%= link_to validate_delay_rotation_plan_path(@procedure), class: 'btn btn-success btn-lg list' do %>
+              <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la solicitud
+            <% end %>
+         </div>
+
+          <br>
+          <p class="center"> (Nota: Une vez solicitada la evaluación no podrá modificar los recaudos.)</p>
+        </h4>
+      <% end %>
+      <br>
+      
+      <% if @procedure.participants.size > 0 %>
+        <%= render 'participants_list' %>
+      <% end %>
+      
+      <% if @procedure.in_draft?  %>
+        <%= render 'requirement_list' %>
+      <% elsif @procedure.in_progress? || @procedure.approved? %>
+        <%= render 'steps_list'%>
+      <% end %>
+
+
+    </div>
+  </div>    
+</div>

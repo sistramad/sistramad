@@ -1,0 +1,21 @@
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12"> 
+      <div class="jumbotron text-center">
+        <p><strong> <h1 class="text-center">Solicitud de Plan de Rotación  </h1> </strong></p>
+        <br>
+        <div>
+          <%= link_to new_rotation_plan_path(code: 'T-SPR201'), class: 'btn btn-info btn-lg list' do %>
+            <i class="glyphicon glyphicon-plus"></i> Crear Plan de Rotación
+          <% end %>            
+        </div>
+        <br>    
+      </div>
+      
+      <% if @procedures.present? %>
+        <%= render 'procedures_list'%>
+      <% end %>
+      
+    </div>
+  </div>    
+</div>

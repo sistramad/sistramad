@@ -1,0 +1,46 @@
+<div id="user-lookup">
+  <%= form_tag search_users_rotation_plan_path,  method: :get, id: 'user-lookup-form' do %>
+    <div class="form-group row no-padding text-center col-md-12">
+      <div class="col-md-10">
+        <%= text_field_tag :search_param, params[:search_param],
+                            placeholder: 'Nombre, Apellido o Correo',
+                            autofocus: true,
+                            class: 'form-control search-box input-lg' %>
+      </div>
+      <div class="col-md-2">
+        <%= button_tag(type: :submit, class: 'btn btn-lg btn-success') do %>
+          <i class='fa fa-search'></i> Buscar usuario
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'common/spinner' %>
+  <% if @users %>
+    <% if @users.size > 0 %>
+      <div id="user-lookup-results" class="well col-md-12">
+        <table class="table table-striped table-hover col-md-12 ">
+          <tbody>
+            <% @users.each do |user| %>
+              <tr>
+                <td><strong>Nombre:</strong> <%= user.first_name %></td>
+                <td><strong>Apellido:</strong> <%= user.last_name %></td>
+                <td><strong>Cédula:</strong> <%= user.identification_document %></td>
+                <td><strong>Correo:</strong> <%= user.email %></td>
+                <td><%= link_to "Agregar", add_user_rotation_plan_path(user: user), 
+                                class: "btn btn-xs btn-success", method: :post %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <%else%>
+      <p class="lead col-md-12">
+        No se encontraron usuarios
+      </p>
+    <%end%>
+  <%end%>
+  <div 
+    id="user-lookup-errors"> 
+  </div>
+</div>
