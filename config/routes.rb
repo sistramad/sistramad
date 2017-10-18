@@ -27,8 +27,6 @@ Rails.application.routes.draw do
       post :complete
       get :generate_approval_document
       get :download_all_documents
-<<<<<<< HEAD
-=======
       get :check_initial_requirements
       post :save_opinion
     end
@@ -81,7 +79,6 @@ Rails.application.routes.draw do
       get :validate
       get :show_requirements
       post :fill_info
->>>>>>> master_integracion
     end
   end
 

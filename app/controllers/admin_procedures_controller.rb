@@ -1,13 +1,8 @@
 class AdminProceduresController < ApplicationController
   include EmailService
-<<<<<<< HEAD
-  require 'zip'
-  before_action :set_procedure, only: [:show, :complete]
-=======
   include FactoryHelper
   require 'zip'
   before_action :set_procedure, only: [:show, :complete, :approve_procedure]
->>>>>>> master_integracion
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -113,14 +108,9 @@ class AdminProceduresController < ApplicationController
   end
 
   def generate_approval_document
-<<<<<<< HEAD
-    @procedure = Procedure.find(params[:procedure])
-    @user = User.find(@procedure.user.id)
-=======
     @procedure = Procedure.find(params[:procedure]) # creo que no hace falta buscarlo en la BD
     @user = User.find(@procedure.user.id)
 
->>>>>>> master_integracion
     if generate_pdf?(@procedure, @user)
       procedure = get_procedure_intance(@procedure)
       procedure.approve_generate_approval_document_step()
@@ -139,13 +129,9 @@ class AdminProceduresController < ApplicationController
       #Add files to the zip file as usual
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
         procedure.documents.order(:name).each do |document|
-<<<<<<< HEAD
-          zipfile.add(document.attachment_identifier, document.attachment.current_path)
-=======
           if document.attachment_url
             zipfile.add(document.attachment_identifier, document.attachment.current_path)
           end
->>>>>>> master_integracion
         end
       end
       #Read the binary data from the file

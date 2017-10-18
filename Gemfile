@@ -83,10 +83,6 @@ gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 # Para descargar adjuntos comprimidos
 gem 'rubyzip'
-<<<<<<< HEAD
-
-=======
->>>>>>> master_integracion
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
