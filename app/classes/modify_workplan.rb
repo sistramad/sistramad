@@ -51,5 +51,15 @@ class ModifyWorkplan < SystemProcedure
     start_step('#3')
     approve_step?('#3')
   end
+
+  def can_complete?(start_date)
+    steps_approved = true
+    self.procedure.steps.each do |step|
+      unless step.approved?
+        steps_approved = false
+      end
+    end
+    return steps_approved
+  end
   
 end

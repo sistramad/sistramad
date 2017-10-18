@@ -1,0 +1,22 @@
+<div class="container"> 
+  <div class="panel panel-primary">
+    <div class="panel-heading">Busqueda de usuarios: </div>
+      <div class="panel-body">
+        <div class="row col-md-12">
+          <%= render 'lookup'%>
+          <br>
+          <br>
+          <br>
+          <br>
+          <% if @participants.size > 0 %>
+            <%= render 'participants'%>
+          <% end %>
+        </div>
+        <%= link_to 'Regresar al plan', rotation_plan_path(@procedure) %>
+      </div>
+    </div>
+  </div>  
+</div>
+
+
+

@@ -1,0 +1,47 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Acciones disponibles:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+ 
+          <% step = @procedure.steps.find_by(name: "#3")%>
+          <% if step.in_draft? %>
+            <p> <li> <%= link_to "Evaluar recaudos iniciales.", check_initial_requirements_admin_procedure_path(procedure: @procedure, step_id: step.id) %> </li> </p>
+          <% elsif step.in_progress?%>
+            <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
+          <% end %>
+
+          
+          <% @document = find_document_by_code(@procedure, "CDAP")%>
+          <% if @document.nil? %>
+            <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+          <% else %>
+            <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
+            
+            <% if @procedure.in_progress? %>
+              <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+            <% end %>
+            
+          <% end %>       
+                  
+          <br>
+            <% if @procedure.in_progress? %>
+              <%= form_tag approve_procedure_admin_procedure_path(@procedure) do %>
+                <div class="field", id="sandbox-container">
+                  <label for="star_date">Fecha de inicio</label>
+                  <%= text_field_tag :date %>
+                </div>
+                <div class='text-center'>
+                  <%= submit_tag "Aprobar", class: "btn btn-success btn-lg list" %>
+                </div>
+              <% end %>
+            <% end %>       
+        </h4>
+      </ul>
+    </div>
+  </div>
+</div>

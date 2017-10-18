@@ -1,7 +1,13 @@
 class AdminProceduresController < ApplicationController
   include EmailService
+<<<<<<< HEAD
   require 'zip'
   before_action :set_procedure, only: [:show, :complete]
+=======
+  include FactoryHelper
+  require 'zip'
+  before_action :set_procedure, only: [:show, :complete, :approve_procedure]
+>>>>>>> master_integracion
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -13,6 +19,28 @@ class AdminProceduresController < ApplicationController
 
   def show_initial_requirements
     @procedure = Procedure.find(params[:procedure])
+  end
+
+  def check_initial_requirements
+    @procedure = Procedure.find(params[:procedure])
+    @step = Step.find(params[:step_id])
+  end
+
+  def save_opinion
+    @procedure = Procedure.find(params[:procedure])
+    @step = Step.find(params[:step_id])
+    @step.info = params[:info]
+    @step.save
+
+    if @step.in_draft?
+      @step.start!
+      users = Group.find(@step.group.id).users
+      send_emails(users,'check_comments_and_approve') if users.present?
+      redirect_to admin_procedure_path(@procedure), notice: 'Comentarios guardados con exito. Notificación enviada.'
+    else
+      flash[:error] = 'Imposible realizar ésta acción.'
+      redirect_to admin_procedure_path(@procedure)
+    end
   end
 
   def approve_initial_requirements
@@ -52,27 +80,47 @@ class AdminProceduresController < ApplicationController
     redirect_to  admin_procedure_path(@procedure)
   end
 
-  def complete
-    steps_approved = true
-    @procedure.steps.each do |step|
-      unless step.approved?
-        steps_approved = false
-      end
-    end
+  def approve_procedure
+    date = params[:date]
+    procedure_instance = get_procedure_intance(@procedure)
+    procedure_instance.approve(date)
 
-    if @procedure.in_progress? and steps_approved
-      @procedure.approve!
+    if @procedure.approved?
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)
     else
-      flash[:error] = 'Imposible completar la solicitud, todos los pasos deben estar aprobados.'
+      flash[:error] = 'Error al aprobar solicitud, pasos incompletos o datos faltantes.'
+      redirect_to  admin_procedure_path(@procedure)
+    end
+   
+  end
+
+  def complete
+    start_date = params[:start_date]
+    procedure_instance = get_procedure_intance(@procedure)
+
+    if @procedure.in_progress? and procedure_instance.can_complete?(start_date)
+      if start_date.present? 
+        @procedure.start_date = start_date
+        @procedure.save
+      end
+      flash[:success] = 'Solicitud aprobada con exito!'
+      redirect_to  admin_procedure_path(@procedure)
+    else
+      flash[:error] = 'Error al aprobar solicitud, pasos incompletos o datos faltantes.'
       redirect_to  admin_procedure_path(@procedure)
     end
   end
 
   def generate_approval_document
+<<<<<<< HEAD
     @procedure = Procedure.find(params[:procedure])
     @user = User.find(@procedure.user.id)
+=======
+    @procedure = Procedure.find(params[:procedure]) # creo que no hace falta buscarlo en la BD
+    @user = User.find(@procedure.user.id)
+
+>>>>>>> master_integracion
     if generate_pdf?(@procedure, @user)
       procedure = get_procedure_intance(@procedure)
       procedure.approve_generate_approval_document_step()
@@ -91,7 +139,13 @@ class AdminProceduresController < ApplicationController
       #Add files to the zip file as usual
       Zip::File.open(temp_file.path, Zip::File::CREATE) do |zipfile|
         procedure.documents.order(:name).each do |document|
+<<<<<<< HEAD
           zipfile.add(document.attachment_identifier, document.attachment.current_path)
+=======
+          if document.attachment_url
+            zipfile.add(document.attachment_identifier, document.attachment.current_path)
+          end
+>>>>>>> master_integracion
         end
       end
       #Read the binary data from the file
@@ -113,12 +167,7 @@ class AdminProceduresController < ApplicationController
       procedure_instance = get_procedure_from_factory(procedure.code)
       procedure_instance.procedure = procedure
       return procedure_instance
-    end
-
-    def get_procedure_from_factory(procedure_code)
-      factory = ProcedureFactory.new
-      factory.build(procedure_code)
-    end
+    end  
 
     def generate_pdf?(procedure, user)
       document = Document.new(name: 'Constancia de Aprobación', code: 'CDAP')

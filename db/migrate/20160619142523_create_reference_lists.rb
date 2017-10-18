@@ -1,4 +1,4 @@
-class CreateReferenceLists < ActiveRecord::Migration
+class CreateReferenceLists < ActiveRecord::Migration[5.1]
   def change
     create_table :reference_lists do |t|
       t.string :name, null: false

@@ -1,4 +1,4 @@
-class CreateDocumentMasters < ActiveRecord::Migration
+class CreateDocumentMasters < ActiveRecord::Migration[5.1]
   def change
     create_table :document_masters do |t|
       t.string :name

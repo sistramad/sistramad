@@ -1,0 +1,29 @@
+<div class="col-md-6">
+  <br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Solicitudes Adicionales:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+          <p>
+            <li>
+              <%= link_to new_delay_license_path(code: 'T-SPL205', parent_id: @procedure), class: 'btn btn-info btn-md list' do %>
+                <i class="glyphicon glyphicon-plus"></i> Solicitud de Prórroga de la Licencia.
+              <% end %>
+            </li>
+          </p>
+          <p>
+            <li>
+              <%= link_to new_license_reincorporation_path(code: 'T-SRL206', parent_id: @procedure), class: 'btn btn-primary btn-md list' do %>
+                <i class="glyphicon glyphicon-plus"></i> Solicitud de Reincorporación
+              <% end %>
+            </li>
+          </p>
+        </h4>
+      </ul>
+    </div>
+  </div>
+</div>
+

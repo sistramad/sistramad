@@ -1,0 +1,54 @@
+<div class="container"> 
+<div class="row">
+  <div class="col-md-12"> 
+    <div class="jumbotron text-center">
+      <p><strong> <h1 class="text-center">Programa de Formación Especial  </h1> </strong></p>
+      <br>
+      <div>
+        <%= link_to new_procedure_path(code: 'T-SPF200'), class: 'btn btn-info btn-lg list' do %>
+          <i class="glyphicon glyphicon-plus"></i> Nuevo Programa de Formación Especial
+        <% end %>            
+      </div>
+      <br>          
+        <% unless @procedures.nil? or @procedures.size == 0 %>
+          <div class="well"> 
+            <div>
+              <p><strong> <h3 class="text-center">Programas de Formación: </h3> </strong></p>
+            </div>
+            <br>
+              <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Solicitud </th>
+                      <th>Código</th>
+                      <th>Fecha creación</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% @procedures.each do |procedure| %>
+                      <tr>
+                        <td><%= link_to procedure.name, procedure_path(procedure) %> </td>
+                        <td><%= procedure.code %></td>
+                        <td><%= procedure.created_at.strftime("%Y-%m-%d") %></td>
+                        <td>
+                          <div class="btn-toolbar">
+                            <div class="btn-group btn-group-xs">
+                              <%= link_to 'Consultar' ,procedure_path(procedure), class: 'btn btn-primary list' %>
+                              <%= link_to 'Cancelar', procedure_path(procedure), method: :delete, data: {confirm: '¿Está seguro de eliminar solicitud?'}, class: 'btn btn-danger list' %>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>    
+</div>
+

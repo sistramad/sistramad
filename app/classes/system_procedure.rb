@@ -16,7 +16,7 @@ class SystemProcedure
   end
 
   def all_required_documents_has_attachment?
-    return true
+    return true #Validacion saltada para testear
     self.procedure.documents.each do |doc|
       unless doc.attachment.present?
         return false
@@ -24,7 +24,7 @@ class SystemProcedure
     end
   end
 
-  def approve_step?(step_name)
+  def approve_step?(step_name) #posiblemente agregar el nombre o el codigo del workflow como parametro
     step = self.procedure.workflows.first.steps.where(name: step_name).first
     step.approve!
     step.update(approved_at: Time.now)
@@ -35,6 +35,7 @@ class SystemProcedure
     step = self.procedure.workflows.first.steps.where(name: step_name).first
     step.start!
     step.update(approved_at: Time.now)
+    step.in_progress?
   end 
 
 end

@@ -3,11 +3,8 @@
     <div class="panel panel-info">
       <div class="panel-heading center">Cargar dcumento</div>
       <div class="panel-body">
-        <%= simple_form_for @document, :html => {:class => "form-horizontal"},
-                            wrapper: :horizontal_file_input,
-                            wrapper_mappings: {
-                                file: :horizontal_file_input
-                            } do |f| %>
+        <%= simple_form_for @document, :html => {:class => "form-horizontal"}, wrapper: :horizontal_file_input,
+                            wrapper_mappings: { file: :horizontal_file_input} do |f| %>
             <%= f.error_notification %>
             <% if @document.errors.any? %>
                 <div id="error_explanation">

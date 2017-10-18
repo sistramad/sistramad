@@ -1,0 +1,44 @@
+<div class="container"> 
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h2> Información de la solicitud: </h2>
+        </div>
+      </div>
+
+      <div class="row">
+        <%= render 'basic_info' %>
+        <%= render 'tips'%>
+      </div>
+
+      <div class="row">
+        <% if @procedure.approved?%>
+          <%= render 'extra_requests'%>  
+        <% end %>
+      </div>
+      
+      <% if @procedure.in_draft?  %>
+        <% if @procedure.license_type.nil? or @procedure.license_period.nil? %>
+          <%= render 'type_time_form' %>
+        <% else %>
+          <h4>
+            <div class="row text-center">
+                <%= link_to validate_license_path(@procedure), class: 'btn btn-success btn-lg list' do %>
+                  <i class="glyphicon glyphicon-cog"></i> Solicitar evaluación de la solicitud
+                <% end %>
+            </div>
+            <br>
+            <p class="center"> (Nota: Une vez solicitada la evaluación no podrá modificar los recaudos, el tipo ni la duración de licencia.)</p>
+          </h4>
+        <% end %>
+      <% end %>
+      
+      <% if @procedure.in_draft?  %>
+        <%= render 'requirement_list' %>
+      <% elsif @procedure.in_progress? || @procedure.approved? %>
+        <%= render 'steps_list'%>
+      <% end %>
+    </div>
+  </div>    
+</div>
