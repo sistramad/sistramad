@@ -1,4 +1,4 @@
-#Migracion
+
 class AddProcedureIdAndUserIdToDocument < ActiveRecord::Migration[5.1]
   def change
     add_reference :documents, :user, index: true

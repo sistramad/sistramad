@@ -1,4 +1,4 @@
-#Migracion
+
 class CreateLicenseInfo < ActiveRecord::Migration[5.1]
   def change
     create_table :license_infos do |t|
