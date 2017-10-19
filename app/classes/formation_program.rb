@@ -58,7 +58,13 @@ class FormationProgram < SystemProcedure
     approve_step?('#4')
   end
 
-  def can_complete?(start_date)
+  def approve(start_date)
+    if can_be_approved?()
+      self.procedure.approve! 
+    end       
+  end
+
+  def can_be_approved?
     steps_approved = true
     self.procedure.steps.each do |step|
       unless step.approved?

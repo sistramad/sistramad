@@ -22,7 +22,7 @@ class RotationPlan < SystemProcedure
   def generate_steps(workflow)
     create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Consejo de facultad")
     create_step(workflow, "#2", "Incluir a los docentes en el plan de rotación", "Consejo de facultad")
-    create_step(workflow, "#3", "Evaluacón de los recaudos del plan de rotación","Consejo de facultad")
+    create_step(workflow, "#3", "Evaluación de los recaudos del plan de rotación","Consejo de facultad")
     create_step(workflow, "#4", "Generar constacia de aprobacón","Consejo Universitario")
     create_step(workflow, "#5", "Aprobar solicitud","Consejo Universitario")
   end
