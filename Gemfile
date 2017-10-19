@@ -107,3 +107,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'rails_12factor'
 end
+
+group :development do
+  gem 'rails-erd'
+end
+
+group :development, :test do
+    gem 'railroady'
+end

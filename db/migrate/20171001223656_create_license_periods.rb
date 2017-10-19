@@ -1,3 +1,4 @@
+#Migracion
 class CreateLicensePeriods < ActiveRecord::Migration[5.1]
   def change
     create_table :license_periods do |t|
