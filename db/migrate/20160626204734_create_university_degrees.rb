@@ -1,3 +1,4 @@
+#Migracion
 class CreateUniversityDegrees < ActiveRecord::Migration[5.1]
   def change
     create_table :university_degrees do |t|
