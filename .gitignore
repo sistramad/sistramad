@@ -36,3 +36,4 @@ doc/
 /public/uploads/*
 
 .secret
+.byebug_history

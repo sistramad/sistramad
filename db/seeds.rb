@@ -256,18 +256,18 @@ faculty.save!
 
 #Carga el Maestro de Documentos:
 
-#Año Sabatico:
-DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Año Sabatico", active: true , initially_required: true ).save
-DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Año Sabatico", active: true, initially_required: true ).save
-DocumentMaster.new(name: "Carta de Aceptación", code: "CAC", procedure: "Año Sabatico", active: true, initially_required: true ).save
-DocumentMaster.new(name: "Utimo ascenso", code: "UAS", procedure: "Año Sabatico", active: true , initially_required: true).save
-DocumentMaster.new(name: "Sintesis curricular", code: "SCU", procedure: "Año Sabatico", active: true , initially_required: true).save
-DocumentMaster.new(name: "Solvencia Biblioteca", code: "SBI", procedure: "Año Sabatico", active: true, initially_required: true ).save
-DocumentMaster.new(name: "Solvencia DAE", code: "SDAE", procedure: "Año Sabatico", active: true , initially_required: true).save
-DocumentMaster.new(name: "Certificado de idioma", code: "CID", procedure: "Año Sabatico", active: true , initially_required: true).save
-DocumentMaster.new(name: "Plan de Trabajo", code: "PDT", procedure: "Año Sabatico", active: true , initially_required: false).save
-DocumentMaster.new(name: "Constancia de antiguedad", code: "CDA", procedure: "Año Sabatico", active: true , initially_required: false).save
-DocumentMaster.new(name: "Constancia de aprobación", code: "CDAP", procedure: "Año Sabatico", active: true , initially_required: false).save
+#Año Sabático:
+DocumentMaster.new(name: "Cédula de Identidad", code: "CI", procedure: "Año Sabático", active: true , initially_required: true ).save
+DocumentMaster.new(name: "RIF", code: "RIF", procedure: "Año Sabático", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Carta de Aceptación", code: "CAC", procedure: "Año Sabático", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Utimo ascenso", code: "UAS", procedure: "Año Sabático", active: true , initially_required: true).save
+DocumentMaster.new(name: "Sintesis curricular", code: "SCU", procedure: "Año Sabático", active: true , initially_required: true).save
+DocumentMaster.new(name: "Solvencia Biblioteca", code: "SBI", procedure: "Año Sabático", active: true, initially_required: true ).save
+DocumentMaster.new(name: "Solvencia DAE", code: "SDAE", procedure: "Año Sabático", active: true , initially_required: true).save
+DocumentMaster.new(name: "Certificado de idioma", code: "CID", procedure: "Año Sabático", active: true , initially_required: true).save
+DocumentMaster.new(name: "Plan de Trabajo", code: "PDT", procedure: "Año Sabático", active: true , initially_required: false).save
+DocumentMaster.new(name: "Constancia de antiguedad", code: "CDA", procedure: "Año Sabático", active: true , initially_required: false).save
+DocumentMaster.new(name: "Constancia de aprobación", code: "CDAP", procedure: "Año Sabático", active: true , initially_required: false).save
 
 #Modificación de Plan de Trabajo:
 DocumentMaster.new(name: "Plan de Trabajo Modificado", code: "PDTM", procedure: "Modificación de Plan de Trabajo", active: true , initially_required: true).save
