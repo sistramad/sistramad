@@ -29,7 +29,7 @@
           <br>
           <div class='text-center'>
             <% if @procedure.in_progress? %>
-              <%= link_to complete_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
+              <%= link_to approve_procedure_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
                 <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
               <% end %>
             <% end %>

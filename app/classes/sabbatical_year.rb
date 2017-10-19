@@ -63,7 +63,6 @@ class SabbaticalYear < SystemProcedure
       self.procedure.approve! 
     end       
   end
-  
 
   def can_be_approved?
     steps_approved = true

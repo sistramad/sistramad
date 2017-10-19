@@ -57,9 +57,9 @@ class DelayRotationPlan < SystemProcedure
     approve_step?('#3')
   end 
 
-  def approve
-    if can_be_approved?
-      approve_procedure
+  def approve(start_date)
+    if can_be_approved?()
+      approve_procedure()
     end       
   end
 
