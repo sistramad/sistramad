@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Estimado usuario: </p>
+    <h1><%=@user.first_name%> <%=@user.last_name%>, </h1>  
+    <p>
+      La siguiente notificación es para informarle que el trámite solicitado por usted ha sido denegado en el sistema por el usuario <%=@procedure.user.first_name%><%=@procedure.user.last_name%>. 
+      Éste será eliminado automáticamente.     
+    </p>
+
+    <p> https://alexghoro-sistramad.herokuapp.com/procedures </p>
+    <p>  Este correo es enviado automáticamente por el Sistema de Trámites Administrativos Docente (SISTRAMAD) </p>
+    <p> No debe responder a este correo.</p>
+  </body>
+</html>
