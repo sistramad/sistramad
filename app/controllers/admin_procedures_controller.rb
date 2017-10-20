@@ -68,7 +68,8 @@ class AdminProceduresController < ApplicationController
     step = Step.find(params[:step])
     if step.in_progress?
       step.approve!
-      send_email(@procedure.user, 'step_approved')
+      email_data = {user: @procedure.user, procedure_name: @procedure.name, template: 'step_approved'}
+      send_email(email_data)
       flash[:success] = 'Paso aprobado con éxito!.'
     else
       flash[:error] = 'Imposible realizar ésta acción.'
@@ -82,6 +83,8 @@ class AdminProceduresController < ApplicationController
     procedure_instance.approve(date)
 
     if @procedure.approved?
+      email_data = {owner: @procedure.user, procedure_name: @procedure.name, responsable: @user, template: 'procedure_approved'}
+      send_email(email_data)
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)
     else

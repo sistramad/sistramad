@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Estimado usuario: </p>
+    
+    <h3><%= @owner_fullname %>, </h3>  
+    <p>
+      La siguiente notificación es para informarle que su trámite <strong><%= @procedure_name %></strong> ha sido Aprobado por <strong> <%= @responsable_fullname %>.</strong> 
+      Lo invitamos a ingresar al sistema usando el siguiente enlace donde podrá consultar su solicitud:     
+    </p>
+
+    <p> https://www.sistramad.uc.edu.ve </p>
+    <p> Este correo es enviado automáticamente por el Sistema de Trámites Administrativos Docente (SISTRAMAD) </p>
+    <p> No debe responder a este correo.</p>
+  </body>
+</html>

@@ -345,16 +345,25 @@ DocumentMaster.new(name: "Oficio de Solicitud", code: "D-OS", procedure: "Reinco
 
 #Carga grupos de usuarios
 Group.new(name: "Dirección de asuntos profesorales", code: "D20", description: "Miembros de la dirección de asuntos profesorales", active: true).save
+#
 Group.new(name: "Consejo de departamento", code: "C10", description: "Miembros del consejo de departamento", active: true).save
+#
 Group.new(name: "Consejo de facultad", code: "C20", description: "Miembros del consejo de facultad", active: true).save
+#
 
 Group.new(name: "Representante de Facultad", code: "R10", description: "Representantes de Facultad", active: true).save
+#
 Group.new(name: "Consejo Universitario", code: "C30", description: "Concejo Universitario", active: true).save
+#
 
 Group.new(name: "Jefe de Departamento", code: "J10", description: "Jefe de Departamento", active: true).save
+#
 Group.new(name: "Director de Departamento", code: "D30", description: "Director del Departamento", active: true).save
+#
 Group.new(name: "Decano", code: "D40", description: "Decano", active: true).save
+#
 Group.new(name: "Director de Escuela", code: "D50", description: "Director del Departamento", active: true).save
+#
 
 #Maestro de tipos de licencias
 LicenseType.new(code: "1", name: "Enfermedad", description:"Licencia otorgada por enfermedad", active: true).save
@@ -396,7 +405,8 @@ user = User.new(:username => 'condep',
         :password_confirmation => '123456')
 user.save!
 user.add_role(:admin)
-user.add_role(:test)
+user.add_role(:consejo_departamento)
+
 
 user = User.new(:username => 'confac',
         :email => 'consejodefacultad@correo.com',

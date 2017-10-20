@@ -1,10 +1,6 @@
 module EmailService 
   extend ActiveSupport::Concern
 
-  def send_email(user, mail_template)
-    SendEmailJob.set(wait: 10.seconds).perform_later(user, mail_template)
-  end
-
   def send_email(email_data)
     SendEmailJob.set(wait: 10.seconds).perform_later(email_data)
   end

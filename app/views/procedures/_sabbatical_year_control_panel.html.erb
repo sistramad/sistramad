@@ -25,11 +25,8 @@
               <p><li> <%= link_to "Cargar constancia de antiguedad.", new_document_path(name: 'Constancia de antiguedad', code: 'CDA', procedure: @procedure, step: '#3' ) %> </li></p>
             <% elsif !step.approved? %>
               <p><li> <%= link_to "Editar constancia de antiguedad.", edit_document_path(@document) %> </li></p>
-            <% end %>    
-         
+            <% end %>  
           <% end %>
-
-                   
 
         </h4>
       </ul>
