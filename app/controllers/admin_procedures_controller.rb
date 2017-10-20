@@ -3,6 +3,7 @@ class AdminProceduresController < ApplicationController
   include FactoryHelper
   require 'zip'
   before_action :set_procedure, only: [:show, :complete, :approve_procedure, :deny_step]
+  before_action :set_user
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -144,10 +145,14 @@ class AdminProceduresController < ApplicationController
   end
 
   def deny_step
-    procedure = get_procedure_intance(@procedure)     
-    if procedure.deny_step()
+    procedure = get_procedure_intance(@procedure)
+
+    owner = @procedure.user
+    responsable_fullname = "#{@user.first_name} #{@user.last_name}"
+
+    if procedure.deny_step(owner, responsable_fullname)
       flash[:success] = 'Tŕamite denegado, los documentos no fueron aprobados.'
-      redirect_to admin_procedure_path
+      redirect_to admin_procedures_path
     end
   end
 
@@ -155,6 +160,10 @@ class AdminProceduresController < ApplicationController
 
     def set_procedure
       @procedure = Procedure.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find(current_user.id)
     end
 
     def get_procedure_intance(procedure)

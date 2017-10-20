@@ -6,9 +6,9 @@
   <body>
     <p>Estimado usuario: </p>
     
-    <h3><%=@procedure.user.first_name%><%=@procedure.user.last_name%>, </h3>  
+    <h3><%= @owner_fullname %>, </h3>  
     <p>
-      La siguiente notificación es para informarle que el trámite solicitado por usted ha sido denegado en el sistema por <%=@user.first_name%> <%=@user.last_name%>. 
+      La siguiente notificación es para informarle que el trámite solicitado por usted ha sido denegado en el sistema por <%= @responsable_fullname %>. 
       Éste será eliminado automáticamente.     
     </p>
 

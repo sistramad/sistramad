@@ -10,8 +10,10 @@ class SendEmailJob < ApplicationJob
   def perform(email_data)
     @user = email_data[:user]
     @procedure_name = email_data[:procedure_name]
-    @procedure = email_data[:procedure]
 
+    @owner = email_data[:owner]
+    @responsable = email_data[:responsable]
+    
     mail_template = email_data[:template]
     send_mail(mail_template)
   end
@@ -25,7 +27,7 @@ class SendEmailJob < ApplicationJob
       when 'step_approved'  then
         NotificationMailer.step_approved_email(@user).deliver_later
       when 'step_deny'  then
-        NotificationMailer.step_deny_email(@user, @procedure).deliver_later
+        NotificationMailer.step_deny_email(@owner, @responsable).deliver_later
     end
   end
 end

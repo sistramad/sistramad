@@ -99,7 +99,7 @@ class ProceduresController < ApplicationController
     concrete_procedure.procedure = @procedure
     
     if concrete_procedure.initial_requirements_valid?  
-      redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
+      redirect_to procedure_path(@procedure), notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
       flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios, o la
         la fecha de la solicitud esta fuera de la permitida.'

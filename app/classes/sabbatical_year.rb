@@ -66,14 +66,10 @@ class SabbaticalYear < SystemProcedure
     end       
   end
 
-  def deny_step()
-    email_data = {user: self.procedure.user, template: 'step_deny', procedure: self.procedure}
-    if self.procedure.destroy
-      send_email(email_data)
-      return true
-    else
-      return false
-    end
+  def deny_step(owner, responsable_fullname)
+    email_data = {owner: owner, responsable: responsable_fullname, template: 'step_deny'}
+    send_email(email_data)
+    self.procedure.destroy
   end
 
   def can_be_approved?

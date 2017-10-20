@@ -17,11 +17,11 @@ class NotificationMailer < ApplicationMailer
     mail(to: @user.email, subject: 'Notificación SISTRAMAD: paso aprobado.')
   end
 
-  def step_deny_email(user, procedure)
-    @user = user
-    @procedure = procedure
-    byebug
-    mail(to: @user.email, subject: 'Notificación de solicitud')
+  def step_deny_email(owner, responsable)
+    @owner = owner
+    @owner_fullname = "#{owner.first_name} #{owner.last_name}"
+    @responsable_fullname = responsable
+    mail(to: @owner.email, subject: 'Notificación de solicitud')
   end
 
 end

@@ -41,7 +41,7 @@ class DocumentsController < ApplicationController
   end
 
   def show
-   
+    @procedure = Procedure.find(params[:procedure])
   end
 
   def update
