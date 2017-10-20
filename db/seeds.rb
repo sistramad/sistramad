@@ -59,15 +59,15 @@ user.add_role(:admin)
 user.add_role(:test)
 
 user = User.new(:username => 'jceballos',
-:email => 'jonnyceballos@gmail.com',
-:first_name => 'Jonny',
-:middle_name => '',
-:last_name => 'Ceballos',
-:genre => 'm',
-:identification_document => '17755525',
-:birthday => "02/06/1986".to_date,
-:password => '123456', #Devise.friendly_token[0,20]
-:password_confirmation => '123456')
+                :email => 'jonnyceballos@gmail.com',
+                :first_name => 'Jonny',
+                :middle_name => '',
+                :last_name => 'Ceballos',
+                :genre => 'm',
+                :identification_document => '17755525',
+                :birthday => "02/06/1986".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
 user.save!
 user.add_role(:admin)
 user.add_role(:test)
@@ -362,7 +362,7 @@ LicenseType.new(code: "2", name: "Estudios", description:"Licencia otorgada para
 LicenseType.new(code: "3", name: "Misiones y comisiones de la Universidad", description:"Licencia otorgada para misiones y comisiones de la Universidad", active: true).save
 LicenseType.new(code: "4", name: "Ejercer funciones en los Subsistemas de Educación", description:"Licencia otorgada para ejercer funciones en los Subsistemas de Educación", active: true).save
 LicenseType.new(code: "5", name: "Ocupar cargos relevantes en la administración pública", description:"Licencia otorgada para ocupar cargos relevantes en la administración pública ", active: true).save
-LicenseType.new(code: "6", name: "Cualquier otro fin", description:"Licencia otorgada para cualquier otro fin", active: true).save
+LicenseType.new(code: "6", name: "Cuaquier otro fin", description:"Licencia otorgada para cualquier otro fin", active: true).save
 
 #Maestro de periodos de licencias
 LicensePeriod.new(code: "1", name: "Hasta 15 días", description: "De 1 a 15 días", days: 15, months: 0, years: 0, active: true).save
@@ -370,7 +370,129 @@ LicensePeriod.new(code: "2", name: "Hasta 30 días", description: "De 1 a 30 dí
 LicensePeriod.new(code: "3", name: "Hasta 90 días", description: "De 1 a 90 días", days: 90, months: 0, years: 0, active: true).save
 LicensePeriod.new(code: "4", name: "Mayor a 90 días", description: "Mas de 90 días", days: 90, months: 0, years: 0, active: true).save
 
+user = User.new(:username => 'asupro',
+        :email => 'asuntosprofesoralesuc@correok.com',
+        :first_name => 'Dirección de asuntos profesorales',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '10',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+user = User.new(:username => 'condep',
+        :email => 'consejodedepartamento@correo.com',
+        :first_name => 'Consejo de departamento',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '20',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+user = User.new(:username => 'confac',
+        :email => 'consejodefacultad@correo.com',
+        :first_name => 'Consejo de facultad',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '30',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+user = User.new(:username => 'repfac',
+        :email => 'representantedefacultad@correo.com',
+        :first_name => 'Representante de Facultad',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '40',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+user = User.new(:username => 'conuni',
+        :email => 'consejouniversitario@correo.com',
+        :first_name => 'Consejo Universitario',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '50',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+user = User.new(:username => 'jefdep',
+        :email => 'jefedepartamento@correo.com',
+        :first_name => 'Jefe de Departamento',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '60',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
+
+user = User.new(:username => 'dirdep',
+        :email => 'direcciondepartamento@correo.com',
+        :first_name => 'Director de Departamento',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '70',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
 
 
+user = User.new(:username => 'decano',
+        :email => 'decano@correo.com',
+        :first_name => 'Decano',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '80',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)
 
-
+user = User.new(:username => 'diresc',
+        :email => 'directorescuela@correo.com',
+        :first_name => 'Director Escuela',
+        :middle_name => '',
+        :last_name => ' ',
+        :genre => 'm',
+        :identification_document => '90',
+        :birthday => "15/08/1988".to_date,
+        :password => '123456', #Devise.friendly_token[0,20]
+        :password_confirmation => '123456')
+user.save!
+user.add_role(:admin)
+user.add_role(:test)

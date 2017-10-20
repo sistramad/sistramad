@@ -7,10 +7,10 @@
     <p>Estimado usuario: </p>
     <h1><%= @user.first_name%> <%= @user.last_name %>, </h1>  
     <p>
-      se le notifica que un paso de su solicitud ha sido aprobado.
+      se le notifica que un paso de su solicitud <%= @procedure.name %>  ha sido aprobado.
       Puede consultar el estado de su trámite haciendo click en el siguiente enlace:
     </p>
-    <p> https://alexghoro-sistramad.herokuapp.com/procedures </p>
+    <p> https://www.sistramad.uc.edu.ve </p>
     <p> Este correo es enviado automáticamente por el Sistema de Trámites Administrativos Docente (SISTRAMAD)</p>
     <p> No debe responder a este correo.</p>
   </body>
