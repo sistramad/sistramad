@@ -405,6 +405,18 @@ user.save!
 #document = Document.new(:name => 'Copia de Oficio de Aprobacion de Cambio en Dedicacion')
 #document.save!
 
+
+#document = Document.new(:name => 'Oficio del Aval del Departamento')
+#document.save!
+#document = Document.new(:name => 'Oficio de Consejo de Escuela')
+#document.save!
+#document = Document.new(:name => 'Fondo Negro de Título IV Nivel')
+#document.save!
+#document = Document.new(:name => 'Copia del Último Ascenso')
+#document.save!
+#document = Document.new(:name => 'Copia de Curso de Certificación como Docente')
+#document.save!
+
 #Para Heroku
 #formalities_master = FormalitiesMaster.new(:name => 'Traslados',:description =>'Se entiende por traslado al procedimiento académico administrativo mediante el cual un miembro del personal Docente y de Investigación puede ser transferido, en forma Parcial o Total, transitoria o permanentemente, a otra Unidad Académica de Adscripción en',:table_manager => 'ProfessorsTransfer',:isactive => true)
 #formalities_master.save!

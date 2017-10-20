@@ -53,5 +53,8 @@ class TemporalChange < Workflow
       approve_final?(5)
     end
   
+    def decline_final_step
+      decline_final?(5)
+    end
     
   end

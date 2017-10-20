@@ -46,7 +46,7 @@ Los formatos permitidos son: .pdf, .doc, .jpeg, .jpj, .png, .docx, .odt</a>
                           <div class="btn-group btn-group-xs">
                             <p>Este Recaudo se encuentra cargado, ¿Desea actualizar este Recaudo?</p>
                             <% @attachment = Attachment.find_by(user_id: current_user.id,document_id: document.id)%>
-                            <%= link_to 'Actualizar Recaudo', edit_attachment_path(@attachment,@formalities_masters), class: 'btn btn-primary list' %>
+                            <%= link_to 'Actualizar Recaudo', edit_attachment_path(@attachment,:tramite => @formalities_master.id), class: 'btn btn-primary list' %>
                           </div>
                         </div>
                       <% end %>

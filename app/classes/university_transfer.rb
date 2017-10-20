@@ -54,5 +54,9 @@ class UniversityTransfer < Workflow
     def approve_final_step
       approve_final?(7)
     end
+
+    def decline_final_step
+      decline_final?(7)
+    end
     
   end

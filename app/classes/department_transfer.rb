@@ -72,4 +72,8 @@ class DepartmentTransfer < Workflow
     def approve_final_step
       approve_final?(6)
     end
+
+    def decline_final_step
+      decline_final?(6)
+    end
 end    

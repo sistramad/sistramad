@@ -31,16 +31,17 @@
                           <%= f.hidden_field :document_id, :value => @attachment.document_id%>
                         </div>
               </div>
-              <%= fields_for 'tramite', @formalities_master do |tramite| %>
-                  <%= tramite.hidden_field :name, :value => @formalities_master.name %>
-              <% end %>
-              <center>
-              <div class="col-md-12">
-                <%= f.button :submit, value: t('form.update'), class: ' btn btn-info' %>
+            
+              
+                <%= fields_for 'tramite', @formalities_masters do |tramite| %>
+                    <%= tramite.hidden_field :id, :value => @formalities_master.id %>
+                <% end %>
+                <div class="col-md-12">
+                  <%= f.button :submit, value: t('form.update'), class: ' btn btn-info' %>
+                </div>
+                </center>
               </div>
-              </center>
-            </div>
-        <% end %>
+            <% end %>
       </div>
     </div>
   </div>

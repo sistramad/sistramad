@@ -4,7 +4,7 @@ class ProfessorsTransfersController < ApplicationController
 
   before_action :set_professors_transfer, only: [:show, :edit, :update, :destroy]
   before_action :set_user
-  before_action :set_faculties, only: [:new,:edit]
+  #before_action :set_faculties, only: [:new,:edit]
   before_action :set_references, only: [:new,:edit]
   before_action :set_reference_lists, only: [:new,:edit]
   before_action :get_selections, only: [:new,:edit,:get_selections,:get_froms,:get_to]
@@ -60,9 +60,8 @@ class ProfessorsTransfersController < ApplicationController
   # PATCH/PUT /professors_transfers/1.json
   def update
     respond_to do |format|
-      date = @professors_transfer.user.employee.dedication_start_date
       if @professors_transfer.update(professors_transfer_params)
-        if (@professors_transfer.process_type)==1
+        if (@professors_transfer.process_type.id == 1)
           type = Reference.find(@professors_transfer.type_of_translate).name
           actual_request = get_request_from_factory(type)
           actual_request.generate_workflow(@professors_transfer)
@@ -71,6 +70,7 @@ class ProfessorsTransfersController < ApplicationController
           format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
           format.json { render :show, status: :ok, location: @professors_transfer }
         else
+          date = @professors_transfer.user.employee.dedication_start_date
           if (validates_dedication_date(date))
             type = ReferenceList.find(@professors_transfer.type_of_translate).name
             actual_request = get_request_from_factory(type)
@@ -156,10 +156,10 @@ class ProfessorsTransfersController < ApplicationController
     end
 
     def set_references
-      if (@professors_transfer.process_type==1)
-          @reference = Reference.last(3)
+      if (@professors_transfer.process_type.id==1)
+          @reference = Reference.where(:name => ['Universidades','Facultades','Escuela o Departamento'])
       end
-      if (@professors_transfer.process_type==3)
+      if (@professors_transfer.process_type.id==3)
         @reference = Reference.find_by(name: 'Tipo de Cambio')
       end
     end
@@ -190,7 +190,11 @@ class ProfessorsTransfersController < ApplicationController
       else
         @references = Reference.find_by(name: 'Tipo de Cambio')
         @reference_lists = @references.reference_lists
-        @reference_lists2 = current_user.employee.dedication_classification
+        if current_user.employee.present?
+          @reference_lists2 = current_user.employee.dedication_classification
+        else
+          @reference_lists2 = @references.reference_lists
+        end    
         @references = Reference.find_by(name: 'Dedicacion')
         @reference_lists3 = @references.reference_lists
       end

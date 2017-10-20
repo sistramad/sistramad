@@ -10,11 +10,11 @@ class SendEmailJob < ApplicationJob
     def send_mail()
       case @mail_template
         when 'initial_validation_success' then 
-          NotificationMailer.initial_validation_success_email(@user).deliver_later
+          NotificationMailer.initial_validation_success_email_transfer(@user).deliver_later
         when 'need_to_approve'  then
-          NotificationMailer.need_to_approve_email(@user).deliver_later
+          NotificationMailer.need_to_approve_email_transfer(@user).deliver_later
         when 'step_approved'  then
-        NotificationMailer.step_approved_email(@user).deliver_later
+        NotificationMailer.step_approved_email_transfer(@user).deliver_later
       end
     end
   end

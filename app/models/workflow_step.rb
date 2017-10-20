@@ -17,7 +17,7 @@ class WorkflowStep < ActiveRecord::Base
       transitions :from => :IP, :to => :AP
     end 
 
-    event :rechazar do
+    event :declinar do
       transitions :from => :IP, :to => :RE
     end
 

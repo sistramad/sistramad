@@ -1,0 +1,42 @@
+<p id="notice"><%= notice %></p>
+<div class="container"> 
+<div class="well"> 
+  <div>
+    <p><strong> <h3 class="text-center background-image: asset-url('work.jpg') background-size: cover"> Revisiones Previas: </h3> </strong></p>
+  </div>
+  <br>
+  <% @professors_transfer.workflow_steps.each do |step| %>
+    <div class="table-responsive">
+      <% if (step.review.present?) %>
+        <table class="table table-striped table-hover">          
+            <thead>
+              <tr>
+                <th> Revision </th>
+                <th> Hecha por: </th>
+                <th> Veredicto </th>
+                <th> Observaciones </th>
+                <th>Fecha creacion</th>
+              </tr>
+            </thead>
+            <tbody>
+                <tr>
+                  <td><%= step.review.name %></td>
+                  <td><%= step.review.user.username %></td>
+                  <td> <h4>
+                  <% if step.AP? %>
+                      <span class="label label-success"> Aprobado </span> 
+                  <% else  %>
+                      <span class="label label-danger"> Desaprobado </span> 
+                  <% end %>
+                  </h4> </td>
+                  <td><%= step.review.comment %></td>
+                  <td><%= step.review.created_at.strftime("%Y-%m-%d") %></td>    
+                </tr>
+            </tbody>
+        </table>
+      <%end%>
+    </div>
+  <%end%>
+</div>  
+</div>
+

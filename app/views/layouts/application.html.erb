@@ -80,21 +80,21 @@
             </span>
               </a>
               <ul class="treeview-menu">
-                <% if (ProfessorsTransfer.where(user_id: current_user.id,process_type: 1).empty? && (current_user.has_role? :docente)) %>
+               <% if (ProfessorsTransfer.where('process_type = ? and user_id =?',1,current_user.id).empty? && (current_user.has_role? :docente)) %>
                       <li><%= link_to new_attachment_path(:tramite => 1),method: :get do%>
                             <i class="fa fa-circle"></i>
                             Solicitar Traslado
                       <% end %>
                       </li>
                 <% else %>
-                  <% if ProfessorsTransfer.exists?(user_id: current_user.id,process_type: 1) %>
-                    <% if ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 1).DR? %>
+                  <% if ProfessorsTransfer.where('process_type = ? and user_id =?',1,current_user.id).present? %>
+                    <% if ProfessorsTransfer.where('process_type = ? and user_id =? and status = ?',1,current_user.id,'DR').present? %>
                         <li><%= link_to new_attachment_path(:tramite => 1 ),method: :get do%>
                                 <i class="fa fa-circle"></i>
                                 Enviar Recaudos Faltantes
                         <% end %>
                           </li>
-                    <% elsif ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 1).CL? %>
+                    <% elsif ProfessorsTransfer.where('process_type = ? and user_id =? and status = ?',1,current_user.id,'CL').present? %>
                         <li><%= link_to new_attachment_path(:tramite => 1 ),method: :get do%>
                                 <i class="fa fa-circle"></i>
                                 Solicitar Traslado
@@ -108,24 +108,24 @@
                     </li> 
                   <% end %> 
                 <% end %>
-                <% if (ProfessorsTransfer.where(user_id: current_user.id,process_type: 3).empty? && (current_user.has_role? :docente))%>
+                <% if (ProfessorsTransfer.where('process_type = ? and user_id =?',3,current_user.id).empty? && (current_user.has_role? :docente) && (current_user.employee.present?))%>
                 <li><%= link_to new_attachment_path(:tramite => 3),method: :get do%>
                       <i class="fa fa-circle"></i>
                       Solicitar Cambio de Dedicación
                 <% end %>
                 </li>
                 <% else %>
-                  <% if ProfessorsTransfer.exists?(user_id: current_user.id,process_type: 3) %>
-                    <% if ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 3).DR? %>
+                  <% if ProfessorsTransfer.where('process_type = ? and user_id =?',3,current_user.id).present? %>
+                    <% if ProfessorsTransfer.where('process_type = ? and user_id =? and  status = ?',3,current_user.id,'DR').present? %>
                       <li><%= link_to new_attachment_path(:tramite => 3 ),method: :get do%>
                               <i class="fa fa-circle"></i>
                               Enviar Recaudos Faltantes
                       <% end %>
                         </li>
-                    <% elsif ProfessorsTransfer.find_by(user_id: current_user.id,process_type: 3).CL? %>
+                    <% elsif ProfessorsTransfer.where('process_type = ? and user_id =? and status = ?',3,current_user.id,'DR').present? %>
                         <li><%= link_to new_attachment_path(:tramite => 3 ),method: :get do%>
                                 <i class="fa fa-circle"></i>
-                                Solicitar Traslado
+                                Solicitar Cambio de Dedicación
                         <% end %>
                           </li>
                     <% end %>

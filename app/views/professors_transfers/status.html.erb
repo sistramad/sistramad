@@ -35,21 +35,29 @@
                 </p>
               </div>
 
-              <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Traslado" %>:</label>
-              <div class="col-sm-7 col-md-8">
-                <p class="form-control-static"><%= professorstransfer.type.name %></p>
-              </div>
+              <% if(professorstransfer.process_type.name='Traslados')%>
+                <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Traslado" %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= professorstransfer.process_type.name %></p>
+                </div>
+              <%else%>  
+                <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Traslado" %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= professorstransfer.type.name %></p>
+                </div>
+              <%end%>
 
-              <label for="faculty_from" class="control-label col-sm-5 col-md-4"><%= "Origen" %>:</label>
-              <div class="col-sm-7 col-md-8">
-                <p class="form-control-static"><%= professorstransfer.from.name %></p>
-              </div>
+              <% if professorstransfer.from.present? %>
+                <label for="faculty_from" class="control-label col-sm-5 col-md-4"><%= "Origen" %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= professorstransfer.from.name %></p>
+                </div>
 
-              <label for="faculty_to" class="control-label col-sm-5 col-md-4"><%= "Destino" %>:</label>
-              <div class="col-sm-7 col-md-8">
-                <p class="form-control-static"><%= professorstransfer.to.name %></p>
-              </div>
-
+                <label for="faculty_to" class="control-label col-sm-5 col-md-4"><%= "Destino" %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= professorstransfer.to.name %></p>
+                </div>
+                <%end%>
             </div>
           </div>
         </div>

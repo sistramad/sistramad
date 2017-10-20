@@ -8,12 +8,18 @@
   <div class="row">
     <%= render 'professors_transfers/info'%>
     
-    <% if @professors_transfer.IP? and @professors_transfer.type_of_translate == 7 %>
+    <% if ((@professors_transfer.IP? or @professors_transfer.AP?) and @professors_transfer.type_of_translate == 7) %>
       <%= render 'university_transfer_manager'%>
-    <% elsif @professors_transfer.IP? and @professors_transfer.type_of_translate == 8 %>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 8) %>
       <%= render 'faculty_transfer_manager'%>
-    <% elsif @professors_transfer.IP? and @professors_transfer.type_of_translate == 9 %>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 9) %>
       <%= render 'department_transfer_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 50) %>
+      <%= render 'permanent_change_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 51) %>
+      <%= render 'temporal_change_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 52) %>
+      <%= render 'dedication_stay_manager'%>  
     <% end %>
     
   </div>

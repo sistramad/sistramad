@@ -52,5 +52,9 @@ class PermanentChange < Workflow
     def approve_final_step
       approve_final?(5)
     end
+
+    def decline_final_step
+      decline_final?(5)
+    end
     
   end

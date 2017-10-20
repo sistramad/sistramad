@@ -1,17 +1,20 @@
 class RequestManagerController < ApplicationController
     include EmailService
-    before_action :set_professors_transfer, only: [:initial_requirements,:complete]
+    before_action :set_professors_transfer, only: [:initial_requirements,:complete,:close,:decline]
     
       def index
-        @professors_transfers = ProfessorsTransfer.where(status: 'IP').page(params[:page]).per(15)
+        @professors_transfers = ProfessorsTransfer.where(status: ['IP','AP']).page(params[:page]).per(15)
       end
     
       def show
         @professors_transfer = ProfessorsTransfer.find(params[:id])
+        docs = FormalitiesMaster.find_by(name: @professors_transfer.process_type.name ).documents   
+        u_id = @professors_transfer.user_id
+        @attachments = User.find_by(id: u_id).attachments.where(:document_id => docs)
       end
     
       def initial_requirements
-        docs = FormalitiesMaster.find_by(name: 'Traslados').documents
+        docs = FormalitiesMaster.find_by(name: @professors_transfer.process_type.name ).documents   
         u_id = @professors_transfer.user_id
         @attachments = User.find_by(id: u_id).attachments.where(:document_id => docs)
       end
@@ -33,8 +36,6 @@ class RequestManagerController < ApplicationController
         @professors_transfer = ProfessorsTransfer.find(params[:professors_transfer])
         @user = User.find(@professors_transfer.user.id)
         if generate_pdf?(@professors_transfer, @user)
-          professors_transfer = get_professors_transfer_instance(@professors_transfer)
-          professors_transfer.approve_final_step()
           flash[:success] = 'Constancia generada con éxito.'       
         else
           flash[:error] = 'Error al generar constancia de aprobación.'
@@ -57,30 +58,70 @@ class RequestManagerController < ApplicationController
         @professorstransfer = ProfessorsTransfer.find(params[:id])
         step = Step.find(params[:step])
         if step.IP?
-          step.approve!
+          step.aprobar!
           send_email(@professorstransfer.user, 'step_approved')
           flash[:success] = 'Paso aprobado con exito!.'
         else
           flash[:error] = 'Imposible realizar ésta acción.'
         end
-        redirect_to  admin_ProfessorsTransfer_path(@professorstransfer)
+        redirect_to  request_manager_path(@professorstransfer)
       end
     
       def complete
         steps_approved = true
-        @professorstransfer.steps.each do |step|
-          unless step.approved?
+        professors_transfer = get_professors_transfer_instance(@professors_transfer)
+        professors_transfer.approve_final_step()
+        @professors_transfer.workflow_steps.each do |step|
+          unless step.AP?
             steps_approved = false
           end
         end
         
-        if @professorstransfer.in_progress? and steps_approved
-          @professorstransfer.approve!
+        if @professors_transfer.IP? and steps_approved
+          @professors_transfer.aprobar!
           flash[:success] = 'Solicitud aprobada con exito!'
-          redirect_to  admin_ProfessorsTransfer_path(@professorstransfer)
+          redirect_to  request_manager_path(@professors_transfer)
         else
           flash[:error] = 'Imposible completar la solicitud, todos los pasos deben estar aprobados.'
-          redirect_to  admin_ProfessorsTransfer_path(@professorstransfer) 
+          redirect_to  request_manager_path(@professors_transfer) 
+        end 
+      end
+
+      def close
+        steps_approved = true
+        @professors_transfer.workflow_steps.each do |step|
+          unless step.AP?
+            steps_approved = false
+          end
+        end
+        
+        if @professors_transfer.AP? and steps_approved
+          @professors_transfer.completar!
+          flash[:success] = 'Solicitud cerrada con exito!'
+          redirect_to  request_manager_path(@professors_transfer)
+        else
+          flash[:error] = 'Imposible cerrar la solicitud, todos los pasos deben estar aprobados.'
+          redirect_to  request_manager_path(@professors_transfer) 
+        end 
+      end
+
+      def decline
+        steps_approved = true
+        professors_transfer = get_professors_transfer_instance(@professors_transfer)
+        professors_transfer.decline_final_step()
+        @professors_transfer.workflow_steps.each do |step|
+          unless step.AP?
+            steps_approved = false
+          end
+        end
+        
+        if @professors_transfer.IP? and !steps_approved
+          @professors_transfer.declinar!
+          flash[:error] = 'Solicitud no cumplio con requisitos, Ha sido Rechazada!'
+          redirect_to  request_manager_path(@professors_transfer)
+        else
+          flash[:error] = 'Imposible declinar la solicitud, todos los pasos deben estar aprobados.'
+          redirect_to  request_manager_path(@professors_transfer) 
         end 
       end
     

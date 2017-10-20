@@ -27,13 +27,16 @@ Rails.application.routes.draw do
         #get :approve_document
         #get :show_document
         #get :approve_step
-        #get :complete
+        get :complete
+        get :close
+        get :decline
       end
     end
 
     resources :reviews do
       member do
          get :new_aval_and_budget_revision
+         get :show_reviews
        end
      end
 

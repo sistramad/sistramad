@@ -29,6 +29,12 @@ class Workflow
         step.update(approval_date: Time.now)
         step.AP?
       end
+
+      def decline_final?(step_number)
+        step = self.professors_transfer.request_workflow.workflow_step.where(step_number: step_number).first
+        step.declinar!
+        step.RE?
+      end
     
       def start_step(step_number)
         step = self.professors_transfer.request_workflow.workflow_step.where(step_number: step_number).first
