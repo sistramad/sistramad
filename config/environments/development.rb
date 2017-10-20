@@ -52,17 +52,19 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  # Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
-  # para ejecutar el job: $ bundle exec rake jobs:work
-  # config.action_mailer.smtp_settings = {
-  #   :address              => "smtp.gmail.com",
-  #   :port                 => 587,
-  #   :user_name            => ENV['gmail_username'],
-  #   :password             => ENV['gmail_password'],
-  #   :authentication       => "plain",
-  #   :enable_starttls_auto => true
-  # }
-
-  # config.active_job.queue_adapter = :delayed_job 
+  # SMTP settings for gmail
+  config.action_mailer.delivery_method = :smtp
+  #Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
+  #para ejecutar el job: $ bundle exec rake jobs:work
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV['gmail_username'],
+    :password             => ENV['gmail_password'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }  
+  
+  config.active_job.queue_adapter = :delayed_job 
 
 end

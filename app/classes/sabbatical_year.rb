@@ -29,9 +29,11 @@ class SabbaticalYear < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment? and request_day_allowed?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('D20')
-      send_emails(users,'need_to_approve')
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+      #send_email(self.procedure.user, 'initial_validation_success')
+      #users = User.find_group_members('D20')
+      #send_emails(users,'need_to_approve')
       return true
     else
       return false
@@ -62,6 +64,16 @@ class SabbaticalYear < SystemProcedure
     if can_be_approved?()
       self.procedure.approve! 
     end       
+  end
+
+  def deny_step()
+    email_data = {user: self.procedure.user, template: 'step_deny', procedure: self.procedure}
+    if self.procedure.destroy
+      send_email(email_data)
+      return true
+    else
+      return false
+    end
   end
 
   def can_be_approved?

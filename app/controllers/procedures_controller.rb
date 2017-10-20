@@ -94,9 +94,6 @@ class ProceduresController < ApplicationController
     render 'requirements'
   end
 
-
-
-  #GET /procedures/1
   def validate
     concrete_procedure = get_procedure_from_factory(@procedure.code)
     concrete_procedure.procedure = @procedure
@@ -104,7 +101,8 @@ class ProceduresController < ApplicationController
     if concrete_procedure.initial_requirements_valid?  
       redirect_to procedures_path, notice: 'La solicitud ha sido confirmada, ha pasado al proceso de evaluación.'
     else
-      flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios.'
+      flash[:error] = 'La solicitud No ha podido completarse, asegurese cargar todos los requerimientos necesarios, o la
+        la fecha de la solicitud esta fuera de la permitida.'
       render :show 
     end
   end

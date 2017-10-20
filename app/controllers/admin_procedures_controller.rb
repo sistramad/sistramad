@@ -2,7 +2,7 @@ class AdminProceduresController < ApplicationController
   include EmailService
   include FactoryHelper
   require 'zip'
-  before_action :set_procedure, only: [:show, :complete, :approve_procedure]
+  before_action :set_procedure, only: [:show, :complete, :approve_procedure, :deny_step]
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -140,6 +140,14 @@ class AdminProceduresController < ApplicationController
     ensure
       temp_file.close
       temp_file.unlink
+    end
+  end
+
+  def deny_step
+    procedure = get_procedure_intance(@procedure)     
+    if procedure.deny_step()
+      flash[:success] = 'Tŕamite denegado, los documentos no fueron aprobados.'
+      redirect_to admin_procedure_path
     end
   end
 

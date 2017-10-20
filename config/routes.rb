@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get :download_all_documents
       get :check_initial_requirements
       post :save_opinion
+      get :deny_step
+      post :deny_step
     end
   end
 
