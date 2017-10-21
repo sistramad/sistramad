@@ -1,7 +1,7 @@
 module AdminProceduresHelper
   def basic_info_view(code)
     case code
-      when 'T-AS100' || 'T-AS101' || 'T-AS102' || 'T-AS103' || 'T-AS104' || 'T-AS105' then 
+      when 'T-AS100' , 'T-AS101' , 'T-AS102' , 'T-AS103' , 'T-AS104' , 'T-AS105' then  
         return 'procedures/basic_info'     
       when 'T-SPF200' then 
         return 'special_formation_procedures/basic_info'

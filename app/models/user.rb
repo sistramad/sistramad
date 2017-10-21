@@ -32,6 +32,7 @@ class User < ApplicationRecord
   def self.find_group_members(code)
     User.joins(:groups).where(groups: {code: code})
   end
+  
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup #copia con el metodo .dup a conditions

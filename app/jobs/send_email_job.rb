@@ -2,6 +2,7 @@ class SendEmailJob < ApplicationJob
   queue_as :default
 
   def perform(user, mail_template)
+    byebug
     @user = user
     @mail_template = mail_template
     send_mail()

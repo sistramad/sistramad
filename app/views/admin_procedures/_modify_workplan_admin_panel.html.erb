@@ -27,9 +27,14 @@
               <p><li> <%= link_to "Aprobar documento de aprobación.", show_document_admin_procedure_path(document_code: 'AMPDT', step: '#3') %> </li></p>
           <% end %>
 
-          <% if @procedure.in_progress? %>
-            <p><li> <%= link_to "Aprobar solicitud.", complete_admin_procedure_path(@procedure) %> </li></p>
-          <% end %>
+          <br>
+          <div class='text-center'>
+            <% if @procedure.in_progress? %>
+              <%= link_to approve_procedure_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
+                <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
+              <% end %>
+            <% end %>
+          </div>
 
         </h4>
       </ul>
