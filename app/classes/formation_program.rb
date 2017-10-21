@@ -30,9 +30,12 @@ class FormationProgram < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('R20')
+
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+      users = User.with_role :concejo_facultad
       send_emails(users,'need_to_approve')
+
       return true
     else
       return false

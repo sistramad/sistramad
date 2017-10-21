@@ -22,7 +22,7 @@ class RotationPlan < SystemProcedure
   def generate_steps(workflow)
     create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Consejo de facultad")
     create_step(workflow, "#2", "Incluir a los docentes en el plan de rotación", "Consejo de facultad")
-    create_step(workflow, "#3", "Evaluación de los recaudos del plan de rotación","Consejo de facultad")
+    create_step(workflow, "#3", "Evalqauación de los recaudos del plan de rotación","Consejo de facultad")
     create_step(workflow, "#4", "Generar constacia de aprobacón","Consejo Universitario")
     create_step(workflow, "#5", "Aprobar solicitud","Consejo Universitario")
   end
@@ -31,9 +31,14 @@ class RotationPlan < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment? and has_correct_number_of_participants?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      send_emails(self.procedure.users, 'initial_validation_success')
-      users = User.find_group_members('C20')
+
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+
+      users = User.with_role :concejo_facultad
+      send_emails(users,'need_to_approve')
+
+
       send_emails(users,'need_to_approve')
       return true
     else

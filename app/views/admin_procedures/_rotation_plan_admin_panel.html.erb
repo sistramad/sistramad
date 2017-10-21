@@ -9,25 +9,25 @@
         <h4>
  
           <% step = @procedure.steps.find_by(name: "#3")%>
-          <% unless step.state != 'in_progress'%>
+          <% if step.in_progress? and current_user.has_role?(:consejo_departamento)%>
             <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
           <% end %>
 
           
           <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+            <% if current_user.has_role?(:consejo_universitario) and steps_approved?(%w[#1 #2 #3])%>
+              <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+            <% end %>
           <% else %>
             <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
-            
             <% if @procedure.in_progress? %>
               <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
             <% end %>
-            
           <% end %>       
                   
           <br>
-            <% if @procedure.in_progress? %>
+            <% if @procedure.in_progress? and  current_user.has_role?(:consejo_universitario) %>
               <%= form_tag approve_procedure_admin_procedure_path(@procedure) do %>
                 <div class="field", id="sandbox-container">
                   <label for="star_date">Fecha de Inicio</label>
