@@ -29,5 +29,9 @@ module AdminProceduresHelper
     return true
   end
 
+  def step_approved?(step_name)
+    @procedure.steps.find_by(name: step_name).approved?
+  end
+
 
 end
