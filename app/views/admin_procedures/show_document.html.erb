@@ -21,6 +21,11 @@
                       Aprobar <%= @document.name %> 
                       <i class="glyphicon glyphicon-ok"></i> 
                     <% end %>
+                    <%= link_to deny_step_admin_procedure_path(@procedure), method: :step_deny, 
+                            data: {confirm: '¿Está seguro que desea reprobar el documento?, el tŕamite sera cancelado.'}, 
+                            class: 'btn btn-danger btn-md list' do %> 
+                      Reprobar recaudos <i class="glyphicon glyphicon-remove"></i> 
+                    <% end %>
                   </p>
             </div>
           </div>

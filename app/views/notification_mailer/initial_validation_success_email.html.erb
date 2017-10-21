@@ -5,15 +5,15 @@
   </head>
   <body>
     <p>Estimado usuario: </p>
-    <h1><%= @user.first_name%> <%= @user.last_name %>, </h1>  
+    <h3><%= @user.first_name%> <%= @user.last_name %>:</h3> 
     <p>
-      Los recaudos inciales de su tramite fueron admitidos por el sistema y pasaran al proceso de evalución,
-      este atento a su correo, recibira nuevas notificaciones cuando sean aprobados, támbien puede consultar el estado
-      de su solicitud haciendo click en el siguiente enlance: 
+      Los recaudos iniciales de su trámite: <strong><%= @procedure_name %></strong>, fueron admitidos por el sistema y pasaran al proceso de evaluación,
+      este atento a su correo, recibirá nuevas notificaciones cuando sean aprobados, también puede consultar el estado
+      de su solicitud haciendo click en el siguiente enlace:
     </p>
-    <p> https://alexghoro-sistramad.herokuapp.com/procedures </p>
+    <h2> https://www.sistramad.uc.edu.ve </h2>
 
-    <p> Este correo es enviado automaticamente por el Sistema de Tramites Administrativos Docente (SISTRAMAD)</p>
+    <p> Este correo es enviado automáticamente por el Sistema de Trámites Administrativos Docente <strong>(SISTRAMAD)</strong></p>
     <p> No debe responder a este correo.</p>
   </body>
 </html>

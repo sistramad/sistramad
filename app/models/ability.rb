@@ -49,7 +49,7 @@ class Ability
 
     end
 
-    if user.has_role? :docente
+    if user.has_role? :test
       can :create, Reference
       can :update, Reference  
     end

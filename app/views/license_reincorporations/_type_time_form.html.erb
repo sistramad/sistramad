@@ -1,0 +1,30 @@
+<div class="col-md-12">
+  <br>
+  <div class="panel panel-primary">
+    <div class="panel-heading"> Selecione la duración de la Prórroga:  </div>
+    <div class="panel-body">
+      <%= form_for :license_info, :url => fill_info_delay_license_path(@procedure), html: {class: 'form'}  do |f| %>
+        <div class="form-group">
+          <div class="row">           
+             <div class="col-sm-offset-1 col-sm-5">
+              <%= f.collection_radio_buttons :license_period_id, LicensePeriod.all, :id, :name, {checked: LicensePeriod.first.id } do |cb| %>
+                <% cb.label(class: "radio") {cb.radio_button(class: "radio") + cb.text} %>
+              <% end %>
+            </div>
+          </div>
+          <div class='text-center'>
+            <%= submit_tag "Completar información", class: "btn btn-success btn-lg list" %>
+          </div>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

@@ -32,7 +32,6 @@ development:
   username: rails_dev
 
   # The password associated with the postgres role (username).
-  #password: luis23989
   password: Alpha
 #  password: Admin
 

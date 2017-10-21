@@ -12,7 +12,12 @@
             <%= render 'participants'%>
           <% end %>
         </div>
-        <%= link_to 'Regresar al plan', rotation_plan_path(@procedure) %>
+
+        <div class="text-center">
+          <%= link_to rotation_plan_path(@procedure), class: 'btn btn-info btn-md list' do %>
+            Regresar al plan
+          <% end %>
+        </div>
       </div>
     </div>
   </div>  

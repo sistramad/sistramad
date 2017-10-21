@@ -1,3 +1,4 @@
+
 class CreateLicenseTypes < ActiveRecord::Migration[5.1]
   def change
     create_table :license_types do |t|

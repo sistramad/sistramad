@@ -28,8 +28,9 @@ class ModifyWorkplan < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('C10')
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+      users = User.with_role :consejo_departamento
       send_emails(users,'need_to_approve')
       return true
     else
@@ -52,14 +53,18 @@ class ModifyWorkplan < SystemProcedure
     approve_step?('#3')
   end
 
-  def can_complete?(start_date)
-    steps_approved = true
-    self.procedure.steps.each do |step|
-      unless step.approved?
-        steps_approved = false
-      end
-    end
-    return steps_approved
+  def approve(start_date)
+    if can_be_approved?()
+      self.procedure.approve! 
+    end       
   end
+
+  def can_be_approved?()
+    step_approved?('#1') &&  step_approved?('#2')
+  end
+
+  def step_approved?(step_name)
+    self.procedure.steps.find_by(name: "#{step_name}").approved?
+  end 
   
 end

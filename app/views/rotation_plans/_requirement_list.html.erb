@@ -33,6 +33,9 @@
                 <%= document.name %> 
                 <i class="glyphicon glyphicon-save-file"></i> 
               <% end %>
+              <%= link_to edit_document_path(document) , class: 'btn btn-warning btn-xs list' do %>
+                  Editar 
+              <% end %>
             </td>
           <% else %>
             <td> 

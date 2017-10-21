@@ -16,45 +16,11 @@
 //= require jquery.Jcrop
 //= require app
 //= require bootstrap-sprockets
-//= require jquery.filer
-//= require magnific-popup
-//= require jquery.slimscroll
-//= require moment-with-locales
-//= require bootstrap-material-datetimepicker
-
-//= require_tree .
 
 
 
 $(document).ready(function() {
     $('.has-tooltip').tooltip();
-    $('#date-es').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        lang: 'es',
-        time: false,
-        weekStart: 0,
-        cancelText: 'Cancelar'
-    });
-    $('#date-es1').bootstrapMaterialDatePicker({
-        format: 'DD/MM/YYYY',
-        lang: 'es',
-        time: false,
-        weekStart: 0,
-        cancelText: 'Cancelar'
-    });
-});
-
-$(function () {
-    $('.popup-modal').magnificPopup({
-        type: 'inline',
-        preloader: false,
-        focus: '#username',
-        modal: true
-    });
-    $(document).on('click', '.popup-modal-dismiss', function (e) {
-        e.preventDefault();
-        $.magnificPopup.close();
-    });
 });
 
 $(function () {

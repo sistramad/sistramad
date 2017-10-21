@@ -74,21 +74,26 @@ Rails.application.configure do
   # config.active_job.queue_adapter = :delayed_job 
 
   #Datos Mail Luis
-=begin
+
   config.assets.quiet = true
 
   config.action_cable.url = "ws://localhost:3000/cable"
 
-  config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
-  config.action_mailer.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :user_name            => 'tgh.lfagundez@gmail.com',
-      :password             => 'luis23989',
-      :authentication       => "plain",
-      :enable_starttls_auto => true
-  }
+  config.action_mailer.delivery_method = :smtp
+  #Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
+  #para ejecutar el job: $ bundle exec rake jobs:work
+  #para ver la cola de jobs: $ Delayed::Job.all
 
-=end
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => 587,
+    :user_name            => ENV['gmail_username'],
+    :password             => ENV['gmail_password'],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }  
+  
+  config.active_job.queue_adapter = :delayed_job 
+
 end

@@ -22,6 +22,7 @@ class User < ApplicationRecord
   has_many :groups, through: :user_groups
 
   mount_uploader :avatar, AvatarUploader
+  crop_uploaded :avatar
 
   validates :username, :presence => true, :uniqueness => { :case_sensitive => false }
   validates :identification_document, :numericality => { only_integer: true, allow_nil: true }
@@ -34,6 +35,7 @@ class User < ApplicationRecord
   def self.find_group_members(code)
     User.joins(:groups).where(groups: {code: code})
   end
+  
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup #copia con el metodo .dup a conditions

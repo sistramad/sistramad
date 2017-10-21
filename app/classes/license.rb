@@ -22,7 +22,7 @@ class License < SystemProcedure
   def generate_steps(workflow)
     create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Jefe de Departamento")
     create_step(workflow, "#2", "Seleccionar el tipo y duración de la licencia.", "Jefe de Departamento")
-    create_step(workflow, "#3", "Evaluación de los recaudos del plan de rotación","Director de Departamento")
+    create_step(workflow, "#3", "Evaluación de los recaudos de la licencia.","Director de Departamento")
     create_step(workflow, "#4", "Generar constacia de aprobacón","")
     create_step(workflow, "#5", "Aprobar solicitud","")
   end
@@ -60,28 +60,19 @@ class License < SystemProcedure
     approve_step?('#4')
   end
 
-  def has_correct_number_of_participants?
-    return self.procedure.participants.size == 2
-  end
-
-  def approve(end_date)
-    
-    if can_be_approved?(end_date)
-      approve_procedure(end_date)
+  def approve(start_date)
+    if can_be_approved?(start_date)
+      approve_procedure(start_date)
     end       
   end
 
-  def can_be_approved?(end_date)
-    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && end_date_valid(end_date)
+  def can_be_approved?(start_date)
+    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && start_date_valid(start_date)
   end
 
   def step_approved?(step_name)
     self.procedure.steps.find_by(name: "#{step_name}").approved?
   end 
-
-  def end_date_valid(end_date)
-    end_date.present? && (Date.parse(end_date) >= Date.today)
-  end
 
   def start_date_valid(start_date)
     start_date.present? && (Date.parse(start_date) >= Date.today)
@@ -89,7 +80,8 @@ class License < SystemProcedure
 
   def approve_procedure(start_date)
     self.procedure.start_date = Date.parse(start_date)
-    if self.procedure.start_date.present?
+    self.procedure.end_date = self.procedure.start_date + (self.procedure.license_period.days).days
+    if self.procedure.start_date.present? && self.procedure.end_date.present?
       start_step('#5')
       approve_step?('#5')
       self.procedure.approve! 
@@ -101,8 +93,17 @@ class License < SystemProcedure
   end
 
   def can_be_delayed?
-    sub_procedures = self.procedure.sub_procedures.where(code: "T-SPL205", state: ["in_draft","in_progress"]) #Busca los tramites de prorroga hijos
+    sub_procedures = self.procedure.sub_procedures.where(code: "T-SPL205", state: ["in_draft","in_progress"]) #tramites de prorroga hijos
     return sub_procedures.size > 0 ? false : true
+  end
+
+  def can_be_reincorporated?
+    sub_procedures = self.procedure.sub_procedures.where(code: "T-SRL206", state: ["in_draft","in_progress"]) #tramites de reincorporacion hijos
+    if self.procedure.end_date.present?
+      return sub_procedures.size > 0 || (self.procedure.end_date + 30.days <= Date.today) ? false : true
+    else
+      return false
+    end
   end
 
   def set_group_resposible_for_step(step_name)

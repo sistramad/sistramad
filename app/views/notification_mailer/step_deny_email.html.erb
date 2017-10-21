@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Estimado usuario: </p>
+    
+    <h3><%= @owner_fullname %>, </h3>  
+    <p>
+      La siguiente notificación es para informarle que el trámite solicitado por usted ha sido denegado en el sistema por <%= @responsable_fullname %>. 
+      Éste será eliminado automáticamente.     
+    </p>
+
+    <p> https://www.sistramad.uc.edu.ve </p>
+    <p>  Este correo es enviado automáticamente por el Sistema de Trámites Administrativos Docente (SISTRAMAD) </p>
+    <p> No debe responder a este correo.</p>
+  </body>
+</html>

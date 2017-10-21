@@ -2,7 +2,8 @@ class AdminProceduresController < ApplicationController
   include EmailService
   include FactoryHelper
   require 'zip'
-  before_action :set_procedure, only: [:show, :complete, :approve_procedure]
+  before_action :set_procedure, only: [:show, :complete, :approve_procedure, :deny_step]
+  before_action :set_user
 
   def index
     @procedures = Procedure.where(state: 'in_progress').page(params[:page]).per(10)
@@ -43,6 +44,8 @@ class AdminProceduresController < ApplicationController
     procedure_instance = get_procedure_intance(@procedure)
 
     if procedure_instance.approve_initial_requirements?
+      email_data = {user: @procedure.user, procedure_name: @procedure.name, template: 'step_approved'}
+      send_email(email_data)
       flash[:success] = 'Los documentos han sido aprobados con éxito.'
       render 'show'
     else
@@ -67,7 +70,9 @@ class AdminProceduresController < ApplicationController
     step = Step.find(params[:step])
     if step.in_progress?
       step.approve!
-      send_email(@procedure.user, 'step_approved')
+      step.update(approved_at: Time.now)
+      email_data = {user: @procedure.user, procedure_name: @procedure.name, template: 'step_approved'}
+      send_email(email_data)
       flash[:success] = 'Paso aprobado con éxito!.'
     else
       flash[:error] = 'Imposible realizar ésta acción.'
@@ -76,11 +81,13 @@ class AdminProceduresController < ApplicationController
   end
 
   def approve_procedure
-    end_date = params[:end_date]
+    date = params[:date]
     procedure_instance = get_procedure_intance(@procedure)
-    procedure_instance.approve(end_date)
+    procedure_instance.approve(date)
 
     if @procedure.approved?
+      email_data = {owner: @procedure.user, procedure_name: @procedure.name, responsable: @user, template: 'procedure_approved'}
+      send_email(email_data)
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)
     else
@@ -95,7 +102,6 @@ class AdminProceduresController < ApplicationController
     procedure_instance = get_procedure_intance(@procedure)
 
     if @procedure.in_progress? and procedure_instance.can_complete?(start_date)
-      @procedure.approve!
       if start_date.present? 
         @procedure.start_date = start_date
         @procedure.save
@@ -144,10 +150,26 @@ class AdminProceduresController < ApplicationController
     end
   end
 
+  def deny_step
+    procedure = get_procedure_intance(@procedure)
+
+    owner = @procedure.user
+    responsable_fullname = "#{@user.first_name} #{@user.last_name}"
+
+    if procedure.deny_step(owner, responsable_fullname)
+      flash[:success] = 'Tŕamite denegado, los documentos no fueron aprobados.'
+      redirect_to admin_procedures_path
+    end
+  end
+
   private
 
     def set_procedure
       @procedure = Procedure.find(params[:id])
+    end
+
+    def set_user
+      @user = User.find(current_user.id)
     end
 
     def get_procedure_intance(procedure)

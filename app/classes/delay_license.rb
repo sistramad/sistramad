@@ -60,23 +60,19 @@ class DelayLicense < SystemProcedure
     approve_step?('#4')
   end
 
-  def approve(end_date)
-    if can_be_approved?(end_date)
-      approve_procedure(end_date)
+  def approve(start_date)
+    if can_be_approved?(start_date)
+      approve_procedure(start_date)
     end       
   end
 
-  def can_be_approved?(end_date)
-    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && end_date_valid(end_date)
+  def can_be_approved?(start_date)
+    step_approved?('#1') &&  step_approved?('#2') && step_approved?('#3') && step_approved?('#4') && start_date_valid(start_date)
   end
 
   def step_approved?(step_name)
     self.procedure.steps.find_by(name: "#{step_name}").approved?
   end 
-
-  def end_date_valid(end_date)
-    end_date.present? && (Date.parse(end_date) >= Date.today)
-  end
 
   def start_date_valid(start_date)
     start_date.present? && (Date.parse(start_date) >= Date.today)
@@ -84,12 +80,19 @@ class DelayLicense < SystemProcedure
 
   def approve_procedure(start_date)
     self.procedure.start_date = Date.parse(start_date)
-    if self.procedure.start_date.present?
+    self.procedure.end_date = self.procedure.start_date + (self.procedure.license_period.days).days
+    if self.procedure.start_date.present? && self.procedure.end_date.present?
+      update_parent_procedure_end_date()
       start_step('#5')
       approve_step?('#5')
       self.procedure.approve! 
     end
-  end 
+  end
+
+  def update_parent_procedure_end_date()
+    self.procedure.parent.end_date = self.procedure.end_date
+    #BUSCAR COMO HACER PARA QUE LO ACTUALICE
+  end
 
   def set_group_resposible_for_step(step_name)
     step = self.procedure.steps.find_by(name: "#{step_name}")

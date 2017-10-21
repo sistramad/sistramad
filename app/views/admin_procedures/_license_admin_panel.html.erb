@@ -34,8 +34,8 @@
             <% if @procedure.in_progress? %>
               <%= form_tag approve_procedure_admin_procedure_path(@procedure) do %>
                 <div class="field", id="sandbox-container">
-                  <label for="star_date">Fecha de Finalización</label>
-                  <%= text_field_tag :end_date %>
+                  <label for="star_date">Fecha de inicio:</label>
+                  <%= text_field_tag :date %>
                 </div>
                 <div class='text-center'>
                   <%= submit_tag "Aprobar", class: "btn btn-success btn-lg list" %>

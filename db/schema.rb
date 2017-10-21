@@ -15,20 +15,6 @@ ActiveRecord::Schema.define(version: 20171002004037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "attachments", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "document_id"
-    t.string   "link"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-    t.integer  "joint_plan_id"
-    t.index ["joint_plan_id"], name: "index_attachments_on_joint_plan_id", using: :btree
-  end
-
   create_table "countries", force: :cascade do |t|
     t.string "name", null: false
     t.string "capital", null: false
@@ -198,19 +184,6 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.integer "procedure_id"
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "document_id"
-    t.integer  "jointplan_id"
-    t.integer  "applicant_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "file_file_name"
-    t.string   "file_content_type"
-    t.integer  "file_file_size"
-    t.datetime "file_updated_at"
-  end
-
   create_table "roles", force: :cascade do |t|
     t.string "name", null: false
     t.string "resource_type"
@@ -326,11 +299,6 @@ ActiveRecord::Schema.define(version: 20171002004037) do
   add_foreign_key "documents", "procedures"
   add_foreign_key "documents", "users"
   add_foreign_key "employees", "users"
-  add_foreign_key "extensions", "attachments"
-  add_foreign_key "extensions", "joint_plans"
-  add_foreign_key "extensions", "users"
-  add_foreign_key "joint_plans", "users"
-  add_foreign_key "notifications", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
   add_foreign_key "steps", "groups"
   add_foreign_key "steps", "workflows"

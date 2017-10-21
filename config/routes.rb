@@ -1,4 +1,3 @@
-require 'sidekiq/web'
 Rails.application.routes.draw do
 
   resources :groups
@@ -30,6 +29,8 @@ Rails.application.routes.draw do
       get :download_all_documents
       get :check_initial_requirements
       post :save_opinion
+      get :deny_step
+      post :deny_step
     end
   end
 
@@ -83,11 +84,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :license_reincorporation do
+  resources :license_reincorporations do
     member do
       get :validate
       get :show_requirements
-      post :fill_info
     end
   end
 

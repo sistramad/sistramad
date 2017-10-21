@@ -10,26 +10,32 @@
  
           <% @document = find_document_by_code(@procedure, "D-PFE")%>
           <% step = @procedure.steps.find_by(name: "#3")%>
-          <% unless @document.nil? or step.state != 'in_progress'%>
+          <% if @document and  step.in_progress? and current_user.has_role?(:consejo_facultad)%>
             <p><li> <%= link_to "Aprobar #{@document.name}", show_document_admin_procedure_path(document_code: @document.code, step: '#3') %> </li></p>
           <% end %>
 
           <% @document = find_document_by_code(@procedure, "CDAP")%>
+          
           <% if @document.nil? %>
-            <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+            <% if current_user.has_role?(:consejo_departamento) and steps_approved?(%w[#1 #2 #3])%>
+              <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+            <% end %>
           <% else %>
             <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
             <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
           <% end %>
+
+          <!-- 
           <% step = @procedure.steps.find_by(name: "#4")%>
           <% unless step.state != 'in_progress'%>
             <p> <li> <%= link_to "Aprobar constancia de aprobación.", show_document_admin_procedure_path(document_code: 'CDAP', step: '#4')%> </li> </p>
           <% end %>
+          -->
          
           <br>
           <div class='text-center'>
             <% if @procedure.in_progress? %>
-              <%= link_to complete_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
+              <%= link_to approve_procedure_admin_procedure_path(@procedure) , class: 'btn btn-success btn-lg list' do %>
                 <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
               <% end %>
             <% end %>
