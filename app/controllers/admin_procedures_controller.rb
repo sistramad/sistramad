@@ -44,6 +44,8 @@ class AdminProceduresController < ApplicationController
     procedure_instance = get_procedure_intance(@procedure)
 
     if procedure_instance.approve_initial_requirements?
+      email_data = {user: @procedure.user, procedure_name: @procedure.name, template: 'step_approved'}
+      send_email(email_data)
       flash[:success] = 'Los documentos han sido aprobados con éxito.'
       render 'show'
     else
@@ -68,6 +70,7 @@ class AdminProceduresController < ApplicationController
     step = Step.find(params[:step])
     if step.in_progress?
       step.approve!
+      step.update(approved_at: Time.now)
       email_data = {user: @procedure.user, procedure_name: @procedure.name, template: 'step_approved'}
       send_email(email_data)
       flash[:success] = 'Paso aprobado con éxito!.'

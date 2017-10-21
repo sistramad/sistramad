@@ -56,6 +56,8 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
   #Configuracion para mandar correos en segundo plano con active_job y 'delayed_job_active_record' gem
   #para ejecutar el job: $ bundle exec rake jobs:work
+  #para ver la cola de jobs: $ Delayed::Job.all
+
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,

@@ -8,7 +8,7 @@
       <ul>
         <h4>
           <% step = @procedure.steps.find_by(name: "#1")%>
-          <% unless step.state != 'in_progress'%>
+          <% if step.in_progress? and current_user.has_role?(:asuntos_profesorales)%>
             <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
           <% end %>
           
@@ -26,7 +26,7 @@
 
           <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% if @document.nil? %>
-            <% if current_user.has_role?(:consejo_departamento) %>
+            <% if current_user.has_role?(:consejo_departamento) and steps_approved?(%w[#1 #2 #3])%>
               <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
             <% end %>
           <% else %>

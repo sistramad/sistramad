@@ -30,7 +30,7 @@ class NotificationMailer < ApplicationMailer
     @owner_fullname = "#{owner.first_name} #{owner.last_name}"
     @responsable_fullname = "#{responsable.first_name} #{responsable.last_name}"
     @procedure_name = procedure_name
-    mail(to: @owner.email, subject: 'Notificación de solicitud')
+    mail(to: @owner.email, subject: 'Notificación de solicitud: Aprobada!')
   end
 
 end

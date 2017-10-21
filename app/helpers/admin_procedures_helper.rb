@@ -19,4 +19,15 @@ module AdminProceduresHelper
         return 'license_reincorporations/basic_info'
     end
   end
+
+  def steps_approved?(steps)
+    steps.each do |step|
+      unless @procedure.steps.find_by(name: step).approved?
+        return false
+      end
+    end
+    return true
+  end
+
+
 end
