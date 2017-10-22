@@ -22,18 +22,17 @@
                     <div class="field">
                       <div class="attachments">
                         <div class="file_field" style="width: 75%;padding-top: 5px">
-                          <%= x.file_field :file,class: "filestyle", "data-buttonName"=>"btn-primary",
+                          <%= x.file_field :file, class: "filestyle", "data-buttonName"=>"btn-primary",
                                            "data-buttonText"=>"Seleccionar Archivo",
                                            "data-iconName"=>"glyphicon glyphicon-paperclip",
                                            "data-buttonBefore"=>"true"%>
                           <%= x.hidden_field :document_id, :value => document.id%>
                         </div>
-
                       </div>
                       <% if document.id == 5 %>
                           <%= fields_for 'joint_plan', @joint_plan do |y| %>
 
-                    <b><li style="margin-top: 5px">Ingrese Fecha de Inicio y Fin del Plan</li></b>
+                      <b><li style="margin-top: 5px">Ingrese Fecha de Inicio y Fin del Plan</li></b>
                           <div class = "field" style="margin-top: 10px; display: flex">
 
                             <div class="input-group" id="dates">
