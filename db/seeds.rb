@@ -565,6 +565,4 @@ JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1).save!
 
 JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1).save!
 
-
-
-
+JointPlan.new(:name => "Plan Conjunto",:user_id => 14,:status => 1).save!

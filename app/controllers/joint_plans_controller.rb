@@ -114,11 +114,10 @@ class JointPlansController < ApplicationController
     @extension = Extension.new
     @document = JointplanDocument.find(16)
     @plan_id = JointPlan.where(:user_id => current_user.id).pluck(:id)
-
   end
 
   def inform
-    @joint_plan = Jointplan.new
+    @joint_plan = JointplanDocument.new
     @document = JointplanDocument.find(16)
     @attachment = Attachment.new
     @plan_id = JointPlan.where(:user_id => current_user.id).pluck(:id)
