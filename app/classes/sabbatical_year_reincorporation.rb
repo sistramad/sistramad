@@ -2,7 +2,7 @@ class SabbaticalYearReincorporation < SystemProcedure
   include EmailService
  
   def initialize     
-    @name = "Reincorporación luego del disfrute del Año Sabatico"
+    @name = "Reincorporación luego del disfrute del Año Sabático"
     @code = "T-AS105"
   end
   

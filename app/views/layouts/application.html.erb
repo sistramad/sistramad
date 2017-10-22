@@ -61,20 +61,22 @@
           <ul class="sidebar-menu">
             <li class="header">TR&Aacute;MITES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
+            
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
+
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
-            <li class="active">
+
+            <li>
               <%= link_to special_formation_procedures_path(code: "T-SPF200") do %>
                 <i class="fa fa-circle-o"></i>
                 <span> Formación Especial</span></a>
-                 
               <% end %>
             <li>
+
             <li>
               <%= link_to rotation_plans_path(code: "T-SPR201") do %>
                 <i class="fa fa-circle-o"></i>
                 <span> Plan de Rotación</span></a>
-                  
               <% end %>
             <li>
 
@@ -89,9 +91,9 @@
             
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
               </a>
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-circle"></i>Solicitar Nuevo Traslado</a></li>
@@ -106,8 +108,8 @@
             <li class="treeview">
                 <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
                   <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
                 </a>
                 <ul class="treeview-menu">
                   <% if JointPlan.where(user_id: current_user.id).empty? %>
@@ -138,19 +140,20 @@
             <% if current_user.has_role? :asuntos %>
                 <li><%= link_to joint_plans_path do%>
                       <i class="fa fa-circle-o"></i>
-                      Ver Solicitudes
+                      <span>Ver Solicitudes</span></a>
                   <% end %></li>
                 <li><%= link_to inform_list_joint_plans_path do%>
                       <i class="fa fa-circle-o"></i>
-                      Informes
+                      <span>Informes</span></a>
                   <% end %></li>
             <% end %>
             <% if current_user.has_role? :decano %>
                 <li><%= link_to joint_plans_path do%>
                     <i class="fa fa-circle-o"></i>
-                    Ver Solicitudes
+                    <span>Ver Solicitudes</span></a>
                 <% end %></li>
             <% end %>
+            
           </ul>
           <!-- /.sidebar-menu -->
         </section>

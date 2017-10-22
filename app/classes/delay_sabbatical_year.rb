@@ -2,7 +2,7 @@ class DelaySabbaticalYear < SystemProcedure
   include EmailService
 
   def initialize     
-    @name = "Diferimiento de Año Sabatico"
+    @name = "Diferimiento de Año Sabático"
     @code = "T-AS104"
   end
   

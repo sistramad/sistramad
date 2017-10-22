@@ -1,4 +1,5 @@
 class SystemProcedure
+  include EmailService
 
   attr_accessor :name
   attr_accessor :code
@@ -37,5 +38,11 @@ class SystemProcedure
     step.update(updated_at: Time.now)
     step.in_progress?
   end 
+
+  def deny_step(owner, responsable_fullname)
+    email_data = {owner: owner, responsable: responsable_fullname, template: 'step_deny'}
+    send_email(email_data)
+    self.procedure.destroy
+  end
 
 end

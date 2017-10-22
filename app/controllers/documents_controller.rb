@@ -84,7 +84,7 @@ private
 
   def redirect_to_specefic_show_route(code, document)
     case code
-      when 'T-AS100' || 'T-AS101' || 'T-AS102' || 'T-AS103' || 'T-AS104' || 'T-AS105' then 
+      when 'T-AS100' , 'T-AS101' , 'T-AS102' , 'T-AS103' , 'T-AS104' , 'T-AS105' then 
         redirect_to procedure_path(@document.procedure_id), notice: "El documento ha sido actualizado."       
       when 'T-SPF200' then redirect_to special_formation_procedure_plan_path(@document.procedure_id), notice: "El documento ha sido actualizado."
       when 'T-SPR201' then  redirect_to rotation_plan_path(@document.procedure_id), notice: "El documento ha sido actualizado."
