@@ -15,6 +15,7 @@ User.create!([
   {id: 2,username: "test", first_name: "", middle_name: "", last_name: "", genre: "m", identification_document: "", birthday: nil, email: "test@test.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-01-17 00:01:48", sign_in_count: 14, current_sign_in_at: "2017-10-16 08:25:06", last_sign_in_at: "2017-08-24 03:15:05", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil},
   {id: 28,username: "testing", first_name: "testing", middle_name: "x", last_name: "testing", genre: "m", identification_document: "7654567", birthday: "1962-10-21", email: "testing@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-10-21 04:02:30", sign_in_count: 1, current_sign_in_at: "2017-10-21 04:03:17", last_sign_in_at: "2017-10-21 04:03:17", current_sign_in_ip: "::1", last_sign_in_ip: "::1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil}
 ])
+=begin
 Role.create!([
   {name: "admin", resource_id: nil, resource_type: nil},
   {name: "test", resource_id: nil, resource_type: nil},
@@ -314,3 +315,4 @@ Review.create!([
   {name: "Verificar Aval Academico y Presupuestario", comment: "ok", files_reviewed: true, approval: true, workflow_step_id: 158, user_id: 14},
   {name: "Analisis y Remisión de juicio a Consejo de Facultad", comment: "ok", files_reviewed: true, approval: true, workflow_step_id: 159, user_id: 14}
 ])
+=end
