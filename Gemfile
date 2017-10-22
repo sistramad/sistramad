@@ -129,6 +129,9 @@ gem 'delayed_job_active_record'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
 
+#crea un dump de la base de datos esto para heroku
+gem 'seed_dump'
+
 group :development, :test do
   gem 'railroady'
 end
