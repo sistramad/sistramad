@@ -52,10 +52,12 @@ class FacultyTransfer < Workflow
     end
 
     def approve_final_step
+      send_email(self.professors_transfer.user,'approve',self.professors_transfer)
       approve_final?(6)
     end
 
     def decline_final_step
+      send_email(self.professors_transfer.user, 'decline',self.professors_transfer)
       decline_final?(6)
     end
 

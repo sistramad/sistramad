@@ -13,6 +13,18 @@ class NotificationMailer < ApplicationMailer
       @transfer = transfer
       mail(to: @user.email, subject: 'Notificación de aprobación de solicitud')
     end
+
+    def approve_email_transfer(user,transfer)
+      @user = user
+      @transfer = transfer
+      mail(to: @user.email, subject: 'Notificación de aprobación completa de solicitud')
+    end
+
+    def decline_email_transfer(user,transfer)
+      @user = user
+      @transfer = transfer
+      mail(to: @user.email, subject: 'Notificación de declinación de solicitud')
+    end
   
     def step_approved_email_transfer(user)
       @user = user

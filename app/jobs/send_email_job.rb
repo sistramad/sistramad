@@ -14,6 +14,10 @@ class SendEmailJob < ApplicationJob
           NotificationMailer.initial_validation_success_email_transfer(@user,@transfer).deliver_later
         when 'need_to_approve'  then
           NotificationMailer.need_to_approve_email_transfer(@user,@transfer).deliver_later
+        when 'approve'  then
+          NotificationMailer.approve_email_transfer(@user,@transfer).deliver_later  
+        when 'decline'  then
+          NotificationMailer.decline_email_transfer(@user,@transfer).deliver_later
         when 'step_approved'  then
         NotificationMailer.step_approved_email_transfer(@user).deliver_later
       end
