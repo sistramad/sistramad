@@ -559,11 +559,10 @@ document = JointplanDocument.new(:name => 'Informe Final' , :typedoc =>1)
 document.save!
 document = JointplanDocument.new(:name => 'Carta de Aceptación', :typedoc =>0)
 document.save!
-joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1)
-joint_plan.save!
 
-joint_plan = JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1)
-joint_plan.save!
+JointPlan.new(:name => "Plan Conjunto",:user_id => 3,:status => 1).save!
+
+JointPlan.new(:name => "Plan Conjunto",:user_id => 4,:status => 1).save!
 
 
 

@@ -97,21 +97,18 @@ gem 'magnific-popup-rails', '~> 1.1.0'
 gem 'jcrop-rails-v2'
 
 gem 'redis'
-gem 'sidekiq'
+#gem 'sidekiq'
 gem 'sinatra', github:"sinatra/sinatra"
 gem 'rails_semantic_logger'
 gem 'mini_magick'
 gem 'chronic'
 gem 'whenever', require: false
-gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 
 # se reemplazo el servidor de web-brick a puma 
 gem "puma"
 # para generar pdf
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
-# Para descargar adjuntos comprimidos
-gem 'rubyzip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

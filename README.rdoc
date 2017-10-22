@@ -28,4 +28,34 @@ Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
 
 
-#test
+-------------------------------
+Para recrear la base de Datos:
+
+To drop database:
+rake db:drop
+
+Then for creating database:
+rake db:create
+
+For migrations:
+rake db:migrate
+
+For seed:
+rake db:seed
+------------------------------
+
+Para redis:
+
+Download, extract and compile Redis with:
+
+$ wget http://download.redis.io/releases/redis-4.0.2.tar.gz
+$ tar xzf redis-4.0.2.tar.gz
+$ cd redis-4.0.2
+$ make
+
+The binaries that are now compiled are available in the src directory. Run Redis with:
+
+$ src/redis-server
+-----------------------------------
+para ejecutar el job: $ bundle exec rake jobs:work
+para ver la cola de jobs: $ Delayed::Job.all

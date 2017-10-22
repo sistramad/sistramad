@@ -15,6 +15,22 @@ ActiveRecord::Schema.define(version: 20171002004037) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "attachments", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "document_id"
+    t.string "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.bigint "joint_plan_id"
+    t.index ["document_id"], name: "index_attachments_on_document_id"
+    t.index ["joint_plan_id"], name: "index_attachments_on_joint_plan_id"
+    t.index ["user_id"], name: "index_attachments_on_user_id"
+  end
+
   create_table "countries", force: :cascade do |t|
     t.string "name", null: false
     t.string "capital", null: false
@@ -86,6 +102,23 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.index ["faculty_id"], name: "index_employees_faculties_on_faculty_id"
   end
 
+  create_table "extensions", id: :serial, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "joint_plan_id"
+    t.integer "attachment_id"
+    t.boolean "approved"
+    t.date "new_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.index ["attachment_id"], name: "index_extensions_on_attachment_id"
+    t.index ["joint_plan_id"], name: "index_extensions_on_joint_plan_id"
+    t.index ["user_id"], name: "index_extensions_on_user_id"
+  end
+
   create_table "faculties", force: :cascade do |t|
     t.string "name", null: false
     t.string "acronym", null: false
@@ -103,6 +136,25 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "joint_plans", force: :cascade do |t|
+    t.string "name"
+    t.bigint "user_id"
+    t.integer "status"
+    t.date "begin_plan"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "end_plan"
+    t.index ["user_id"], name: "index_joint_plans_on_user_id"
+  end
+
+  create_table "jointplan_documents", force: :cascade do |t|
+    t.string "name"
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "typedoc"
   end
 
   create_table "license_infos", force: :cascade do |t|
@@ -133,6 +185,17 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "item_type"
+    t.bigint "item_id"
+    t.boolean "viewed", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_type", "item_id"], name: "index_notifications_on_item_type_and_item_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -182,6 +245,22 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "procedure_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "document_id"
+    t.bigint "jointplan_id"
+    t.integer "applicant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "file_file_name"
+    t.string "file_content_type"
+    t.integer "file_file_size"
+    t.datetime "file_updated_at"
+    t.index ["document_id"], name: "index_reports_on_document_id"
+    t.index ["jointplan_id"], name: "index_reports_on_jointplan_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -296,9 +375,15 @@ ActiveRecord::Schema.define(version: 20171002004037) do
     t.integer "procedure_id"
   end
 
+  add_foreign_key "attachments", "joint_plans"
   add_foreign_key "documents", "procedures"
   add_foreign_key "documents", "users"
   add_foreign_key "employees", "users"
+  add_foreign_key "extensions", "attachments"
+  add_foreign_key "extensions", "joint_plans"
+  add_foreign_key "extensions", "users"
+  add_foreign_key "joint_plans", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "reference_lists", "\"references\"", column: "reference_id"
   add_foreign_key "steps", "groups"
   add_foreign_key "steps", "workflows"
