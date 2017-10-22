@@ -73,8 +73,7 @@ Document.create!([
   {name: "Copia Certificada Titulo Universitario", status: nil},
   {name: "Motivación Razonada para el Traslado", status: nil},
   {name: "Certificación Expedida de Secretario Universidad de Origen", status: nil},
-  {name: "Copia de Oficio de Designació
-  n como Docente", status: nil},
+  {name: "Copia de Oficio de Designación como Docente", status: nil},
   {name: "Copia de Oficio de Aprobación de Traslado", status: nil},
   {name: "Copia de Oficio de Aprobacion de Cambio en Dedicacion", status: nil},
   {name: "Oficio del Aval del Departamento", status: nil},
@@ -283,29 +282,6 @@ RequestWorkflow.create!([
   {name: "Workflow Traslado entre Universidades", description: "Flujo principal del trámite de Traslado entre Universidades", professors_transfer_id: 115, is_active: true, is_completed: false},
   {name: "Workflow Traslado entre Facultades", description: "Flujo principal del trámite de Traslado entre Facultades", professors_transfer_id: 132, is_active: true, is_completed: false},
   {name: "Workflow Cambio de Dedicación Temporal", description: "Flujo principal del trámite de Cambio de Dedicación Temporal", professors_transfer_id: 133, is_active: true, is_completed: false}
-])
-Role::HABTM_Users.create!([
-  {user_id: 1, role_id: 1},
-  {user_id: 2, role_id: 2},
-  {user_id: 3, role_id: 1},
-  {user_id: 3, role_id: 2},
-  {user_id: 4, role_id: 2},
-  {user_id: 8, role_id: 1},
-  {user_id: 8, role_id: 2},
-  {user_id: 13, role_id: 3},
-  {user_id: 13, role_id: 4},
-  {user_id: 14, role_id: 3},
-  {user_id: 14, role_id: 5},
-  {user_id: 8, role_id: 3},
-  {user_id: 19, role_id: 5},
-  {user_id: 20, role_id: 6},
-  {user_id: 21, role_id: 9},
-  {user_id: 22, role_id: 8},
-  {user_id: 23, role_id: 7},
-  {user_id: 24, role_id: 10},
-  {user_id: 19, role_id: 3},
-  {user_id: 15, role_id: 3},
-  {user_id: 28, role_id: 2}
 ])
 WorkflowStep.create!([
   {name: "Analisis y Remisión de juicio de Asuntos Profesorales.", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 4, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "AP"},
