@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t('formalities_master') %></div>
+      <div class="panel-body">
+        <%= simple_form_for @formalities_master, :html => {:multipart => true, :class => "form-horizontal"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input_sistramad
+                            } do |f| %>
+            <%= f.error_notification %>
+
+            <% if @formalities_master.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@formalities_master.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                  <ul>
+                    <% @formalities_master.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <%= f.input :name, :label => t("name"), :placeholder => t("name") %>
+
+                <%= f.input :description, :label => t("description"), :placeholder => t("description") %>
+
+                <%= f.input :table_manager, :label => t("table_manager"), :placeholder => t("table_manager") %>
+
+                <%= f.input :isactive, :label => t("isactive"), :wrapper => :multi_select_sistramad %>
+              </div>
+              <div class="col-md-12">
+                <%= f.button :submit, value: t('form.send'), class: ' btn btn-info' %>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

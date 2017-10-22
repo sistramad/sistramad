@@ -1,0 +1,49 @@
+<h1><%=  t('index.listing_formalities_masters') %></h1>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to t('index.listing_formalities_masters'), formalities_masters_path %></li>
+  <li><%= link_to t('index.new_formalities_master'), new_formalities_master_path %></li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th><%= t('name') %></th>
+      <th><%= t('description') %></th>
+      <th><%= t('table_manager') %></th>
+      <th><%= t('isactive') %></th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @formalities_masters.each do |formalities_master| %>
+        <tr>
+          <td><%= formalities_master.name %></td>
+          <td><%= formalities_master.description %></td>
+          <td><%= formalities_master.table_manager %></td>
+          <td><%= formalities_master.isactive %></td>
+          <td>
+            <div class="btn-toolbar">
+              <div class="btn-group btn-group-xs">
+                <%= link_to t('index.show'), formalities_master, class: 'btn btn-info list' %>
+                <%= link_to t('index.edit'), edit_formalities_master_path(formalities_master), class: 'btn btn-primary list' %>
+                <%= link_to t('index.destroy'), formalities_master, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger list' %>
+              </div>
+            </div>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @formalities_masters %></br>
+<%= page_entries_info @formalities_masters %>
+
+<br><br>
+
+<%= link_to new_formalities_master_path, class: 'btn btn-info btn-sm list' do %>
+    <i class="glyphicon glyphicon-plus"></i> <%= t('index.new_formalities_master') %>
+<% end %>

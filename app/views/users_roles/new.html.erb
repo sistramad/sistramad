@@ -1,0 +1,10 @@
+<h1> Nuevo Rol para Usuario </h1>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li><%= link_to 'Lista de Asociaciones Usuario/Rol ', users_roles_path %></li>
+
+</ul>
+
+<%= render 'form' %>
+
+<%= link_to t('back'), users_roles_path, class: 'btn btn-info' %>

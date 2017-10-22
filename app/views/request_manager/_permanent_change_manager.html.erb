@@ -1,0 +1,88 @@
+<div class="col-md-6">
+<br>
+  <div class="panel panel-primary">
+    <div 
+      class="panel-heading">Acciones disponibles:
+    </div>
+    <div class="panel-body">
+      <ul>
+        <h4>
+        <% actions = true %>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number: 1)%>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number: 1).role.name%>
+          <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
+          <% actions = false %>
+          <p> <li> <%= link_to "Aprobar recaudos iniciales.", initial_requirements_request_manager_path %> </li> </p>
+          <% end %>
+          
+          <% step = @professors_transfer.workflow_steps.find_by(step_number: 2)%>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:2).role.name %>
+          <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
+            <% actions = false %>
+            <p><li><%= link_to "Aprobacion de Jefe de Departamento y Remisión de juicio a Decano.", new_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
+          <% end %>
+          
+          <% step = @professors_transfer.workflow_steps.find_by(step_number: 3) %>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:3).role.name%>
+          <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
+          <% actions = false %>
+          <p><li><%= link_to "Verificación de Aval Academico y Presupuestario.",  new_aval_and_budget_revision_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
+          <% end %>
+          
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:4) %>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:4).role.name%>
+          <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
+          <% actions = false %>
+          <p><li><%= link_to "Analisis y Remisión de juicio a Consejo de Facultad.", new_review_path(workflow_step_id: step.id,id:@professors_transfer.id)  %></li></p>
+          <% end %>
+
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:5)%>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:5).role.name%>
+          <% if(step.AP?) %>
+            <% if(current_user.has_role?responsable.to_sym) || (current_user.id == @professors_transfer.user_id) %>
+              <% actions = false %>
+              <% @doc = Document.find_by(name:  'Copia de Oficio de Aprobacion de Cambio en Dedicacion)%>
+              <% @document = Attachment.where('process_id = ? and document_id = ?',@professors_transfer.id,@doc.id).first%>
+              <% if @document.nil? %>
+              <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_request_manager_path(professors_transfer: @professors_transfer, format: :pdf) %> </li></p>
+              <% else %>
+                <p><li> <%= link_to "Ver constancia de aprobación.", @document.file.url %> </li></p>
+                <p><h4>Si desea puede cerrar la Solicitud dando click al siguiente enlace:<h4/></p>
+                <p><li> <%= link_to "Cerrar Solicitud", close_request_manager_path(id:@professors_transfer.id) %> </li></p>
+              <% end %>
+            <% end %>
+          <% end %> 
+
+          <br>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number:5)%>
+          <% responsable = @professors_transfer.workflow_steps.find_by(step_number:5).role.name%>
+          <div class='text-center'>
+          <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
+            <% actions = false %>
+            <%= link_to complete_request_manager_path(@professors_transfer) , class: 'btn btn-success btn-lg list' do %>
+              <i class="glyphicon glyphicon-cog"></i> Aprobar solicitud
+            <% end %>
+            <%= link_to decline_request_manager_path(id:@professors_transfer.id) , class: 'btn btn-danger btn-lg list' do %>
+              <i class="glyphicon glyphicon-cog"></i> Declinar o Rechazar Solicitud
+            <% end %>
+          <% end %>
+        </div>
+
+        <% if actions %>
+          <p><h4>No existen Acciones disponibles<h4/></p>
+        <% end %>
+        </h4>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<div class="col-md-12">
+<% step = @professors_transfer.workflow_steps.find_by(step_number:5)%>
+<% responsable = @professors_transfer.workflow_steps.find_by(step_number:5).role.name%>
+<% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
+    <%= render 'show_requirements' %>
+    <%= render 'reviews/show_reviews' %>
+<% end %>
+</div>

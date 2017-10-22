@@ -1,0 +1,6 @@
+<p id="notice"><%= notice %></p>
+<% if (@professors_transfer.process_type.id == 1)%>
+    <%= render 'form' %>
+<% else %>
+    <%= render 'form_change' %>
+<% end %>    

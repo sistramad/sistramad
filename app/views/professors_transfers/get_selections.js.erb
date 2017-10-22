@@ -1,0 +1,8 @@
+$('.from_selection').empty();
+$('.to_selection').empty();
+<% @reference_lists.each do |reference_lists| %>
+  $('.from_selection').append($('<option value="<%= reference_lists.id %>"><%= reference_lists.name %></option>'));
+<% end %>
+<% @reference_lists.each do |reference_lists| %>
+  $('.to_selection').append($('<option value="<%= reference_lists.id %>"><%= reference_lists.name %></option>'));
+<% end %>

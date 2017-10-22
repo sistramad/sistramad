@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Estimado usuario: </p>
+    <h1><%= @user.first_name%> <%= @user.last_name %>, </h1>  
+    <p>
+    los recaudos iniciales de su tramite de <%= @transfer.process_type.name %> fueron admitidos por el sistema y pasaran al proceso de evaluación,
+    este atento a su correo, recibira notificaciones en cuanto sean aprobados, támbien puede consultar el estado
+    de su solicitud haciendo click en el siguiente enlace:  
+    </p>
+    <p> http://localhost:3000/professors_transfers/status?locale=es </p>
+
+    <p> Este correo es enviado automaticamente por el Sistema de Tramites Administrativos Docente (SISTRAMAD)</p>
+    <p> No debe responder a este correo.</p>
+  </body>
+</html>

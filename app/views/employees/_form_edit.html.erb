@@ -30,9 +30,11 @@
                 <%= f.association :type_employee, :label => t("type_employee.short"), :include_blank => false, collection: ReferenceList.type_employee %>
                 <%= f.association :scale_classification, :label => t("scale_classification.short"), :include_blank => false, collection: ReferenceList.scale_classification %>
                 <%= f.association :scale_category, :label => t("scale_category.short"), :include_blank => false, collection: ReferenceList.scale_category %>
+                <%= f.association :dedication_classification, :label => 'Dedicacion', :include_blank => false, collection: ReferenceList.dedication_classification %>
+                <%= f.input :dedication_start_date, start_year: Date.today.year - 30, end_year: Date.today.year , :label => 'Fecha de Inicio en la Dedicación' %>
               </div>
               <div class="col-md-12">
-                <%= f.button :submit, value: t('form.send'), class: 'form-control btn btn-info' %>
+                <%= f.button :submit, value: t('form.send'), class: 'btn btn-info' %>
               </div>
             </div>
         <% end %>

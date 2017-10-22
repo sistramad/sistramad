@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"> </script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -28,16 +29,28 @@
         <section class="sidebar">
 
           <!-- Sidebar user panel (optional) -->
+          <% if !current_user.nil?  %>
           <div class="user-panel">
             <div class="pull-left image">
-              <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
+              <% if current_user.avatar.present? %>
+                <%= image_tag (current_user.avatar.url), :class=>"img-circle" , :alt=>"User Image"%>-->
+              <% else %>
+                <% if current_user.genre == "m"%>
+                <%= image_tag "user2-160x160.jpg" , :class=>"img-circle", :alt=>"User Image"%>
+                <% else %>
+                <%= image_tag "female_user.png" , :class=>"img-circle", :alt=>"User Image"%>
+                <% end %>
+              <% end %> 
             </div>
             <div class="pull-left info">
-              <p>Alexander Pierce</p>
+            <% if user_signed_in? %>
+              <div><%= current_user.first_name %> <%= current_user.last_name %></div>
+            <% end %>
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+              <a href="#"><i class="fa fa-circle text-success"></i>en linea</a>
             </div>
           </div>
+          <% end %>
 
           <!-- search form (Optional) -->
           <form action="#" method="get" class="sidebar-form">
@@ -60,21 +73,114 @@
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Formación Especial</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Licencias</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan de Rotación</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Traslado</span></a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
-
-
             <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
+              <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle"></i>Nuevo Plan Conjunto</a></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
+               <% if (ProfessorsTransfer.where('process_type = ? and user_id =?',1,current_user.id).empty? && (current_user.has_role? :docente)) %>
+                      <li><%= link_to new_attachment_path(:tramite => 1),method: :get do%>
+                            <i class="fa fa-circle"></i>
+                            Solicitar Traslado
+                      <% end %>
+                      </li>
+                <% else %>
+                  <% if ProfessorsTransfer.where('process_type = ? and user_id =?',1,current_user.id).present? %>
+                    <% if ProfessorsTransfer.where('process_type = ? and user_id =? and status = ?',1,current_user.id,'DR').present? %>
+                        <li><%= link_to new_attachment_path(:tramite => 1 ),method: :get do%>
+                                <i class="fa fa-circle"></i>
+                                Enviar Recaudos Faltantes
+                        <% end %>
+                          </li>
+                    <% elsif ProfessorsTransfer.where('process_type = ? and user_id =? and status = ?',1,current_user.id,'CL').present? %>
+                        <li><%= link_to new_attachment_path(:tramite => 1 ),method: :get do%>
+                                <i class="fa fa-circle"></i>
+                                Solicitar Traslado
+                        <% end %>
+                          </li>
+                    <% end %>
+                    <li><%= link_to status_professors_transfers_path ,method: :get do%>
+                        <i class="fa fa-circle"></i>
+                        Estatus de Traslado
+                  <% end %>
+                    </li> 
+                  <% end %> 
+                <% end %>
+                <% if (ProfessorsTransfer.where('process_type = ? and user_id =?',3,current_user.id).empty? && (current_user.has_role? :docente) && (current_user.employee.present?))%>
+                <li><%= link_to new_attachment_path(:tramite => 3),method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Solicitar Cambio de Dedicación
+                <% end %>
+                </li>
+                <% else %>
+                  <% if ProfessorsTransfer.where('process_type = ? and user_id =?',3,current_user.id).present? %>
+                    <% if ProfessorsTransfer.where('process_type = ? and user_id =? and  status = ?',3,current_user.id,'DR').present? %>
+                      <li><%= link_to new_attachment_path(:tramite => 3 ),method: :get do%>
+                              <i class="fa fa-circle"></i>
+                              Enviar Recaudos Faltantes
+                      <% end %>
+                        </li>
+                    <% elsif ProfessorsTransfer.where('process_type = ? and user_id =? and status = ?',3,current_user.id,'DR').present? %>
+                        <li><%= link_to new_attachment_path(:tramite => 3 ),method: :get do%>
+                                <i class="fa fa-circle"></i>
+                                Solicitar Cambio de Dedicación
+                        <% end %>
+                          </li>
+                    <% end %>
+                      <li><%= link_to status_professors_transfers_path ,method: :get do%>
+                        <i class="fa fa-circle"></i>
+                        Estatus de Cambio de Dedicación
+                      <% end %>
+                    </li> 
+                <% end %> 
+                <% end %>   
+                <% if ((current_user.has_role? :decano) || (current_user.has_role? :Consejo_Departamento)|| (current_user.has_role? :Consejo_Escuela) || (current_user.has_role? :Consejo_Facultad) || (current_user.has_role? :departamento) || (current_user.has_role? :Consejo_Universitario))%>
+                    <li><%= link_to professors_transfers_path do%>
+                        <i class="fa fa-circle-o"></i>
+                        Ver Solicitudes de Traslados
+                    <% end %></li>
+                <% end %>
               </ul>
             </li>
+
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Regimen de Beca</span></a></li>
+
+
+            <li class="treeview">
+              <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                <% if JointPlan.where(user_id: current_user.id).empty? %>
+                    <li><%= link_to new_attachment_path(:tramite => FormalitiesMaster.find(2).name),method: :get do%>
+                          <i class="fa fa-circle"></i>
+                          Nuevo Plan Conjunto
+                      <% end %></li>
+                <% end %>
+                <li><%= link_to status_joint_plans_path,method: :get do%>
+                    <i class="fa fa-circle"></i>
+                    Estatus de Plan Conjunto
+                <% end %>
+                </li>
+                <li><%= link_to informs_joint_plans_path,method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Subir Informe
+                  <% end %>
+                </li>
+
+              </ul>
+            </li>
+            <% if current_user.has_role? :decano %>
+                <li><%= link_to joint_plans_path do%>
+                    <i class="fa fa-circle-o"></i>
+                    Ver Solicitudes de Plan Conjunto
+                <% end %></li>
+            <% end %>
+
           </ul>
           <!-- /.sidebar-menu -->
         </section>
@@ -94,8 +200,8 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Page Header
-            <small>Optional description</small>
+            Pagina Principal
+            <small>Sistema de tramites administrativos </small>
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -115,10 +221,10 @@
       <footer class="main-footer">
         <!-- To the right -->
         <div class="pull-right hidden-xs">
-          Anything you want
+          FACYT
         </div>
         <!-- Default to the left -->
-        <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2017 <a href="#">University of Carabobo</a>.</strong> All rights reserved.
       </footer>
   <% end %>
 </div>

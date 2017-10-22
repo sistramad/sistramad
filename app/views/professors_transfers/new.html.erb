@@ -1,0 +1,10 @@
+<h1><%= t('index.new_professors_transfer')%></h1>
+
+<ul class="nav nav-tabs" role="tablist">
+  <li><%= link_to t('index.listing_professors_transfer'), professors_transfers_path %></li>
+  <li class="active"><%= link_to t('index.new_professors_transfer'), professors_transfers_path %></li>
+</ul>
+
+<%= render 'form' %>
+
+<%= link_to t('back'), professors_transfers_path, class: 'btn btn-info' %>

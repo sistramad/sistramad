@@ -9,10 +9,10 @@
               <div class="form-group">
                 <label for="first_name" class="control-label col-sm-5 col-md-4"><%= t("first_name") %>:</label>
                 <div class="col-sm-7 col-md-8">
-                  <p class="form-control-static"><%= @employee.user.first_name %></p>
+                  <p class="form-control-static"><%= @employee.user.first_name %> <%= @employee.user.last_name %>  </p>
                 </div>
 
-                <label for="type_employee" class="control-label col-sm-5 col-md-4"><%= t("type_employee") %>:</label>
+                <label for="type_employee" class="control-label col-sm-5 col-md-4"><%= t("type_employee.long") %>:</label>
                 <div class="col-sm-7 col-md-8">
                   <p class="form-control-static"><%= @employee.type_employee.name %></p>
                 </div>
@@ -27,6 +27,18 @@
                   :</label>
                 <div class="col-sm-7 col-md-8">
                   <p class="form-control-static"><%= @employee.scale_category.name %></p>
+                </div>
+
+                <label for="scale_category" class="control-label col-sm-5 col-md-4"> Dedicacion
+                :</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @employee.dedication_classification.name %></p>
+                </div>
+
+                <label for="scale_category" class="control-label col-sm-5 col-md-4"> Inicio en la Dedicación
+                :</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @employee.dedication_start_date %></p>
                 </div>
               </div>
             </div>

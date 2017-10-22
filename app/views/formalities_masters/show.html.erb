@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t("formalities_master") %></div>
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9">
+              <div class="form-group">
+
+                <label for="name" class="control-label col-sm-5 col-md-4"><%= t("name") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @formalities_master.name %></p>
+                </div>
+
+                <label for="description" class="control-label col-sm-5 col-md-4"><%= t("description") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @formalities_master.description %></p>
+                </div>
+
+                <label for="table_manager" class="control-label col-sm-5 col-md-4"><%= t("table_manager") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @formalities_master.table_manager %></p>
+                </div>
+
+                <label for="isactive" class="control-label col-sm-5 col-md-4"><%= t("isactive") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= t('@formalities_master.isactive') %></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <div class="btn-group btn-group-justified">
+        <%= link_to t('edit'), edit_formalities_master_path(@formalities_master), class: 'btn btn-info' %>
+        <%= link_to t('back'), formalities_masters_path, class: 'btn btn-info' %>
+      </div>
+    </div>
+  </div>
+</div>

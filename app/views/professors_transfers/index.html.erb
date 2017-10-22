@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to t('index.listing_professors_transfers'), professors_transfers_path %></li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th><%= t('status') %></th>
+      <th><%= t('Solicitante') %></th>
+      <th><%= t("faculty_from") %></th>
+      <th><%= t("faculty_to") %></th>
+      <th><%= t('requirements')%></th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @professors_transfers.each do |professors_transfer| %>
+        <tr>
+          <td><li><%= "En Progreso" %></li></td>
+          <td><li><%= professors_transfer.user.first_name.capitalize  %>
+          <%= professors_transfer.user.middle_name.capitalize %>
+          <%= professors_transfer.user.last_name.capitalize %>
+          (<%= professors_transfer.user.username %>)</li></td>
+          <td><li><%= professors_transfer.from.name %></li></td>
+          <td><li><%= professors_transfer.to.name %></li></td>
+          <td>
+            <li>
+              <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <%= link_to "Descargar", download_professors_transfers_path(user_id: professors_transfer.user.id), {method: "download"} %>
+            </li>
+          </td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= paginate @professors_transfers %></br>
+<%= page_entries_info @professors_transfers %>
+
+<br><br>

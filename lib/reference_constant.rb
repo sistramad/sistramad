@@ -12,7 +12,7 @@ module ReferenceConstant
 
   SCALE_CLASSIFICATION = 3
   SCALE_CATEGORY = 4
-
+  DEDICATION_CLASSIFICATION=11
   TYPE_EMPLOYEE = 5
 
   module ScaleClassificationConst

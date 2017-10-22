@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-ruby '2.2.4'
+ruby '2.4.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '5.0.2'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '0.18'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -70,10 +70,10 @@ gem 'rolify', '~> 5.1' #usar >rails g rolify Role User y agregar al controller l
 gem 'breadcrumbs_on_rails', '~> 2.3', '>= 2.3.1'
 
 # para simplificar los formularios
-gem 'simple_form', '~> 3.2', '>= 3.2.1'
+gem 'simple_form'
 
 # para la paginacion
-gem 'kaminari', '~> 0.17.0'
+gem 'kaminari', '0.17.0'
 
 # para instalar el compilador css sass
 gem 'sass', '~> 3.4', '>= 3.4.22'
@@ -88,19 +88,19 @@ gem 'autoprefixer-rails', '~> 6.4', '>= 6.4.0'
 gem 'pry-rails', '~> 0.3.4', :group => :development
 
 # para traducir las rutas
-gem 'route_translator', '~> 4.4'
+gem 'route_translator'
 
-# para abrir correos desde local
-gem "letter_opener", :group => :development
+# para abrir correos desde local (abre navegador firefox con info del correo)
+#gem "letter_opener", :group => :development
 
 #para que no salgan las peticiones de precompilado assets en la consola
-gem 'quiet_assets', '~> 1.1', :group => :development
+#gem 'quiet_assets', '~> 1.1', :group => :development
 
 # para el procesamiento de archivos varios
-gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave'
 
 # para agregar la funcionalidad de recorte de imagenes
-gem 'carrierwave-crop', '~> 0.1.2'
+gem 'carrierwave-crop'
 
 # para transformar imagenes
 # gem 'rmagick', '~> 2.15', '>= 2.15.4'
@@ -109,4 +109,29 @@ gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 # para que puedan coexistir jquery y turbolinks sin problemas
 gem 'jquery-turbolinks'
 
+# para adjuntar archivos
+gem 'paperclip'
+# Para crear archivos zip
+gem 'rubyzip'
+# Crear ventanas modales (pop-ups)
+gem 'magnific-popup-rails', '~> 1.1.0' 
+
+# Creat ventanas modales (pop-ups)
+gem 'aasm'
+
+# se reemplazo el servidor de web-brick a puma 
 gem "puma"
+
+# Backend para procesos en background
+gem 'delayed_job_active_record'
+
+# para generar pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+#crea un dump de la base de datos esto para heroku
+gem 'seed_dump'
+
+group :development, :test do
+  gem 'railroady'
+end

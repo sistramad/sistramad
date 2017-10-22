@@ -37,13 +37,16 @@
                 <%= f.input :genre, :label => t("genre"), collection: {'m' => t('genres.male'), 'f' => t('genres.female')}.sort.map { |k, v| [v, k] }, :include_blank => false, :placeholder => t("genre") %>
                 <%= f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document") %>
                 <%= f.input :birthday, start_year: Date.today.year - 90, end_year: Date.today.year - 12, :label => t("birthday.short") %>
+                <%= f.input :roles, :label => t("roles"), collection: Role.all ,:include_blank => false, :placeholder => t("name") %>
               </div>
               <div class="col-md-12">
-                <%= f.button :submit, value: t('form.send'), class: 'form-control btn btn-info' %>
+                <center>
+                  <%= f.button :submit, value: t('form.send'), class: 'btn btn-info' %>
+                </center>
               </div>
             </div>
             <%= f.error_notification %>
-            <% if @user.errors.any? %>
+              <% if @user.errors.any? %>
                 <div id="error_explanation">
                   <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 

@@ -1,0 +1,90 @@
+<div>
+  <p><strong> <h2 class="text-center"><%= @step.name%></h2> </strong></p>
+</div>
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="table-responsive">
+      <table class="table table-striped table-hover">
+      <%= simple_form_for @review, :html => {:class => "form-horizontal"},
+                          wrapper: :horizontal_file_input,
+                          wrapper_mappings: {
+                              file: :horizontal_file_input
+                          } do |f| %>
+          <%= f.error_notification %>
+          <% if @review.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@review.errors.count, "error") %> Los siguientes errores no permitieron guardar la revision:</h2>
+                <ul>
+                  <% @review.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
+
+            <input name="workflow_step_id" type="hidden" value= <%= @step.id %> >
+            <div class="col-xs-15 col-sm-12 col-md-10 " >
+              <strong> Observaciones:</strong>
+              <center>
+              <%= f.text_area :comment, :rows => 5, style: 'width:100%;' %>
+              </center>
+              <%= f.check_box :files_reviewed, :style => "width: 17px; height: 17px;" %>
+              <%= f.label :files_reviewed, " ¿Se analizó el Aval Academico Y Presupuestario para este Trámite? " %> 
+            </div> 
+            <%= f.hidden_field :id, :value => @professors_transfer.id%>
+          <div class="col-md-8 col-md-offset-4">
+            <%= f.button :button, 'Aprobar', type: 'submit', class: 'btn label-success',name: 'approval', value: true %>
+            <%= f.button :button, 'Desaprobar', type: 'submit', class: 'btn label-danger', name: 'approval', value: false %>
+          </div>
+      <% end %>
+      </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container"> 
+  <div class="well"> 
+    <div>
+      <p><strong> <h3 class="text-center background-image: asset-url('work.jpg') background-size: cover"> Revisiones Previas: </h3> </strong></p>
+    </div>
+    <br>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <% steps = @professors_transfer.workflow_steps %>           
+        <% if @preview.present? %>
+          <thead>
+            <tr>
+              <th> Revision </th>
+              <th> Hecha por: </th>
+              <th> Veredicto </th>
+              <th> Observaciones </th>
+              <th>Fecha creacion</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @professors_transfer.workflow_steps.each do |step| %>
+              <tr>
+                <% if step.review.present? %>
+                  <td><%= step.review.name %></td>
+                  <td><%= step.review.user.username %></td>
+                  <% if step.review.approval? %>
+                      <td> <h4> <span class="label label-success"> Aprobado </span> </h4> </td>
+                  <% else  %>
+                    <td> <h4> <span class="label label-danger"> Desaprobado </span> </h4> </td>
+                  <% end %>
+                  <td><%= step.review.comment %></td>
+                  <td><%= step.review.created_at.strftime("%d-%m-%Y") %></td>   
+                <% end %>   
+              </tr>
+            <% end %>  
+          </tbody>
+        <% else %>    
+            <p><strong> <h2 class="text-center "> No existen revisiones para este Trámite </h2> </strong></p>
+        <% end %>
+      </table>
+    </div>
+  </div>  
+</div>

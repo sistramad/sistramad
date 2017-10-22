@@ -1,0 +1,53 @@
+<%= javascript_include_tag 'professors_transfers' %>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t('professors_transfers') %></div>
+      <div class="panel-body">
+        <%= simple_form_for @professors_transfer, :html => {:multipart => true, :class => "form-horizontal"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input_sistramad
+                            } do |pf| %>
+            <%= pf.error_notification %>
+
+            <% if @professors_transfer.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@professors_transfer.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                  <ul>
+                    <% @professors_transfer.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <%= pf.label :type_of_translate, "Tipo de Cambio de Dedicacion:  " %></br>
+                <%= collection_select(:professors_transfer,:type_of_translate,@reference_lists,:id,:name,{ :class => "type_selection_dedication"}) %></br></br>
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <%= pf.label :faculty_to_id , "Tipo de dedicacion:  " %></br>
+                <%= @reference_lists2.name %><br></br>
+                <%= pf.hidden_field :faculty_from_id, :value => @reference_lists2.id %>
+              </div>
+
+              <div class="col-xs-12 col-sm-12 col-md-9">
+                <%= pf.label :faculty_to_id , "Tipo de dedicacion:  " %></br>
+                <%= pf.collection_select :faculty_to_id, @reference_lists3, :id, :name, {:class=>"to_selection"}  %>
+              </div>
+              
+            </div>            
+          <center>
+              <div class="col-md-12">
+                <%= pf.button :submit, value: "Guardar", class: ' btn btn-info' %>
+              </div>
+          </center>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

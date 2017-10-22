@@ -1,0 +1,29 @@
+<div class="well">
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2> <strong> Información del Traslado: <strong></h1>
+    </div>
+  </div>
+  <div class="row">
+    <%= render 'professors_transfers/info'%>
+    
+    <% if ((@professors_transfer.IP? or @professors_transfer.AP?) and @professors_transfer.type_of_translate == 7) %>
+      <%= render 'university_transfer_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 8) %>
+      <%= render 'faculty_transfer_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 9) %>
+      <%= render 'department_transfer_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 50) %>
+      <%= render 'permanent_change_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 51) %>
+      <%= render 'temporal_change_manager'%>
+    <% elsif ((@professors_transfer.IP? or @professors_transfer.AP?)  and @professors_transfer.type_of_translate == 52) %>
+      <%= render 'dedication_stay_manager'%>  
+    <% end %>
+    
+  </div>
+  <br>
+</div>
+</div>
+<%= render 'steps' %>

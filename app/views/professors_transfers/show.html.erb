@@ -1,0 +1,91 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t("professors_transfer") %></div>
+      <div class="panel-body">
+        <div class="form-horizontal">
+          <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-9">
+              <div class="form-group">
+
+                <label for="user" class="control-label col-sm-5 col-md-4"><%= t("user") %>:</label>
+                <div class="col-sm-7 col-md-8">
+                  <p class="form-control-static"><%= @professors_transfer.user.first_name%>
+                    <%= @professors_transfer.user.last_name%>
+                  </p>
+                </div>
+
+                <label for="status" class="control-label col-sm-5 col-md-4"><%= t("status") %>:</label>
+                <div class="col-sm-7 col-md-4">
+                <% if @professors_transfer.DR? %>
+                    <span class="label label-default"> Solicitado </span>
+                <% elsif @professors_transfer.IP? %>
+                    <span class="label label-primary"> En Progreso </span>
+                <% elsif @professors_transfer.AP? %>
+                    <span class="label label-success"> Aprobado </span>
+                <% elsif @professors_transfer.RE? %>
+                    <span class="label label-success">Negado </span>
+                <% elsif @professors_transfer.CL? %>
+                    <span class="label label-danger"> Cerrado </span>
+                <% end %>
+
+                </div>
+
+                <br> <br>  <br>  <br>  
+                <% if (@professors_transfer.process_type.present?) %>
+                  <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Tramite" %>:</label>
+                  <div class="col-sm-7 col-md-8">
+                    <p class="form-control-static"><%= @professors_transfer.process_type.name %></p>
+                  </div>
+                
+                  <% if ((@professors_transfer.type_1.present?)||(@professors_transfer.type_2.present?)) %>  
+                    <% if (@professors_transfer.process_type.id == 1) %>
+
+                      <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Traslado" %>:</label>
+                      <div class="col-sm-7 col-md-8">
+                        <p class="form-control-static"><%= @professors_transfer.type_1.name %></p>
+                      </div>
+
+                      <label for="faculty_from" class="control-label col-sm-5 col-md-4"><%= "Origen " %>:</label>
+                      <div class="col-sm-7 col-md-8">
+                        <p class="form-control-static"><%= @professors_transfer.from.name %></p>
+                      </div>
+
+                      <label for="faculty_to" class="control-label col-sm-5 col-md-4"><%= "Destino " %>:</label>
+                      <div class="col-sm-7 col-md-8">
+                        <p class="form-control-static"><%= @professors_transfer.to.name %></p>
+                      </div>
+                    <% end %>
+                    <% if (@professors_transfer.process_type.id == 3) %>
+
+                      <label for="type_of_translation" class="control-label col-sm-5 col-md-4"><%= "Tipo de Cambio" %>:</label>
+                      <div class="col-sm-7 col-md-8">
+                        <p class="form-control-static"><%= @professors_transfer.type_2.name %></p>
+                      </div>
+
+                      <label for="faculty_from" class="control-label col-sm-5 col-md-4"><%= "Dedicacion Actual " %>:</label>
+                      <div class="col-sm-7 col-md-8">
+                        <p class="form-control-static"><%= @professors_transfer.from.name %></p>
+                      </div>
+
+                      <label for="faculty_to" class="control-label col-sm-5 col-md-4"><%= "Cambio para " %>:</label>
+                      <div class="col-sm-7 col-md-8">
+                        <p class="form-control-static"><%= @professors_transfer.to.name %></p>
+                      </div>
+                    <% end %>
+                  <% end %>      
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="btn-toolbar">
+      <div class="btn-group btn-group-justified">
+        <%= link_to t('back'), professors_transfers_path, class: 'btn btn-info' %>
+      </div>
+    </div>
+  </div>
+</div>

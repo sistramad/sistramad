@@ -1,0 +1,4 @@
+$('.type_selection_dedication').empty();
+<% @reference_lists.each do |reference_lists| %>
+  $('.type_selection_dedication').append($('<option value="<%= reference_lists.id %>"><%= reference_lists.name %></option>'));
+<% end %>

@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="panel panel-info">
+      <div class="panel-heading center"><%= t('users_roles') %></div>
+      <div class="panel-body">
+        <%= simple_form_for @users_role, :html => {:multipart => true, :class => "form-horizontal"},
+                            wrapper: :horizontal_file_input_sistramad,
+                            wrapper_mappings: {
+                                file: :horizontal_file_input_sistramad
+                            } do |f| %>
+            <%= f.error_notification %>
+
+            <% if @users_role.errors.any? %>
+                <div id="error_explanation">
+                  <h2><%= pluralize(@users_role.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+                  <ul>
+                    <% @users_role.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                    <% end %>
+                  </ul>
+                </div>
+            <% end %>
+
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-9">
+    				<%= f.association :user, :label => t("user"), :placeholder => t("name"), :label_method => lambda { |user| "#{user.username}".capitalize } %>
+    				<%= f.association :role, :label => t("role"), :placeholder => t("name") %>
+  			  </div>
+  			  <center>
+              <div class="col-md-12">
+                <%= f.button :submit, value: t('form.send'), class: ' btn btn-info' %>
+              </div>
+              </center>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+

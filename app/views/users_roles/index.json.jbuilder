@@ -1,0 +1,1 @@
+json.array! @formalities_documents, partial: 'formalities_documents/formalities_document', as: :formalities_document

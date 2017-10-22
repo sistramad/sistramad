@@ -1,0 +1,48 @@
+<div class="well">
+<div>
+  <p><strong> <h2 class="text-center">Lista de pasos para completar solicitud:</h2> </strong></p>
+</div>
+<br>
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Paso:</th>
+          <th>Nombre:</th>
+          <th>Estado:</th>
+          <th>Responsable de aprobación:</th>
+          <th>Fecha de Aprobacion:</th>  
+        </tr>
+      </thead>
+      <tbody>
+      <% @professors_transfer.workflow_steps.order(:step_number).each do |step|%>
+        <tr>
+          <h4> <td><%= step.step_number %> </td></h4>
+          <h4> <td><%= step.name%> </td> </h4>
+          
+          <% if step.DR? %>
+            <td> <h4> <span class="label label-default"> No Iniciado </span> </h4> </td>
+          <% elsif step.IP? %>
+          <td> <h4> <span class="label label-primary"> En Progreso </span> </h4> </td>
+          <% elsif step.AP? %>
+            <td> <h4> <span class="label label-success"> Procesado </span> </h4> </td>
+          <% elsif step.RE? %>
+            <td> <h4> <span class="label label-danger"> Desaprobado </span> </h4> </td>
+          <% end %>
+          
+          <h4> <td><%= step.role.name %> </td></h4>
+          
+          <% if step.approval_date.nil? %>
+            <td>--  /  --  /  ----</td>
+          <%else%>
+            <td> <%= step.approval_date.strftime("%d-%m-%Y") %> </td>
+          <%end%>
+
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

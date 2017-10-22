@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
   load_and_authorize_resource :only => [:new, :edit, :destroy]
 
   add_breadcrumb "home", :authenticated_root_path, :title => "Back to the home"
@@ -21,6 +20,8 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+
+    #@attachment = Attachment.new
   end
 
   # GET /users/1/edit
@@ -30,13 +31,14 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    @role = Role.find(params.require(:user).permit(:roles).require(:roles))
     @user = User.new(user_params)
-
+    @user.add_role(@role.name)
     respond_to do |format|
       if @user.save
         # format.html { redirect_to @user, notice: 'User was successfully created.' }
 
-        flash[:success] = 'User was successfully created.'
+        flash[:success] = 'User fue creado Exitosamente.'
         format.html {
           if user_params[:avatar].present?
             render :crop  ## Render the view for cropping
@@ -61,7 +63,7 @@ class UsersController < ApplicationController
           if user_params[:avatar].present?
             render :crop  ## Render the view for cropping
           else
-            redirect_to @user, notice: 'User was successfully updated.'
+            redirect_to @user, notice: 'Usuario fue actualizado Exitosamente!!.'
           end
         }
         format.json { render :show, status: :ok, location: @user }
@@ -77,7 +79,7 @@ class UsersController < ApplicationController
   def destroy
     @user.destroy
     respond_to do |format|
-      format.html { redirect_to references_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'Usuario fue eliminado Exitosamente!!.' }
       format.json { head :no_content }
     end
   end
@@ -107,4 +109,5 @@ class UsersController < ApplicationController
         :avatar_crop_w,
         :avatar_crop_h)
   end
+
 end

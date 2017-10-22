@@ -37,6 +37,8 @@ en:
   faculty: 'Faculty'
   acronym: 'acronym'
   active: 'Active'
+  list_attachment: 'List of Attachments'
+  list_request: 'List of Requests'
   type_employee:
     short: 'Type'
     long: 'Type employee'
@@ -78,6 +80,7 @@ en:
     password: 'Password'
     forgot_your_password: 'Forgot your password?'
     did_not_receive_unlock_instructions: "Didn't receive unlock instructions?"
+  sign_up: 'sign_up'  
   hello:
     short:    'welcome'
     long:     'Welcome to our website'

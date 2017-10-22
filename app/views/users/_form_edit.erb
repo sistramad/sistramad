@@ -37,6 +37,8 @@
                 <%= f.input :first_name, :label => t("first_name"), :placeholder => t("first_name") %>
                 <%= f.input :middle_name, :label => t("middle_name"), :placeholder => t("middle_name") %>
                 <%= f.input :last_name, :label => t("last_name"), :placeholder => t("last_name") %>
+                <%=	f.input :password, :label => t('password'), :placeholder => t('password') %>
+                <%=	f.input :password_confirmation, :label => t('password_confirmation.short'), :placeholder => t('password_confirmation.long') %>
                 <%= f.input :genre, :label => t("genre"), collection: {'m' => t('genres.male'), 'f' => t('genres.female')}.sort.map { |k, v| [v, k] },
                             :include_blank => false, :placeholder => t("genre") %>
                 <%= f.input :identification_document, :label => t("identification_document"), :placeholder => t("identification_document") %>
@@ -44,7 +46,9 @@
                             :label => t("birthday.short"), :wrapper => :multi_select_sistramad %>
               </div>
               <div class="col-md-12">
-                <%= f.button :submit, value: t('form.send'), class: 'form-control btn btn-info' %>
+                <center>
+                <%= f.button :submit, value: t('form.send'), class: ' btn btn-info' %>
+                </center>
               </div>
             </div>
             <%= f.error_notification %>

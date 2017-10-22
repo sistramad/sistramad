@@ -1,14 +1,14 @@
 es:
   devise:
     failure:
-      invited: "You have a pending invitation, accept it to finish creating your account."
+      invited: "Tienes una invitación pendiente, acepta para poder terminar de crear tu cuenta de usuario."
     invitations:
-      send_instructions: "An invitation email has been sent to %{email}."
+      send_instructions: "Una invitacion por e-mail fue enviada a  %{email}."
       invitation_token_invalid: "The invitation token provided is not valid!"
-      updated: "Your password was set successfully. You are now signed in."
-      updated_not_active: "Your password was set successfully."
-      no_invitations_remaining: "No invitations remaining"
-      invitation_removed: "Your invitation was removed."
+      updated: "Su contraseña fue añadida exitosamente. Usted ahora se encuentra registrado."
+      updated_not_active: Su contraseña fue añadida exitosamente."
+      no_invitations_remaining: "No posee invitaciónes pendientes"
+      invitation_removed: "Su invitación fue eliminada."
       new:
         header: "Enviar invitación"
         submit_button: "Enviar una invitación"
@@ -18,11 +18,11 @@ es:
     mailer:
       invitation_instructions:
         subject: "Invitation instructions"
-        hello: "Hello %{email}"
-        someone_invited_you: "Someone has invited you to %{url}, you can accept it through the link below."
-        accept: "Accept invitation"
+        hello: "HOLA %{email}"
+        someone_invited_you: "Alguien lo invito a %{url}, puede aceptar el link de la invitación a traves del link de abajo."
+        accept: "Aceptar Invitación"
         accept_until: "This invitation will be due in %{due_date}."
-        ignore: "If you don't want to accept the invitation, please ignore this email.<br />\nYour account won't be created until you access the link above and set your password."
+        ignore: "Si no desea aceptar esta invitación, por favor ignore este correo.<br />\nYour account won't be created until you access the link above and set your password."
   time:
     formats:
       devise:
