@@ -9,11 +9,11 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable and :omniauthable
   # :registerable,
-  devise :invitable, :registerable ,:database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
+  devise :invitable ,:database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
   has_one :joint_plan, inverse_of: :user
-  has_one :professors_transfer, inverse_of: :user
+  has_many :professors_transfer, inverse_of: :user
   has_many :attachments
   has_many :reviews
   accepts_nested_attributes_for :attachments

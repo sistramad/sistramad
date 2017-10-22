@@ -5,9 +5,9 @@
   </head>
   <body>
     <p>
-      La siguiente notificación es para informarle que el usuario <%= @user.first_name%> <%= @user.last_name %> 
+      La siguiente notificación es para informarle que el usuario <%= @transfer.user.first_name.capitalize %> <%=  @transfer.user.last_name.capitalize %> 
       ha solicitado la evaluación de los requisistos iniciales de su trámite,
-      puede evaluar y a aprobar los requsitos en el módulo de administración ingresando al sistema con su cuenta de administrador.
+      puede evaluar y a aprobar los requsitos en el módulo de administración ingresando.
     </p>
     <p> Este correo es enviado automaticamente por el Sistema de Trámites Administrativos Docente (SISTRAMAD)</p>
     <p> No debe responder a este correo.</p>

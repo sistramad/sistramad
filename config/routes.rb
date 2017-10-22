@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :universities
     resources :faculties
     resources :roles
+    resources :users_roles
     resources :employees
     resources :request_manager
     resources :countries do
@@ -17,6 +18,12 @@ Rails.application.routes.draw do
         get :insert_records
       end
     end
+
+    #resources :roles do
+    #  member do
+    #    get :addusers
+    #  end
+    #end
 
     resources :request_manager do
      member do
@@ -80,7 +87,7 @@ Rails.application.routes.draw do
     #end
 
     localized do
-      resources :users
+      resources :users 
       resources :references
       resources :reference_lists
     end
@@ -100,7 +107,7 @@ Rails.application.routes.draw do
 
       unauthenticated do
         root 'devise/sessions#new', as: :unauthenticated_root
+      end
     end
-  end
 
 end

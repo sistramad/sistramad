@@ -7,7 +7,7 @@
     <p>Estimado usuario: </p>
     <h1><%= @user.first_name%> <%= @user.last_name %>, </h1>  
     <p>
-    los recaudos iniciales de su tramite de Traslado fueron admitidos por el sistema y pasaran al proceso de evalución,
+    los recaudos iniciales de su tramite de <%= @transfer.process_type.name %> fueron admitidos por el sistema y pasaran al proceso de evaluación,
     este atento a su correo, recibira notificaciones en cuanto sean aprobados, támbien puede consultar el estado
     de su solicitud haciendo click en el siguiente enlace:  
     </p>

@@ -3,7 +3,7 @@ class Role < ActiveRecord::Base
   has_many :steps
   belongs_to :resource, :polymorphic => true
 
-  validates :resource_type, :inclusion => { :in => Rolify.resource_types }, :allow_nil => true
+  #validates :resource_type, :inclusion => { :in => Rolify.resource_types }, :allow_nil => true
 
   scopify #scopes de la gema rolify
 end

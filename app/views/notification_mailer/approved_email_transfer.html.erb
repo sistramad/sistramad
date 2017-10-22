@@ -7,13 +7,12 @@
     <p>Estimado usuario: </p>
     <h1><%= @user.first_name%> <%= @user.last_name %>, </h1>  
     <p>
-      Los recaudos inciales de su tramite fueron admitidos por el sistema y pasaran al proceso de evalución,
-      este atento a su correo, recibira nuevas notificaciones cuando sean aprobados, támbien puede consultar el estado
-      de su solicitud haciendo click en el siguiente enlance: 
+      El siguiente correo es para notificarle que su solicitud de <%= @transfer.process_type.name %> ha sido aprobada, para continuar con el proceso
+      puede solicitar la Constancia de Aprobación  haciendo click en el siguiente enlance: 
     </p>
     <p> https://alexghoro-sistramad.herokuapp.com/procedures </p>
-
     <p> Este correo es enviado automaticamente por el Sistema de Tramites Administrativos Docente (SISTRAMAD)</p>
     <p> No debe responder a este correo.</p>
   </body>
 </html>
+

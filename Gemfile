@@ -90,8 +90,8 @@ gem 'pry-rails', '~> 0.3.4', :group => :development
 # para traducir las rutas
 gem 'route_translator'
 
-# para abrir correos desde local
-gem "letter_opener", :group => :development
+# para abrir correos desde local (abre navegador firefox con info del correo)
+#gem "letter_opener", :group => :development
 
 #para que no salgan las peticiones de precompilado assets en la consola
 #gem 'quiet_assets', '~> 1.1', :group => :development

@@ -70,7 +70,7 @@ class AttachmentsController < ApplicationController
           @instance =  instance.new(user_id: current_user.id,name: formalities_master.name, process_type: formalities_master)
           if (params[:tramite]== 1)
             if (params[:tramite][:docs].to_i == uploads) 
-              @instance.procesar
+              @instance.procesar!
             end
             respond_to do |format|
               if @instance.save
@@ -84,7 +84,7 @@ class AttachmentsController < ApplicationController
             end
           elsif (params[:tramite]== 3)
             if (params[:tramite][:docs].to_i == uploads)   
-              @instance.procesar
+              #@instance.procesar
             end
             respond_to do |format|
               if @instance.save
@@ -111,7 +111,9 @@ class AttachmentsController < ApplicationController
           @instance = instance.where('process_type = ? and user_id =? and status = ?',params[:tramite][:id],current_user.id,'DR').first
           #@instance = instance.find_by(user_id: current_user.id, process_type: params[:tramite])
           if ((params[:tramite][:docs].to_i == uploads) && ((params[:tramite][:id].to_i == 1)||(params[:tramite][:id].to_i == 3)))
-            @instance.procesar
+            if (params[:tramite][:id].to_i == 1)
+              @instance.procesar!
+            end  
             @instance.save
             respond_to do |format|
               if @instance.save
@@ -139,7 +141,7 @@ class AttachmentsController < ApplicationController
         @instance =  instance.new(user_id: current_user.id,name: formalities_master.name, process_type: formalities_master)
         if (formalities_master.id==1)
           if (params[:tramite][:docs].to_i == uploads) 
-            @instance.procesar
+            @instance.procesar!
             respond_to do |format|
               if @instance.save
                   format.html { redirect_to edit_professors_transfer_path (@instance),notice: '' }
@@ -156,7 +158,7 @@ class AttachmentsController < ApplicationController
           end
         elsif (formalities_master.id==3)
           if (params[:tramite][:docs].to_i == uploads) 
-            @instance.procesar
+            #@instance.procesar
             respond_to do |format|
               if @instance.save
                   format.html { redirect_to edit_professors_transfer_path (@instance),notice: '' }
@@ -186,7 +188,10 @@ class AttachmentsController < ApplicationController
         #@instance = instance.find_by(user_id: current_user.id, process_type: params[:tramite][:id])
         @instance = instance.where('process_type = ? and user_id =? and status = ?',params[:tramite][:id],current_user.id,'DR').first
         if ((params[:tramite][:docs].to_i == uploads) && ((params[:tramite][:id].to_i == 1)||(params[:tramite][:id].to_i == 3)))
-          @instance.procesar
+          if (params[:tramite][:id].to_i == 1)
+            @instance.procesar!
+          end 
+          #@instance.procesar
           @instance.save
           respond_to do |format|
             if @instance.save

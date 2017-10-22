@@ -41,7 +41,9 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.delivery_method = :letter_opener
+  #Esto es para que no use la gema letter opener al enviar correos
+  #config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :smtp
 
   config.assets.quiet = true
 
@@ -49,8 +51,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     :address              => "smtp.gmail.com",
     :port                 => 587,
-    :user_name            => ENV['gmail_username'],
-    :password             => ENV['gmail_password'],
+    :user_name            => 'sistramad@gmail.com',
+    :password             => 'UC.sistramad',
     :authentication       => "plain",
     :enable_starttls_auto => true
   }

@@ -32,10 +32,10 @@ class DepartmentTransfer < Workflow
     def initial_requirements_valid?()
       if self.professors_transfer.IP?
         start_step(1)
-        send_email(self.professors_transfer.user, 'initial_validation_success')
+        send_email(self.professors_transfer.user, 'initial_validation_success',self.professors_transfer)
         step = self.professors_transfer.request_workflow.workflow_step.find_by(step_number: 1)
         users = Role.find_by(id: step.role_id).users
-        send_emails(users,'need_to_approve')
+        send_emails(users,'need_to_approve',self.professors_transfer)
         return true
       else
         return false

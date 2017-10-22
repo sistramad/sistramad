@@ -71,16 +71,26 @@ class ProfessorsTransfersController < ApplicationController
           format.json { render :show, status: :ok, location: @professors_transfer }
         else
           date = @professors_transfer.user.employee.dedication_start_date
-          if (validates_dedication_date(date))
-            type = ReferenceList.find(@professors_transfer.type_of_translate).name
+          type = ReferenceList.find(@professors_transfer.type_of_translate).name
+          if (type == 'Cambio de Dedicación Temporal'|| type == 'Permanencia en la Dedicación')
+            @professors_transfer.procesar!
             actual_request = get_request_from_factory(type)
             actual_request.generate_workflow(@professors_transfer)
             actual_request.professors_transfer = @professors_transfer
             actual_request.initial_requirements_valid?  
             format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
             format.json { render :show, status: :ok, location: @professors_transfer }
-          else
-            format.html { render :show, notice: 'El tiempo en la Dedicación debe ser mayor a un Año' }
+          elsif(validates_dedication_date(date))
+            @professors_transfer.procesar!
+            actual_request = get_request_from_factory(type)
+            actual_request.generate_workflow(@professors_transfer)
+            actual_request.professors_transfer = @professors_transfer
+            actual_request.initial_requirements_valid?  
+            format.html { redirect_to @professors_transfer, notice: 'El Tramite fue solicitado correctamente.' }
+            format.json { render :show, status: :ok, location: @professors_transfer }
+          else  
+            flash[:error] = 'El tiempo en la Dedicación para el Trámite de Cambio en la Dedicación Permanente debe ser mayor a un Año.'
+            format.html { render :show }
             format.json { render json: @professors_transfer.errors, status: :unprocessable_entity }
           end
         end
