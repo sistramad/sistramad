@@ -221,6 +221,7 @@ user = User.new(:username => 'decano',
         :password_confirmation => '123456')
 user.save!
 user.add_role(:decano)
+user.add_role(:docente)
 user.add_role(:admin)
 
 user = User.new(:username => 'diresc',

@@ -1,0 +1,46 @@
+<ul class="nav nav-tabs" role="tablist">
+ <li class="active"><%= link_to t('list_attachment'), "#" %></li>
+</ul>
+<%= simple_form_for @joint_plan, :html => {:multipart => true, :class => "form-horizontal", :id => "attachment"},
+                    wrapper: :horizontal_file_input_sistramad,
+                    wrapper_mappings: {
+                        file: :horizontal_file_input_sistramad
+                    } do |f| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <% @joint_plans.each do |document| %>
+            <tr>
+              <div class="field">
+                <td><b><li><%= document.name %></li></b>
+                  <div class="field">
+                  <div class="input-group">
+
+                      <%= f.file_field :file%>
+                  </div><!-- /input-group -->
+                    </div>
+                </td>
+              </div>
+            </tr>
+
+        <% end %>
+        </tbody>
+      </table>
+      <div class="field">
+        <%= f.submit "Guardar", class:'btn btn-info btn-sm list'%>
+      </div>
+
+    </div>
+<% end %>
+
+
+<br><br>
+
+
