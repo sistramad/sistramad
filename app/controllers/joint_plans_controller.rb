@@ -9,7 +9,7 @@ class JointPlansController < ApplicationController
 
   def new
     @joint_plan = JointPlan.new
-    @documents = Document.all
+    @documents = JointplanDocument.all
     @user =  @joint_plan.user
     @attachment = Attachment.new
   end
@@ -112,13 +112,13 @@ class JointPlansController < ApplicationController
 
   def extension
     @extension = Extension.new
-    @document = Document.find(16)
+    @document = JointplanDocument.find(16)
     @plan_id = JointPlan.where(:user_id => current_user.id).pluck(:id)
 
   end
 
   def inform
-    @joint_plan = JointplanDocument.new
+    @joint_plan = Jointplan.new
     @document = JointplanDocument.find(16)
     @attachment = Attachment.new
     @plan_id = JointPlan.where(:user_id => current_user.id).pluck(:id)
@@ -126,7 +126,7 @@ class JointPlansController < ApplicationController
 
   def inform_list
     @joint_plans = Attachment.where('joint_plan_id > ?', 0)
-    @prueba = JointPlan.joins(attachments: :document).where('attachments.joint_plan_id > ?', 0).select('attachments.joint_plan_id','documents.name as doc','id','user_id','name')
+    @prueba = JointPlan.joins(attachments: :jointplan_document).where('attachments.joint_plan_id > ?', 0).select('attachments.joint_plan_id','jointplant_documents.name as doc','id','user_id','name')
     @report = Report.new
     @joint_plan = JointPlan.new
   end
