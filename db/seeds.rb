@@ -1,3 +1,4 @@
+=begin
 Role.create!([
   {name: "admin", resource_id: nil, resource_type: nil},
   {name: "test", resource_id: nil, resource_type: nil},
@@ -189,7 +190,6 @@ user = User.new(:id => 23,
 user.add_role(:Consejo_Facultad)                  
 user.save!(:validate => false)
 
-=begin
 User.create!([
   {id: 3,username: "joalbert", first_name: "joalbert", middle_name: "andrés", last_name: "gonzález", genre: "m", identification_document: "18468784", birthday: "1988-11-24", email: "joalbertgonzalez@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-01-17 00:01:48", sign_in_count: 14, current_sign_in_at: "2017-10-16 08:26:15", last_sign_in_at: "2017-08-24 03:29:27", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil},
   # 3
@@ -242,7 +242,7 @@ User.create!([
 #  {user_id: 15, role_id: 3},
 #  {user_id: 28, role_id: 2}
 #])
-=end
+
 Document.create!([
   {name: "Solicitud del Beneficiario", status: nil},
   {name: "Fotocopia de la Cedula de identidad", status: nil},
@@ -392,6 +392,7 @@ Faculty::HABTM_Employees.create!([
   {employee_id: 3, faculty_id: 1},
   {employee_id: 4, faculty_id: 1}
 ])
+=end
 FormalitiesDocument.create!([
   {formalities_master_id: 1, document_id: 19},
   {formalities_master_id: 1, document_id: 12},
