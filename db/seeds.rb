@@ -423,11 +423,42 @@ FormalitiesDocument.create!([
   {formalities_master_id: 3, document_id: 27},
   {formalities_master_id: 3, document_id: 29}
 ])
+professortransfer = ProfessorsTransfer.new(:id => 132,
+:name => "Traslados",
+:status => "AP",
+:user_id => 15,
+:faculty_from_id => 62,
+:faculty_to_id => 68,
+:type_of_translate => 8,
+:process_type => 1)
+professortransfer.save!
+
+professortransfer = ProfessorsTransfer.new(:id => 115,
+:name => "Traslados",
+:status => "IP",
+:user_id => 8,
+:faculty_from_id => 48,
+:faculty_to_id => 47,
+:type_of_translate => 7,
+:process_type => 1)
+professortransfer.save!
+
+professortransfer = ProfessorsTransfer.new(:id => 133,
+:name => "Cambio de Dedicacion",
+:status => "IP",
+:user_id => 15,
+:faculty_from_id => 56,
+:faculty_to_id => 53,
+:type_of_translate => 51,
+:process_type => 3)
+professortransfer.save!
+=begin
 ProfessorsTransfer.create!([
   {id: 132,name: "Traslados", status: "AP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 62, faculty_to_id: 68, type_of_translate: 8, process_type: 1},
   {id: 115,name: "Traslados", status: "IP", user_id: 8, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 48, faculty_to_id: 47, type_of_translate: 7, process_type: 1},
   {id: 133,name: "Cambio de Dedicacion", status: "IP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 56, faculty_to_id: 53, type_of_translate: 51, process_type: 3}
 ])
+=end
 Attachment.create!([
   {id: 1,user_id: 2, document_id: 1, link: nil, file_file_name: "Wallpaper-3D-2013-.jpg", file_content_type: "image/jpeg", file_file_size: 532832, file_updated_at: "2017-02-12 22:54:14", process_id: nil},
   {id: 199,user_id: 8, document_id: 2, link: nil, file_file_name: "JesusDeAbreu.jpg", file_content_type: "image/jpeg", file_file_size: 33215, file_updated_at: "2017-09-27 03:49:39", process_id: nil},
