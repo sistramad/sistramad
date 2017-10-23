@@ -1,5 +1,5 @@
 Role.create!([
-  {name: "admin", resource_id: nil, resource_type: nil}]),
+  {name: "admin", resource_id: nil, resource_type: nil},
   {name: "test", resource_id: nil, resource_type: nil},
   {name: "docente", resource_id: nil, resource_type: nil},
   {name: "decano", resource_id: nil, resource_type: nil},
