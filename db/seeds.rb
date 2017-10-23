@@ -423,6 +423,7 @@ FormalitiesDocument.create!([
   {formalities_master_id: 3, document_id: 27},
   {formalities_master_id: 3, document_id: 29}
 ])
+process=FormalitiesMaster.where('id = ?',1).first
 professortransfer = ProfessorsTransfer.new(:id => 132,
 :name => "Traslados",
 :status => "AP",
@@ -430,9 +431,10 @@ professortransfer = ProfessorsTransfer.new(:id => 132,
 :faculty_from_id => 62,
 :faculty_to_id => 68,
 :type_of_translate => 8,
-:process_type => 1)
+:process_type => process)
 professortransfer.save!
 
+process=FormalitiesMaster.where('id = ?',1).first
 professortransfer = ProfessorsTransfer.new(:id => 115,
 :name => "Traslados",
 :status => "IP",
@@ -440,9 +442,10 @@ professortransfer = ProfessorsTransfer.new(:id => 115,
 :faculty_from_id => 48,
 :faculty_to_id => 47,
 :type_of_translate => 7,
-:process_type => 1)
+:process_type => process)
 professortransfer.save!
 
+process=FormalitiesMaster.where('id = ?',3).first
 professortransfer = ProfessorsTransfer.new(:id => 133,
 :name => "Cambio de Dedicacion",
 :status => "IP",
@@ -450,7 +453,7 @@ professortransfer = ProfessorsTransfer.new(:id => 133,
 :faculty_from_id => 56,
 :faculty_to_id => 53,
 :type_of_translate => 51,
-:process_type => 3)
+:process_type => process)
 professortransfer.save!
 =begin
 ProfessorsTransfer.create!([
