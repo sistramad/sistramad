@@ -29,9 +29,8 @@
                 <% end %>
               <% end %>   
           <% end %>
-<<<<<<< HEAD
            
-          <% if group_code == 'C20' and current_user.has_role?(:consejo_facultad) %>
+          <% if group_code == 'C20' and current_user.has_role?(:consejo_facultad) and steps_approved?(%w[#1 #2 #3]) %>
               <% if @document.nil? %>
                 <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
               <% else %>
@@ -42,7 +41,7 @@
               <% end %>   
           <% end %>   
 
-          <% if group_code == 'C30' and current_user.has_role?(:consejo_universitario) %>
+          <% if group_code == 'C30' and current_user.has_role?(:consejo_universitario) and steps_approved?(%w[#1 #2 #3]) %>
               <% if @document.nil? %>
                 <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
               <% else %>
@@ -53,7 +52,7 @@
               <% end %>   
           <% end %> 
 
-          <% if group_code == 'D50' and current_user.has_role?(:director_escuela) %>
+          <% if group_code == 'D50' and current_user.has_role?(:director_escuela) and steps_approved?(%w[#1 #2 #3]) %>
               <% if @document.nil? %>
                 <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
               <% else %>
@@ -64,9 +63,6 @@
               <% end %>   
           <% end %> 
 
-=======
-                  
->>>>>>> 143dfdd9bacb07bf28afd251bb6a2b2e766d25bc
           <br>
             <% if @procedure.in_progress? %>
               <%= form_tag approve_procedure_admin_procedure_path(@procedure) do %>
