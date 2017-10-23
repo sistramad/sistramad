@@ -23,7 +23,7 @@ class License < SystemProcedure
     create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Jefe de Departamento")
     create_step(workflow, "#2", "Seleccionar el tipo y duración de la licencia.", "Jefe de Departamento")
     create_step(workflow, "#3", "Evaluación de los recaudos de la licencia.","Director de Departamento")
-    create_step(workflow, "#4", "Generar constacia de aprobación","")
+    create_step(workflow, "#4", "Generar constancia de aprobación","")
     create_step(workflow, "#5", "Aprobar solicitud","")
   end
 

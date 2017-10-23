@@ -22,8 +22,8 @@ class SabbaticalYear < SystemProcedure
   def generate_steps(workflow)
     create_step(workflow, "#1", "Carga y evaluación de recaudos iniciales.","Dirección de asuntos profesorales")
     create_step(workflow, "#2", "Cargar plan de trabajo.","Consejo de departamento")
-    create_step(workflow, "#3", "Cargar constacia de antigüedad.","Consejo de departamento")
-    create_step(workflow, "#4", "Generar constacia de aprobación.","Consejo de departamento")
+    create_step(workflow, "#3", "Cargar constancia de antigüedad.","Consejo de departamento")
+    create_step(workflow, "#4", "Generar constancia de aprobación.","Consejo de departamento")
   end
 
   def initial_requirements_valid?()
