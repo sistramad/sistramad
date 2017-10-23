@@ -21,7 +21,7 @@ class FinalReport < SystemProcedure
 
   def generate_steps(workflow)
     create_step(workflow, "#1", "Evaluación del Informe Final.","Consejo de departamento")
-    create_step(workflow, "#2", "Generar constacia de aprobación del Informe Final.","Consejo de departamento")
+    create_step(workflow, "#2", "Generar constancia de aprobación del Informe Final.","Consejo de departamento")
   end
 
   def initial_requirements_valid?()
