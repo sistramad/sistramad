@@ -36,7 +36,6 @@ class License < SystemProcedure
       
       users = User.with_role :jefe_departamento
       email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
-      byebug
       send_multiple_emails(users, email_data)
 
       return true
