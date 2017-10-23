@@ -36,10 +36,8 @@ class RotationPlan < SystemProcedure
       send_email(email_data)
 
       users = User.with_role :concejo_facultad
-      send_emails(users,'need_to_approve')
-
-
-      send_emails(users,'need_to_approve')
+      email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
+      send_multiple_emails(users, email_data)
       return true
     else
       return false
