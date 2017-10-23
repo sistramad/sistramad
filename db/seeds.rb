@@ -468,7 +468,7 @@ attachment = Attachment.new(:id => 209,
 :document_id => 23,
 :file_file_name => "traslado_aprobacion_temp20171004-4608-1w1z7mm.pdf",
 :file_content_type => "application/pdf",
-:file_file_size 104717, 
+:file_file_size => 104717, 
 :file_updated_at =>"2017-10-05 02:35:33",
 :process_id => process)
 attachment.save!
@@ -479,7 +479,7 @@ attachment = Attachment.new(:id => 227,
 :document_id => 23,
 :file_file_name => "traslado_aprobacion_temp20171020-28749-1pe2jpu.pdf",
 :file_content_type => "application/pdf",
-:file_file_size 104826, 
+:file_file_size => 104826, 
 :file_updated_at =>"2017-10-20 06:28:14",
 :process_id => process)
 attachment.save!
