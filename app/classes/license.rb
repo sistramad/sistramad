@@ -31,9 +31,14 @@ class License < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment? and self.procedure.license_info.present?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('J10')
-      send_emails(users,'need_to_approve')#REVISAR FORMATO
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+      
+      users = User.with_role :jefe_departamento
+      email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
+      byebug
+      send_multiple_emails(users, email_data)
+
       return true
     else
       return false

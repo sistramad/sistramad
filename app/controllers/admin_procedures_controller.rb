@@ -30,8 +30,9 @@ class AdminProceduresController < ApplicationController
 
     if @step.in_draft?
       @step.start!
-      users = Group.find(@step.group.id).users
-      send_emails(users,'check_comments_and_approve') if users.present?
+      users = User.with_role :director_departamento
+      email_data = {users: users, owner: @procedure.user, procedure_name: @procedure.name, info: @step.info, template: 'check_comments_and_approve'}
+      send_multiple_emails(email_data)
       redirect_to admin_procedure_path(@procedure), notice: 'Comentarios guardados con exito. Notificación enviada.'
     else
       flash[:error] = 'Imposible realizar ésta acción.'
