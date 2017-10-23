@@ -1,10 +1,23 @@
-user = User.new(:username => 'admin',
-                :email => 'admin@admin.com',
-                :password => '123456', #Devise.friendly_token[0,20]
-                :password_confirmation => '123456')
-user.save!(:validate => false)
+Role.create!([
+  {name: "admin", resource_id: nil, resource_type: nil}]),
+  {name: "test", resource_id: nil, resource_type: nil},
+  {name: "docente", resource_id: nil, resource_type: nil},
+  {name: "decano", resource_id: nil, resource_type: nil},
+  {name: "asuntos", resource_id: nil, resource_type: nil},
+  {name: "departamento", resource_id: nil, resource_type: nil},
+  {name: "Consejo_Departamento", resource_id: nil, resource_type: nil},
+  {name: "Consejo_Facultad", resource_id: nil, resource_type: nil},
+  {name: "Consejo_Escuela", resource_id: nil, resource_type: nil},
+  {name: "Consejo_Universitario", resource_id: nil, resource_type: nil},
+  {name: "Jefe_Departamento", resource_id: nil, resource_type: nil}
+])
+#user = User.new(:username => 'admin',
+#                :email => 'admin@admin.com',
+#                :password => '123456', #Devise.friendly_token[0,20]
+#                :password_confirmation => '123456')
+#user.save!(:validate => false)
 
-user.add_role(:admin)
+#user.add_role(:admin)
 
 #user = User.new(:username => 'test',
 #                :email => 'test@test.com',
