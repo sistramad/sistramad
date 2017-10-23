@@ -31,7 +31,7 @@ class ModifyWorkplan < SystemProcedure
       email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
       send_email(email_data)
       users = User.with_role :consejo_departamento
-      send_emails(users,'need_to_approve')
+      send_multiple_emails(users, email_data)
       return true
     else
       return false
