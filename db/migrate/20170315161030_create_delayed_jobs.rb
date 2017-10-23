@@ -1,3 +1,4 @@
+
 class CreateDelayedJobs < ActiveRecord::Migration[5.1]
   def self.up
     create_table :delayed_jobs, force: true do |table|

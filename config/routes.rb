@@ -29,6 +29,8 @@ Rails.application.routes.draw do
       get :download_all_documents
       get :check_initial_requirements
       post :save_opinion
+      get :deny_step
+      post :deny_step
     end
   end
 
@@ -130,4 +132,32 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
+
+  #Routes de Luis
+
+  resources :extensions
+  resources :joint_plans do
+    collection do
+        post :download
+        get :status
+        post :decline
+        post :accept
+        post :view
+        get :inform
+        get :inform_list
+        get :extension
+    end
+  end
+
+  resources :notifications
+  resources :reports
+  resources :attachments do
+    collection do
+      post :create_inform
+    end
+  end
+
+  mount ActionCable.server => '/cable'
+  #mount Sidekiq::Web => '/sidekiq'
+
 end

@@ -1,0 +1,66 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to t('list_attachment'), "#" %></li>
+</ul>
+<%= form_for (@attachment), :html => {:multipart => true, :class => "new_attachment"},
+                    wrapper: :horizontal_file_input_sistramad,
+                    wrapper_mappings: {
+                        file: :horizontal_file_input_sistramad
+                    } do |f| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @documents.each do |document| %>
+            <tr>
+              <%= fields_for 'attachments[]', document do |x| %>
+                  <td><b><li><%= document.name %></li></b>
+                    <div class="field">
+                      <div class="attachments">
+                        <div class="file_field" style="width: 75%;padding-top: 5px">
+                          <%= x.file_field :file, class: "filestyle", "data-buttonName"=>"btn-primary",
+                                           "data-buttonText"=>"Seleccionar Archivo",
+                                           "data-iconName"=>"glyphicon glyphicon-paperclip",
+                                           "data-buttonBefore"=>"true"%>
+                          <%= x.hidden_field :document_id, :value => document.id%>
+                        </div>
+                      </div>
+                      <% if document.id == 5 %>
+                          <%= fields_for 'joint_plan', @joint_plan do |y| %>
+
+                      <b><li style="margin-top: 5px">Ingrese Fecha de Inicio y Fin del Plan</li></b>
+                          <div class = "field" style="margin-top: 10px; display: flex">
+
+                            <div class="input-group" id="dates">
+                              <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span></button>
+                              </div>
+                              <%= y.text_field :begin_plan,:id => 'date-es',:class => 'form-control',:style => 'margin-right: -10px', :placeholder=>'Fecha de Inicio' %>
+                            </div>
+                            <div class="input-group" id="dates">
+                              <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span></button>
+                              </div>
+                              <%= y.text_field :end_plan,:id => 'date-es1',:class => 'form-control',:style => 'margin-right: -10px', :placeholder=>'Fecha de Fin' %>
+                            </div>
+                          </div>
+                          <% end %>
+                      <% end %>
+                    </div>
+                  </td>
+              <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <div class="field">
+        <%= f.submit "Guardar", class:'btn btn-info btn-sm list'%>
+      </div>
+
+    </div>
+<% end %>

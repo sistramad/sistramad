@@ -2,7 +2,7 @@ class DelaySabbaticalYear < SystemProcedure
   include EmailService
 
   def initialize     
-    @name = "Diferimiento de Año Sabatico"
+    @name = "Diferimiento de Año Sabático"
     @code = "T-AS104"
   end
   
@@ -27,9 +27,12 @@ class DelaySabbaticalYear < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      users = User.find_group_members('C20')
-      send_emails(users,'need_to_approve')
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+      
+      users = User.with_role :consejo_facultad
+      email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
+      send_multiple_emails(users, email_data)
       return true
     else
       return false
@@ -46,15 +49,19 @@ class DelaySabbaticalYear < SystemProcedure
     approve_step?('#2')
   end
 
-  def can_complete?(start_date)
-    steps_approved = true
-    self.procedure.steps.each do |step|
-      unless step.approved?
-        steps_approved = false
-      end
-    end
-    return steps_approved
+  def approve(start_date)
+    if can_be_approved?()
+      self.procedure.approve!
+    end       
   end
+
+  def can_be_approved?()
+    step_approved?('#1') && step_approved?('#2')
+  end
+
+  def step_approved?(step_name)
+    self.procedure.steps.find_by(name: "#{step_name}").approved?
+  end 
 
   
 end

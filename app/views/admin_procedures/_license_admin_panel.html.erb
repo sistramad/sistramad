@@ -7,29 +7,62 @@
     <div class="panel-body">
       <ul>
         <h4>
-
-
  
           <% step = @procedure.steps.find_by(name: "#3")%>
-          <% if step.in_draft? %>
+          <% if step.in_draft? and current_user.has_role?(:jefe_departamento)%>
             <p> <li> <%= link_to "Evaluar recaudos iniciales.", check_initial_requirements_admin_procedure_path(procedure: @procedure, step_id: step.id) %> </li> </p>
-          <% elsif step.in_progress?%>
+          <% elsif step.in_progress? and current_user.has_role?(:director_departamento)%>
             <p> <li> <%= link_to "Aprobar recaudos iniciales.", show_initial_requirements_admin_procedure_path(procedure: @procedure) %> </li> </p>
           <% end %>
 
           
           <% @document = find_document_by_code(@procedure, "CDAP")%>
-          <% if @document.nil? %>
-            <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
-          <% else %>
-            <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
-            
-            <% if @procedure.in_progress? %>
-              <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
-            <% end %>
-            
-          <% end %>       
-                  
+          <% group_code = @procedure.steps.find_by(name: "#4").group.code %>
+
+          <% if group_code == 'D40' and current_user.has_role?(:decano) and steps_approved?(%w[#1 #2 #3]) %>
+              <% if @document.nil? %>
+                <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+              <% else %>
+                <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
+                <% if @procedure.in_progress? %>
+                  <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+                <% end %>
+              <% end %>   
+          <% end %>
+           
+          <% if group_code == 'C20' and current_user.has_role?(:consejo_facultad) and steps_approved?(%w[#1 #2 #3]) %>
+              <% if @document.nil? %>
+                <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+              <% else %>
+                <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
+                <% if @procedure.in_progress? %>
+                  <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+                <% end %>
+              <% end %>   
+          <% end %>   
+
+          <% if group_code == 'C30' and current_user.has_role?(:consejo_universitario) and steps_approved?(%w[#1 #2 #3]) %>
+              <% if @document.nil? %>
+                <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+              <% else %>
+                <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
+                <% if @procedure.in_progress? %>
+                  <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+                <% end %>
+              <% end %>   
+          <% end %> 
+
+          <% if group_code == 'D50' and current_user.has_role?(:director_escuela) and steps_approved?(%w[#1 #2 #3]) %>
+              <% if @document.nil? %>
+                <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
+              <% else %>
+                <p><li> <%= link_to "Ver constancia de aprobación.", @document.attachment_url %> </li></p>
+                <% if @procedure.in_progress? %>
+                  <p><li> <%= link_to "Editar constancia de aprobación.", edit_document_path(@document) %> </li></p>
+                <% end %>
+              <% end %>   
+          <% end %> 
+
           <br>
             <% if @procedure.in_progress? %>
               <%= form_tag approve_procedure_admin_procedure_path(@procedure) do %>

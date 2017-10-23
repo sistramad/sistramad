@@ -36,3 +36,7 @@ doc/
 /public/uploads/*
 
 .secret
+.byebug_history
+
+#para que no tome los documentos subidos por el tramite de luis en git
+/public/system

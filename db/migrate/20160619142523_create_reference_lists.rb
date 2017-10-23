@@ -1,3 +1,4 @@
+
 class CreateReferenceLists < ActiveRecord::Migration[5.1]
   def change
     create_table :reference_lists do |t|

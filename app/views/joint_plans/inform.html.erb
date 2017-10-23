@@ -1,0 +1,36 @@
+
+<%= simple_form_for (@attachment), :html => {:multipart => true, :class => "new_attachment"},
+                    wrapper: :horizontal_file_input_sistramad,
+                    wrapper_mappings: {
+                        file: :horizontal_file_input_sistramad
+                    } do |f| %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+
+        <tbody>
+            <tr>
+              <div id="<%= @document.id %>">
+                <h1>Informe Parcial</h1>
+                <p>Adjuntar informe Parcial</p>
+                    <%= fields_for 'attachments[]', @document do |x| %>
+                        <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                         "data-buttonText" => "Seleccionar Archivo",
+                                         "data-iconName" => "glyphicon glyphicon-paperclip",
+                                         "data-buttonBefore" => "true" %>
+                        <%= x.hidden_field :document_id, :value => 16 %>
+                        <%= x.hidden_field :joint_plan_id, :value => @plan_id %>
+                    <% end %>
+                    <p style="margin-top: 5px">
+                    <%= f.submit 'Aceptar',class: 'btn btn-info'%>
+
+                    </div>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+<% end %>
+
+
+<br><br>
+
+

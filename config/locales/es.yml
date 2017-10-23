@@ -271,6 +271,7 @@ es:
   edit: 'Editar'
   back: 'Regresar'
   reference_lists: 'Lista de referencias'
+  list_attachment: 'Lista de recaudos'
   user:  'Usuario'
   users: 'Usuarios'
   roles: 'Roles'

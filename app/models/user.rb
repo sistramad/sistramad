@@ -11,6 +11,9 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable, :lockable
 
   has_one :employee, inverse_of: :user
+  has_one :joint_plan, inverse_of: :user
+  has_many :attachments
+  accepts_nested_attributes_for :attachments
   has_many :procedures, dependent: :destroy
   has_many :workflows, through: :procedures
   has_many :steps, through: :workflows
@@ -32,6 +35,7 @@ class User < ApplicationRecord
   def self.find_group_members(code)
     User.joins(:groups).where(groups: {code: code})
   end
+  
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup #copia con el metodo .dup a conditions
@@ -42,6 +46,17 @@ class User < ApplicationRecord
     end
   end
 
+  def notification_count
+    Notification.for_user(self.id)
+  end
+
+  def user_id
+    current_user.id
+  end
+
+  def crop_avatar
+    avatar.recreate_versions! if avatar_crop_x.present?
+  end
   def except_current_user(users)
     users.reject {|user| user.id == self.id}
   end

@@ -1,4 +1,5 @@
 class SystemProcedure
+  include EmailService
 
   attr_accessor :name
   attr_accessor :code
@@ -34,8 +35,14 @@ class SystemProcedure
   def start_step(step_name)
     step = self.procedure.workflows.first.steps.where(name: step_name).first
     step.start!
-    step.update(approved_at: Time.now)
+    step.update(updated_at: Time.now)
     step.in_progress?
   end 
+
+  def deny_step(owner, responsable_fullname)
+    email_data = {user: owner, owner: owner, responsable: responsable_fullname, template: 'step_deny'}
+    send_email(email_data)
+    self.procedure.destroy
+  end
 
 end

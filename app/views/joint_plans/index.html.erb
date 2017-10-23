@@ -1,0 +1,232 @@
+<ul class="nav nav-tabs" role="tablist">
+  <li class="active"><%= link_to t('list_request'), "#" %></li>
+</ul>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover">
+
+
+    <tbody>
+    <% if current_user.has_role? :decano %>
+        <thead>
+        <tr>
+          <th><%= "Nombre del Plan" %></th>
+          <th><%= "Solicitado Por" %></th>
+          <th><%= "Recaudos" %></th>
+          <th><%= "Recomendacion de aprobación" %></th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+        <% @joint_plans.each do |document| %>
+            <tr>
+              <div class="field">
+                <td><b>
+                  <li><%= document.name %></li>
+                </b>
+                <td><b>
+                  <li><%= User.find(document.user.id).username %></li>
+                </b>
+                <td>
+                  <li>
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <%= link_to "Descargar", download_joint_plans_path(user_id: document.user.id), {method: "download"} %>
+                  </li>
+                  <div class="field">
+                    <div class="input-group">
+
+                    </div><!-- /input-group -->
+                  </div>
+                </td>
+                <td>
+                  <% if document.status < 2 %>
+                      <div class="popup-modal" href=#<%= document.id %>a>
+                        <button type="button" class="btn btn-success">Adjuntar</button>
+
+                      </div>
+                      <div class="popup-modal" href=#<%= document.id %>r>
+                        <button type="button" class="btn btn-danger">Negar</button>
+
+                      </div>
+                  <% else %>
+                      <% if document.status == 2 %>
+                          <span class="label label-success" style="font-size: 110%;margin-left: 5px;">Preaprobado</span>
+                      <% end %>
+                      <%  if document.status == 3 %>
+                          <span class="label label-danger" style="font-size: 110%;margin-left: 5px;">Negado</span>
+                      <% end %>
+                  <% end %>
+                  </div>
+
+              <div id="<%= document.id %>a" class="white-popup-block mfp-hide">
+                <h1>Adjuntar Documento</h1>
+                <p>Adjunte el documento de recomendación de aprobación</p>
+                <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
+                                    wrapper: :horizontal_file_input_sistramad,
+                                    wrapper_mappings: {
+                                        file: :horizontal_file_input_sistramad
+                                    } do |f| %>
+
+                    <%= fields_for :report, document do |x| %>
+                        <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                         "data-buttonText" => "Seleccionar Archivo",
+                                         "data-iconName" => "glyphicon glyphicon-paperclip",
+                                         "data-buttonBefore" => "true" %>
+                        <%= x.hidden_field :jointplan_id, :value => document.id %>
+                        <%= x.hidden_field :user_id, :value => current_user.id %>
+                        <%= x.hidden_field :applicant_id, :value => document.user.id %>
+                        <%= x.hidden_field :document_id, :value => 14 %>
+                    <% end %>
+                    <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
+                      <a class="popup-modal-dismiss" href="#">
+                        <button type="button" class="btn btn-default">Cerrar</button>
+                      </a></p>
+
+                    </div>
+
+                <% end %>
+
+                <div id="<%= document.id %>r" class="white-popup-block mfp-hide">
+                  <h1>Adjuntar Documento</h1>
+                  <p>Adjunte el documento de desaprobación del plan</p>
+                  <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
+                                      wrapper: :horizontal_file_input_sistramad,
+                                      wrapper_mappings: {
+                                          file: :horizontal_file_input_sistramad
+                                      } do |f| %>
+                      <%= fields_for :report, document do |x| %>
+                          <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                           "data-buttonText" => "Seleccionar Archivo",
+                                           "data-iconName" => "glyphicon glyphicon-paperclip",
+                                           "data-buttonBefore" => "true" %>
+                          <%= x.hidden_field :jointplan_id, :value => document.id %>
+                          <%= x.hidden_field :user_id, :value => current_user.id %>
+                          <%= x.hidden_field :applicant_id, :value => document.user.id %>
+                          <%= x.hidden_field :document_id, :value => 15 %>
+                      <% end %>
+                      <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
+                        <a class="popup-modal-dismiss" href="#">
+                          <button type="button" class="btn btn-default">Cerrar</button>
+                        </a></p>
+
+                      </div>
+
+                  <% end %>
+                  </tr>
+
+        <% end %>
+
+    <% end %>
+    <% if current_user.has_role? :asuntos %>
+
+        <thead>
+        <tr>
+          <th><%= "Nombre del Plan" %></th>
+          <th><%= "Solicitado Por" %></th>
+          <th><%= "Documento" %></th>
+          <th><%= "Aprobar" %></th>
+          <th colspan="3"></th>
+        </tr>
+        </thead>
+        <% @joint_plans.each do |document| %>
+            <% if document.status == 2 %>
+            <tr>
+              <div class="field">
+                <td><b>
+                  <li><%= document.name %></li>
+                </b>
+                <td><b>
+                  <li><%= User.find(document.user.id).username %></li>
+                </b>
+                <td>
+                  <li>
+                    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <%= link_to "Descargar", download_joint_plans_path(user_id: document.user.id), {method: "download"} %>
+                  </li>
+                  <div class="field">
+                    <div class="input-group">
+
+                    </div><!-- /input-group -->
+                  </div>
+                </td>
+                <td>
+
+                      <div class="popup-modal" href=#<%= document.id %>a>
+                        <button type="button" class="btn btn-success">Adjuntar</button>
+
+                      </div>
+                      <div class="popup-modal" href=#<%= document.id %>r>
+                        <button type="button" class="btn btn-danger">Negar</button>
+
+                      </div>
+
+
+                  <div id="<%= document.id %>a" class="white-popup-block mfp-hide">
+                    <h1>Adjuntar Documento</h1>
+                    <p>Adjunte el documento de de aprobación</p>
+                    <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
+                                        wrapper: :horizontal_file_input_sistramad,
+                                        wrapper_mappings: {
+                                            file: :horizontal_file_input_sistramad
+                                        } do |f| %>
+
+                        <%= fields_for :report, document do |x| %>
+                            <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                             "data-buttonText" => "Seleccionar Archivo",
+                                             "data-iconName" => "glyphicon glyphicon-paperclip",
+                                             "data-buttonBefore" => "true" %>
+                            <%= x.hidden_field :jointplan_id, :value => document.id %>
+                            <%= x.hidden_field :user_id, :value => current_user.id %>
+                            <%= x.hidden_field :applicant_id, :value => document.user.id %>
+                            <%= x.hidden_field :document_id, :value => 18 %>
+                        <% end %>
+                        <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
+                          <a class="popup-modal-dismiss" href="#">
+                            <button type="button" class="btn btn-default">Cerrar</button>
+                          </a></p>
+
+                        </div>
+
+                    <% end %>
+
+                    <div id="<%= document.id %>r" class="white-popup-block mfp-hide">
+                      <h1>Adjuntar Documento</h1>
+                      <p>Adjunte el documento de desaprobación del plan</p>
+                      <%= simple_form_for (@report), :html => {:multipart => true, :class => "new_attachment"},
+                                          wrapper: :horizontal_file_input_sistramad,
+                                          wrapper_mappings: {
+                                              file: :horizontal_file_input_sistramad
+                                          } do |f| %>
+                          <%= fields_for :report, document do |x| %>
+                              <%= x.file_field :file, class: "filestyle", "data-buttonName" => "btn-primary",
+                                               "data-buttonText" => "Seleccionar Archivo",
+                                               "data-iconName" => "glyphicon glyphicon-paperclip",
+                                               "data-buttonBefore" => "true" %>
+                              <%= x.hidden_field :jointplan_id, :value => document.id %>
+                              <%= x.hidden_field :user_id, :value => current_user.id %>
+                              <%= x.hidden_field :applicant_id, :value => document.user.id %>
+                              <%= x.hidden_field :document_id, :value => 15 %>
+                          <% end %>
+                          <p style="margin-top: 5px"><%= f.submit "Guardar", class: 'btn btn-info btn-sm list', id: document.id %>
+                            <a class="popup-modal-dismiss" href="#">
+                              <button type="button" class="btn btn-default">Cerrar</button>
+                            </a></p>
+
+                          </div>
+
+                      <% end %>
+
+                  </div>
+            </tr>
+        <% end %>
+
+        <% end %>
+
+
+    <% end %>
+    </tbody>
+  </table>
+
+
+</div>
+
+
+<br><br>
+

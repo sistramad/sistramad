@@ -1,7 +1,7 @@
 module AdminProceduresHelper
   def basic_info_view(code)
     case code
-      when 'T-AS100' || 'T-AS101' || 'T-AS102' || 'T-AS103' || 'T-AS104' || 'T-AS105' then 
+      when 'T-AS100' , 'T-AS101' , 'T-AS102' , 'T-AS103' , 'T-AS104' , 'T-AS105' then  
         return 'procedures/basic_info'     
       when 'T-SPF200' then 
         return 'special_formation_procedures/basic_info'
@@ -19,4 +19,19 @@ module AdminProceduresHelper
         return 'license_reincorporations/basic_info'
     end
   end
+
+  def steps_approved?(steps)
+    steps.each do |step|
+      unless @procedure.steps.find_by(name: step).approved?
+        return false
+      end
+    end
+    return true
+  end
+
+  def step_approved?(step_name)
+    @procedure.steps.find_by(name: step_name).approved?
+  end
+
+
 end

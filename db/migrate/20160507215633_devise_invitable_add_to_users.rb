@@ -1,3 +1,4 @@
+
 class DeviseInvitableAddToUsers < ActiveRecord::Migration[5.1]
   def up
     change_table :users do |t|
@@ -21,3 +22,4 @@ class DeviseInvitableAddToUsers < ActiveRecord::Migration[5.1]
     end
   end
 end
+

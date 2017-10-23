@@ -27,17 +27,17 @@
             <%= f.input :parent_procedure_id, label: "Parent:", wrapper_html: { class: 'hidden'} %>
 
             <% @documents.each do |document| %>
-              <div class = "well well-sm col-md-6">
-                <%= simple_fields_for 'documents[]', document do |ff| %>
-                  <dl>
+            <div class = "well well-sm col-md-6">
+              <%= simple_fields_for 'documents[]', document do |ff| %>
+                <dl>
                     <dt> <h3> <%=document.name %> </h3> </dt>
                     <dd>  
                       <%= ff.input :name, label: document.name, wrapper_html: { class: 'hidden'}%>
                       <%= ff.input :code, label: document.code, wrapper_html: { class: 'hidden'}%>
-                      <%= ff.file_field :attachment %>
-                    </dd>
-                  </dl>
-                <% end %>
+                      <%= ff.file_field :attachment%>
+                    </dd>                    
+                </dl>
+              <% end %>
               </div>
             <% end %>
             <div class = "col-md-12 col-md-offset-5">

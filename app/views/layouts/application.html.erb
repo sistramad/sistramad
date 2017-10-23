@@ -2,14 +2,19 @@
 <html>
 <head>
   <title>Sistramad</title>
-  <%= stylesheet_link_tag 'application', :media => "all"%>
-  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= action_cable_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application'%>
+
   <%= csrf_meta_tags %>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/bootstrap.filestyle/1.1.0/js/bootstrap-filestyle.min.js"> </script>
 </head>
+
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 <%= render "partials/navigation" %>
@@ -33,12 +38,12 @@
               <%= image_tag "user_avatar.jpg" , :class=>"img-circle", :alt=>"User Image"%>
             </div>
             <div class="pull-left info">
+              <p><%= current_user.first_name %> <%= current_user.last_name %></p>
             <% if user_signed_in? %>
               <div><%= current_user.username %></div>
             <% end %>
               <!-- @user.current.username -->
               <!-- Status -->
-              <a href="#"><i class="fa fa-circle text-success"></i> En Linea</a>
             </div>
           </div>
 
@@ -58,34 +63,39 @@
           <ul class="sidebar-menu">
             <li class="header">TR&Aacute;MITES</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
+            
+            <li><a href="#"><i class="fa fa-circle-o"></i> <span>Plan Septenal</span></a></li>
+
             <li><a href="#"><i class="fa fa-circle-o"></i> <span>Ascenso</span></a></li>
+
             <li>
               <%= link_to special_formation_procedures_path(code: "T-SPF200") do %>
                 <i class="fa fa-circle-o"></i>
-                  Formación Especial
+                <span> Formación Especial</span></a>
               <% end %>
             <li>
+
             <li>
               <%= link_to rotation_plans_path(code: "T-SPR201") do %>
                 <i class="fa fa-circle-o"></i>
-                  Plan de Rotación
+                <span> Plan de Rotación</span></a>
               <% end %>
             <li>
 
             <li>
               <%= link_to licenses_path(code: "T-SLR204") do %>
                 <i class="fa fa-circle-o"></i>
-                  Licencias
+                <span>Licencias</span></a>
               <% end %>
             <li>
 
             <li><a href="/procedures"><i class="fa fa-circle-o"></i> <span>Año Sabatico</span></a></li>
+            
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> <span>Traslados</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
               </a>
               <ul class="treeview-menu">
                 <li><a href="#"><i class="fa fa-circle"></i>Solicitar Nuevo Traslado</a></li>
@@ -98,16 +108,54 @@
 
 
             <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle"></i>Nuevo Plan Conjunto</a></li>
-                <li><a href="#"><i class="fa fa-circle"></i>Eliminar Plan Conjunto</a></li>
-              </ul>
+                <a href="#"><i class="fa fa-circle-o"></i> <span>Plan Conjunto</span>
+                  <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                  </span>
+                </a>
+                <ul class="treeview-menu">
+                  <% if JointPlan.where(user_id: current_user.id).empty? %>
+                      <li><%= link_to new_attachment_path,method: :get do%>
+                            <i class="fa fa-circle"></i>
+                            Nuevo Plan Conjunto
+                        <% end %></li>
+                  <% end %>
+                  <li><%= link_to status_joint_plans_path,method: :get do%>
+                      <i class="fa fa-circle"></i>
+                      Estatus de Plan Conjunto
+                  <% end %>
+                  </li>
+                  <li><%= link_to inform_joint_plans_path,method: :get do%>
+                        <i class="fa fa-circle"></i>
+                        Subir Informe
+                    <% end %>
+                  </li>
+                  <li><%= link_to extension_joint_plans_path,method: :get do%>
+                        <i class="fa fa-circle"></i>
+                        Solicitar Extensión de Plazo
+                    <% end %>
+                  </li>
+                </ul>
             </li>
+
+
+            <% if current_user.has_role? :asuntos %>
+                <li><%= link_to joint_plans_path do%>
+                      <i class="fa fa-circle-o"></i>
+                      <span>Ver Solicitudes</span></a>
+                  <% end %></li>
+                <li><%= link_to inform_list_joint_plans_path do%>
+                      <i class="fa fa-circle-o"></i>
+                      <span>Informes</span></a>
+                  <% end %></li>
+            <% end %>
+            <% if current_user.has_role? :decano %>
+                <li><%= link_to joint_plans_path do%>
+                    <i class="fa fa-circle-o"></i>
+                    <span>Ver Solicitudes</span></a>
+                <% end %></li>
+            <% end %>
+            
           </ul>
           <!-- /.sidebar-menu -->
         </section>
@@ -138,7 +186,9 @@
         <section class="content">
           <!-- Your Page Content Here -->
           <%= yield %>
-          <%= debug(params) if Rails.env.development? %>
+          <!-- 
+            <%= debug(params) if Rails.env.development? %>
+          -->
         </section>
       </div>
 

@@ -1,3 +1,4 @@
+
 class CreateRegisteredUsers < ActiveRecord::Migration[5.1]
   def change
     create_table :registered_users do |t|
