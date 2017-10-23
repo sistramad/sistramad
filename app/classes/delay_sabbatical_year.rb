@@ -30,6 +30,7 @@ class DelaySabbaticalYear < SystemProcedure
       email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
       send_email(email_data)
       
+      users = User.with_role :consejo_facultad
       email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
       send_multiple_emails(users, email_data)
       return true
