@@ -95,6 +95,8 @@ user = User.new(:username => 'jceballos',
                 :password => '123456', #Devise.friendly_token[0,20]
                 :password_confirmation => '123456')
 user.save!
+user.add_role(:admin)
+user.add_role(:system_admin)
 
 user = User.new(:username => 'lisset',
                 :email => 'liss612@gmail.com',
