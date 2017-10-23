@@ -462,6 +462,28 @@ ProfessorsTransfer.create!([
   {id: 133,name: "Cambio de Dedicacion", status: "IP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 56, faculty_to_id: 53, type_of_translate: 51, process_type: 3}
 ])
 =end
+process=ProfessorsTransfer.where('id = ?',115).first
+attachment = Attachment.new(:id => 209,
+:user_id => 8,
+:document_id => 23,
+:file_file_name => "traslado_aprobacion_temp20171004-4608-1w1z7mm.pdf",
+:file_content_type => "application/pdf",
+:file_file_size 104717, 
+:file_updated_at =>"2017-10-05 02:35:33",
+:process_id => process)
+attachment.save!
+
+process=ProfessorsTransfer.where('id = ?',132).first
+attachment = Attachment.new(:id => 227,
+:user_id => 15,
+:document_id => 23,
+:file_file_name => "traslado_aprobacion_temp20171020-28749-1pe2jpu.pdf",
+:file_content_type => "application/pdf",
+:file_file_size 104826, 
+:file_updated_at =>"2017-10-20 06:28:14",
+:process_id => process)
+attachment.save!
+
 Attachment.create!([
   {id: 1,user_id: 2, document_id: 1, link: nil, file_file_name: "Wallpaper-3D-2013-.jpg", file_content_type: "image/jpeg", file_file_size: 532832, file_updated_at: "2017-02-12 22:54:14", process_id: nil},
   {id: 199,user_id: 8, document_id: 2, link: nil, file_file_name: "JesusDeAbreu.jpg", file_content_type: "image/jpeg", file_file_size: 33215, file_updated_at: "2017-09-27 03:49:39", process_id: nil},
@@ -491,7 +513,7 @@ Attachment.create!([
   {id: 197,user_id: 2, document_id: 21, link: nil, file_file_name: "UCd.jpg", file_content_type: "image/jpeg", file_file_size: 120507, file_updated_at: "2017-03-24 19:08:26", process_id: nil},
   {id: 198,user_id: 2, document_id: 22, link: nil, file_file_name: "hexagons-3d-desktop-wallpaper-hd_VUiBHpV.jpg", file_content_type: "image/jpeg", file_file_size: 128475, file_updated_at: "2017-03-24 19:08:26", process_id: nil},
   {id: 153,user_id: 8, document_id: 22, link: nil, file_file_name: "pagocarne.pdf", file_content_type: "application/pdf", file_file_size: 63742, file_updated_at: "2017-09-03 23:12:40", process_id: nil},
-  {id: 209,user_id: 8, document_id: 23, link: nil, file_file_name: "traslado_aprobacion_temp20171004-4608-1w1z7mm.pdf", file_content_type: "application/pdf", file_file_size: 104717, file_updated_at: "2017-10-05 02:35:33", process_id: 115},
+  #{id: 209,user_id: 8, document_id: 23, link: nil, file_file_name: "traslado_aprobacion_temp20171004-4608-1w1z7mm.pdf", file_content_type: "application/pdf", file_file_size: 104717, file_updated_at: "2017-10-05 02:35:33", process_id: 115},
   {id: 214,user_id: 15, document_id: 12, link: nil, file_file_name: "3D-Cigarette-Wallpaper_VeqSC7f.jpg", file_content_type: "image/jpeg", file_file_size: 130334, file_updated_at: "2017-10-19 17:46:01", process_id: nil},
   {id: 215,user_id: 15, document_id: 20, link: nil, file_file_name: "3d-tv-14723_sqhNJej.jpg", file_content_type: "image/jpeg", file_file_size: 501358, file_updated_at: "2017-10-19 17:46:03", process_id: nil},
   {id: 216,user_id: 15, document_id: 19, link: nil, file_file_name: "3D-Wallpaper-of-Tiger_60ipnX3.jpg", file_content_type: "image/jpeg", file_file_size: 389486, file_updated_at: "2017-10-19 18:37:12", process_id: nil},
@@ -499,7 +521,7 @@ Attachment.create!([
   {id: 213,user_id: 15, document_id: 4, link: nil, file_file_name: "download.jpg", file_content_type: "image/jpeg", file_file_size: 5086, file_updated_at: "2017-10-20 01:34:19", process_id: nil},
   {id: 226,user_id: 15, document_id: 26, link: nil, file_file_name: "certificadoRubyOnRails.pdf", file_content_type: "application/pdf", file_file_size: 1153634, file_updated_at: "2017-10-20 02:05:27", process_id: nil},
   {id: 225,user_id: 15, document_id: 22, link: nil, file_file_name: "3D-Cigarette-Wallpaper_VeqSC7f.jpg", file_content_type: "image/jpeg", file_file_size: 130334, file_updated_at: "2017-10-20 02:36:44", process_id: nil},
-  {id: 227,user_id: 15, document_id: 23, link: nil, file_file_name: "traslado_aprobacion_temp20171020-28749-1pe2jpu.pdf", file_content_type: "application/pdf", file_file_size: 104826, file_updated_at: "2017-10-20 06:28:14", process_id: 132},
+  #{id: 227,user_id: 15, document_id: 23, link: nil, file_file_name: "traslado_aprobacion_temp20171020-28749-1pe2jpu.pdf", file_content_type: "application/pdf", file_file_size: 104826, file_updated_at: "2017-10-20 06:28:14", process_id: 132},
   {id: 229,user_id: 15, document_id: 3, link: nil, file_file_name: "controllers_complete.png", file_content_type: "image/png", file_file_size: 121436, file_updated_at: "2017-10-20 23:28:35", process_id: nil},
   {id: 230,user_id: 15, document_id: 25, link: nil, file_file_name: "female_user.png", file_content_type: "image/png", file_file_size: 1043, file_updated_at: "2017-10-20 23:28:36", process_id: nil},
   {id: 231,user_id: 15, document_id: 27, link: nil, file_file_name: "Etiqueta_Anaquel.pdf", file_content_type: "application/pdf", file_file_size: 12909, file_updated_at: "2017-10-20 23:28:36", process_id: nil},
