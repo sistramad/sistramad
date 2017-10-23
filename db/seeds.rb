@@ -1,3 +1,4 @@
+=begin
 Role.create!([
   {name: "admin", resource_id: nil, resource_type: nil},
   {name: "test", resource_id: nil, resource_type: nil},
@@ -189,7 +190,7 @@ user = User.new(:id => 23,
 user.add_role(:Consejo_Facultad)                  
 user.save!(:validate => false)
 
-=begin
+
 User.create!([
   {id: 3,username: "joalbert", first_name: "joalbert", middle_name: "andrés", last_name: "gonzález", genre: "m", identification_document: "18468784", birthday: "1988-11-24", email: "joalbertgonzalez@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-01-17 00:01:48", sign_in_count: 14, current_sign_in_at: "2017-10-16 08:26:15", last_sign_in_at: "2017-08-24 03:29:27", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil},
   # 3
@@ -218,7 +219,7 @@ User.create!([
  {id:28,username: "testing", first_name: "testing", middle_name: "x", last_name: "testing", genre: "m", identification_document: "7654567", birthday: "1962-10-21", email: "testing@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-10-21 04:02:30", sign_in_count: 1, current_sign_in_at: "2017-10-21 04:03:17", last_sign_in_at: "2017-10-21 04:03:17", current_sign_in_ip: "::1", last_sign_in_ip: "::1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil}
  #id: 28 -> 14
 ])
-=end
+
 #UsersRole.create!([
 #  {user_id: 1, role_id: 1}, 
 #  {user_id: 2, role_id: 2},
@@ -284,11 +285,7 @@ JointPlan.create!([
   {name: "Plan Conjunto", user_id: 8, status: nil, created: nil},
   {name: "Plan Conjunto", user_id: 2, status: nil, created: nil}
 ])
-ProfessorsTransfer.create!([
-  {name: "Traslados", status: "AP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 62, faculty_to_id: 68, type_of_translate: 8, process_type: 1},
-  {name: "Traslados", status: "IP", user_id: 8, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 48, faculty_to_id: 47, type_of_translate: 7, process_type: 1},
-  {name: "Cambio de Dedicacion", status: "IP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 56, faculty_to_id: 53, type_of_translate: 51, process_type: 3}
-])
+=end
 Reference.create!([
   {name: "region", description: nil},
   {name: "sub_region", description: nil},
@@ -468,6 +465,11 @@ FormalitiesDocument.create!([
   {formalities_master_id: 3, document_id: 26},
   {formalities_master_id: 3, document_id: 27},
   {formalities_master_id: 3, document_id: 29}
+])
+ProfessorsTransfer.create!([
+  {name: "Traslados", status: "AP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 62, faculty_to_id: 68, type_of_translate: 8, process_type: 1},
+  {name: "Traslados", status: "IP", user_id: 8, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 48, faculty_to_id: 47, type_of_translate: 7, process_type: 1},
+  {name: "Cambio de Dedicacion", status: "IP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 56, faculty_to_id: 53, type_of_translate: 51, process_type: 3}
 ])
 RequestWorkflow.create!([
   {name: "Workflow Traslado entre Universidades", description: "Flujo principal del trámite de Traslado entre Universidades", professors_transfer_id: 115, is_active: true, is_completed: false},
