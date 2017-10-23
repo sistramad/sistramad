@@ -373,11 +373,6 @@ Employee.create!([
   {user_id: 8, type_employee_id: 40, scale_classification_id: 30, scale_category_id: 35, dedication_classification_id: 56, dedication_start_date: "2017-10-08"},
   {user_id: 15, type_employee_id: 40, scale_classification_id: 30, scale_category_id: 35, dedication_classification_id: 56, dedication_start_date: "2016-10-30"}
 ])
-Employee::HABTM_Faculties.create!([
-  {employee_id: 2, faculty_id: 1},
-  {employee_id: 3, faculty_id: 1},
-  {employee_id: 4, faculty_id: 1}
-])
 Faculty.create!([
   {name: "facultad de ciencias y tecnología", acronym: "FaCyT", active: true},
   {name: "facultad de ciencias de la salud", acronym: "FCS", active: true},
@@ -386,6 +381,11 @@ Faculty.create!([
   {name: "facultad de ingeniería", acronym: "FACING", active: true},
   {name: "facultad de odontología", acronym: "FAO", active: true},
   {name: "Facultad de ciencias de la educación", acronym: "FaCE", active: true}
+])
+Employee::HABTM_Faculties.create!([
+  {employee_id: 2, faculty_id: 1},
+  {employee_id: 3, faculty_id: 1},
+  {employee_id: 4, faculty_id: 1}
 ])
 Faculty::HABTM_Employees.create!([
   {employee_id: 2, faculty_id: 1},
