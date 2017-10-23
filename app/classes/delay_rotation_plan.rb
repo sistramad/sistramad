@@ -30,10 +30,11 @@ class DelayRotationPlan < SystemProcedure
   def initial_requirements_valid?()
     if all_required_documents_has_attachment?
       update_procedure_elements()
-      send_email(self.procedure.user, 'initial_validation_success')
-      send_emails(self.procedure.users, 'initial_validation_success')
-      users = User.find_group_members('C20')
-      send_emails(users,'need_to_approve')
+      email_data = {user: self.procedure.user, template: 'initial_validation_success', procedure_name: name}
+      send_email(email_data)
+      users = User.with_role :consejo_facultad
+      email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
+      send_multiple_emails(users, email_data)
       return true
     else
       return false
