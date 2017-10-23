@@ -38,7 +38,7 @@ class NotificationMailer < ApplicationMailer
     @owner = owner
     @procedure_name = procedure_name
     @info = info
-    mail(to: email_to.email, subject: 'Notificación de aprobacion de solicitud')
+    mail(to: email_to, subject: 'Notificación de aprobacion de solicitud')
   end
 
 end

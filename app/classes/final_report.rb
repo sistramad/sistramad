@@ -32,7 +32,8 @@ class FinalReport < SystemProcedure
       send_email(email_data)
       
       users = User.with_role :consejo_departamento
-      send_emails(users,'need_to_approve')    
+      email_data = {owner: self.procedure.user, procedure_name: name , template: 'need_to_approve' }
+      send_multiple_emails(users, email_data)     
       
       return true
     else
