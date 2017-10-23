@@ -1,4 +1,3 @@
-=begin
 Role.create!([
   {name: "admin", resource_id: nil, resource_type: nil},
   {name: "test", resource_id: nil, resource_type: nil},
@@ -189,7 +188,7 @@ user = User.new(:id => 23,
                 :password_confirmation => '123456')
 user.add_role(:Consejo_Facultad)                  
 user.save!(:validate => false)
-
+=begin
 User.create!([
   {id: 3,username: "joalbert", first_name: "joalbert", middle_name: "andrés", last_name: "gonzález", genre: "m", identification_document: "18468784", birthday: "1988-11-24", email: "joalbertgonzalez@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-01-17 00:01:48", sign_in_count: 14, current_sign_in_at: "2017-10-16 08:26:15", last_sign_in_at: "2017-08-24 03:29:27", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil},
   # 3
@@ -242,7 +241,7 @@ User.create!([
 #  {user_id: 15, role_id: 3},
 #  {user_id: 28, role_id: 2}
 #])
-
+=end
 Document.create!([
   {name: "Solicitud del Beneficiario", status: nil},
   {name: "Fotocopia de la Cedula de identidad", status: nil},
@@ -382,6 +381,7 @@ Faculty.create!([
   {name: "facultad de odontología", acronym: "FAO", active: true},
   {name: "Facultad de ciencias de la educación", acronym: "FaCE", active: true}
 ])
+=begin
 Employee::HABTM_Faculties.create!([
   {employee_id: 2, faculty_id: 1},
   {employee_id: 3, faculty_id: 1},
@@ -424,9 +424,9 @@ FormalitiesDocument.create!([
   {formalities_master_id: 3, document_id: 29}
 ])
 ProfessorsTransfer.create!([
-  {name: "Traslados", status: "AP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 62, faculty_to_id: 68, type_of_translate: 8, process_type: 1},
-  {name: "Traslados", status: "IP", user_id: 8, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 48, faculty_to_id: 47, type_of_translate: 7, process_type: 1},
-  {name: "Cambio de Dedicacion", status: "IP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 56, faculty_to_id: 53, type_of_translate: 51, process_type: 3}
+  {id: 132,name: "Traslados", status: "AP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 62, faculty_to_id: 68, type_of_translate: 8, process_type: 1},
+  {id: 115,name: "Traslados", status: "IP", user_id: 8, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 48, faculty_to_id: 47, type_of_translate: 7, process_type: 1},
+  {id: 133,name: "Cambio de Dedicacion", status: "IP", user_id: 15, isactive: nil, processed: nil, isapproved: nil, faculty_from_id: 56, faculty_to_id: 53, type_of_translate: 51, process_type: 3}
 ])
 Attachment.create!([
   {id: 1,user_id: 2, document_id: 1, link: nil, file_file_name: "Wallpaper-3D-2013-.jpg", file_content_type: "image/jpeg", file_file_size: 532832, file_updated_at: "2017-02-12 22:54:14", process_id: nil},
@@ -473,29 +473,29 @@ Attachment.create!([
   {id: 228,user_id: 15, document_id: 2, link: nil, file_file_name: "admin_1.png", file_content_type: "image/png", file_file_size: 57303, file_updated_at: "2017-10-20 23:41:23", process_id: nil}
 ])
 RequestWorkflow.create!([
-  {name: "Workflow Traslado entre Universidades", description: "Flujo principal del trámite de Traslado entre Universidades", professors_transfer_id: 115, is_active: true, is_completed: false},
-  {name: "Workflow Traslado entre Facultades", description: "Flujo principal del trámite de Traslado entre Facultades", professors_transfer_id: 132, is_active: true, is_completed: false},
-  {name: "Workflow Cambio de Dedicación Temporal", description: "Flujo principal del trámite de Cambio de Dedicación Temporal", professors_transfer_id: 133, is_active: true, is_completed: false}
+  {id: 24,name: "Workflow Traslado entre Universidades", description: "Flujo principal del trámite de Traslado entre Universidades", professors_transfer_id: 115, is_active: true, is_completed: false},
+  {id: 29,name: "Workflow Traslado entre Facultades", description: "Flujo principal del trámite de Traslado entre Facultades", professors_transfer_id: 132, is_active: true, is_completed: false},
+  {id: 36,name: "Workflow Cambio de Dedicación Temporal", description: "Flujo principal del trámite de Cambio de Dedicación Temporal", professors_transfer_id: 133, is_active: true, is_completed: false}
 ])
 WorkflowStep.create!([
-  {name: "Analisis y Remisión de juicio de Asuntos Profesorales.", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 4, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Analisis y Remisión de juicio a Decano.", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 6, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Verificar Aval Academico y Presupuestario", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 5, info: nil, step_number: 4, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Evaluación de Recaudos iniciales", description: nil, request_workflow_id: 24, approval_date: "2017-09-21", role_id: 5, info: nil, step_number: 1, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Analisis y Remisión de juicio a Consejo de Facultad", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 5, info: nil, step_number: 5, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Analisis y Remisión de juicio a Consejo de Departamento.", description: nil, request_workflow_id: 24, approval_date: "2017-09-24", role_id: 10, info: nil, step_number: 2, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Aprobacion de Jefe de Departamento y Remisión de juicio a Decano.", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 6, info: nil, step_number: 2, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Verificar Aval Academico y Presupuestario", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 4, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Analisis Final de Traslado", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 7, info: nil, step_number: 6, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Analisis y Remisión de juicio a Consejo de Facultad", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 4, info: nil, step_number: 4, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Analisis Final de Traslado", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 7, info: nil, step_number: 5, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Evaluación de Recaudos iniciales", description: nil, request_workflow_id: 36, approval_date: "2017-10-21", role_id: 5, info: nil, step_number: 1, is_active: true, is_completed: nil, status: "IP"},
-  {name: "Analisis y Remisión de juicio a Consejo de Facultad", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 5, info: nil, step_number: 6, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Analisis Final de Traslado", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 7, info: nil, step_number: 7, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Verificar Aval Academico y Presupuestario", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 5, info: nil, step_number: 5, is_active: true, is_completed: nil, status: "DR"},
-  {name: "Analisis y Remisión de juicio de Asuntos Profesorales.", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 4, info: nil, step_number: 4, is_active: true, is_completed: nil, status: "IP"},
-  {name: "Evaluación de Recaudos iniciales", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 5, info: nil, step_number: 1, is_active: true, is_completed: nil, status: "AP"},
-  {name: "Analisis y Remisión de juicio a Decano.", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 6, info: nil, step_number: 2, is_active: true, is_completed: nil, status: "AP"}
+  {id: 157,name: "Analisis y Remisión de juicio de Asuntos Profesorales.", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 4, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "AP"},
+  {id: 126,name: "Analisis y Remisión de juicio a Decano.", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 6, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "AP"},
+  {id: 158,name: "Verificar Aval Academico y Presupuestario", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 5, info: nil, step_number: 4, is_active: true, is_completed: nil, status: "AP"},
+  {id: 124,name: "Evaluación de Recaudos iniciales", description: nil, request_workflow_id: 24, approval_date: "2017-09-21", role_id: 5, info: nil, step_number: 1, is_active: true, is_completed: nil, status: "AP"},
+  {id: 159,name: "Analisis y Remisión de juicio a Consejo de Facultad", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 5, info: nil, step_number: 5, is_active: true, is_completed: nil, status: "AP"},
+  {id: 125,name: "Analisis y Remisión de juicio a Consejo de Departamento.", description: nil, request_workflow_id: 24, approval_date: "2017-09-24", role_id: 10, info: nil, step_number: 2, is_active: true, is_completed: nil, status: "AP"},
+  {id: 192,name: "Aprobacion de Jefe de Departamento y Remisión de juicio a Decano.", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 6, info: nil, step_number: 2, is_active: true, is_completed: nil, status: "DR"},
+  {id: 193,name: "Verificar Aval Academico y Presupuestario", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 4, info: nil, step_number: 3, is_active: true, is_completed: nil, status: "DR"},
+  {id: 160,name: "Analisis Final de Traslado", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 7, info: nil, step_number: 6, is_active: true, is_completed: nil, status: "AP"},
+  {id: 194,name: "Analisis y Remisión de juicio a Consejo de Facultad", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 4, info: nil, step_number: 4, is_active: true, is_completed: nil, status: "DR"},
+  {id: 195,name: "Analisis Final de Traslado", description: nil, request_workflow_id: 36, approval_date: nil, role_id: 7, info: nil, step_number: 5, is_active: true, is_completed: nil, status: "DR"},
+  {id: 191,name: "Evaluación de Recaudos iniciales", description: nil, request_workflow_id: 36, approval_date: "2017-10-21", role_id: 5, info: nil, step_number: 1, is_active: true, is_completed: nil, status: "IP"},
+  {id: 129,name: "Analisis y Remisión de juicio a Consejo de Facultad", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 5, info: nil, step_number: 6, is_active: true, is_completed: nil, status: "DR"},
+  {id: 130,name: "Analisis Final de Traslado", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 7, info: nil, step_number: 7, is_active: true, is_completed: nil, status: "DR"},
+  {id: 128,name: "Verificar Aval Academico y Presupuestario", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 5, info: nil, step_number: 5, is_active: true, is_completed: nil, status: "DR"},
+  {id: 127,name: "Analisis y Remisión de juicio de Asuntos Profesorales.", description: nil, request_workflow_id: 24, approval_date: "2017-10-07", role_id: 4, info: nil, step_number: 4, is_active: true, is_completed: nil, status: "IP"},
+  {id: 155,name: "Evaluación de Recaudos iniciales", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 5, info: nil, step_number: 1, is_active: true, is_completed: nil, status: "AP"},
+  {id: 156,name: "Analisis y Remisión de juicio a Decano.", description: nil, request_workflow_id: 29, approval_date: "2017-10-20", role_id: 6, info: nil, step_number: 2, is_active: true, is_completed: nil, status: "AP"}
 ])
 Review.create!([
   {name: "Analisis y Remisión de juicio a Consejo de Departamento.", comment: "igyggkjgj yg iyg iughklj hk ", files_reviewed: true, approval: true, workflow_step_id: 125, user_id: 24},
