@@ -26,6 +26,170 @@ user = User.new(:id => 2,
                 :password_confirmation => '123456')
 user.add_role(:test)                
 user.save!(:validate => false)
+
+user = User.new( :id => 3,
+                :username => 'joalbert',
+                :email => 'joalbertgonzalez@gmail.com',
+                :first_name => 'joalbert',
+                :middle_name => 'andrés',
+                :last_name => 'gonzález',
+                :identification_document => '18468784',
+                :birthday => "24/11/1988".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+               :password_confirmation => '123456')
+user.add_role(:admin)
+user.add_role(:test)
+user.save!(:validate => false)
+
+user = User.new(:id => 8,
+                :username => 'jesusdeabreu',
+                :email => 'jmanueldeabreum2@gmail.com',
+                :first_name => 'jesus',
+                :middle_name => 'manuel',
+                :last_name => 'de abreu',
+                :genre => 'm',
+                :identification_document => '18241890',
+                :birthday => "21/12/1988".to_date,
+                :password => 'jmdam182', #Devise.friendly_token[0,20]
+                :password_confirmation => 'jmdam182')
+user.add_role(:admin)
+user.add_role(:test)
+user.add_role(:docente)                
+user.save!(:validate => false)
+
+user = User.new(:id => 4,
+                :username => 'lisset',
+                :email => 'liss612@gmail.com',
+                :first_name => 'lisset',
+                :middle_name => 'alexandra',
+                :last_name => 'orozco',
+                :genre => 'f',
+                :identification_document => '18686803',
+                :birthday => "06/10/1987".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:test)                
+user.save!(:validate => false)
+
+
+user = User.new(:id => 13,
+                :username => 'marcano',
+                :email => 'marcano@test.com',
+                :first_name => 'jose',
+                :middle_name => 'x',
+                :last_name => 'marcano',
+                :genre => 'm',
+                :identification_document => '1000',
+                :birthday => "06/10/1960".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:docente)
+user.add_role(:decano)                
+user.save!(:validate => false)
+
+
+user = User.new(:id => 14,
+                :username => 'asuntos',
+                :email => 'jmanueldeabreum@gmail.com',
+                :first_name => 'Asuntos',
+                :middle_name => 'x',
+                :last_name => 'Profesorales',
+                :genre => 'm',
+                :identification_document => '1000',
+                :birthday => "06/10/1960".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:docente)
+user.add_role(:asuntos)
+user.save!(:validate => false)
+
+user = User.new(:id => 15,
+                :username => 'iperez',
+                :email => 'jemadam@hotmail.com',
+                :first_name => 'Ivan',
+                :middle_name => 'Enrique',
+                :last_name => 'Perez',
+                :genre => 'm',
+                :identification_document => '19878987',
+                :birthday => "1990-12-14".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:docente)
+user.save!(:validate => false)
+
+
+user = User.new(:id => 20,
+                :username => 'consejodepartamento',
+                :email => 'consejoDepartamental@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Departamental',
+                :genre => 'm',
+                :identification_document => '1001',
+                :birthday => "06/10/1965".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:Consejo_Departamento)
+user.save!(:validate => false)
+
+
+user = User.new(:id => 24,
+                :username => 'consejouniversitario',
+                :email => 'consejoUniversitario@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Universitario',
+                :genre => 'm',
+                :identification_document => '1001',
+                :birthday => "06/10/1970".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:Consejo_Universitario)
+user.save!(:validate => false)
+
+user = User.new(:id => 21,
+                :username => 'departamento',
+                :email => 'Departamento@test.com',
+                :first_name => 'Departamento',
+                :middle_name => 'x',
+                :last_name => 'Departamento',
+                :genre => 'm',
+                :identification_document => '1002',
+                :birthday => "06/10/1966".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:departamento)
+user.save!(:validate => false)                
+                
+user = User.new(:id => 22,
+                :username => 'consejoescuela',
+                :email => 'consejoEscuela@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Escuela',
+                :genre => 'm',
+                :identification_document => '1003',
+                :birthday => "06/10/1967".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456') 
+user.add_role(:Consejo_Escuela)
+user.save!(:validate => false)                
+                
+user = User.new(:id => 23,
+                :username => 'consejofacultad',
+                :email => 'consejoFacultad@test.com',
+                :first_name => 'Consejo',
+                :middle_name => 'x',
+                :last_name => 'Facultad',
+                :genre => 'm',
+                :identification_document => '1004',
+                :birthday => "06/10/1968".to_date,
+                :password => '123456', #Devise.friendly_token[0,20]
+                :password_confirmation => '123456')
+user.add_role(:Consejo_Facultad)                  
+user.save!(:validate => false)
+
+=begin
 User.create!([
   {id: 3,username: "joalbert", first_name: "joalbert", middle_name: "andrés", last_name: "gonzález", genre: "m", identification_document: "18468784", birthday: "1988-11-24", email: "joalbertgonzalez@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-01-17 00:01:48", sign_in_count: 14, current_sign_in_at: "2017-10-16 08:26:15", last_sign_in_at: "2017-08-24 03:29:27", current_sign_in_ip: "127.0.0.1", last_sign_in_ip: "127.0.0.1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil},
   # 3
@@ -54,29 +218,30 @@ User.create!([
  {id:28,username: "testing", first_name: "testing", middle_name: "x", last_name: "testing", genre: "m", identification_document: "7654567", birthday: "1962-10-21", email: "testing@gmail.com", password: "123456", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: "2017-10-21 04:02:30", sign_in_count: 1, current_sign_in_at: "2017-10-21 04:03:17", last_sign_in_at: "2017-10-21 04:03:17", current_sign_in_ip: "::1", last_sign_in_ip: "::1", failed_attempts: 0, unlock_token: nil, locked_at: nil, invitation_token: nil, invitation_created_at: nil, invitation_sent_at: nil, invitation_accepted_at: nil, invitation_limit: nil, invited_by_id: nil, invited_by_type: nil, invitations_count: 0, avatar: nil}
  #id: 28 -> 14
 ])
-UsersRole.create!([
-  {user_id: 1, role_id: 1}, 
-  {user_id: 2, role_id: 2},
-  {user_id: 3, role_id: 1},
-  {user_id: 3, role_id: 2},
-  {user_id: 4, role_id: 2},
-  {user_id: 8, role_id: 1},
-  {user_id: 8, role_id: 2},
-  {user_id: 13, role_id: 3},
-  {user_id: 13, role_id: 4},
-  {user_id: 14, role_id: 3},
-  {user_id: 14, role_id: 5},
-  {user_id: 8, role_id: 3},
-  {user_id: 19, role_id: 5},
-  {user_id: 20, role_id: 6},
-  {user_id: 21, role_id: 9},
-  {user_id: 22, role_id: 8},
-  {user_id: 23, role_id: 7},
-  {user_id: 24, role_id: 10},
-  {user_id: 19, role_id: 3},
-  {user_id: 15, role_id: 3},
-  {user_id: 28, role_id: 2}
-])
+=end
+#UsersRole.create!([
+#  {user_id: 1, role_id: 1}, 
+#  {user_id: 2, role_id: 2},
+#  {user_id: 3, role_id: 1},
+#  {user_id: 3, role_id: 2},
+#  {user_id: 4, role_id: 2},
+#  {user_id: 8, role_id: 1},
+#  {user_id: 8, role_id: 2},
+#  {user_id: 13, role_id: 3},
+#  {user_id: 13, role_id: 4},
+#  {user_id: 14, role_id: 3},
+#  {user_id: 14, role_id: 5},
+#  {user_id: 8, role_id: 3},
+#  {user_id: 19, role_id: 5},
+#  {user_id: 20, role_id: 6},
+#  {user_id: 21, role_id: 9},
+#  {user_id: 22, role_id: 8},
+#  {user_id: 23, role_id: 7},
+#  {user_id: 24, role_id: 10},
+#  {user_id: 19, role_id: 3},
+#  {user_id: 15, role_id: 3},
+#  {user_id: 28, role_id: 2}
+#])
 Document.create!([
   {name: "Solicitud del Beneficiario", status: nil},
   {name: "Fotocopia de la Cedula de identidad", status: nil},
