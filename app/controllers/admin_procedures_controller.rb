@@ -87,7 +87,7 @@ class AdminProceduresController < ApplicationController
     procedure_instance.approve(date)
 
     if @procedure.approved?
-      email_data = {owner: @procedure.user, procedure_name: @procedure.name, responsable: @user, template: 'procedure_approved'}
+      email_data = {user:@procedure.user, owner: @procedure.user, procedure_name: @procedure.name, responsable: @user, template: 'procedure_approved'}
       send_email(email_data)
       flash[:success] = 'Solicitud aprobada con exito!'
       redirect_to  admin_procedure_path(@procedure)

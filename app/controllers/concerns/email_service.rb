@@ -3,6 +3,7 @@ module EmailService
 
   def send_email(email_data)
     user = email_data[:user]
+    
     SendEmailJob.set(wait: 10.seconds).perform_later(user.email, email_data)
   end
 
