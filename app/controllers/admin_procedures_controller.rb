@@ -122,9 +122,9 @@ class AdminProceduresController < ApplicationController
     if generate_pdf?(@procedure, @user)
       procedure = get_procedure_intance(@procedure)
       procedure.approve_generate_approval_document_step()
-      flash[:success] = 'Constacia generada con éxito.'       
+      flash[:success] = 'constancia generada con éxito.'       
     else
-      flash[:error] = 'Error al generar constacia de aprobación.'
+      flash[:error] = 'Error al generar constancia de aprobación.'
     end
     redirect_to  admin_procedure_path(@procedure)
   end

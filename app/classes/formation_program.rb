@@ -22,8 +22,8 @@ class FormationProgram < SystemProcedure
   def generate_steps(workflow)
     create_step(workflow, "#1", "Cargar el documento con el plan de formación especial.", "Representante de Facultad")
     create_step(workflow, "#2", "Registrar docentes al plan de formación especial", "Representante de Facultad")
-    create_step(workflow, "#3", "Evaluacón del plan de formación.","Consejo de facultad")
-    create_step(workflow, "#4", "Generar constacia de aprobación.","Consejo de departamento")
+    create_step(workflow, "#3", "Evaluación del plan de formación.","Consejo de facultad")
+    create_step(workflow, "#4", "Generar constancia de aprobación.","Consejo de departamento")
   end
 
   #Al solicitar la evaluacion

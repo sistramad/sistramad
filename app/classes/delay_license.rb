@@ -23,7 +23,7 @@ class DelayLicense < SystemProcedure
     create_step(workflow, "#1", "Cargar todos documentos requeridos.", "Jefe de Departamento")
     create_step(workflow, "#2", "Seleccionar la duración de la prórroga.", "Jefe de Departamento")
     create_step(workflow, "#3", "Evaluación de los recaudos del plan de rotación","Director de Departamento")
-    create_step(workflow, "#4", "Generar constacia de aprobacón","")
+    create_step(workflow, "#4", "Generar constancia de aprobación","")
     create_step(workflow, "#5", "Aprobar solicitud","")
   end
 
