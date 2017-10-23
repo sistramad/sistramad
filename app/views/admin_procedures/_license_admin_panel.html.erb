@@ -19,7 +19,7 @@
           <% @document = find_document_by_code(@procedure, "CDAP")%>
           <% group_code = @procedure.steps.find_by(name: "#4").group.code %>
 
-          <% if group_code == 'D40' and current_user.has_role?(:decano) %>
+          <% if group_code == 'D40' and current_user.has_role?(:decano) and steps_approved?(%w[#1 #2 #3]) %>
               <% if @document.nil? %>
                 <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_admin_procedure_path(procedure: @procedure, format: :pdf) %> </li></p>
               <% else %>
@@ -29,7 +29,6 @@
                 <% end %>
               <% end %>   
           <% end %>
-           
                   
           <br>
             <% if @procedure.in_progress? %>
