@@ -8,7 +8,7 @@
       <ul>
         <h4>
         <% actions = true %>
-          <<% step = @professors_transfer.workflow_steps.find_by(step_number: 1)%>
+          <% step = @professors_transfer.workflow_steps.find_by(step_number: 1)%>
           <% responsable = @professors_transfer.workflow_steps.find_by(step_number: 1).role.name%>
           <% if ((step.status == 'IP') && (current_user.has_role?responsable.to_sym))%>
           <% actions = false %>
