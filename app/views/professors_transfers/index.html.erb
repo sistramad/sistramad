@@ -28,7 +28,7 @@
           <td><li><%= professors_transfer.to.name %></li></td>
           <td>
             <li>
-              <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <%= link_to "Descargar", download_professors_transfers_path(user_id: professors_transfer.user.id), {method: "download"} %>
+              <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> <%= link_to "Descargar", download_professors_transfers_path(user_id: professors_transfer.user.id,process_id: professors_transfer.process_type.id), {method: "download"} %>
             </li>
           </td>
         </tr>

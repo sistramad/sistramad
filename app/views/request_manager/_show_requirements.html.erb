@@ -46,7 +46,7 @@
       <p>
         <div>
             <li>
-              <span class="btn btn-info btn-md list "> <%= link_to 'Descargar todos los documentos',download_professors_transfers_path(user_id: @professors_transfer.user.id), {method: "download"} %>
+              <span class="btn btn-info btn-md list "> <%= link_to 'Descargar todos los documentos',download_professors_transfers_path(user_id: @professors_transfer.user.id,process_id: @professors_transfer.process_type.id), {method: "download"} %>
               <i class="glyphicon glyphicon-download-alt"></i> 
               </span>
             </li>
