@@ -41,7 +41,7 @@
           <% if(step.AP?) %>
             <% if(current_user.has_role?responsable.to_sym) || (current_user.id == @professors_transfer.user_id) %>
               <% actions = false %>
-              <% @doc = Document.find_by(name:  'Copia de Oficio de Aprobacion de Cambio en Dedicacion)%>
+              <% @doc = Document.find_by(name:  'Copia de Oficio de Aprobacion de Cambio en Dedicacion')%>
               <% @document = Attachment.where('process_id = ? and document_id = ?',@professors_transfer.id,@doc.id).first%>
               <% if @document.nil? %>
               <p><li> <%= link_to "Generar constancia de aprobación.", generate_approval_document_request_manager_path(professors_transfer: @professors_transfer, format: :pdf) %> </li></p>
